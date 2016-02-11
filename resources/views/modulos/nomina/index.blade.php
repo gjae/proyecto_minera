@@ -9,6 +9,9 @@
 @section('titulo', 'Modulo de persoal y nomina')
 @section('contenedor')
 
+<input type="hidden" id="modulo" value="nomina">
+<input type="hidden" id="programa" value="Personal">
+
 <div class="row clearfix">
 @if(Session::has('correcto'))
 <div class="col-sm-12 col-lg-12 col-md-12">
@@ -26,8 +29,20 @@
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="card">
 			<div class="body">
-				<div class="table-responsive">
-				<button type="button red pull-right" action="formularios" formulario="ingresar" class="btn btn-default waves-effect m-r-20 actions">Ingresar persona</button>					
+			<div class="row">
+				<div class="col-sm-12 col-lg-12 col-md-12">
+					<button type="button red pull-right" action="formularios" formulario="ingresar" class="btn btn-default waves-effect m-r-20 actions">Ingresar persona</button>
+					<button 
+						role="reportes"
+						class="btn btn-success actions"
+						formulario="formato_personal"
+						action="formularios"
+					>
+						<strong>LISTADO DE PERSONAL</strong>
+					</button>
+				</div>
+			</div>
+				<div class="table-responsive">					
 					<table class="table table-bordered table-striped table-hover" id="dataTables-example">
 						<thead>
 							<tr>
@@ -102,7 +117,10 @@
              	</form>
             </div>
             <div class="modal-footer">
-                <button type="button" id="salvar" class="btn btn-link waves-effect">Guardar datos</button>
+                <button type="button" id="salvar" class="btn btn-link waves-effect data">Guardar datos</button>
+
+                <button type="button" id="generar" class="btn btn-link waves-effect hidden">Generar reporte</button>
+
                 <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cerrar</button>
             </div>
    		</div>

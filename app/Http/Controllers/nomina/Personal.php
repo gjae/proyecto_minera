@@ -11,6 +11,7 @@ use App\Models\personal\AjustePersona as AP;
 
 use DB;
 use Carbon\Carbon;
+use PDF;
 
 class Personal extends Controller
 {
@@ -40,6 +41,36 @@ class Personal extends Controller
 
 			return response($data, 200)->header('Content-Type', 'application/json');
 		}
+	}
+
+	public function reportes($req){
+		return call_user_func_array([$this, $req->tipo_formato], [$req]);
+	}
+
+	public function listado_personal($req){
+		$persona = new Persona;
+
+		//return dd($req->all());
+		if( $req->estado != 'T' ){
+			//return dd($req->estado);
+			$persona= $persona->where('estado_persona', $req->estado);
+		}
+		if( $req->filtro_cargo != 'T' )
+			$persona = $persona->where('cargo_id', $req->filtro_cargo);
+
+		if( !empty($req->fecha_desde))
+			$persona = $persona->where('fecha_ingreso', '>=' ,Carbon::parse($req->fecha_desde)->format('Y-m-d') );
+
+		if( !empty($req->fecha_hasta))
+			$persona = $persona->where('fecha_ingreso', '<=' ,Carbon::parse($req->fecha_hasta)->format('Y-m-d') );
+
+		$vista = \View::make('modulos.nomina.reportes.listado_personal', [
+				'personas' => $persona->get(),
+			])->render();
+		$pdf = PDF::loadHtml($vista);
+
+		$pdf->setPaper('A4', 'landscape');
+		return $pdf->stream('control_personal', ['attachment' => 0]);
 	}
 
 	public function loquidacion($req){
