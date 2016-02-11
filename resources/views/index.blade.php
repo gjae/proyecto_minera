@@ -159,6 +159,11 @@
                                     Emitir requisicion
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ url('dashboard/requisicion/requisicion') }}">
+                                    Ver requisiciones
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     @endif

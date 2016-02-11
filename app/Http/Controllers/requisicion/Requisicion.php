@@ -15,7 +15,9 @@ use PDF;
 class Requisicion extends Controller
 {
 	public function index(){
-		return redirect()->to( url('dashboard') );
+		return view('modulos.requisiciones.lista_requisiciones', [
+                'requisiciones' => r::all()
+            ]);
 	}
     public function emitir($req){
     	
@@ -25,12 +27,12 @@ class Requisicion extends Controller
     }
 
     private function getCodigoRequisicion(){
-    	$codigo = r::where('codigo_requisicion', 'LIKE', Carbon::now()->format('Ym').'%')->count('codigo_requisicion') + 1;
-
-    	for ($i=0; $i < (5 - strlen($codigo) ); $i++) { 
-    		$codigo = '0'.$codigo;
+    	$codigo = r::count('codigo_requisicion') + 1;
+        $len = '';
+    	for ($i=0; $i < (8 - strlen($codigo) ); $i++) { 
+    		$len .= '0';
     	}
-    	return Carbon::now()->format('Ym').'-'.$codigo;
+    	return $len.$codigo;
     }
 
     public function consultarMaterial($req){
