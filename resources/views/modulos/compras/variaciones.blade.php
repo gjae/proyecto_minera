@@ -10,7 +10,20 @@
 @section('contenedor')
 
 <input type="hidden" id="modulo" value="compras">
-<input type="hidden" id="programa" value="valuaciones">
+<input type="hidden" id="programa" value="variaciones">
+@if(Session::has('correcto'))
+<div class="col-sm-12 col-lg-12 col-md-12">
+	<div class="alert alert-success">
+		{{ Session::get('correcto') }}
+	</div>
+</div>
+@elseif(Session::has('error'))
+<div class="col-sm-12 col-lg-12 col-md-12">
+	<div class="alert alert-danger">
+		{{ Session::get('error') }}
+	</div>
+</div>
+@endif
 <div class="row clearfix">
 	<input type="hidden" id="token" value="{{ csrf_token() }}">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -20,7 +33,7 @@
 					
 					<div class="row">
 						<div class="col-sm-12">
-							<a href="{{ url('dashboard/compras/Valuaciones/crear?orden='.$orden_id) }}" class="btn btn-success">
+							<a href="{{ url('dashboard/compras/variaciones/crear?orden='.$orden_id) }}" class="btn btn-success">
 								<strong>Crear</strong>
 							</a>
 						</div>
@@ -35,24 +48,39 @@
 							<tr>
 								<th>Codigo</th>
 								<th>Concepto</th>
-								<th>Fecha de inicio</th>
-								<th>Fecha tope</th>
+								<th>Fecha de registro</th>
+								<th>Fecha de suspencion</th>
+								<th>Fecha reinicio</th>
 								<th>Monto</th>
 								<th>Acciones</th>
 							</tr>
 						</thead>
 						<tbody>
-							@foreach($valuaciones as $key => $valuacion)
+							@foreach($variaciones as $key => $variacion)
 								<tr>
-									<td>{{ $valuacion->codigo_valuacion }}</td>
-									<td>{{ $valuacion->concepto_valuacion }}</td>
-									<td>{{ $valuacion->fecha_inicio->format('d-m-Y') }}</td>
-									<td>{{ $valuacion->fecha_tope->format('d-m-Y') }}</td>
-									<td>{{ number_format($valuacion->monto_valuacion, 2) }}</td>
+									<td>{{ $variacion->consecutivo }}</td>
+									<td>{{ $variacion->concepto }}</td>
+
+									<td>
+										@if( !is_null($variacion->created_at) )
+											{{ $variacion->created_at->format('d-m-Y') }}
+										@endif
+									</td>
+									<td>
+										@if( !is_null($variacion->fecha_suspencion) )
+										{{ $variacion->fecha_suspencion->format('d-m-Y') }}
+										@endif
+									</td>
+									<td>
+										@if(!is_null($variacion->fecha_reinicio))
+										{{ $variacion->fecha_reinicio->format('d-m-Y') }}
+										@endif
+									</td>
+									<td>{{ $variacion->monto_variacion }}</td>
 									<td>
 										<a 
-											class="eliminar_valuacion btn btn-success"
-											data-id="{{ $valuacion->id }}"
+											class="eliminar_variacion btn btn-success"
+											data-id="{{ $variacion->id }}"
 										>
 											<strong>ELIMINAR</strong>
 										</a>
@@ -73,7 +101,7 @@
 	    <div class="modal-dialog modal-lg" role="document">
 	        <div class="modal-content">
 	           	<div class="modal-header">
-	                <h4 class="modal-title" id="largeModalLabel">Gestion de valuaciones de cotizacion</h4>
+	                <h4 class="modal-title" id="largeModalLabel">Gestion de variaciones de cotizacion</h4>
 	            </div>
 	            <div class="modal-body">
 	             	<form action="#" id="form-modal">

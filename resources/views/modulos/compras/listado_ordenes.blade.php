@@ -11,6 +11,19 @@
 
 <input type="hidden" id="modulo" value="compras">
 <input type="hidden" id="programa" value="ordenes">
+@if(Session::has('correcto'))
+<div class="col-sm-12 col-lg-12 col-md-12">
+	<div class="alert alert-success">
+		{{ Session::get('correcto') }}
+	</div>
+</div>
+@elseif(Session::has('error'))
+<div class="col-sm-12 col-lg-12 col-md-12">
+	<div class="alert alert-danger">
+		{{ Session::get('error') }}
+	</div>
+</div>
+@endif
 <div class="row clearfix">
 	<input type="hidden" id="token" value="{{ csrf_token() }}">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -60,6 +73,11 @@
 										<a href="{{ url('dashboard/compras/Valuaciones?orden='.$orden->id) }}" class="btn btn-primary">
 											<strong>REGISTRO DE VALUACION</strong>
 										</a>
+										@if( $orden->tipo_orden == 'SERVICIOS' )
+										<a href="{{ url('dashboard/compras/Variaciones?orden='.$orden->id) }}" class="btn btn-primary">
+											<strong>VARIACIONES</strong>
+										</a>
+										@endif
 									</td>
 								</tr>
 							@endforeach

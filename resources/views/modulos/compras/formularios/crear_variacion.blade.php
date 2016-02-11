@@ -30,7 +30,7 @@
 	<input type="hidden" id="token" value="{{ csrf_token() }}">
 		<div class="card">
 			<div class="body">
-				<form action="{{ url('dashboard/compras/Valuaciones/guardar') }}" method="post">
+				<form action="{{ url('dashboard/compras/Variaciones/guardar') }}" method="post">
 				{{ csrf_field() }}
 				<input type="hidden" name="orden_id" value="{{ $orden->id }}">
 				<div class="container">
@@ -46,90 +46,57 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-12 col-md-2 col-lg-2">
-							<label for="">COD. VALUACION</label>
-							<input type="text" value="{{ App\Models\compras\Valuacion::getANewCode() }}" class="form-control" name="codigo_valuacion" id="codigo_valuacion">
+							<label for="">COD. VARIACION</label>
+							<input type="text" value="{{ App\Models\compras\Variacion::getConsecutivo() }}" class="form-control" name="codigo_valuacion" id="codigo_valuacion">
 						</div>
 						<div class="col-sm-12 col-md-7 col-lg-7">
-							<label for="">CONCEPTO DE LA VALUACION</label>
-							<input type="text" name="concepto_valuacion" class="form-control" placeholder="Ingrese el concepto de esta valuacion" required>
+							<label for="">CONCEPTO DE LA VARIACION</label>
+							<input type="text" name="concepto" class="form-control" placeholder="Ingrese el concepto de esta variacion" required>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-12 col-md-4 col-lg-4">
-							<label for="">FECHA DE INICIO</label>
-							<input type="date" required class="form-control" name="fecha_inicio" id="fecha_inicio">
+						<div class="col-sm-12 col-md-3 col-lg-3">
+							<label for="">FECHA DE SUSPENSION</label>
+							<input type="date" class="form-control" name="fecha_suspencion" id="fecha_inicio">
 						</div>
-						<div class="col-sm-12 col-md-4 col-lg-4">
-							<label for="">FECHA DE TOPE</label>
-							<input type="date" required class="form-control" name="fecha_tope" id="fecha_tope">
+						<div class="col-sm-12 col-md-3 col-lg-3">
+							<label for="">FECHA DE REINICIO</label>
+							<input type="date" class="form-control" name="fecha_reinicio" id="fecha_reinicio">
+						</div>
+						<div class="col-sm-12 col-md-3 col-lg-3">
+							<label for="">CANTIDAD / DIAS</label>
+							<input type="date" class="form-control" name="cantidad_dias_variacion" id="cantidad_dias_variacion" value="0">
 						</div>
 					</div>
 				</div>
-				<input type="hidden" id="valor_original" value="{{ $orden->total }}">
 				<div class="row">
-					<div class="col-sm-12 col-lg-10 col-md-10">
-						<div class="table-responsive">
-							<table class="table">
-								<thead>
-									<tr>
-										<th>Codigo</th>
-										<th>Concepto</th>
-										<th>Estado</th>
-										<th>Fecha de inicio</th>
-										<th>Fecha tope</th>
-										<th>Monto</th>
-									</tr>
-								</thead>
-								<tbody>
-								@php
-									$valuaciones = $orden->valuaciones()->where('estatus', '<>', 'AN')->get();
-								@endphp
-									@foreach($valuaciones as $key => $valuacion)
-										<tr>
-											<td>{{ $valuacion->codigo_valuacion }}</td>
-											<td>{{ $valuacion->concepto_valuacion }}</td>
-											<td>{{ $valuacion->estatus }}</td>
-											<td>{{ $valuacion->fecha_inicio->format('d-m-Y') }}</td>
-											<td>{{ $valuacion->fecha_tope->format('d-m-Y') }}</td>
-											<td>{{ number_format($valuacion->monto_valuacion, 2) }}</td>
-										</tr>
-									@endforeach
-									<tr>
-										<td> </td>
-										<td> </td>
-										<td> </td>
-										<td> <strong>TOTAL A LA FECHA</strong> </td>
-										<td></td>
-										<td>
-											{{ number_format( $orden->valuaciones()->where('estatus', '<>', 'AN')->sum('monto_valuacion', 2) ) }}
-										</td>
-									</tr>
-									<tr>
-										<td> </td>
-										<td> </td>
-										<td> </td>
-										<td> <strong>POR COMPROMETER</strong> </td>
-										<td></td>
-										<td>
-											<input type="text" id="por_comprometer" class="form-control" readonly value="{{ $orden->total - $orden->valuaciones()->where('estatus', '<>', 'AN')->sum('monto_valuacion')  }}" name="pendiente_por_valuar">
-										</td>
-									</tr>
-									<tr>
-										<td> </td>
-										<td> </td>
-										<td> </td>
-										<td> <strong>COMPROMETER COP$</strong> </td>
-										<td></td>
-										<td>
-											<input type="text" class="form-control" onkeyup="calcular_valuacion(event, this)" name="monto_valuacion">
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
+					<div class="col-sm-12 col-md-3 col-lg-3">
+						<label for="">MONTO DE LA ORDEN</label>
+						<input readonly class="form-control" type="text" id="total" value="{{ $orden->total }}">
+
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-sm-12 col-md-3 col-lg-3">
+						<label for="">MONTO COMPROMETIDO</label>
+						<input readonly class="form-control" type="text" id="comprometido" value="{{$orden->valuaciones()->where('estatus','<>', 'AN')->sum('monto_valuacion')  }}">
 
+					</div>
+					<div class="col-sm-12 col-md-3 col-lg-3">
+						<label for="">MONTO VARIADO</label>
+						<input readonly class="form-control" type="text" id="variado" value="{{$orden->variaciones()->where('estatus', '<>', 2)->sum('monto_variacion') }}">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12 col-md-3 col-lg-3">
+						<label for="">MONTO DISPONIBLE</label>
+						<input readonly class="form-control" type="text" id="disponible" value="{{ ( $orden->total - $orden->valuaciones()->where('estatus','<>', 'AN')->sum('monto_valuacion') ) + $orden->variaciones()->where('estatus', '<>', 2)->sum('monto_variacion') }}">
+					</div>
+					<div class="col-sm-12 col-md-3 col-lg-3">
+						<label for="">NUEVO MONTO / VARIACION</label>
+						<input class="form-control" type="text" name="monto_variacion" id="monto_variacion" value="0" onkeyup="calcularVariacion(event, this)">
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-sm-12 col-md-9 col-lg-9">
 						<input type="submit" value="Guardar" class="btn btn-success">
@@ -181,12 +148,26 @@
 <script src="{{ asset('plugins/jquery-datatable/extensions/export/vfs_fonts.js') }}"></script>
 <script src="{{ asset('plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}"></script>
 <script src="{{ asset('plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}"></script>
-<script src="{{ asset('js/compras/ordenes.js') }}"></script>
+<script src="{{ asset('js//compras/ordenes.js') }}"></script>
     <!-- Demo Js -->
 <script src="{{ asset('js/demo.js') }}"></script>
 <script>
 $('#dataTables-example').DataTable({
     responsive: true
 });
+
+function calcularVariacion(e, field){
+	var comprometido = document.getElementById('comprometido')
+	var total = document.getElementById('total')
+	var variado = document.getElementById('variado')
+	var resultado = 0;
+
+	if( ! isNaN( parseFloat(field.value) ) )
+		resultado = ( ( parseFloat(total.value) - parseFloat(comprometido.value) ) + parseFloat(variado.value) + parseFloat(field.value) )
+	else
+		resultado = ( ( parseFloat(total.value) - parseFloat(comprometido.value) ) + parseFloat(variado.value) + 0 )
+
+	document.getElementById('disponible').value = resultado
+}
 </script>
 @endsection

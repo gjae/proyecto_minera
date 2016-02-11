@@ -11,7 +11,7 @@ class Requisicion extends Model
     protected $fillable = [
     	'codigo_requisicion', 'concepto_requisicion', 'user_id',
     	'tipo_requisicion', 'estado_requisicion', 'total_requisicion', 'total_impuestos',
-    	'fecha_requerida', 'centro_costo_id', 'etapa_produccion_id', 'diciplina_id'
+    	'fecha_requerida', 'centro_costo_id', 'etapa_produccion_id', 'diciplina_id', 'ciudad_id'
     ];
 
     protected $casts = [
@@ -44,5 +44,9 @@ class Requisicion extends Model
     }
     public function getTipoRequisicionAttribute($old){
         return "COMPRAS";
+    }
+
+    public function ciudad(){
+        return $this->belongsTo('App\Models\Ciudad');
     }
 }

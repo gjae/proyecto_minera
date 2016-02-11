@@ -39,6 +39,32 @@ $(document).ready(function(){
 		//alert(url)
 		window.open(url, 'ORDEN', 'width=850,height=800');
 	})
+
+	$(".eliminar_valuacion").on('click', function(){
+		var url = location.protocol+'//'+location.host+'/dashboard/compras/Valuaciones/eliminar';
+
+		if( confirm('¿Seguro que desea realizar esta accion?') ){
+			$.post(url, {'_token': $("#token").val(), 'id': $(this).attr('data-id') }, function(res){
+				alert(res.mensaje);
+				if(! res.error){
+					location.reload()
+				}
+			})
+		}
+	})
+
+		$(".eliminar_variacion").on('click', function(){
+		var url = location.protocol+'//'+location.host+'/dashboard/compras/Variaciones/eliminar';
+
+		if( confirm('¿Seguro que desea realizar esta accion?') ){
+			$.post(url, {'_token': $("#token").val(), 'id': $(this).attr('data-id') }, function(res){
+				alert(res.mensaje);
+				if(! res.error){
+					location.reload()
+				}
+			})
+		}
+	})
 })
 
 function cargarAnalisis(event, boton){

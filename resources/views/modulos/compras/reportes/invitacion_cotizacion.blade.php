@@ -176,7 +176,7 @@
 <strong>
 Tener en cuenta la siguiente especificacion para los productos: 
 <br>
-1. El proponente debe especificar el costo de transporte poniendo los productos en la ciudad de Duitama.
+1. El proponente debe especificar el costo de transporte poniendo los productos en la ciudad de {{ $solicitudes[0]->ciudad->nombre_ciudad }}.
 </strong>
 <table border="0" width="100%" cellpadding="0" cellspacing="0" class="body">
 	<tr>

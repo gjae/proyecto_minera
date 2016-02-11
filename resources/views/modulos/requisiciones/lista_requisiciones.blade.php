@@ -21,7 +21,7 @@
 			<input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 			<div class="container">
 				<div class="row">
-					<div class="col-sm-10 col-md-9 col-lg-9">
+					<div class="col-sm-10 col-md-11 col-lg-11">
 						
 						<div class="table-responsive">
 							<table class="table table-bordered table-striped table-hover" id="dataTables-example">
@@ -49,8 +49,8 @@
 												<a class="btn btn-danger">
 													ANULAR
 												</a>
-												<a  class="btn btn-primary" onclick="imprimir()"
-													codigo=""
+												<a  class="btn btn-primary" onclick="imprimir(event, this)"
+													codigo="{{ $requisicion->codigo_requisicion }}"
 												>
 													IMPRIMIR
 												</a>
@@ -93,5 +93,11 @@
 $('#dataTables-example').DataTable({
     responsive: true
 });
+
+function imprimir(e, bot){
+	var url = location.protocol+'//'+location.host+'/dashboard/requisicion/requisicion/printRequisicion?codigo='+bot.getAttribute('codigo')
+	//alert(url)
+	window.open(url, 'IMPRIMIR REQUISICION', 'width=800,height=900')
+}
 </script>
 @endsection

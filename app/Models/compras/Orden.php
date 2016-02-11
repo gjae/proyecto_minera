@@ -65,4 +65,8 @@ class Orden extends Model
         return $this->hasMany('App\Models\compras\Valuacion');
     }
 
+    public function variaciones(){
+        return $this->hasMany('App\Models\compras\Variacion');
+    }
+
 }

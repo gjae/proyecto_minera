@@ -36,6 +36,19 @@
 							</div>
 						</div>
 						<div class="row">
+							<div class="col-sm-12 col-lg-5 col-md-5">
+								<label for="">CIUDAD</label>
+								<select name="ciudad_id" class="form-control" required>
+									<option value="">-- SELECCIONE UNO --</option>
+									@foreach(App\Models\Ciudad::all() as $ciudad)
+										<option value="{{ $ciudad->id }}">
+											{{ $ciudad->nombre_ciudad }}
+										</option>
+									@endforeach
+								</select> 
+							</div>
+						</div>
+						<div class="row">
 							<a class="btn btn-primary actions" role="buscarProveedores">
 								Agregar proveedores
 							</a>

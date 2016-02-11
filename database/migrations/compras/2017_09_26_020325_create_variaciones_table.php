@@ -24,6 +24,12 @@ class CreateVariacionesTable extends Migration
             $table->date('fecha_reinicio')->nullable();
             $table->integer('orden_id')->unsigned();
 
+            /**
+             * 1: PENDIENTE
+             * 2: ANULADO
+             */
+            $table->smallInteger('estatus')->default(1);
+
             $table->foreign('orden_id')->references('id')
                     ->on('ordenes')->onDelete('cascade')->onUpdate('cascade');
 

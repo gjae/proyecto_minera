@@ -12,7 +12,8 @@ use DB;
 class Valuaciones extends Controller
 {
 	public function index($req){
-		$valuaciones = Valuacion::where('orden_id', $req->orden)->get();
+		$valuaciones = Valuacion::where('orden_id', $req->orden)
+								->where('estatus', '<>', 'AN')->get();
 
 		return view('modulos.compras.valuaciones', [ 
 			'valuaciones' => $valuaciones , 
@@ -39,6 +40,24 @@ class Valuaciones extends Controller
 			return redirect()
 					->to( url('dashboard/compras/Valuaciones?orden='.$req->orden_id) )
 					->with('error', 'EL REGISTRO NO PUDO SER GUARDADO EN LA BASE DE DATOS , INTENTELO MAS TARDE!');
+		}
+	}
+
+	public function eliminar($req){
+		$valuacion = Valuacion::find($req->id);
+		$valuacion->estatus = 'AN';
+
+		if( $valuacion->save() ){
+			return response([
+					'error' => false,
+					'mensaje' => 'REGISTRO ANULADO CORRECTAMENTE'
+				], 200)->header('Content-Type', 'application/json');
+		}else{
+			return response([
+				'error' => false,
+				'mensaje' => 'HA OCURRIDO UN ERROR AL INTENTAR SUPRIMIR EL REGISTRO'
+
+			], 200)->header('Content-Type','application/json');
 		}
 	}
 }

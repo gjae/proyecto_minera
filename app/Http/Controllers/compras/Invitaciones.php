@@ -80,7 +80,8 @@ class Invitaciones extends Controller
     						'proveedor_id' => $req->proveedores[$i],
     						'requisicion_id' => $req->requisiciones[$j],
     						'concepto_solicitud' => $req->concepto_solicitud,
-    						'codigo' => $req->codigo
+    						'codigo' => $req->codigo,
+                            'ciudad_id' => $req->ciudad_id
     					]);
     				$r = Requisicion::find($req->requisiciones[$j]);
     				if(! $solicitud->save()){
