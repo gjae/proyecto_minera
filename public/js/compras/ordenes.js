@@ -40,12 +40,32 @@ function cargarAnalisis(event, boton){
 
 function calcularSubTotal(event, input){
 
-	var cantidad = input.value;
-	var tot_sin_desc = document.getElementById('total_sin_descuento').value
+	var descuento = document.getElementById('descuento') ;
+	var tot_sin_desc = document.getElementById('total_sin_descuento')
 	var iva = document.getElementById('iva')
 	var total = document.getElementById('total')
 	var subtotal =document.getElementById('subtotal')
+	var anticipo = document.getElementById('monto_anticipo')
+	var retefuente = document.getElementById('retefuente')
+	subtotal.value = ( parseFloat(tot_sin_desc.value) - parseFloat(descuento.value) )
 
-	subtotal.value = ( parseFloat(tot_sin_desc) - cantidad )
-	total.value = ( parseFloat(subtotal.value)  + parseFloat(iva.value) )
+	if( isNaN(subtotal.value) )
+		subtotal.value = redondear(tot_sin_desc.value)
+
+	total.value = redondear( ((parseFloat(subtotal.value)+ parseFloat(iva.value)) - anticipo.value) )
+
+}
+
+function redondear(num){
+	var original = parseFloat(num)
+	var result = 0;
+	if( ((original * 100)%100) >= 0.5 ){
+		
+		var result = Math.round(original*100)/100+0.01;
+	}
+	else{
+		var result = Math.round(original*100)/100;
+	}
+
+	return result;
 }

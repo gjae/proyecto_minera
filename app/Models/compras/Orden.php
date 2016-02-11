@@ -12,6 +12,7 @@ class Orden extends Model
     	'proveedor_id',
         'tipo_orden',
         'estado_orden', 
+        'monto_anticipo',
         'codigo_analisis', 
         'concepto',
         'codigo_orden', 

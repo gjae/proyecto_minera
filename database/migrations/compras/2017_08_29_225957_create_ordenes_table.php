@@ -29,6 +29,7 @@ class CreateOrdenesTable extends Migration
             $table->float('retefuente')->default(0);
             $table->float('total')->default(0);
             $table->float('anticipo')->default(0);
+            $table->float('monto_anticipo')->default(0);
 
             $table->char('mes_anticipo', 1)->default('N');
             $table->integer('tiempo_pago')->nullable();

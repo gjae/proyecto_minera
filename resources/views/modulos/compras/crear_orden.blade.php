@@ -245,6 +245,13 @@
                                         <input type="text" value="{{ $sub_total }}" class="form-control" name="total_sin_descuento" readonly="" id="total_sin_descuento">
                                     </div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="col-sm-9 col-md-4 col-lg-4">
+                                        <label for="">MONTO DE ANTICIPO</label>
+                                        <input type="text" onkeyup="calcularSubTotal(event, this)" class="form-control" value="0" name="monto_anticipo" id="monto_anticipo">
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-sm-9 col-md-4 col-lg-4">
                                         <label for="">MONTO DE DESCUENTO</label>
@@ -260,7 +267,7 @@
                                 <div class="row">
                                     <div class="col-sm-9 col-md-4 col-lg-4">
                                         <label for="">IVA</label>
-                                        <input type="text" value="{{ $iva }}" class="form-control" name="iva" readonly="" id="iva">
+                                        <input type="text" value="{{ $iva }}" class="form-control" name="total_iva" readonly="" id="iva">
                                     </div>
                                 </div>
                                 <div class="row">
