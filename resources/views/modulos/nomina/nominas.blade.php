@@ -9,6 +9,8 @@
 @section('titulo', 'Modulo de personal y nomina')
 @section('contenedor')
 
+<input type="hidden" id="modulo" value="nomina">
+<input type="hidden" id="programa" value="Nomina">
 <div class="row clearfix">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="card">
@@ -16,7 +18,7 @@
 				<div class="table-responsive">
 
 					
-					<button type="button red pull-right" action="formularios" formulario="ingresar" class="btn btn-default waves-effect m-r-20 actions">Abrir nomina</button>	
+					<button type="button red pull-right" action="formularios" role="crearNomina" class="btn btn-default waves-effect m-r-20 actions">Abrir nomina</button>	
 						
 					<table class="table table-bordered table-striped table-hover" id="dataTables-example">
 						<thead>
@@ -100,7 +102,7 @@
 <script src="{{ asset('plugins/jquery-datatable/extensions/export/vfs_fonts.js') }}"></script>
 <script src="{{ asset('plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}"></script>
 <script src="{{ asset('plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}"></script>
-<script src="{{ asset('js/personal/personal.js') }}"></script>
+<script src="{{ asset('js/personal/ajustes.js') }}"></script>
     <!-- Demo Js -->
 <script src="{{ asset('js/demo.js') }}"></script>
 <script>

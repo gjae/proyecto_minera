@@ -39,7 +39,7 @@
 			<select name="tipo_ajuste" id="tipo_ajuste" class="form-control">
 				<option value="">Seleccione uno</option>
 				<option value="BONO">BONO</option>
-				<option value="DEDDUCCION">DEDDUCCION</option>
+				<option value="DEDUCCION">DEDUCCION</option>
 			</select>
 		</div>
 

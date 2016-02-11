@@ -10,7 +10,12 @@ class DetalleNomina extends Model
 {
     protected $table = 'detalle_nomina';
     protected $fillable = [
-        'persona_id', 'nomina_id', 'ajuste_persona_id'
+        'persona_id', 
+        'nomina_id', 
+        'ajuste_persona_id',
+        'total_bonos',
+        'total_deducciones',
+        'total_pagar'
     ];
 
 
@@ -23,6 +28,6 @@ class DetalleNomina extends Model
     }
 
     public function ajuste(){
-    	return $this->belongsTo('App\Models\personal\DetalleNomina', 'ajuste_persona_id');
+    	return $this->belongsTo('App\Models\personal\AjustePersona', 'ajuste_persona_id');
     }
 }

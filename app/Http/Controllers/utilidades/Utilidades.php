@@ -73,4 +73,24 @@ class Utilidades extends Controller
 
     	return $comparar;
     }
+
+    public static function calcular($persona, $total_fraccion_persona){
+
+        $totales = [
+            'total_bonos' => 0,
+            'total_deducciones' => 0,
+            'total_aporte_patron' => 0
+        ];
+        foreach ($persona->ajustes as $key => $ajuste) {
+            if( $ajuste->ajuste->tipo_ajuste == 'BONO' &&  $ajuste->ajuste->ajuste_permanente == 'SI'){
+
+                $totales['total_bonos'] += ( $ajuste->ajuste->porcentaje_ajuste > 0 ) ? ( $total_fraccion_persona * $ajuste->ajuste->porcentaje_ajuste) / 100 : $ajuste->ajuste->cantidad_ajuste;
+            }
+            else if(($ajuste->ajuste->tipo_ajuste == 'DEDUCCION' && $ajuste->ajuste->aportador != 'PATRON') &&  $ajuste->ajuste->ajuste_permanente == 'SI'){
+                $totales['total_deducciones']+= ( $ajuste->ajuste->porcentaje_ajuste > 0 ) ? ( $total_fraccion_persona * $ajuste->ajuste->porcentaje_ajuste) / 100 : $ajuste->ajuste->cantidad_ajuste;
+            }
+        }
+
+        return $totales;
+    }
 }

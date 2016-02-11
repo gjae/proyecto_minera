@@ -19,7 +19,9 @@ class CreateDetalleNominaTable extends Migration
             $table->integer('persona_id')->unsigned();
             $table->integer('ajuste_persona_id')->unsigned();
             $table->integer('nomina_id')->unsigned();
-            
+            $table->float('total_bonos')->default(0);
+            $table->float('total_deducciones')->default(0);
+            $table->float('total_pagar')->default(0);
 
             $table->foreign('persona_id')->references('id')
                     ->on('personas')->onDelete('cascade')->onUpdate('cascade');

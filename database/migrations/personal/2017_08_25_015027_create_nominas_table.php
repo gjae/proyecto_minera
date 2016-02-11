@@ -24,6 +24,9 @@ class CreateNominasTable extends Migration
             $table->float('total_deducciones')->default(0.00);
             $table->float('total_seguro_aporte_persona')->default(0.00);
             $table->float('total_seguro_aporte_empresa')->default(0.00);
+            $table->enum('tipo_nomina', ['Q', 'S', 'M'])->default('Q');
+
+            $table->string('nombre_nomina', 130);
 
             $table->index(['estado_nomina']);
         });

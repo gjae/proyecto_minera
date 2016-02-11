@@ -22,6 +22,7 @@
 								<th width="18%">Identificacion</th>
 								<th>Telefono</th>
 								<th>Fecha de ingreso</th>
+								<th>Acciones</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -38,6 +39,11 @@
 									</td>
 									<td>
 										{{ $persona->fecha_ingreso }}
+									</td>
+									<td>
+										<a class="btn btn-success">
+											<strong>AGREGAR AJUSTE</strong>
+										</a>
 									</td>
 								</tr>
 							@endforeach
