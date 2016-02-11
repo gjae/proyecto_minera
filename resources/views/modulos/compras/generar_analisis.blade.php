@@ -23,11 +23,18 @@
 					<div class="container">
 						
 						<div class="row">
-							<div class="col-sm-12 col-md-5 col-lg-5">
+							<div class="col-sm-4 col-md-4 col-lg-4">
 								<a class="btn btn-success acciones" id="buscarCotizaciones" role="buscarCotizaciones">
 									<strong>AGREGAR COTIZACIONES</strong><span>
 								</a>
 							</div>
+
+							<div class="col-sm-4 col-md-4 col-lg-4">
+								<a class="btn btn-success acciones" id="buscarCotizaciones" role="buscarAnalisis">
+									<strong>BUSCAR ANALISIS</strong><span>
+								</a>
+							</div>
+							
 							<div class="col-sm-3 col-lg-2 col-md-2">
 								<input type="text" value="{{ ($solicitud != false) ? $solicitud[0]->codigo : '' }}" class="form-control" name="codigo_solicitud" readonly="" id="codigo">	
 								</span>

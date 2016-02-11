@@ -39,3 +39,9 @@ function cargarRegistro(evento, boton){
 	var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/cargarRegistro?codigo='+boton.getAttribute('codigo')
 	location.href = url;
 }
+
+function imprimir(event, boton){
+	var url = 'http://'+location.host+'/dashboard/compras/analisis/imprimir?codigo='+boton.getAttribute('codigo')
+	window.open(url, 'MEJOR OFERTA', 'width=800,height=490');
+
+}

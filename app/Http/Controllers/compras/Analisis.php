@@ -21,6 +21,39 @@ class Analisis extends Controller
     		]);
     }
 
+    public function listado($req){
+        $ac = AC::all();
+        return view('modulos.compras.listado_analisis', [
+                'analisis' => $ac
+            ]);
+    }
+
+    public function buscarAnalisis($req){
+        $ac = AC::all();
+        $vista = \View::make('modulos.compras.formularios.imprimir_analisis', [
+                'ac' => $ac
+            ])->render();
+
+        $data = [
+            'error' => false,
+            'formulario' => $vista
+        ];
+        return response($data, 200)->header('Content-Type', 'application/json');
+    }
+
+
+    public function imprimir($req){
+        if($req->has('codigo')){
+            $ac = AC::where('codigo', $req->codigo)->get();
+            $vista = \View::make('modulos.compras.reportes.mejor_oferta', [
+                    'analisis' => $ac
+                ])->render();
+
+            $pdf = PDF::loadHtml($vista);
+            return $pdf->stream('mejor_oferta', ['attachment' => 0]);
+        }
+    }
+
     public function buscarCotizaciones($req){
     	$rc = RC::where('estado_registro', 'REGISTRO')->get();
     	$vista = \View::make('modulos.compras.formularios.buscar_registro_cotizacion', [

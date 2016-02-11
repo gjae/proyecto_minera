@@ -272,6 +272,11 @@
                                     Listado de ordenes de compras / servicios
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ url('dashboard/compras/analisis/listado') }}">
+                                    Listado de analisis de cotizacion
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     @endif
