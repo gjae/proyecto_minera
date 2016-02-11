@@ -3,6 +3,8 @@
 namespace App\Models\transporte;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
+use DB;
 
 class Transporte extends Model
 {
@@ -44,7 +46,8 @@ class Transporte extends Model
         'telefono_cliente',
         'email_cliente',
 		'estado_registro',
-
+        'total_km_viaje',
+        'distancia_recorrida',
     ];
     protected $casts = [
     	'fecha_llegada' => 'date',
@@ -61,5 +64,24 @@ class Transporte extends Model
 
     public function vehiculo(){
     	return $this->belongsTo('App\Models\transporte\Vehiculo', 'vehiculo_id');
+    }
+
+    public function setFechaSalidaAttribute($old){
+        $this->attributes['fecha_salida'] = Carbon::parse($old)->format('Y-m-d');
+    }
+
+    public function setFechaLlegadaAttribute($old){
+        $this->attributes['fecha_llegada'] = Carbon::parse($old)->format('Y-m-d');
+    }
+
+    public static function getNewCode(){
+        $codigo = DB::table('transporte')->count('nro_factura') + 1;
+        $long = (7 - strlen($codigo));
+        $nuevo = '';
+        for ($i=0; $i < $long; $i++) { 
+            $nuevo.= '0';
+        }
+
+        return $nuevo.$codigo;
     }
 }

@@ -42,6 +42,8 @@ class CreateTransporteTable extends Migration
             $table->float('total_kilo_material')->default(0);
             $table->float('total_kilo_viaje_material')->default(0);
             $table->float('total_factura')->default(0);
+            $table->float('total_km_viaje')->default(0);
+            $table->float('distancia_recorrida')->default(0);
 
             $table->string('procedencia', 160)->nullable();
             $table->string('destino', 160)->nullable();
