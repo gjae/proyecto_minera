@@ -74,4 +74,25 @@ class Persona extends Model
     public function setSegundoApellidoAttribute($old){
         $this->attributes['segundo_apellido'] = ucfirst($old);
     }
+
+    public static function getSalario($tipo_nomina, $sueldo){
+        $total_persona = 0;
+
+        switch ($tipo_nomina) {
+            case 'Q': {
+                return $sueldo / 2;
+                break;
+            }
+            
+            case 'S':{
+                return $sueldo / 4;
+                break;
+            }
+
+            case 'M':{
+                return $sueldo;
+                break;
+            }
+        }
+    }
 }

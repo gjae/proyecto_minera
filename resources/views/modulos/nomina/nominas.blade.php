@@ -62,6 +62,7 @@
 											 role="tipoReporte"
 										>
 											<i class="material-icons">local_printshop</i>
+											imprimir
 										</a>
 
 									</td>

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\nomina;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\personal\Persona;
+use App\Models\personal\Ajuste as A;
+use App\Models\personal\AjustePersona as AP;
+
 
 use DB;
 use Carbon\Carbon;
@@ -20,13 +23,43 @@ class Personal extends Controller
 
 	public function formulario($req){
 		if( $req->has('form') ){
-			$form = \View::make('modulos.nomina.formularios.'.$req->form)->render();
+			$persona = ( $req->persona == 0 ) ? [] : Persona::find($req->persona)->ajustes()->select('ajuste_id')->get();
+			$ids = [];
+			foreach ($persona as $key => $ajuste) {
+				$ids[$key] = $ajuste->ajuste_id;
+			}
+			$form = \View::make('modulos.nomina.formularios.'.$req->form, [
+					'persona' => Persona::find($req->persona),
+					'ids' => $ids,
+				])->render();
 			$data = [
 				"error" => false,
-				'formulario' => $form
+				'formulario' => $form,
+
 			];
 
 			return response($data, 200)->header('Content-Type', 'application/json');
+		}
+	}
+
+	public function guardarAjusteAPersona($req){
+		DB::beginTransaction();
+		try {
+			if( AP::create($req->all()) ){
+				DB::commit();
+				return response([
+						'error' => false,
+						'mensaje' => 'SE HA ALMACENADO EL AJUSTE DE MANERA CORRECTA'
+					], 200)->header('Content-Type','application/json');
+			}
+			throw new \Exception("HA OCURRIDO UN ERROR AL INTENTAR ALMACENAR LOS DATOS DEL AJUSTE A LA PERSONA, MODULO: nomina ARCHIVO: Personal.php CERCA DE LA LINEA 48", 1);
+			
+		} catch (Exception $e) {
+			DB::rollback();
+			return response([
+					'error' => true,
+					'mensaje' => $e->getMessage()
+				], 200)->header('Content-Type', 'application/json');
 		}
 	}
 

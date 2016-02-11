@@ -149,7 +149,6 @@ class Nomina extends Controller
 
     public function tipoReporte($req){
         if( $req->has('codigo_nomina') ){
-
             $vistaPdf = \View::make('modulos.nomina.reportes.reporte_nomina',[
                     'nomina' =>  N::where('codigo_nomina', $req->codigo_nomina)->first(),
                     'periodo' => $this->getPeriodoNomina(N::where('codigo_nomina', $req->codigo_nomina)->first()),
@@ -168,20 +167,24 @@ class Nomina extends Controller
        $totalAjustes = [];
 
        foreach ($ajustes as $key => $ajuste) {
-           $totalAjustes[$ajuste->nombre_ajuste] = 0;
+           $totalAjustes[$ajuste->tipo_ajuste][$ajuste->nombre_ajuste] = 0;
+           $totalAjustes["TOTAL_".$ajuste->tipo_ajuste] = 0;
        }
-       foreach ($ajustes as $key => $ajuste) {
            
-           foreach ($nomina->detalles as $key => $detalle) {
-              /* if( $detalle->ajuste->ajuste->tipo_ajuste == 'BONO' ){
-                 if()
-               }*/
+        foreach ($nomina->detalles as $key => $detalle) {
 
-                var_dump($detalle->ajuste->ajuste;)
-               exit;
-           }
+            if($detalle->ajuste->ajuste->cantidad_ajuste > 0) {
+                $totalAjustes[$detalle->ajuste->ajuste->tipo_ajuste][$detalle->ajuste->ajuste->nombre_ajuste] += $detalle->ajuste->ajuste->cantidad_ajuste;
+                $totalAjustes['TOTAL_'.$detalle->ajuste->ajuste->tipo_ajuste] += $detalle->ajuste->ajuste->cantidad_ajuste;
+            }
+            else{
+                $totalAjustes[$detalle->ajuste->ajuste->tipo_ajuste][$detalle->ajuste->ajuste->nombre_ajuste] += ($this->getSueldoPersona($nomina, $detalle->persona) * $detalle->ajuste->ajuste->porcentaje_ajuste) / 100;
 
-       }
+                $totalAjustes['TOTAL_'.$detalle->ajuste->ajuste->tipo_ajuste] += ($this->getSueldoPersona($nomina, $detalle->persona) * $detalle->ajuste->ajuste->porcentaje_ajuste) / 100;
+            }
+                
+        }
+       return $totalAjustes;
     }
 
     private function getPeriodoNomina($nomina){
@@ -213,6 +216,28 @@ class Nomina extends Controller
 
         $periodo['desde'] = $nomina->periodo_nomina;
         return $periodo;
+
+    }
+
+    public function getSueldoPersona($nomina, $persona){
+        $total_persona = 0;
+
+        switch ($nomina->tipo_nomina) {
+            case 'Q': {
+                return $persona->sueldo_basico / 2;
+                break;
+            }
+            
+            case 'S':{
+                return $persona->sueldo_basico / 4;
+                break;
+            }
+
+            case 'M':{
+                return $persona->sueldo_basico;
+                break;
+            }
+        }
 
     }
 }

@@ -41,7 +41,7 @@
 										{{ $persona->fecha_ingreso }}
 									</td>
 									<td>
-										<a class="btn btn-success">
+										<a class="btn btn-success actions" action="formularios" persona="{{ $persona->id }}" formulario="agregar_ajustes">
 											<strong>AGREGAR AJUSTE</strong>
 										</a>
 									</td>
