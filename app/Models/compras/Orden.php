@@ -9,6 +9,7 @@ class Orden extends Model
 {
     protected  $table = 'ordenes';
     protected $fillable = [
+        'proyecto',
     	'proveedor_id',
         'tipo_orden',
         'estado_orden', 

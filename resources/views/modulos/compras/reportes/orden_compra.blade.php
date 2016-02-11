@@ -1,53 +1,63 @@
 <style>
-	.page_break { page-break-before: always; }
-	body{ font-family: Helvetica;  }
+	body{
+		font-family: Helvetica;
+	}
+	thead{
+		border: 1px solid black;
+	}
+	thead th{
+		border: 1px solid black;
+	}
+	table.body{
+		border: 1px solid black;
+	}
+	td.date-box{ border-left: 1px solid #000; text-align: center; background-color: #E9E9E9; }
+	td.title{ border-left: 1px solid #000; text-align: right;}
+	.header { top: 0px; position: fixed; margin-bottom: 8px;  }
+	td.td-title{ border-bottom: 1px solid black; }
+	td.footer-table{ border-top: 1px solid black;  }
+	td.box{ border-right: 1px solid #000; border-bottom: 1px solid #000;  }
+	.page_break { page-break-inside: avoid; }
+
+	td.totales{  border-left: 1px solid #000; }
 </style>
-<table border="1" cellpadding="0" cellspacing="0">
+<div class="header">
+<table border="1" cellpadding="0" width="100%" cellspacing="0">
 	<tr>
-		<td>
+		<td width="10%">
 			<img src="{{ public_path().'/images/logo.png' }}" alt="" style="max-width: 150px; max-height: 210px;">
 		</td>
-		<td >
-			<table border="0" cellpadding="0" cellspacing="0">
-				<tr>
-					<td>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<strong style="font-size: 12pt; font-family: Helvetica;">COMPRAS Y CONTRATACION</strong>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<td width="63%" style="text-align: center;">
+			<table border="0" cellpadding="0" cellspacing="0" width="100%">
+				<tr align="center">
+					<td class="td-title" >
+						<strong style="font-size: 12pt; font-family: Helvetica;">COMPRAS Y CONTRATACION.</strong>
 						<br>
 
 					</td>
 				</tr>
-				<tr>
+				<tr align="center">
 					<td>
-						------------------------------------------------------------------------
-					</td>
-				</tr>
-				<tr>
-					<td>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<strong style="font-size: 12pt; font-family: Helvetica;">ORDEN DE {{ $orden->tipo_orden }}</strong>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					</td>
 				</tr>
 			</table>
 		</td>
 		<td>
-			<table border="0" cellspacing="0" cellpadding="0">
-				<tr style="outline: thin solid;">
-					<td> &nbsp; </td>
-				</tr>
+			<table border="0" cellspacing="0" width="100%" cellpadding="0">
+
 				<tr>
-					<td>
-						<strong style="font-size: 10pt; font-family: Helvetica;">Paginas: 1 de 2</strong>
+					<td class="td-title">
+						&nbsp;
+						<strong style="font-size: 10pt; font-family: Helvetica;">CODIGO: {{ $orden->codigo_orden }}</strong>
+					&nbsp;
 					</td>
-				</tr>
-				<tr>
-					<td>-------------------------------</td>
 				</tr>
 				<tr style="outline: thin solid;">
 					<td>
-						<strong style="font-size: 10pt; font-family: Helvetica;">Fecha: </strong>
+					&nbsp;
+						<strong style="font-size: 10pt; font-family: Helvetica;">{{ Carbon\Carbon::now()->format('d-M-Y') }}</strong>
+						&nbsp;
 					</td>
 				</tr>
 			</table>
@@ -55,715 +65,370 @@
 	</tr>
 </table>
 
-<table>
+<table class="body head" border="0" cellspacing="0" cellpadding="0" width="100%">
 	<tr>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>	
-		<td>&nbsp;</td>	
-		<td>&nbsp;</td>	
-		<td>&nbsp;</td>	
-		<td>&nbsp;</td>	
-		<td>&nbsp;</td>	
-		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>							
 		<td>
-			<table border="1" cellspacing="0" cellpadding="">
-				<tr>
-					<td>
-						<strong style="font-family: Helvetica;">
-							CONSECUTIVO
-						</strong>
-					</td>
-					<td>
-						&nbsp;&nbsp;&nbsp;
-						<strong style="font-family: Helvetica;">
-							{{ substr($orden->tipo_orden, 0, 2).'-'.$orden->codigo_orden }}
-						</strong>
-					</td>
-				</tr>
-			</table>
+			<strong>FECHA: </strong>
+		</td>
+		<td class="date-box">
+			<strong>{{ $orden->created_at->format('d') }}</strong>
+		</td>	
+		<td class="date-box">
+			<strong>{{ $orden->created_at->format('m') }}</strong>
+		</td>
+		<td class="date-box">
+			<strong>{{ $orden->created_at->format('Y') }}</strong>
+		</td>
+		<td class="title"> 
+			<strong>PROYECTO: </strong>
+		</td>
+		<td class="date-box">
+			<strong>{{ $orden->proyecto }}</strong>
+		</td>
+		<td class="title">
+			<strong>CONSECUTIVO:</strong>
+		</td>
+		<td class="date-box" width="11%">
+			<strong>{{ substr($orden->tipo_orden, 0, 2).'-'.$orden->codigo_orden }}</strong>
 		</td>
 	</tr>
 </table>
+<table class="body" border="0" cellpadding="0" cellspacing="0">
 
-<table border="0" cellpadding="0" cellspacing="0">
-	
-	<tr>
-		<td> &nbsp; </td>
-		<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DIA 
-		</td>
-		<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			 MES 
-		</td>
-		<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-			AÑO 
-		</td>
-	</tr>
-
-</table>
-<table border="1" cellpadding="0" cellspacing="0" >
-	<tr style="height: 13px;">
-		<td>
-			 &nbsp; &nbsp;
-			<strong>FECHA</strong>
-			 &nbsp; &nbsp;
-		</td>
-		<td bgcolor="#F2F2F2">
-			 &nbsp; &nbsp;
-			<strong> 00 </strong>
-			 &nbsp; &nbsp;
-		</td>
-		<td bgcolor="#F2F2F2">
-			 &nbsp; &nbsp;
-			<strong> 00 </strong>
-			 &nbsp; &nbsp;
-		</td>
-		<td bgcolor="#F2F2F2">
-			 &nbsp; &nbsp;
-			<strong> AAAA </strong>
-			 &nbsp; &nbsp;
-		</td>
-		<td>
-			<strong>PROYECTO</strong>
-		</td>
-		<td>
-			SOCIEDAD MINERA DEL NORTE
-		</td>
-	</tr>
-</table>
-<table border="1" cellspacing="0" cellpadding="0" style="text-align: center;">
-	
 	<tr>
 		<td>
-			&nbsp; &nbsp;
-			<strong>REQUISICION NO.</strong>
-			&nbsp; &nbsp;
+			<strong>REQUISICION:</strong>
 		</td>
-		<td bgcolor="#F2F2F2">
-			&nbsp; &nbsp;
-			<strong>
-				{{ $analisis[0]->cotizacion->solicitud->requisicion->codigo_requisicion }}
-			</strong>
-			&nbsp; &nbsp;
+		<td class="date-box footer-table">
+			<strong>{{ $requisicion->id }}</strong>
 		</td>
-		<td>
+		<td class="title footer-table">
 			<strong>CENTRO DE COSTOS</strong>
 		</td>
-		<td>
-			<strong>
-			{{ $analisis[0]->cotizacion->solicitud->requisicion->centro_costo->nombre_centro }}
-			</strong>
+		<td class="date-box">
+			<strong>{{ $requisicion->centro_costo->nombre_centro }}</strong>
 		</td>
-	</tr>
-</table>
-<table border="1" cellspacing="0" cellpadding="0">
-	<tr>
-		<td>
+		<td class="title">
 			<strong>ETAPA DE EXPLOTACION</strong>
 		</td>
-		<td bgcolor="#F2F2F2">
-			<strong>
-			{{ $analisis[0]->cotizacion->solicitud->requisicion->etapa_produccion->nombre_etapa }}
-			</strong>
+		<td class="date-box">
+			<strong>{{ $requisicion->etapa_produccion->nombre_etapa }}</strong>
 		</td>
-		<td>
-			&nbsp; &nbsp;
+		<td class="title">
 			<strong>DICIPLINA</strong>
-			&nbsp; &nbsp;
 		</td>
-		<td bgcolor="#F2F2F2">
-		&nbsp; &nbsp;
-			<strong>
-			{{ $analisis[0]->cotizacion->solicitud->requisicion->diciplina->nombre_diciplina }}
-			</strong>
-			&nbsp; &nbsp;
+		<td class="date-box">
+			<strong>{{ $requisicion->diciplina->nombre_diciplina }}</strong>
 		</td>
 	</tr>
 </table>
-
 <strong>1. INFORMACION DEL CONTRATANTE</strong>
-<table border="1" cellpadding="0" cellspacing="0" style="text-align: center;">
+
+<table class="body" border="0" width="100%"  cellspacing="0" cellpadding="0">
+	<tr>
+		<td width="12%">
+			<strong>NOMBRE: </strong>
+		</td>
+		<td width="38%" class="date-box">
+			<strong>{{ $orden->contte_nombre }}</strong>
+		</td>
+		<td width="12%">
+			<strong>RESPONSABLE: </strong>
+		</td>
+		<td class="date-box" width="38%">
+			<strong>{{ $orden->contte_resp }}</strong>
+		</td>
+	</tr>
+	<tr>
+		<td width="12%">
+			<strong>NIT /CC: </strong>
+		</td>
+		<td width="38%" class="date-box">
+			<strong>{{ $orden->contte_nit_cc }}</strong>
+		</td>
+		<td width="12%">
+			<strong>CC: </strong>
+		</td>
+		<td class="date-box" width="38%">
+			<strong>{{ $orden->contte_resp_cc }}</strong>
+		</td>
+	</tr>
 
 	<tr>
-		<td>
-			&nbsp; &nbsp;
-			<br>
-			<strong>NOMBRE</strong>
-			&nbsp; &nbsp;
-			<br>
-		</td>	
-		<td bgcolor="#F2F2F2">	
-			&nbsp; &nbsp;
-			<br>
-			<strong>
-				{{ $orden->contte_nombre }}
-			</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="12%">
+			<strong>DIR: </strong>
 		</td>
-		<td>
-			&nbsp; &nbsp;
-			<br>
-			<strong>
-				RESPONSABLE
-			</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="38%" class="date-box">
+			<strong> -- </strong>
 		</td>
-		<td bgcolor="#F2F2F2">
-			<br>
-			&nbsp; &nbsp;
-			<strong>
-				{{ $orden->contte_resp }}
-			</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="12%">
+			<strong>CARGO :</strong>
 		</td>
-	</tr>
-	<tr>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>
-				NIT / CC
-			</strong>
-			&nbsp; &nbsp;
-			<br>
-		</td>
-		<td bgcolor="#F2F2F2">
-			<br>
-			&nbsp; &nbsp;
-			<strong>
-				{{ $orden->contte_nit_cc }}
-			</strong>
-			&nbsp; &nbsp;
-			<br>
-		</td>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>CC</strong>
-			&nbsp; &nbsp;
-			<br>
-		</td>
-		<td bgcolor="#F2F2F2">
-			<br>
-			&nbsp; &nbsp;
-			<strong>{{ $orden->contte_resp_cc }}</strong>
-			&nbsp; &nbsp;
-			<br>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>DIR</strong>
-			&nbsp; &nbsp;
-			<br>
-		</td>
-		<td bgcolor="#F2F2F2">
-			<br>
-			&nbsp; &nbsp;
-			<strong>-</strong>
-			&nbsp; &nbsp;
-			<br>
-		</td>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>CARGO</strong>
-			&nbsp; &nbsp;
-			<br>
-		</td>
-		<td bgcolor="#F2F2F2">
-			<br>
-			&nbsp; &nbsp;
+		<td class="date-box" width="38%">
 			<strong>{{ $orden->contte_resp_cargo }}</strong>
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>TEL</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="12%">
+			<strong>TEL: </strong>
 		</td>
-		<td bgcolor="#F2F2F2">
-			<br>
-			&nbsp; &nbsp;
+		<td width="38%" class="date-box">
 			<strong>{{ $orden->contte_telefono }}</strong>
-			&nbsp; &nbsp;
-			<br>
 		</td>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>MAIL</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="12%">
+			<strong>EMAIL: </strong>
 		</td>
-		<td bgcolor="#F2F2F2">
-			<br>
+		<td class="date-box" width="38%">
 			<strong>{{ $orden->contte_resp_email }}</strong>
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>MAIL</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="12%">
+			<strong>MAIL: </strong>
 		</td>
-		<td bgcolor="#F2F2F2">
-			<br>
-			&nbsp; &nbsp;
-			<strong>-</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="38%" class="date-box">
+			<strong>--</strong>
 		</td>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>TEL</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="12%">
+			<strong>TEL: </strong>
 		</td>
-		<td bgcolor="#F2F2F2">
-			<br>
-			&nbsp; &nbsp;
-			<strong>{{ $orden->contte_rep_telf}}</strong>
+		<td class="date-box" width="38%">
+			<strong>{{ $orden->contte_rep_telf }}</strong>
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>REP / LEGAL</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="12%">
+			<strong>REP/LEGAL: </strong>
 		</td>
-		<td bgcolor="#F2F2F2">
-			<br>
-			&nbsp; &nbsp;
+		<td width="38%" class="date-box">
 			<strong>{{ $orden->contte_rep_legal }}</strong>
-			&nbsp; &nbsp;
-			<br>
 		</td>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>&nbsp;</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="12%">
+			&nbsp;
 		</td>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>&nbsp;</strong>
+		<td width="38%">
+			&nbsp;
 		</td>
 	</tr>
-
 	<tr>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>CC</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="12%">
+			<strong>CC: </strong>
 		</td>
-		<td bgcolor="#F2F2F2">
-			<br>
-			&nbsp; &nbsp;
+		<td width="38%" class="date-box">
 			<strong>{{ $orden->contte_cc }}</strong>
-			&nbsp; &nbsp;
-			<br>
 		</td>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>&nbsp;</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="12%">
+			&nbsp;
 		</td>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>&nbsp;</strong>
+		<td width="38%">
+			&nbsp;
 		</td>
 	</tr>
 </table>
-<br>
 <strong>2. INFORMACION DEL CONTRATISTA</strong>
-<table border="1" cellpadding="0" cellspacing="0" style="text-align: center;">
+<table class="body" border="0" width="100%"  cellspacing="0" cellpadding="0">
+	<tr>
+		<td width="12%">
+			<strong>NOMBRE: </strong>
+		</td>
+		<td width="38%" class="date-box">
+			<strong>{{ $analisis->proveedor->razon_social }}</strong>
+		</td>
+		<td width="12%">
+			<strong>RESPONSABLE: </strong>
+		</td>
+		<td class="date-box" width="38%">
+			<strong>{{ $orden->contta_resp }}</strong>
+		</td>
+	</tr>
+	<tr>
+		<td width="12%">
+			<strong>NIT /CC: </strong>
+		</td>
+		<td width="38%" class="date-box">
+			<strong>{{ $orden->contta_nit_cc }}</strong>
+		</td>
+		<td width="12%">
+			<strong>CC: </strong>
+		</td>
+		<td class="date-box" width="38%">
+			<strong>{{ $orden->contta_resp_cc }}</strong>
+		</td>
+	</tr>
 
 	<tr>
-		<td>
-			&nbsp; &nbsp;
-			<br>
-			<strong>NOMBRE</strong>
-			&nbsp; &nbsp;
-			<br>
-		</td>	
-		<td bgcolor="#F2F2F2">	
-			&nbsp; &nbsp;
-			<br>
-			<strong>
-				{{ $orden->proveedor->razon_social }}
-			</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="12%">
+			<strong>DIR: </strong>
 		</td>
-		<td>
-			&nbsp; &nbsp;
-			<br>
-			<strong>
-				RESPONSABLE
-			</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="38%" class="date-box">
+			<strong>{{ $orden->contta_dir }} </strong>
 		</td>
-		<td bgcolor="#F2F2F2">
-			<br>
-			&nbsp; &nbsp;
-			<strong>
-				{{ $orden->contta_resp }}
-			</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="12%">
+			<strong>CARGO :</strong>
 		</td>
-	</tr>
-	<tr>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>
-				NIT / CC
-			</strong>
-			&nbsp; &nbsp;
-			<br>
-		</td>
-		<td bgcolor="#F2F2F2">
-			<br>
-			&nbsp; &nbsp;
-			<strong>
-				{{ $orden->contta_nit_cc }}
-			</strong>
-			&nbsp; &nbsp;
-			<br>
-		</td>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>CC</strong>
-			&nbsp; &nbsp;
-			<br>
-		</td>
-		<td bgcolor="#F2F2F2">
-			<br>
-			&nbsp; &nbsp;
-			<strong>{{ $orden->contta_resp_cc }}</strong>
-			&nbsp; &nbsp;
-			<br>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>DIR</strong>
-			&nbsp; &nbsp;
-			<br>
-		</td>
-		<td bgcolor="#F2F2F2">
-			<br>
-			<strong>{{ $orden->contta_dir }}</strong>
-			<br>
-		</td>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>CARGO</strong>
-			&nbsp; &nbsp;
-			<br>
-		</td>
-		<td bgcolor="#F2F2F2">
-			<br>
-			&nbsp; &nbsp;
+		<td class="date-box" width="38%">
 			<strong>{{ $orden->contta_resp_cargo }}</strong>
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>TEL</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="12%">
+			<strong>TEL: </strong>
 		</td>
-		<td bgcolor="#F2F2F2">
-			<br>
-			&nbsp; &nbsp;
-			<strong>{{ $orden->proveedor->telefono }}</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="38%" class="date-box">
+			<strong>{{ $analisis->proveedor->telefono }}</strong>
 		</td>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>MAIL</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="12%">
+			<strong>EMAIL: </strong>
 		</td>
-		<td bgcolor="#F2F2F2">
-			<br>
+		<td class="date-box" width="38%">
 			<strong>{{ $orden->contta_resp_email }}</strong>
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>MAIL</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="12%">
+			<strong>MAIL: </strong>
 		</td>
-		<td bgcolor="#F2F2F2">
-			<br>
-			&nbsp; &nbsp;
-			<strong>{{ $orden->proveedor->email }}</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="38%" class="date-box">
+			<strong>{{ $analisis->proveedor->telefono }}</strong>
 		</td>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>TEL</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="12%">
+			<strong>TEL: </strong>
 		</td>
-		<td bgcolor="#F2F2F2">
-			<br>
-			&nbsp; &nbsp;
-			<strong>{{ $orden->contta_rep_telf}}</strong>
+		<td class="date-box" width="38%">
+			<strong>{{ $orden->contta_rep_telf }}</strong>
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>REP / LEGAL</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="12%">
+			<strong>REP/LEGAL: </strong>
 		</td>
-		<td bgcolor="#F2F2F2">
-			<br>
-			&nbsp; &nbsp;
+		<td width="38%" class="date-box">
 			<strong>{{ $orden->contta_resp_legal }}</strong>
-			&nbsp; &nbsp;
-			<br>
 		</td>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>&nbsp;</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="12%">
+			&nbsp;
 		</td>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>&nbsp;</strong>
+		<td width="38%">
+			&nbsp;
 		</td>
 	</tr>
-
 	<tr>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>CC</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="12%">
+			<strong>CC: </strong>
 		</td>
-		<td bgcolor="#F2F2F2">
-			<br>
-			&nbsp; &nbsp;
-			<strong>{{ $orden->proveedor->nro_identificacion }}</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="38%" class="date-box">
+			<strong>{{ $analisis->proveedor->cedula }}</strong>
 		</td>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>&nbsp;</strong>
-			&nbsp; &nbsp;
-			<br>
+		<td width="12%">
+			&nbsp;
 		</td>
-		<td>
-			<br>
-			&nbsp; &nbsp;
-			<strong>&nbsp;</strong>
+		<td width="38%">
+			&nbsp;
 		</td>
 	</tr>
 </table>
-
-<strong>3. OBJETOS Y CONSIDERACIONES</strong>
-<table border="1" cellpadding="0" cellspacing="0">
+<strong>3. OBJETO Y CONSIDERACIONES </strong>
+<table class="body" border="0" width="100%" cellspacing="0" cellpadding="0">
 	<tr>
 		<td>
-			&nbsp; &nbsp;&nbsp; &nbsp;
-			<br>
-			<strong>{{ $orden->concepto }}</strong>
-			<br>
-			&nbsp; &nbsp;&nbsp; &nbsp;
+			{{ $orden->concepto }}
 		</td>
 	</tr>
 </table>
-<div class="page_break"></div>
-
-<strong>4.</strong>
-<table border="1" cellpadding="0" cellspacing="0" style="text-align: center;">  
+<strong>4. </strong>
+<table class="body" width="100%" style="text-align: center;" border="0" cellpadding="0" cellspacing="0">
 	<thead>
 		<tr>
-			<th>
-				&nbsp;&nbsp;&nbsp;
-				ID
-				&nbsp;&nbsp;&nbsp;
-			</th>
-			<th>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				DESCRIPCION
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			</th>
-			<th>
-				&nbsp;&nbsp;
-				UND
-				&nbsp;&nbsp;
-			</th>
-			<th>
-				&nbsp;&nbsp;
-				CANT
-				&nbsp;&nbsp;
-			</th>
-			<th>
-				&nbsp;&nbsp;
-				VR / UNIT
-				&nbsp;&nbsp;
-			</th>
-			<th>
-			&nbsp;&nbsp;
-			VR/ TOTAL
-			&nbsp;&nbsp;
-			</th>
+			<th>ID</th>
+			<th>DESCRIPCION</th>
+			<th>UNIDAD</th>
+			<th>CANT.</th>
+			<th> VR/ UNIT. </th>
+			<th>VR/ TOTAL</th>
 		</tr>
 	</thead>
-	<tbody>
-        @foreach($analisis as $key => $detalle)
-            <tr>
-                <td>{{ $key+1 }}</td>
-                <td>
-                    {{ $detalle->cotizacion->material->nombre_material }}
-                </td>
-                 <td>
-                    {{ $detalle->cotizacion->material->unidad_medida->codigo_unidad }}
-                 </td>
-                 <td>
-                    {{ $detalle->cotizacion->cantidad }}
-                 </td>
-                 <td>
-                    {{ $detalle->cotizacion->cotizacion }}
-                 </td>
-                 <td>
-                    {{ $detalle->cotizacion->cotizacion * $detalle->cotizacion->cantidad}}
-                 </td>
-            </tr>
-          @endforeach
-	</tbody>
-</table>
-<table border="1" cellspacing="0" cellpadding="0">
+	@foreach($solicitud->registros_cotizacion as $key => $registro)
+		<tr>
+			<td>{{ $key+1 }}</td>
+			<td>{{ $registro->material->nombre_material }}</td>
+			<td>{{ $registro->material->unidad_medida->codigo_unidad }}</td>
+			<td>{{ $registro->cantidad }}</td>
+			<td>{{ $registro->cotizacion }}</td>
+			<td>{{ $registro->total_cotizacion }}</td>
+		</tr>
+	@endforeach
 	<tr>
-		<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			SUBTOTAL ANTES DEL DESCUENTO
+		<td class="footer-table">&nbsp;</td>
+		<td class="footer-table">&nbsp;</td>
+		<td class="footer-table">&nbsp;</td>
+		<td class="footer-table">&nbsp;</td>
+		<td class="footer-table" style="text-align: right;">
+			<strong>TOTAL ANTES DE DESCUENTO</strong>
 		</td>
-		<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<td class="footer-table totales">
 			{{ number_format($orden->total_sin_descuento, 2) }}
-			&nbsp;&nbsp;&nbsp;
 		</td>
 	</tr>
+	
 	<tr>
-		<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			DESCUENTO
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td style="text-align: right;">
+			<strong>DESCUENTO</strong>
 		</td>
-		<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<td class="footer-table totales">
 			{{ number_format($orden->descuento, 2) }}
-			&nbsp;&nbsp;&nbsp;
 		</td>
 	</tr>
 	<tr>
-		<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			SUBTOTAL
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td style="text-align: right;">
+			<strong>SUBTOTAL</strong>
 		</td>
-		<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<td class="footer-table totales">
 			{{ number_format($orden->subtotal, 2) }}
-			&nbsp;&nbsp;&nbsp;
 		</td>
 	</tr>
 	<tr>
-		<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			IVA
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td style="text-align: right;">
+			<strong>IVA</strong>
 		</td>
-		<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<td class="footer-table totales">
 			{{ number_format($orden->total_iva, 2) }}
 		</td>
 	</tr>
 	<tr>
-		<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			RETEFUENTE
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td style="text-align: right;">
+			<strong>RETEFUENTE</strong>
 		</td>
-		<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<td class="footer-table totales">
 			{{ number_format($orden->retefuente, 2) }}
-			&nbsp;&nbsp;&nbsp;
 		</td>
 	</tr>
 	<tr>
-		<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			TOTAL A PAGAR
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td style="text-align: right;">
+			<strong>TOTAL A PAGAR</strong>
 		</td>
-		<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<td class="footer-table totales">
 			{{ number_format($orden->total, 2) }}
-			&nbsp;&nbsp;&nbsp;
 		</td>
 	</tr>
-
-
-
+	
 </table>
-
-<br>
-<strong>
-5. 
-</strong>
-<strong>FORMA DE PAGO</strong> CONTADO [ {{ ($analisis[0]->cotizacion->forma_pago == 'CONTADO') ? 'X' : '&nbsp;' }} ] CREDITO [{{ ($analisis[0]->cotizacion->forma_pago == 'CREDITO') ? 'X' : '&nbsp;' }}]
-<br>
-<strong>PLAZO EN DIAS CALENDARIO PARA PAGO DE FACTURA RADICADA:</strong> {{ $orden->tiempo_pago }} Dias
-<br>
-<strong>FACTURACION: </strong> MES VENCIDO [ {{ ($orden->mes_anticipo == 'M' || $orden->mes_anticipo == 'N') ? 'X' : '&nbsp;' }} ] MES ANTICIPO [{{ ($orden->mes_anticipo == 'S' ) ? 'X' : '&nbsp;' }}]
-<br>
-<strong>CUENTA A CONSIGNAR: </strong> {{ $orden->proveedor->cuenta_bancaria }} 
-<strong>BANCO: </strong> {{ $orden->proveedor->banco->nombre_banco }} 

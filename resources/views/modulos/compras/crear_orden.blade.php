@@ -52,9 +52,14 @@
                                     <label for="">TIPO DE ORDEN</label>
                                     <input type="text" style="text-align: center;"  value="{{ $tipo }}" class="form-control" name="tipo_orden" readonly="" id="tipo_orden">
                                 </div>
-                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                <div class="col-sm-7 col-md-7 col-lg-7">
                                     <label for="">OBJETO Y CONSIDERACIONES</label>
                                     <input type="text" name="concepto" id="concepto" class="form-control">
+                                </div>
+                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                    <label for="">PROYECTO</label>
+                                    <input type="text" name="proyecto" id="proyecto" class="form-control">
+
                                 </div>
                             @endif
                         </div>

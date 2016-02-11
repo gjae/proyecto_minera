@@ -21,6 +21,7 @@ class CreateOrdenesTable extends Migration
             $table->string('codigo_analisis', 8);
             $table->string('concepto')->nullable();
             $table->string('codigo_orden', 10);
+            $table->string('proyecto', 140)->default('SOCIEDAD MINERA DEL NORTE');
 
             $table->float('total_iva')->default(0);
             $table->float('total_sin_descuento')->default(0);

@@ -267,6 +267,11 @@
                                     Emitir
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ url('dashboard/compras/Ordenes/ordenes') }}">
+                                    Listado de ordenes de compras / servicios
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     @endif

@@ -17,6 +17,32 @@ class Ordenes extends Controller
     		]);
     }
 
+    public function ordenes($req){
+        return view('modulos.compras.listado_ordenes', [
+                'ordenes' => Orden::all(),
+            ]);
+    }
+
+    public function imprimir($req){
+        if( $req->has('orden') && !empty($req->orden)){
+            $orden = Orden::find($req->orden);
+            $ac = AC::where('codigo', $orden->codigo_analisis)->first();
+
+            $requisicion = $ac->cotizacion->solicitud->requisicion;
+            set_time_limit(900);
+           
+            $vista = \View::make('modulos.compras.reportes.orden_compra',[
+                    'orden' => $orden,
+                    'requisicion' => $requisicion,
+                    'analisis' => $ac,
+                    'solicitud' => $ac->cotizacion->solicitud
+                ])->render();
+            $pdf = PDF::loadHtml($vista);
+            $pdf->setPaper('A4', 'landscape');
+            return $pdf->stream('reporte_orden', ['attachment' => 0]);
+        }
+    }
+
     public function buscarAnalisis($req){
     	$ac = AC::select(['codigo', 'observacion', 'proveedor_id'])
     				->distinct()->get();

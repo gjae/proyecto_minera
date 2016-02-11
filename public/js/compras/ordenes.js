@@ -16,7 +16,7 @@ $(document).ready(function(){
 
 	$("#guardar").on('click', function(){
 		var datos = $("#emision").serialize();
-		alert(datos)
+		//alert(datos)
 		if( datos.indexOf('=&') == -1){
 			if(confirm('¿SEGURO QUE DESEA GUARDAR ESTOS DATOS?')){
 
@@ -30,6 +30,12 @@ $(document).ready(function(){
 		else alert('AUN HAY DATOS PENDIENTES POR COMPLETAR')
 	})
 
+	$(".opciones").on('click' ,function(){
+		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
+		url += '?orden='+$(this).attr('orden')
+		alert(url)
+		window.open(url, 'ORDEN', 'width=850,height=800');
+	})
 })
 
 function cargarAnalisis(event, boton){

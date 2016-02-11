@@ -25,11 +25,11 @@ $(document).ready(function(){
 		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()
 		url += '/'+$(this).attr('role')
 		
-		alert(datos)
+		//alert(datos)
 		$.post(url, datos, function(resp){
 			alert(resp.mensaje)
 			if( !resp.error )
-				alert("CORRECTO") 
+				location.reload()
 		})
 	})
 
