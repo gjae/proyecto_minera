@@ -18,6 +18,28 @@
 	
 	<div class="body">
 		
+		<div class="container-fluid clearfix">
+			<form action="#" method="post" id="nomina">
+				{{ csrf_field() }}
+				<section id="datos_nomina">
+					<div class="row">
+						
+						<div class="col-sm-3">
+							<label for="">Codigo de nomina</label>
+							<input type="text" class="form-control" id="codigo_nomina" name="codigo_nomina" value="{{ $nomina->codigo_nomina }}" readonly="">
+						</div>
+						<div class="col-sm-3">
+							<label for="">Periodo de la nomina</label>
+							<input type="text" value="{{ $nomina->periodo_nomina->format('d-m-Y') }}" class="form-control" id="periodo_nomina" name="periodo_nomina" readonly="">
+						</div>
+
+					</div>
+
+				</section>
+
+
+			</form>
+		</div>
 
 	</div>
 
