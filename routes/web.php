@@ -11,6 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Auth::routes();
+
+Route::get('/', function(){
+	return view('index');
+});
+
+
+Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function(){
+
+	Route::get('/{modulo?}/{programa?}/{accion?}', 'Dashboard@index');
+
 });
