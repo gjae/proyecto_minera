@@ -137,7 +137,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">Crear concepto de nomina</a>
+                                <a href="{{ url('dashboard/nomina') }}">Nominas</a>
                             </li>
                         </ul>
                     </li>

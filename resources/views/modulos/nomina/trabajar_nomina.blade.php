@@ -6,47 +6,25 @@
 
 @endsection
 
-@section('titulo', 'Modulo de persoal y nomina')
+@section('titulo', 'Trabajar nomina')
 @section('contenedor')
 
+
 <div class="row clearfix">
-	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		<div class="card">
-			<div class="body">
-				<div class="table-responsive">
-				<button type="button red pull-right" action="formularios" formulario="ingresar" class="btn btn-default waves-effect m-r-20 actions">Ingresar persona</button>					
-					<table class="table table-bordered table-striped table-hover" id="dataTables-example">
-						<thead>
-							<tr>
-								<th width="24%">Nombre</th>
-								<th width="18%">Identificacion</th>
-								<th>Telefono</th>
-								<th>Fecha de ingreso</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach($personas as $persona)
-								<tr>
-									<td>
-										{{ $persona->primer_nombre.' '.$persona->segundo_nombre.' '.$persona->primer_apellido.' '.$persona->segundo_apellido }}
-									</td>
-									<td>
-										{{ $persona->identificacion }}
-									</td>
-									<td>
-										{{ $persona->telefono }}
-									</td>
-									<td>
-										{{ $persona->fecha_ingreso }}
-									</td>
-								</tr>
-							@endforeach
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
+	
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	
+<div class="card">
+	
+	<div class="body">
+		
+
 	</div>
+
+</div>
+
+</div>
+
 </div>
 
 <section id="modals">
@@ -83,12 +61,7 @@
 <script src="{{ asset('plugins/jquery-datatable/extensions/export/vfs_fonts.js') }}"></script>
 <script src="{{ asset('plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}"></script>
 <script src="{{ asset('plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}"></script>
-<script src="{{ asset('js/personal/personal.js') }}"></script>
+-<script src="{{ asset('js/personal/personal.js') }}"></script>
     <!-- Demo Js -->
 <script src="{{ asset('js/demo.js') }}"></script>
-<script>
-$('#dataTables-example').DataTable({
-    responsive: true
-});
-</script>
 @endsection

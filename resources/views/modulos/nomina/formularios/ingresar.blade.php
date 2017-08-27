@@ -1,5 +1,6 @@
 <div class="container">
 {{ csrf_field() }}
+<input type="hidden" id="accion" name="accion" value="insertarNuevaPersona">
 	<div class="row">
 		<div class="col-sm-10">
 			<h3 class="page-header">Datos personales</h3>
@@ -41,18 +42,28 @@
 			<label for="">Telefono de contacto</label>
 			<input type="number" id="telefono" class="form-control" name="telefono" placeholder="000000000">
 		</div>
-		<div class="col-sm-3">
+		<div class="col-sm-2">
 			<label for="">Sexo</label>
 			<select name="sexo" id="sexo" class="form-control">
 				<option value="HOMBRE">Hombre</option>
 				<option value="MUJER">Mujer</option>
 			</select>
 		</div>
-		<div class="col-sm-3">
+		<div class="col-sm-2">
 			<label for="">Ciudad natal</label>
 			<select name="ciudad_id" id="ciudad_id" class="form-control">
 				@foreach(App\Models\Ciudad::all() as $ciudad)
 					<option value="{{ $ciudad->id }}">{{ $ciudad->nombre_ciudad }}</option>
+				@endforeach
+			</select>
+		</div>
+		<div class="col-sm-3">
+			<label for="">Tipo de sangre</label>
+			<select name="tipo_sangre_id" id="tipo_sangre_id" class="form-control">
+				@foreach(App\Models\personal\TipoSangre::all() as $tipo)
+					<option value="{{ $tipo->id }}">
+						 {{ $tipo->abreviatura_tipo }}
+					</option>
 				@endforeach
 			</select>
 		</div>
@@ -111,7 +122,7 @@
 		</div>
 		<div class="col-sm-5">
 			<label for="">Sueldo base</label>
-			
+			<input type="number" class="form-control" id="sueldo_basico" name="sueldo_basico" placeholder="Sueldo basico de la persona">
 		</div>
 	</div>
 

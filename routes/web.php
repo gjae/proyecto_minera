@@ -21,6 +21,6 @@ Route::get('/', function(){
 
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function(){
 
-	Route::get('/{modulo?}/{programa?}/{accion?}', 'Dashboard@index');
+	Route::match(['get', 'post'],'/{modulo?}/{programa?}/{accion?}', 'Dashboard@index');
 
 });

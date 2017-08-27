@@ -6,7 +6,7 @@
 
 @endsection
 
-@section('titulo', 'Modulo de persoal y nomina')
+@section('titulo', 'Modulo de personal y nomina')
 @section('contenedor')
 
 <div class="row clearfix">
@@ -14,30 +14,47 @@
 		<div class="card">
 			<div class="body">
 				<div class="table-responsive">
-				<button type="button red pull-right" action="formularios" formulario="ingresar" class="btn btn-default waves-effect m-r-20 actions">Ingresar persona</button>					
+
+					
+					<button type="button red pull-right" action="formularios" formulario="ingresar" class="btn btn-default waves-effect m-r-20 actions">Abrir nomina</button>	
+						
 					<table class="table table-bordered table-striped table-hover" id="dataTables-example">
 						<thead>
 							<tr>
-								<th width="24%">Nombre</th>
-								<th width="18%">Identificacion</th>
-								<th>Telefono</th>
-								<th>Fecha de ingreso</th>
+								<th width="14%">Codigo</th>
+								<th width="18%">Periodo</th>
+								<th>Estado</th>
+								<th>Total (hasta la fecha)</th>
+								<th>Total (deducciones hasta la fecha)</th>
+								<th>Opciones</th>
 							</tr>
 						</thead>
 						<tbody>
-							@foreach($personas as $persona)
+							@foreach(App\Models\personal\Nomina::all() as $nomina)
 								<tr>
 									<td>
-										{{ $persona->primer_nombre.' '.$persona->segundo_nombre.' '.$persona->primer_apellido.' '.$persona->segundo_apellido }}
+										{{ $nomina->codigo_nomina }}
 									</td>
 									<td>
-										{{ $persona->identificacion }}
+										{{ $nomina->periodo_nomina->format('d-m-Y') }}
 									</td>
 									<td>
-										{{ $persona->telefono }}
+										{{ $nomina->estado_nomina }}
 									</td>
 									<td>
-										{{ $persona->fecha_ingreso }}
+										<strong>COP$</strong>
+										@if($nomina)
+											{{ number_format($nomina->total_nomina, 2) }}
+										@endif
+									</td>
+									<td>
+										<strong>COP$</strong>
+										{{ number_format($nomina->total_deducciones, 2) }}
+									</td>
+									<td>
+										<a href="{{ url('dashboard/nomina/Nomina/trabajar?codigo_nomina='.$nomina->codigo_nomina) }}" class="btn btn-success">
+											Trabajar
+										</a>
 									</td>
 								</tr>
 							@endforeach

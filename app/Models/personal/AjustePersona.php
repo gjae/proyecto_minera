@@ -18,4 +18,8 @@ class AjustePersona extends Model
     public function ajuste(){
         return $this->belongsTo('App\Models\personal\Ajuste');
     }
+
+    public function nominas(){
+        return $this->hasMany('App\Models\personal\DetalleNomina');
+    }
 }

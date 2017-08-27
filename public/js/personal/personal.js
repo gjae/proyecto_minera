@@ -16,21 +16,18 @@ $(document).ready(function(){
 
 
 	$("#salvar").on('click', function(event){
-		var data = [
-			'primer_nombre', 'segundo_nombre',
-			'identificacion'
-		];
-		var form_completo = true;
-
-		console.log(data.length)
-
-		for(var i = 0; i < data.length; i++){
-			if( $("#"+data[i]).val() == "" ){
-				$("#"+data[i]).addClass('has-error');
-				form_completo = false;
-			}
-		}
-		if( !form_completo )
+		var url = location.href;
+		var datos = $("#form-modal").serialize();
+		
+		if( datos.indexOf('=&') != -1 ){
 			alert("AUN HAY CAMPOS POR COMPLETAR")
+		}
+		else{
+			$.post(url+'/'+$("#accion").val(), datos, function(resp){
+				alert(resp.mensaje)
+				if(! resp.error)
+					location.reload()
+			})
+		}
 	})
 })

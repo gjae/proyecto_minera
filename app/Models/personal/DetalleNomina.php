@@ -1,32 +1,28 @@
 <?php
+namespace App\Models\personal;
 
-namespace App;
-
-use Illuminate\Auth\Authenticatable;
-use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract
+/**
+* 
+*/
+class DetalleNomina extends Model
 {
-    use Authenticatable, Authorizable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    protected $table = 'detalle_nomina';
     protected $fillable = [
-        'name', 'email',
+        'persona_id', 'nomina_id', 'ajuste_persona_id'
     ];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-    ];
+
+    public function nomina(){
+        return $this->belongsTo('App\Models\personal\Nomina');
+    }
+
+    public function persona(){
+    	return $this->belongsTo('App\Models\personal\Persona');
+    }
+
+    public function ajuste(){
+    	return $this->belongsTo('App\Models\personal\DetalleNomina', 'ajuste_persona_id');
+    }
 }
