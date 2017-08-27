@@ -12,6 +12,7 @@ class Persona extends Model
         'sitio_trabajo_id', 'tipo_sangre_id', 'cargo_id', 'ciudad_id', 'estado_persona', 'sexo'
     ];
 
+    protected $casts = ['fecha_ingreso' => 'date'];
 
     public function ajustes(){
         return $this->hasMany('App\Models\personal\AjustePersona');
