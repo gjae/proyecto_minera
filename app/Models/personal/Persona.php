@@ -17,4 +17,16 @@ class Persona extends Model
     public function ajustes(){
         return $this->hasMany('App\Models\personal\AjustePersona');
     }
+
+    public function ciudad(){
+        return $this->belongsTo('App\Models\Ciudad');
+    }
+
+    public function sitio_trabajo(){
+        return $this->belongsTo('App\Models\personal\SitioTrabajo', 'sitio_trabajo_id');
+    }
+
+    public function cargo(){
+        return $this->belongsTo('App\Models\personal\Cargo', 'cargo_id');
+    }
 }
