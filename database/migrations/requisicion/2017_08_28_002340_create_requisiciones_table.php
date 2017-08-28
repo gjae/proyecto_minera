@@ -26,6 +26,7 @@ class CreateRequisicionesTable extends Migration
             
             $table->float('total_requisicion')->default(0.00);
             $table->float('total_impuestos')->default(0.00);
+            $table->float('sub_total')->default(0.00);
             $table->date('fecha_requerida')->nullable();
 
 

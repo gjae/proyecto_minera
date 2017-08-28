@@ -3,6 +3,7 @@
 namespace App\Models\requisicion;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Requisicion extends Model
 {
@@ -20,5 +21,9 @@ class Requisicion extends Model
 
     public function detalles(){
     	return $this->hasMany('App\Models\requisicion\DetalleRequisicion');
+    }
+
+    public function setFechaRequeridaAttribute($old){
+        $this->attributes['fecha_requerida'] = Carbon::parse($old)->format('Y-m-d');
     }
 }

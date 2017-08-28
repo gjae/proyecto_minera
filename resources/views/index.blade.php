@@ -142,7 +142,7 @@
                         </ul>
                     </li>
                    @endif
-
+                   @if(Auth::user()->tipo_usuario == 'ADMIN' || Auth::user()->tipo_usuario == 'REQUSICION')
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">add_shopping_cart</i>
@@ -156,6 +156,7 @@
                             </li>
                         </ul>
                     </li>
+                    @endif
                 </ul>
             </div>
             <!-- #Menu -->
@@ -175,7 +176,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-                <h2>DASHBOARD</h2>
+                <h2>@yield('dash_titulo','DASHBOARD')</h2>
             </div>
 
             <div class="row clearfix">
@@ -194,8 +195,6 @@
     <!-- Waves Effect Plugin Js -->
     <script src="{{ asset('plugins/node-waves/waves.js') }}"></script>
 
-    <!-- Jquery CountTo Plugin Js -->
-    <script src="{{ asset('plugins/jquery-countto/jquery.countTo.js') }}"></script>
     <script src="{{ asset('plugins/morrisjs/morris.js') }}"></script>
 
 
@@ -204,9 +203,6 @@
 
     <!-- Custom Js -->
     <script src="{{ asset('js/admin.js') }}"></script>
-
-    <!-- Demo Js -->
-    <script src="{{ asset('js/demo.js') }}"></script>
 
     @section('jquery')
     @show
