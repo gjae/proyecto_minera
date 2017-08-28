@@ -33,6 +33,15 @@ $(document).ready(function(){
 	});
 
 	$(".btn-options").on('click', function(){
-
+		if( $(this).attr('role') == 'delete' ){
+			if(confirm("¿Seguro que desea eliminar este item?")){
+				var url = location.href+'/eliminarMaterial';
+				$.post(url, {id: $(this).attr('data-id'), '_token': $("#token").val() }, function(resp){
+					alert(resp.mensaje)
+					if(! resp.error)
+						location.reload()
+				})
+			}
+		}
 	})
 })

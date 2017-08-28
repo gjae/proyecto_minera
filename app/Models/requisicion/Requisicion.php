@@ -11,7 +11,7 @@ class Requisicion extends Model
     protected $fillable = [
     	'codigo_requisicion', 'concepto_requisicion', 'user_id',
     	'tipo_requisicion', 'estado_requisicion', 'total_requisicion', 'total_impuestos',
-    	'fecha_requerida'
+    	'fecha_requerida', 'centro_costo_id', 'etapa_produccion_id', 'diciplina_id'
     ];
 
     protected $casts = [
@@ -26,4 +26,17 @@ class Requisicion extends Model
     public function setFechaRequeridaAttribute($old){
         $this->attributes['fecha_requerida'] = Carbon::parse($old)->format('Y-m-d');
     }
+
+    public function centro_costo(){
+        return $this->belongsTo('App\Models\requisicion\CentroCosto', 'centro_costo_id');
+    }
+
+    public function diciplina(){
+        return $this->belongsTo('App\Models\requisicion\Diciplina');
+    }
+
+    public function etapa_produccion(){
+        return $this->belongsTo('App\Models\requisicion\EtapaProduccion', 'etapa_produccion_id');
+    }
+
 }

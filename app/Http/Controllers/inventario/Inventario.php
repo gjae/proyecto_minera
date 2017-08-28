@@ -60,4 +60,32 @@ class Inventario extends Controller
     		return response($resp, 200)->header('Content-Type', 'application/json');
     	}
     }
+
+    public function eliminarMaterial($req){
+        if( $req->has('id') ){
+            $data = [];
+            DB::beginTransaction();
+            try {
+                $material = Material::find($req->id);
+                $material->estado_material = 'ELIMINADO';
+                if($material->save()){
+                    DB::commit();
+                    $data = [
+                        'error' => false,
+                        'mensaje' => 'REGISTRO ELIMINADO CORRECTAMENTE'
+                    ];
+
+                    return response($data, 200)->header('Content-Type', 'application/json');
+                }
+
+            } catch (\Exception $e) {
+                DB::rollback();
+                $data = [
+                    'error' => true,
+                    'mensaje' => 'ERROR INESPERADO : '.$e->getMessage()
+                ];
+                return response($data, 200)->header('Content-Type', 'application/json');
+            }
+        }
+    }
 }

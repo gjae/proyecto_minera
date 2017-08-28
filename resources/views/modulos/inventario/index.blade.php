@@ -10,6 +10,7 @@
 @section('contenedor')
 
 <div class="row clearfix">
+	<input type="hidden" id="token" value="{{ csrf_token() }}">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="card">
 			<div class="container-fluid">
@@ -21,12 +22,10 @@
 							<a  formulario="crearMaterial" class="btn btn-primary actions">
 								CREAR NUEVO
 							</a>
-							<a  formulario="hacerIngreso" class="btn btn-success actions">
-								INGRESAR
-							</a>
 							<a  formulario="insertarUnidadMedida" class="btn btn-success actions">
 								AGREGAR UNIDAD DE MEDIDA
 							</a>
+
 						</div>
 
 					</div>
@@ -65,8 +64,9 @@
 										{{ $material->ingresos->sum('cantidad') - $material->egresos->sum('cantidad_salida') }}
 									</td>
 									<td>
-										<i class="large material-icons btn-options" role="delete">delete</i>
-										<i class="large material-icons btn-options" role="detalles">pageview</i>
+										<i class="large material-icons btn-options" data-id="{{ $material->id }}" role="delete">delete</i>
+										<i class="large material-icons btn-options" data-id="{{ $material->id }}" role="detalles">pageview</i>
+										<i class="large material-icons btn-options" data-id="{{ $material->id }}" role="ingresar">add_circle</i>
 									</td>
 								</tr>
 							@endforeach
