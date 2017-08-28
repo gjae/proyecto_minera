@@ -22,12 +22,12 @@
 			<div class="container">
 				
 				<div class="row">
-					<div class="col-sm-3 col-md-3 col-lg-3">
+					<div class="col-sm-12 col-md-2 col-lg-2">
 						<label for="">Codigo dela requisicion</label>
 						<input style="text-align: center;" type="text" class="form-control" id="codigo_requisicion" name="codigo_requisicion" value="{{ $codigo }}" readonly="">
 					</div>
-					<div class="col-sm-5 col-md-5 col-lg-5">
-						<label for="">Fecha requerida (AAAA-MM-DD / DD-MM-AAAA)</label>
+					<div class="col-sm-3 col-md-3 col-lg-3">
+						<label for="">Fecha requerida </label>
 						<input style="text-align: center;" type="date" placeholder="Fecha que se requiere el material"  class="form-control" id="fecha_requerida" name="fecha_requerida">
 					</div>
 					<div class="col-sm-3 col-md-3 col-lg-3">
@@ -39,14 +39,14 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-11 col-md-11 col-lg-11">
+					<div class="col-sm-8 col-md-8 col-lg-8">
 						<label for="">Concepto de la requisicion</label>
 						<input type="text" placeholder="Concepto" name="concepto_requisicion" id="concepto_requisicion" class="form-control">
 					</div>
 				</div>
 
 				<div class="row">
-					<div class="col-sm-4 col-md-4 col-lg-4">
+					<div class="col-sm-2 col-md-2 col-lg-2">
 						<a class="btn btn-success" onclick="agregarFila(event, this)" id="agregar_fila">AGREGAR BIENES</a>
 
 					</div>
@@ -63,9 +63,9 @@
 				</div>
 				<div class="row">
 					
-					<div class="col-sm-11 col-md-11 col-lg-11">
+					<div class="col-sm-3 col-md-5 col-lg-3">
 						
-						<table class="table table-bordered table-responsive table-striped table-hover">
+						<table class="table-responsive table-bordered table-striped table-hover">
 							<thead>
 								<tr>
 									<th>CODIGO</th>

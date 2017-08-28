@@ -15,10 +15,11 @@
 Auth::routes();
 
 Route::get('/', function(){
-	return view('index');
+	if(Auth::check()){
+		return redirect()->to(url('dashboard'));
+	}
+	return redirect()->to( url('login') );
 });
-
-
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function(){
 
 	Route::match(['get', 'post'],'/{modulo?}/{programa?}/{accion?}', 'Dashboard@index');

@@ -99,18 +99,18 @@
             <div class="menu">
                 <ul class="list">
                     <li class="header">Menu</li>
-                    <li class="active">
+                    <li>
                         <a href="{{ url('dashboard') }}">
                             <i class="material-icons">home</i>
                             <span>Inicio</span>
                         </a>
                     </li>
-                    <li>
+                    <!--<li>
                         <a href="pages/typography.html">
                             <i class="material-icons">text_fields</i>
                             <span>Typography</span>
                         </a>
-                    </li>
+                    </li> -->
                      @if(Auth::user()->tipo_usuario == 'ADMIN')
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
@@ -152,6 +152,21 @@
                             <li>
                                 <a href="{{ url('dashboard/requisicion/requisicion/emitir') }}">
                                     Emitir requisicion
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    @endif
+                   @if(Auth::user()->tipo_usuario == 'ADMIN' || Auth::user()->tipo_usuario == 'INVENTARIO')
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">content_paste</i>
+                            <span>Inventario</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="{{ url('dashboard/inventario/inventario') }}">
+                                    Ver inventario
                                 </a>
                             </li>
                         </ul>

@@ -23,8 +23,9 @@ class CreateMaterialesTable extends Migration
             $table->integer('tipo_material_id')->unsigned();
             $table->date('fecha_ingreso_material');
             $table->string('nombre_material', 150);
+            $table->enum('estado_material' , ['ACTIVO', 'ELIMINADO'])->default('ACTIVO');
 
-            $table->index(['codigo_material']);
+            $table->index(['codigo_material', 'estado_material']);
 
             $table->foreign('unidad_medida_id')->references('id')
                     ->on('unidades_medida')->onDelete('cascade')->onUpdate('cascade');
