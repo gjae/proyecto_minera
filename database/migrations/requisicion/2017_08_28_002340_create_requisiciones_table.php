@@ -20,7 +20,7 @@ class CreateRequisicionesTable extends Migration
             $table->string('concepto_requisicion')->nullable();
 
             $table->integer('user_id')->unsigned();
-            $table->enum('tipo_requisicion', ['BEIENES', 'SERVICIOS'])->default('BIENES');
+            $table->enum('tipo_requisicion', ['BIENES', 'SERVICIOS'])->default('BIENES');
 
             $table->enum('estado_requisicion', ['APROBADA', 'EMITIDA', 'REVERSADA', 'ANULADA', 'PROCESADA'])->default('EMITIDA');
             
