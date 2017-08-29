@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	$(".actions").on('click', function(){
 		var btn = $(this)
-		var url = location.href + '/formularios?formulario='+btn.attr('formulario')
+		var url = location.href + '/formularios?formulario='+btn.attr('formulario')+'&id='+$(this).attr('data-id')
 		var modal = $("#modal-inventario")
 		modal.modal({show: true})
 		$.get(url, {}, function(resp){

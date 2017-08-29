@@ -14,4 +14,12 @@ class CentroCosto extends Model
     public function requisiciones(){
     	return $this->hasMany('App\models\requisicion\Requisicion', 'centro_costo_id');
     }
+
+    public function egresos_materiales(){
+    	return $this->hasMany('App\Models\inventario\EgresoMaterial', 'centro_costo_id');
+    }
+
+    public function ingresos_materiales(){
+    	return $this->hasMany('App\Models\inventario\IngresoMaterial', 'centro_costo_id');
+    }
 }

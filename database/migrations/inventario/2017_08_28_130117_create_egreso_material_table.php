@@ -18,6 +18,12 @@ class CreateEgresoMaterialTable extends Migration
             $table->timestamps();
             $table->integer('material_id')->unsigned();
             $table->integer('cantidad_salida')->default(0);
+
+
+            $table->integer('diciplina_id')->unsigned();
+            $table->integer('centro_costo_id')->unsigned();
+            $table->integer('etapa_produccion_id')->unsigned();
+            $table->integer('persona_id')->unsigned();
         });
     }
 

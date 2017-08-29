@@ -43,6 +43,10 @@ class Persona extends Model
         return $this->belongsTo('App\Models\personal\Cargo', 'cargo_id');
     }
 
+    public function solicitudes_materiales(){
+        return $this->hasMany('App\Models\inventario\EgresoMaterial');
+    }
+
     /**
      * SETTERS FUNCTIONS
      */

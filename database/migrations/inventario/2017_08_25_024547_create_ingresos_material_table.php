@@ -21,7 +21,9 @@ class CreateIngresosMaterialTable extends Migration
             $table->integer('material_id')->unsigned();
             $table->float('cantidad')->default(0.00);
 
-
+            $table->integer('diciplina_id')->unsigned();
+            $table->integer('centro_costo_id')->unsigned();
+            $table->integer('etapa_produccion_id')->unsigned();
             $table->foreign('material_id')->references('id')
                     ->on('materiales')->onDelete('cascade')->onUpdate('cascade');
         });

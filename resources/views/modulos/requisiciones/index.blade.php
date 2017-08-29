@@ -22,7 +22,7 @@
 			<div class="container">
 				
 				<div class="row">
-					<div class="col-sm-12 col-md-2 col-lg-2">
+					<div class="col-sm-12 col-md-3 col-lg-3">
 						<label for="">Codigo dela requisicion</label>
 						<input style="text-align: center;" type="text" class="form-control" id="codigo_requisicion" name="codigo_requisicion" value="{{ $codigo }}" readonly="">
 					</div>

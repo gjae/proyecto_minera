@@ -3,7 +3,7 @@
 	<input type="hidden" name="accion" id="accion" value="guardarUnidadMedida">
 	<input type="hidden" name="_archivo" id="_archivo" value="medidas">
 	<div class="row clearfix">
-		<div class="col-sm-10 col-md-3 col-lg-3">
+		<div class="col-sm-10 col-md-5 col-lg-4">
 			<label for="">Abreviatura de la unudad de medida</label>
 			<input type="text" value="" placeholder="Agrega un codigo a la unidad" class="form-control" id="codigo_unidad" name="codigo_unidad">
 		</div>

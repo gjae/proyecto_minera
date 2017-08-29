@@ -65,8 +65,9 @@
 									</td>
 									<td>
 										<i class="large material-icons btn-options" data-id="{{ $material->id }}" role="delete">delete</i>
-										<i class="large material-icons btn-options" data-id="{{ $material->id }}" role="detalles">pageview</i>
-										<i class="large material-icons btn-options" data-id="{{ $material->id }}" role="ingresar">add_circle</i>
+										<i class="large material-icons btn-options actions" formulario="ingreso_material" data-id="{{ $material->id }}" role="ingresar">add_circle</i>
+
+										<i class="large material-icons btn-options actions" formulario="egresar_material" role="egresar" data-id="{{ $material->id }}">highlight_off</i>
 									</td>
 								</tr>
 							@endforeach

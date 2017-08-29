@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\inventario\Material;
+use App\Models\inventario\IngresoMaterial;
+use App\Models\inventario\EgresoMaterial;
 use DB;
 
 class Inventario extends Controller
@@ -16,10 +18,10 @@ class Inventario extends Controller
 
     public function formularios($req){
     	if( $req->has('formulario') ){
-    		$vista = \View::make('modulos.inventario.formularios.'.$req->formulario)->render();
+    		$vista = \View::make('modulos.inventario.formularios.'.$req->formulario, ['id'=> $req->id])->render();
     		$data = [
     			'error' => false,
-    			'formulario' => $vista
+    			'formulario' => $vista,
     		];
     		return response($data, 200)->header('Content-Type', 'application/json');
     	}
@@ -59,6 +61,45 @@ class Inventario extends Controller
     	}finally{
     		return response($resp, 200)->header('Content-Type', 'application/json');
     	}
+    }
+
+    public function ingresarMaterial($req){
+        $ingreso = new IngresoMaterial($req->all());
+        $respuesta = [];
+        if( $ingreso->save() ){
+            $respuesta = [
+                'error' => false,
+                'mensaje' => 'Se ha realizado el ingreso correctamente'
+            ];
+        }
+        else{
+
+            $respuesta = [
+                'error' => true,
+                'mensaje' => 'HA OCURRIDO UN ERROR INESPERADO AL INTENTAR REALIZAR EL INGRESO DE MATERIAL, MODULO DE INVENTARIO ARCHIVO INVENTARIO.PHP'
+            ];
+        }
+
+        return response($respuesta, 200)->header('Content-Type', 'application/json');
+    }
+
+    public function egresarMaterial($req){
+        $egreso = new EgresoMaterial($req->all());
+
+        $respuesta = [];
+        if( $egreso->save() ){
+            $respuesta = [
+                'error' => false,
+                'mensaje' => 'Se ha realizado el egreso de material correctamente'
+            ];    
+        }
+        else{
+            $respuesta = [
+                'error' => true,
+                'mensaje' => 'HA OCURRIDO UN ERROR INESPERADO AL INTENTAR REALIZAR EL INGRESO DE MATERIAL, MODULO DE INVENTARIO ARCHIVO INVENTARIO.PHP'
+            ];         
+        }
+        return response($respuesta, 200)->header('Content-Type', 'application/json');
     }
 
     public function eliminarMaterial($req){
