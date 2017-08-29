@@ -25,7 +25,8 @@ class Requisicion extends Controller
 
     private function getCodigoRequisicion(){
     	$codigo = r::where('codigo_requisicion', 'LIKE', Carbon::now()->format('Ym').'%')->count('codigo_requisicion') + 1;
-    	for ($i=0; $i < (5 - $codigo); $i++) { 
+
+    	for ($i=0; $i < (5 - strlen($codigo) ); $i++) { 
     		$codigo = '0'.$codigo;
     	}
     	return Carbon::now()->format('Ym').'-'.$codigo;
