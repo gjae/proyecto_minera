@@ -172,6 +172,21 @@
                         </ul>
                     </li>
                     @endif
+                   @if(Auth::user()->tipo_usuario == 'ADMIN' || Auth::user()->tipo_usuario == 'PROCURA')
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">content_paste</i>
+                            <span>Inventario</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="{{ url('dashboard/inventario/inventario') }}">
+                                    Ver inventario
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    @endif
                 </ul>
             </div>
             <!-- #Menu -->

@@ -18,8 +18,9 @@ class CreateUsersTable extends Migration
             $table->string('email');
             $table->string('password');
             $table->string('remember_token', 255)->nullable();
-            $table->enum('tipo_usuario', ['ADMIN', 'NOMINA', 'REQUISICIONES', 'TRANSPORTE', 'INVENTARIO', ])
-                    ->default('REQUISICIONES');
+            $table->enum('tipo_usuario', ['INVITADO','ADMIN', 'NOMINA', 'REQUISICIONES', 'TRANSPORTE', 'INVENTARIO', 'PROCURA'])
+                    ->default('INVITADO');
+                    
             $table->tinyInteger('edo_reg')->default(1);
             $table->integer('persona_id')->nullable()->unsigned();
             
