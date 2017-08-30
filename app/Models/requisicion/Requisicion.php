@@ -39,4 +39,8 @@ class Requisicion extends Model
         return $this->belongsTo('App\Models\requisicion\EtapaProduccion', 'etapa_produccion_id');
     }
 
+    public function solicitudes_cotizaciones(){
+        return $this->hasMany('App\Models\compras\SolicitudCotizacion', 'requisicion_id');
+    }
+
 }

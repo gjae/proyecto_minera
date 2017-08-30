@@ -40,4 +40,8 @@ class Material extends Model
     public function  setFechaIngresoMaterialAttribute($old){
         $this->attributes['fecha_ingreso_material'] = Carbon::parse($old)->format('Y-m-d');
     }
+
+    public function registroes_cotizacion(){
+        return $this->hasMany('App\Models\compras\RegistroCotizacion');
+    }
 }
