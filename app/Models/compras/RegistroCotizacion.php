@@ -34,4 +34,8 @@ class RegistroCotizacion extends Model
     public function proveedor(){
     	return $this->belongsTo('App\Models\compras\Proveedor');
     }
+
+    public function analisis(){
+    	return $this->hasMany('App\Models\compras\AnalisisCotizacion', 'registro_cotizacion_id');
+    }
 }
