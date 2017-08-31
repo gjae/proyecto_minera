@@ -8046,3 +8046,7 @@ html.ie11 .bs-searchbox .form-control {
 .btn-options:hover{
   color:red;
 }
+
+.theme-red .navbar {
+    background-color: #33691e;
+}

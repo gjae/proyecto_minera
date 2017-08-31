@@ -29,7 +29,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
-    <link href="{{ asset('css/themes/all-themes.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/themes/theme-green.css') }}" rel="stylesheet" />
 
     @section('css')
     @show
@@ -68,12 +68,12 @@
     </div>
     <!-- #END# Search Bar -->
     <!-- Top Bar -->
-    <nav class="navbar">
+    <nav class="navbar " style="color: white;">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="{{ url('dashboard') }}">Conectado como {{ Auth::user()->email }}</a>
+                <a class="navbar-brand" style="color: white;" href="{{ url('dashboard') }}">Conectado como {{ Auth::user()->email }}</a>
             </div>
         </div>
     </nav>
