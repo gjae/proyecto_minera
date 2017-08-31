@@ -175,8 +175,8 @@
                    @if(Auth::user()->tipo_usuario == 'ADMIN' || Auth::user()->tipo_usuario == 'PROCURA')
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">content_paste</i>
-                            <span>Inventario</span>
+                            <i class="material-icons">shopping_cart</i>
+                            <span>Compras</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
