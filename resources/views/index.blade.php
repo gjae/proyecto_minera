@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -35,7 +35,7 @@
     @show
 </head>
 
-<body class="theme-red">
+<body class="theme-green">
     <div class="page-loader-wrapper">
         <div class="loader">
             <div class="preloader">
@@ -180,8 +180,8 @@
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="{{ url('dashboard/inventario/inventario') }}">
-                                    Ver inventario
+                                <a href="{{ url('dashboard/compras/invitaciones') }}">
+                                    Generar invitaciones a cotizar
                                 </a>
                             </li>
                         </ul>

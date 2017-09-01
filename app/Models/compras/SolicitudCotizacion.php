@@ -12,7 +12,8 @@ class SolicitudCotizacion extends Model
     	'proveedor_id',
     	'concepto_solicitud',
     	'estado_registro',
-    	'observacion_anulacion'
+    	'observacion_anulacion',
+        'codigo'
     ];
 
     public function requisicion(){
