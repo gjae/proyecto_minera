@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use DB;
+use PDF;
 
 // MODELOS
 // 
@@ -101,5 +102,16 @@ class Invitaciones extends Controller
     		return response(['error' => true, 'mensaje' => $e->getMessage()], 200)
     				->header('Content-Type', 'application/json');
     	}
+    }
+
+    public function printInvitacion($req){
+    	$solicitud = SolicitudCotizacion::where('codigo', '00000002')->get();
+
+    	$vista = \View::make('modulos.compras.reportes.invitacion_cotizacion', [
+    			'solicitudes' => $solicitud
+    		])->render();
+    	$pdf = PDF::loadHtml($vista);
+
+    	return $pdf->stream('invoice', ['attachment' => 0]);
     }
 }
