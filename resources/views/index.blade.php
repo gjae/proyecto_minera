@@ -35,7 +35,7 @@
     @show
 </head>
 
-<body class="theme-green">
+<body class="theme-red">
     <div class="page-loader-wrapper">
         <div class="loader">
             <div class="preloader">

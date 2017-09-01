@@ -87,6 +87,7 @@ class Invitaciones extends Controller
     					throw new \Exception("HA OCURRIDO UN ERROR AL GUARDAR LA INVITACION, MODULO : compras ARCHIVO: Invitaciones.php CERCA DE LA LINEA # 79", 1);
     					
     				}
+                    
     				if(! $r->update(['estado_requisicion' => 'PROCESADA'])){
     					throw new \Exception("HA OCURRIDO UN ERROR AL GUARDAR LA INVITACION, MODULO : compras ARCHIVO: Invitaciones.php CERCA DE LA LINEA # 79", 1);
     				}
@@ -94,7 +95,11 @@ class Invitaciones extends Controller
     			}
     		}
     		DB::commit();
-    		return response(['error' => false, 'mensaje' => 'LAS INVITACIONES A COTIZAR HAN SIDO GUARDADAS CORRECTAMENTE'], 200)
+    		return response([
+                    'error' => false, 
+                    'mensaje' => 'LAS INVITACIONES A COTIZAR HAN SIDO GUARDADAS CORRECTAMENTE',
+                    'codigo' => $req->codigo
+                    ], 200)
     				->header('Content-Type', 'application/json');
     		
     	} catch (\Exception $e) {
@@ -105,8 +110,9 @@ class Invitaciones extends Controller
     }
 
     public function printInvitacion($req){
-    	$solicitud = SolicitudCotizacion::where('codigo', '00000002')->get();
+    	$solicitud = SolicitudCotizacion::where('codigo', $req->codigo)->get();
 
+        //return dd($solicitud);
     	$vista = \View::make('modulos.compras.reportes.invitacion_cotizacion', [
     			'solicitudes' => $solicitud
     		])->render();

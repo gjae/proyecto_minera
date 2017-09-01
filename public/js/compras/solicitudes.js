@@ -20,11 +20,19 @@ $(document).ready(function(){
 			alert("ASEGURESE DE HABER AGREGADO ALGUN PROVEEDOR Y ALGUNA REQUISICION")
 			return false;
 		}
+		else if( datos.indexOf("=&") != -1 ){
+			alert("EL CONCEPTO DE LA INVITACIÓN NO PUEDE ESTAR VACIO")
+			return false;
+		}
 
 		$.post('http://'+url, datos, function(resp){
 			alert(resp.mensaje)
 			if(! resp.error)
-				location.reload();
+			{
+				var url = location.host + '/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/printInvitacion?codigo='+resp.codigo
+				window.open('http://'+url, "INVITACIONES"  ,"width=800,height=900")
+				//location.reload();
+			}
 		});
 	})
 })
