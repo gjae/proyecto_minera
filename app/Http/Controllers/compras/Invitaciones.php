@@ -114,7 +114,8 @@ class Invitaciones extends Controller
 
         //return dd($solicitud);
     	$vista = \View::make('modulos.compras.reportes.invitacion_cotizacion', [
-    			'solicitudes' => $solicitud
+    			'solicitudes' => $solicitud,
+                'cantidad' => count($solicitud)
     		])->render();
     	$pdf = PDF::loadHtml($vista);
 

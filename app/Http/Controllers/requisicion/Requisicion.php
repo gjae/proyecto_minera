@@ -10,6 +10,7 @@ use App\Models\inventario\Material;
 use App\Models\requisicion\DetalleRequisicion as DR;
 use Carbon\Carbon;
 use DB;
+use PDF;
 
 class Requisicion extends Controller
 {
@@ -94,5 +95,14 @@ class Requisicion extends Controller
     		);
     	}
     	return true;
+    }
+
+
+    public function printRequisicion($req){
+        $vista = \View::make('modulos.requisiciones.reportes.formato_requisicion')->render();
+        $pdf = PDF::loadHtml($vista );
+        $pdf->setPaper('A4', 'landscape');
+
+        return $pdf->stream('invoice', ['attachment' => 0]); 
     }
 }
