@@ -13,13 +13,14 @@
 <input type="hidden" id="programa" value="invitaciones">
 <input type="hidden" id="accion" value="buscarProveedores">
 <div class="row clearfix">
-	<input type="hidden" id="token" value="{{ csrf_token() }}">
+	
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="card">
 			<div class="body">
 				
 				<div class="container">
 					<form action="#" method="post" id="invitacion">
+						{{ csrf_field() }}
 						<div class="row">
 							<div class="col-sm-12 col-md-2 col-lg-2">
 								<label for="">Codigo</label>
@@ -42,10 +43,10 @@
 						<div class="row">
 								
 							<div class="col-sm-12 col-md-9 col-lg-9">
+								<h3 class="page-header">Proveedores invitados</h3>
 								<table class="table table-stripped">
 									<thead>
 										<tr>
-											<th>Id</th>
 											<th>Razon social</th>
 											<th>Identificacion</th>
 											<th>Cedula</th>
@@ -54,6 +55,37 @@
 									</thead>
 									<tbody id="proveedores"></tbody>
 								</table>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12 col-md-9 col-lg-9">
+								<a class="btn btn-primary actions" role="buscarRequisiciones">
+									Agregar requisicion
+								</a>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12 col-md-9 col-lg-9">
+								<h3 class="page-header">Requisicion</h3>
+								<table class="table table-stripped">
+									<thead>
+										<tr>
+											<th>Codigo</th>
+											<th>Concepto</th>
+											<th>Tipo</th>
+											<th>Total COP$</th>
+										</tr>
+									</thead>
+									<tbody id="table-requisiciones"></tbody>
+								</table>
+							</div>
+						</div>
+						<div class="row">
+							<br>
+							<div class="col-sm-12 col-md-9 col-lg-9">
+								<a class="btn btn-success" id="guardar" role="guardarInvitacion" form-id="invitacion">
+									GUARDAR DATOS
+								</a>
 							</div>
 						</div>
 					</form>

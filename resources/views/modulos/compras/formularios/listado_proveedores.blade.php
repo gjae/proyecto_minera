@@ -24,7 +24,7 @@
 					<button class="btn btn-success"
 							data-id="{{ $proveedor->id }}"
 							razon-social="{{ $proveedor->razon_social }}"
-							identificacion="{{ $proveedor->identificacion }}"
+							identificacion="{{ $proveedor->nro_identificacion }}"
 							cedula="{{ $proveedor->cedula }}"
 							telefono="{{ $proveedor->telefono }}"
 							onclick="agregarProveedor(event, this)"
