@@ -29,13 +29,13 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
-    <link href="{{ asset('css/themes/theme-green.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/themes/all-themes.css') }}" rel="stylesheet" />
 
     @section('css')
     @show
 </head>
 
-<body class="theme-red">
+<body class="theme-green">
     <div class="page-loader-wrapper">
         <div class="loader">
             <div class="preloader">
@@ -180,8 +180,8 @@
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="{{ url('dashboard/inventario/inventario') }}">
-                                    Ver inventario
+                                <a href="{{ url('dashboard/compras/invitaciones') }}">
+                                    Generar invitaciones a cotizar
                                 </a>
                             </li>
                         </ul>
