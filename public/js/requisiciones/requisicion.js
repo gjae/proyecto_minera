@@ -78,6 +78,8 @@ function guardar(event, datos){
 			alert(resp.mensaje)
 			if(!resp.error)
 			{
+				var url = location.host +'/dashboard/requisicion/requisicion/printRequisicion?codigo='+resp.codigo;
+				window.open('http://'+url, "INVITACIONES"  ,"width=800,height=900")
 				filas = 0
 				location.reload()
 			}

@@ -65,7 +65,11 @@ class Requisicion extends Controller
     			if( $this->guardarDetalle($req, $requisicion) )
     			{
     				DB::commit();
-    				return response(['error' => false, 'mensaje' => 'EXITO!!'])->header('Content-Type', 'application/json');
+    				return response([
+                            'error' => false, 
+                            'mensaje' => 'LA REQUISICION HA SIDO GUARDADA DE MANERA CORRECTA', 
+                            'codigo' => $requisicion->codigo_requisicion
+                    ])->header('Content-Type', 'application/json');
     			}
     		}
     		
@@ -99,7 +103,10 @@ class Requisicion extends Controller
 
 
     public function printRequisicion($req){
-        $vista = \View::make('modulos.requisiciones.reportes.formato_requisicion')->render();
+        $requisiciones = r::where('codigo_requisicion', $req->codigo)->first();
+       $vista = \View::make('modulos.requisiciones.reportes.formato_requisicion', [
+                'requisiciones' => $requisiciones
+            ])->render();
         $pdf = PDF::loadHtml($vista );
         $pdf->setPaper('A4', 'landscape');
 

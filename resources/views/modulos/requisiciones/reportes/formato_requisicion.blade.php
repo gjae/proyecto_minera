@@ -37,11 +37,12 @@
 			</td>
 			<td>
 				<br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<strong>REQUISICIÓN No.: </strong>
 			</td>
 			<td>
-				
+				<br>
+				<strong>{{ $requisiciones->codigo_requisicion }}</strong>
 			</td>
 			<td>
 				<br>
@@ -51,10 +52,13 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td>
+				<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;
 				<strong>COM 01 2017</strong>
+				&nbsp;&nbsp;
 			</td>
 		</tr>
 		<tr>
@@ -68,16 +72,76 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<strong>FECHA: </strong>
 				<br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td>
 				<br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong>{{ $requisiciones->created_at->format('d-m-Y') }}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<br>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
-			<td>a</td>
-			<td>a</td>
+			<td>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong>VERSION </strong>
+			</td>
+			<td>&nbsp;</td>
+			<td>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong>Hoja 1 de</strong>
+			</td>
 		</tr>
+</table>
+<table border="1" style="font-family: Helvetica;" cellpadding="0" cellspacing="0" >
+	<thead>
+		<tr bgcolor="#333F50" align="center">
+			<td>
+				<strong>ITEM</strong>	
+			</td>
+			<td>
+				<strong>DESCRIPCION </strong>
+			</td>
+			<td>
+				<strong>UNIDAD</strong>
+			</td>
+			<td>
+				<strong>CANT. SOLICITADA</strong>
+			</td>
+			<td>
+				<strong>CANT. APROBADA</strong>
+			</td>
+			<td bgcolor="#548235">
+				
+				<strong>CENTRO DE COSTOS</strong>
+			</td>
+			<td bgcolor="#548235">
+				
+				<strong>ETAPA DE 
+				PRODUCCION </strong> 
+			</td>
+			<td bgcolor="#548235">
+				<strong>
+				DICIPLINA 
+				</strong>
+			</td>
+			<td>
+				<strong>RESPONSABLE</strong>
+			</td>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach($requisiciones->detalles as $detalle)
+			<tr align="center">
+				<td>{{ $detalle->material->codigo_material }}</td>
+				<td>{{ $detalle->material->nombre_material }}</td>
+				<td>{{ $detalle->material->unidad_medida->codigo_unidad }}</td>
+				<td>{{ $detalle->cantidad_pedida }}</td>
+				<td>{{ $detalle->cantidad_aprobada }}</td>
+				<td>{{ $requisiciones->centro_costo->nombre_centro }}</td>
+				<td>{{ $requisiciones->etapa_produccion->nombre_etapa }}</td>
+				<td>{{ $requisiciones->diciplina->nombre_diciplina }}</td>
+				<td>&nbsp;</td>
+			</tr>
+		@endforeach
+	</tbody>
 </table>
