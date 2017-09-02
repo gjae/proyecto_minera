@@ -189,6 +189,11 @@
                                     Rigistrar cotizaciones
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ url('dashboard/compras/ordenes/analisis') }}">
+                                    Analisis
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     @endif

@@ -92,12 +92,12 @@
 					@endif
 
 					<div class="row">
-						
 						<div class="col-sm-12 col-md-9 col-lg-9">
 							<h3 class="page-header">Detalles de requisicion</h3>
 						</div>
-						<div class="col-sm-12 col-md-12 col-lg-12">
-							<table class="table table-stripped">
+						<div class="col-sm-9 col-md-9 col-lg-9">
+							<div class="table-responsive">
+							<table class="table">
 								<thead>
 									<tr>
 										<th>Codigo</th>
@@ -134,6 +134,7 @@
 									@endif
 								</tbody>
 							</table>
+							</div>
 						</div>
 
 					</div>

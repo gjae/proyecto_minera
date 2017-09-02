@@ -44,4 +44,8 @@ class Material extends Model
     public function registroes_cotizacion(){
         return $this->hasMany('App\Models\compras\RegistroCotizacion');
     }
+
+    public function analisis_cotizacion(){
+        return $this->hasMany('App\Models\compras\AnalisisCotizacion');
+    }
 }

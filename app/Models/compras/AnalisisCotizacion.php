@@ -13,6 +13,7 @@ class AnalisisCotizacion extends Model
     	'observacion',
     	'codigo',
     	'estado_analisis',	
+        'material_id',
     ];
 
 
@@ -22,5 +23,9 @@ class AnalisisCotizacion extends Model
 
     public function cotizacion(){
     	return $this->belongsTo('App\Models\compras\RegistroCotizacion', 'registro_cotizacion_id');
+    }
+
+    public function material(){
+        return $this->belongsTo('App\Models\inventario\Material');
     }
 }
