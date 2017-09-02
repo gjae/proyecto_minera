@@ -8050,3 +8050,7 @@ html.ie11 .bs-searchbox .form-control {
 .theme-red .navbar {
     background-color: #33691e;
 }
+
+.cifras{
+  text-align: left;
+}

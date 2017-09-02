@@ -184,6 +184,11 @@
                                     Generar invitaciones a cotizar
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ url('dashboard/compras/cotizaciones/registrar') }}">
+                                    Rigistrar cotizaciones
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     @endif
