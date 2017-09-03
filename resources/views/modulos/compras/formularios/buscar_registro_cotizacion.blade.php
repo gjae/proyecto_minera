@@ -25,7 +25,10 @@
 						{{ $registro->observacion }}
 					</td>
 					<td>
-						<a class="btn btn-success">
+						<a class="btn btn-success"
+							codigo="{{ $registro->solicitud->codigo }}"
+							onclick="cargarRegistro(event, this)"
+						>
 							<strong>AGREGAR</strong>
 						</a>
 					</td>

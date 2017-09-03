@@ -25,12 +25,44 @@
 						<div class="row">
 							<div class="col-sm-12 col-md-9 col-lg-9">
 								<a class="btn btn-success acciones" id="buscarCotizaciones" role="buscarCotizaciones">
-									<strong>AGREGAR COTIZACIONES</strong>
+									<strong>AGREGAR COTIZACIONES</strong><span>
 								</a>
+									<strong>
+										{{ ($solicitud != false) ? $solicitud->codigo : '' }}
+									</strong>
+								</span>
 
 							</div>
 
 						</div>
+
+						@if( $solicitud != false )
+						<div class="row">
+							<div class="col-sm-12 col-md-11 col-lg-11">
+								<a role="recomendaciones" codigo="{{ $solicitud->codigo }}" class="btn btn-danger acciones">
+									<strong>VER ANALISIS / RECOMENDACION</strong>
+								</a>
+							</div>
+						</div>
+						<div class="row">
+							
+							<div class="col-sm-9 col-md-9 col-lg-9">
+								<div class="table-responsive">
+									<table class="table table-stripped">
+										<thead>
+											<tr>
+												<th>Codigo</th>
+												<th>Observacion</th>
+												<th>Proveedor ganador</th>
+											</tr>
+										</thead>
+
+									</table>
+								</div>
+							</div>
+
+						</div>
+						@endif
 
 					</div>
 
