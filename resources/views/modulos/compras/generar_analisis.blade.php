@@ -10,7 +10,7 @@
 @section('contenedor')
 
 <input type="hidden" id="modulo" value="compras">
-<input type="hidden" id="programa" value="Ordenes">
+<input type="hidden" id="programa" value="Analisis">
 <input type="hidden" id="accion" value="buscarProveedores">
 <div class="row clearfix">
 	
@@ -19,27 +19,40 @@
 			<div class="body">
 				
 				<form action="#" method="post" id="analisis">
-					
+					{{ csrf_field() }}
 					<div class="container">
 						
 						<div class="row">
-							<div class="col-sm-12 col-md-9 col-lg-9">
+							<div class="col-sm-12 col-md-5 col-lg-5">
 								<a class="btn btn-success acciones" id="buscarCotizaciones" role="buscarCotizaciones">
 									<strong>AGREGAR COTIZACIONES</strong><span>
 								</a>
-									<strong>
-										{{ ($solicitud != false) ? $solicitud->codigo : '' }}
-									</strong>
+							</div>
+							<div class="col-sm-3 col-lg-2 col-md-2">
+								<input type="text" value="{{ ($solicitud != false) ? $solicitud[0]->codigo : '' }}" class="form-control" name="codigo_solicitud" readonly="" id="codigo">	
 								</span>
-
 							</div>
 
 						</div>
+						@if($solicitud != false)
+						
+						<div class="row">
+							<div class="col-sm-3 col-md-2 col-lg-2">
+								<label for="">Codigo</label>
+								<input type="text" value="{{ $codigo }}" class="form-control" name="codigo" readonly="" id="codigo">
+							</div>
+							<div class="col-sm-7 col-md-7 col-lg7">
+								<label for="">Concepto / observacion del analisis</label>
+								<input type="text" class="form-control" name="observacion" placeholder="Ingrese el texto de la observacion que desee" id="observacion">
+							</div>
+						</div>
+
+						@endif
 
 						@if( $solicitud != false )
 						<div class="row">
 							<div class="col-sm-12 col-md-11 col-lg-11">
-								<a role="recomendaciones" codigo="{{ $solicitud->codigo }}" class="btn btn-danger acciones">
+								<a role="recomendaciones" codigo="{{ $solicitud[0]->codigo }}" class="btn btn-danger acciones">
 									<strong>VER ANALISIS / RECOMENDACION</strong>
 								</a>
 							</div>
@@ -52,15 +65,39 @@
 										<thead>
 											<tr>
 												<th>Codigo</th>
-												<th>Observacion</th>
+												<th>Concepto</th>
 												<th>Proveedor ganador</th>
 											</tr>
 										</thead>
+										<tbody>
+											<tr>
+												<th>{{ $solicitud[0]->codigo }}</th>
+												<th>{{ $solicitud[0]->concepto_solicitud }}</th>
+												<th>
+													<select name="proveedor_id" id="" class="form-control">
+														<option value="">Elija uno</option>
+													@foreach($solicitud as $sc)
+														<option value="{{ $sc->proveedor_id }}">
+															{{ $sc->proveedor->razon_social }}
+														</option>
+													@endforeach
+													</select>
+												</th>
+											</tr>
+										</tbody>
 
 									</table>
 								</div>
 							</div>
 
+						</div>
+
+						<div class="row">
+							<div class="col-sm-7 col-md-7 col-lg-7">
+								<a role="guardarAnalisis" id="guardar" class="btn btn-primary">
+									GUARDAR DATOS
+								</a>
+							</div>
 						</div>
 						@endif
 

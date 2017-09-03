@@ -20,7 +20,8 @@ class RegistroCotizacion extends Model
     	'cotizacion',
     	'porcentaje_impuesto',
     	'cantidad',
-    	'total_cotizacion'
+    	'total_cotizacion',
+        'marca'
     ];
 
     public function solicitud(){

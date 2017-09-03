@@ -107,6 +107,7 @@
 										<th>Vr / Unitario</th>
 										<th>% Impuesto</th>
 										<th>Total</th>
+										<th>Marca</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -128,6 +129,9 @@
 											</td>
 											<td>
 												<input type="number" readonly onkeyup="calcularTotal(event, this)" class="form-control cifras" id="totales{{$key}}" value="0" name="totales[]" indice="{{ $key }}">
+											</td>
+											<td>
+												<input type="text" name="marcas[]" id="marcas" class="form-control">
 											</td>
 										</tr>
 									@endforeach

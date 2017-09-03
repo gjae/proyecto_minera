@@ -77,7 +77,8 @@ class Cotizaciones extends Controller
     				'cotizacion' => $req->cotizaciones[$i],
     				'porcentaje_impuesto' => $req->porcentajes[$i],
     				'cantidad' => $req->cantidades[$i],
-    				'total_cotizacion' => $req->totales[$i]
+    				'total_cotizacion' => $req->totales[$i],
+                    'marca' => $req->marcas[$i]
     			];
 
     			$rc = new RC($insert);

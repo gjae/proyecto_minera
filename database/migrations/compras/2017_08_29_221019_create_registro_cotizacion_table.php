@@ -21,6 +21,7 @@ class CreateRegistroCotizacionTable extends Migration
             $table->integer('proveedor_id')->unsigned();
             $table->integer('plazo_entrega')->default(0);
             $table->text('observacion')->nullable();
+            $table->string('marca', 170)->nullable();
 
             $table->enum('estado_registro', ['REGISTRO', 'ANULADO', 'PROCESADO'])->default('REGISTRO');
             $table->string('observacion_anulacion')->nullable();

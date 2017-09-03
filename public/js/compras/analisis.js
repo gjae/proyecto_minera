@@ -16,9 +16,26 @@ $(document).ready(function(){
 
 	})
 
+	$("#guardar").on('click', function(){
+		var datos = $("#analisis").serialize();
+		if(datos.indexOf('=&') != -1){
+			alert("AUN LE FALTAN DATOS DEL FORMULARIO POR COMPLETAR");
+			return false;
+		}
+		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()
+		url += '/'+$(this).attr('role')
+		
+		alert(datos)
+		$.post(url, datos, function(resp){
+			alert(resp.mensaje)
+			if( !resp.error )
+				alert("CORRECTO") 
+		})
+	})
+
 })
 
 function cargarRegistro(evento, boton){
 	var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/cargarRegistro?codigo='+boton.getAttribute('codigo')
-	alert(url)
+	location.href = url;
 }

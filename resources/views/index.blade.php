@@ -190,7 +190,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ url('dashboard/compras/ordenes/analisis') }}">
+                                <a href="{{ url('dashboard/compras/Analisis/analisis') }}">
                                     Analisis
                                 </a>
                             </li>
