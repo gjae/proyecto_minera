@@ -119,6 +119,6 @@ class Invitaciones extends Controller
     		])->render();
     	$pdf = PDF::loadHtml($vista);
 
-    	return $pdf->stream('invoice', ['attachment' => 0]);
+    	return $pdf->stream('invitacion.pdf', ['attachment' => 0]);
     }
 }

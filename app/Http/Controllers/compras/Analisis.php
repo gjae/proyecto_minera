@@ -83,7 +83,8 @@ class Analisis extends Controller
                     'registro_cotizacion_id' => $registro->id,
                     'proveedor_id' => $req->proveedor_id,
                     'observacion' => $req->observacion,
-                    'codigo' => $req->codigo
+                    'codigo' => $req->codigo,
+                    'material_id' => $registro->material_id
                 ];
 
                 $ac = new AC($insert);
@@ -100,7 +101,7 @@ class Analisis extends Controller
                         'codigo' => $req->codigo
                     ], 200)->header('Content-Type', 'application/json');
             }
-            throw new \Exception("ERROR AL INTENTAR PROCESAR EL ANALISIS - MODULO: COMPRAS ARCHIVO: Analisis.php CERCA DE LA LINEA 96", 1);
+            throw new \Exception("ERROR AL INTENTAR PROCESAR EL ANALISIS ACTUALIZANDO EL REGISTRO - MODULO: COMPRAS ARCHIVO: Analisis.php CERCA DE LA LINEA 96", 1);
             
             
 

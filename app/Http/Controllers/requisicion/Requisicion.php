@@ -110,6 +110,6 @@ class Requisicion extends Controller
         $pdf = PDF::loadHtml($vista );
         $pdf->setPaper('A4', 'landscape');
 
-        return $pdf->stream('invoice', ['attachment' => 0]); 
+        return $pdf->stream('requisicion.pdf', ['attachment' => 0]); 
     }
 }
