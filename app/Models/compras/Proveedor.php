@@ -41,4 +41,8 @@ class Proveedor extends Model
         return $this->hasMany('App\Models\compras\AnalisisCotizacion');
     }
 
+    public function ordenes(){
+        return $this->hasMany('App\Models\compras\Orden');
+    }
+
 }

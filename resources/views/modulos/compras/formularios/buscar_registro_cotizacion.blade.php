@@ -28,6 +28,7 @@
 						<a class="btn btn-success"
 							codigo="{{ $registro->solicitud->codigo }}"
 							onclick="cargarRegistro(event, this)"
+							role="emitir"
 						>
 							<strong>AGREGAR</strong>
 						</a>

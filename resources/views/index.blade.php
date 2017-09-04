@@ -194,6 +194,11 @@
                                     Analisis
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ url('dashboard/compras/Ordenes/emitir') }}">
+                                    Emitir
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     @endif
