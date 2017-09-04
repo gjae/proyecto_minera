@@ -51,8 +51,10 @@ function calcularSubTotal(event, input){
 
 	if( isNaN(subtotal.value) )
 		subtotal.value = redondear(tot_sin_desc.value)
+	if( retefuente.value == '' &&  event.keyCode != 8 )
+		retefuente.value = 0
 
-	total.value = redondear( ((parseFloat(subtotal.value)+ parseFloat(iva.value)) - anticipo.value) )
+	total.value = redondear( ((parseFloat(subtotal.value)+ parseFloat(iva.value)) - anticipo.value) - parseFloat(retefuente.value) )
 
 }
 

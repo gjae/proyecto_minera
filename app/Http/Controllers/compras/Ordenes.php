@@ -98,7 +98,7 @@ class Ordenes extends Controller
 
     	$pdf = PDF::loadHtml($view);
 
-    	return $pdf->stream('invoice', ['attachment' => 1]);
+    	return $pdf->stream('orden', ['attachment' => 1]);
 
     }
 }
