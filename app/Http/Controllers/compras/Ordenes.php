@@ -8,7 +8,7 @@ use App\Models\compras\AnalisisCotizacion as AC;
 use App\Models\compras\Orden;
 
 use DB;
-
+use PDF;
 class Ordenes extends Controller
 {
     public function emitir($req){
@@ -89,7 +89,16 @@ class Ordenes extends Controller
 
     public function printOrden($req){
     	$orden = Orden::where('codigo_orden', $req->codigo)->first();
+    	$analisis = AC::where('codigo', $orden->codigo_analisis)->get();
 
-    	return dd($orden);
+    	$view = \View::make('modulos.compras.reportes.orden_compra', [
+    			'orden' => $orden,
+    			'analisis' => $analisis
+    		])->render();
+
+    	$pdf = PDF::loadHtml($view);
+
+    	return $pdf->stream('invoice', ['attachment' => 1]);
+
     }
 }
