@@ -1,4 +1,4 @@
-$(document).ready(function(){
+ $(document).ready(function(){
 
 	$(".actions").on('click', function(){
 		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
@@ -60,6 +60,11 @@ $(document).ready(function(){
 			})
 		}
 	})
+
+	$(".reportes").on('click', function(){
+		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
+		window.open(url+'?codigo_nomina='+$(this).attr('codigo-nomina'), "REPORTE DE NOMINA HASTA ESTE MOMENTO"  ,"width=800,height=900")
+	});
 })
 
 function cargarPersona(event, boton){

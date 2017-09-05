@@ -8,8 +8,11 @@ use App\Models\personal\Nomina as N;
 use App\Models\personal\Persona as P;
 use App\Models\personal\DetalleNomina as DN;
 use App\Http\Controllers\utilidades\Utilidades as U;
+use App\Models\personal\Ajuste as A;
 
 use DB;
+use PDF;
+use Carbon\Carbon;
 class Nomina extends Controller
 {
 
@@ -142,5 +145,53 @@ class Nomina extends Controller
 
             return response(['error' => true, 'mensaje' => $e->getMessage()])->header('Content-Type', 'application/json');
         }
+    }
+
+    public function tipoReporte($req){
+        if( $req->has('codigo_nomina') ){
+
+            $vistaPdf = \View::make('modulos.nomina.reportes.reporte_nomina',[
+                    'nomina' =>  N::where('codigo_nomina', $req->codigo_nomina)->first(),
+                    'periodo' => $this->getPeriodoNomina(N::where('codigo_nomina', $req->codigo_nomina)->first()),
+                    'ajustes' => A::all(),
+
+                ])->render();
+            $pdf = PDF::loadHtml($vistaPdf);
+
+            return $pdf->stream('reporte_nomina_.pdf', ['attachment' => 0]);
+        }
+    }
+
+
+    private function getPeriodoNomina($nomina){
+        $perido = [
+            'desde' => $nomina->periodo_nomina,
+            'hasta' => Carbon::now()
+        ];
+
+        /**
+         * SWITCH PARA DETERMINAR EL TIPO DE NOMINA (Q: quincenal, S: semanal, M: mensual)
+         *  BASADO EN ESE DATO SE ENCUENTRA EL "HASTA" DE LA NOMINA
+         */
+        switch ($nomina->tipo_nomina) {
+            case 'Q': {
+                $periodo['hasta'] = $nomina->periodo_nomina->addWeek(2);
+                break;
+            }
+            
+            case 'S':{
+                $periodo['hasta'] = $nomina->periodo_nomina->addWeek(1);
+                break;
+            }
+
+            case 'M':{
+                $periodo['hasta'] = $nomina->periodo_nomina->endOfMotnh();
+                break;
+            }
+        }
+
+        $periodo['desde'] = $nomina->periodo_nomina;
+        return $periodo;
+
     }
 }

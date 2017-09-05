@@ -57,6 +57,13 @@
 										<a href="{{ url('dashboard/nomina/Nomina/trabajar?codigo_nomina='.$nomina->codigo_nomina) }}" class="btn btn-success">
 											Trabajar
 										</a>
+										<a class="btn btn-success reportes"
+											codigo-nomina="{{ $nomina->codigo_nomina }}"
+											 role="tipoReporte"
+										>
+											<i class="material-icons">local_printshop</i>
+										</a>
+
 									</td>
 								</tr>
 							@endforeach
