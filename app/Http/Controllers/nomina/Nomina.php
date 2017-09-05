@@ -154,6 +154,7 @@ class Nomina extends Controller
                     'nomina' =>  N::where('codigo_nomina', $req->codigo_nomina)->first(),
                     'periodo' => $this->getPeriodoNomina(N::where('codigo_nomina', $req->codigo_nomina)->first()),
                     'ajustes' => A::all(),
+                    'totales' => $this->totalPorAjuste(N::where('codigo_nomina', $req->codigo_nomina)->first())
 
                 ])->render();
             $pdf = PDF::loadHtml($vistaPdf);
@@ -162,6 +163,26 @@ class Nomina extends Controller
         }
     }
 
+    private function totalPorAjuste($nomina){
+       $ajustes = A::all();
+       $totalAjustes = [];
+
+       foreach ($ajustes as $key => $ajuste) {
+           $totalAjustes[$ajuste->nombre_ajuste] = 0;
+       }
+       foreach ($ajustes as $key => $ajuste) {
+           
+           foreach ($nomina->detalles as $key => $detalle) {
+              /* if( $detalle->ajuste->ajuste->tipo_ajuste == 'BONO' ){
+                 if()
+               }*/
+
+                var_dump($detalle->ajuste->ajuste;)
+               exit;
+           }
+
+       }
+    }
 
     private function getPeriodoNomina($nomina){
         $perido = [
