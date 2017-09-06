@@ -59,7 +59,7 @@ function buscar_tipo(event,select){
 
 	if( select.value = 'datos_generales' )
 	{
-		var url = 'http://'+location.host+'/dashboard/inventario/reportes/'+select.value+'&material_id='
+		var url = location.host+'/dashboard/inventario/reportes/'+select.value+'?material_id='+$("#material_reporte").val()
 		window.open('http://'+url, "INVITACIONES"  ,"width=800,height=900")
 	}
 }
