@@ -87,7 +87,7 @@
 	<td>&nbsp;</td>
 	<td>&nbsp;</td>
 	<td>{{ $ingreso->centro_costo->nombre_centro }}</td>
-	<td>a</td>
+	<td>{{ $ingreso->etapa_produccion->nombre_etapa }}</td>
 	<td>a</td>
 </tr>
 @endforeach

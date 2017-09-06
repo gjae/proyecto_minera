@@ -53,3 +53,13 @@ $(document).ready(function(){
 
 	})
 })
+
+function buscar_tipo(event,select){
+	alert(select.value)
+
+	if( select.value = 'datos_generales' )
+	{
+		var url = 'http://'+location.host+'/dashboard/inventario/reportes/'+select.value+'&material_id='
+		window.open('http://'+url, "INVITACIONES"  ,"width=800,height=900")
+	}
+}

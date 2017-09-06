@@ -66,14 +66,26 @@
 										{{ $material->ingresos->sum('cantidad') - $material->egresos->sum('cantidad_salida') }}
 									</td>
 									<td>
-										<i class="large material-icons btn-options" data-id="{{ $material->id }}" role="delete">delete</i>
-										<i class="large material-icons btn-options actions" 
-											formulario="ingreso_material"  
-											data-id="{{ $material->id }}" role="ingresar">
-											add_circle
-										</i>
+										<a class="btn btn-danger btn-options" role="delete" data-id="{{ $material->id }}">
+											<i class="large material-icons btn-options"  >delete</i>
+										</a>
 
-										<i class="large material-icons btn-options actions" formulario="egresar_material" role="egresar" data-id="{{ $material->id }}">highlight_off</i>
+										<a class="btn btn-success actions"
+											formulario="ingreso_material"  
+											data-id="{{ $material->id }}" role="ingresar"
+										>
+											<i class="large material-icons btn-options " 
+												>
+												add_circle
+											</i>
+										</a>
+										
+										<a class="btn btn-warning" data-id="{{ $material->id }}" formulario="egresar_material" role="egresar" >
+											<i class="large material-icons btn-options actions"  >highlight_off</i>
+										</a>
+										<a class="btn btn-primary actions" data-id="{{ $material->id }}" formulario="reportePor" role="reportes">
+											<i class="material-icons actions">local_printshop</i>
+										</a>
 									</td>
 								</tr>
 							@endforeach
