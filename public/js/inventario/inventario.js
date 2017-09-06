@@ -44,4 +44,12 @@ $(document).ready(function(){
 			}
 		}
 	})
+
+	$(".reportes").on('click', function(){
+		if( $(this).attr('role') =='controlBodega' ){
+			var url = location.href+'/'+$(this).attr('role');
+			window.open(url, "FORMATO DE CONTROL DE BODEGA"  ,"width=800,height=900")
+		}
+
+	})
 })

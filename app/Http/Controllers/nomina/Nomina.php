@@ -10,6 +10,7 @@ use App\Models\personal\DetalleNomina as DN;
 use App\Http\Controllers\utilidades\Utilidades as U;
 use App\Models\personal\Ajuste as A;
 
+use CodeItNow\BarcodeBundle\Utils\BarcodeGenerator as BC;
 use DB;
 use PDF;
 use Carbon\Carbon;
@@ -149,11 +150,12 @@ class Nomina extends Controller
 
     public function tipoReporte($req){
         if( $req->has('codigo_nomina') ){
+
             $vistaPdf = \View::make('modulos.nomina.reportes.reporte_nomina',[
                     'nomina' =>  N::where('codigo_nomina', $req->codigo_nomina)->first(),
                     'periodo' => $this->getPeriodoNomina(N::where('codigo_nomina', $req->codigo_nomina)->first()),
                     'ajustes' => A::all(),
-                    'totales' => $this->totalPorAjuste(N::where('codigo_nomina', $req->codigo_nomina)->first())
+                    'totales' => $this->totalPorAjuste(N::where('codigo_nomina', $req->codigo_nomina)->first()),
 
                 ])->render();
             $pdf = PDF::loadHtml($vistaPdf);
@@ -161,7 +163,6 @@ class Nomina extends Controller
             return $pdf->stream('reporte_nomina_.pdf', ['attachment' => 0]);
         }
     }
-
     private function totalPorAjuste($nomina){
        $ajustes = A::all();
        $totalAjustes = [];

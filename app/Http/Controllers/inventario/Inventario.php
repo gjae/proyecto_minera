@@ -9,6 +9,7 @@ use App\Models\inventario\Material;
 use App\Models\inventario\IngresoMaterial;
 use App\Models\inventario\EgresoMaterial;
 use DB;
+use PDF;
 
 class Inventario extends Controller
 {
@@ -61,6 +62,18 @@ class Inventario extends Controller
     	}finally{
     		return response($resp, 200)->header('Content-Type', 'application/json');
     	}
+    }
+
+
+    public function controlBodega($req){
+        $materiales = Material::all();
+        $vista = \View::make('modulos.inventario.reportes.formato_bodega', [
+                'materiales' => $materiales
+            ]);
+
+        $pdf = PDF::loadHtml($vista);
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream('reporte_control_bodega', ['attachment' => 0]);
     }
 
     public function ingresarMaterial($req){

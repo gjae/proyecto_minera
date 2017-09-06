@@ -25,7 +25,9 @@
 							<a  formulario="insertarUnidadMedida" class="btn btn-success actions">
 								AGREGAR UNIDAD DE MEDIDA
 							</a>
-
+							<a  formulario="insertarUnidadMedida" role="controlBodega" class="btn btn-success reportes">
+								REPORTE - CONTROL DE BODEGA
+							</a>
 						</div>
 
 					</div>

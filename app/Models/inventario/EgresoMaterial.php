@@ -3,7 +3,7 @@
 namespace App\Models\inventario;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Carbon\Carbon;
 class EgresoMaterial extends Model
 {
     protected $table = 'egresos_materiales';
@@ -30,7 +30,11 @@ class EgresoMaterial extends Model
     	return $this->belongsTo('App\Models\requisicion\CentroCosto', 'centro_costo_id');
     }
 
-    public function persona_solicitante(){
+    public function persona(){
     	return $this->belongsTo('App\Models\personal\Persona');
+    }
+
+    public function setCreatedAtAttribute($old){
+        $this->attributes['created_at'] = Carbon::now()->format('Y-m-d 00:00:00');
     }
 }
