@@ -55,11 +55,16 @@ $(document).ready(function(){
 })
 
 function buscar_tipo(event,select){
-	alert(select.value)
+	//alert(select.value)
 
 	if( select.value = 'datos_generales' )
 	{
 		var url = location.host+'/dashboard/inventario/reportes/'+select.value+'?material_id='+$("#material_reporte").val()
 		window.open('http://'+url, "INVITACIONES"  ,"width=800,height=900")
+	}
+	else if(select.value == 'actividad_en_fechas'){
+		var side_fechas = $("#rango_fechas")
+		console.log(document.getElementById('rango_fechas'))
+		var url = location.host+'/dashboard/inventario/reportes/'+select.value+'?material_id='+$("#material_reporte").val()
 	}
 }

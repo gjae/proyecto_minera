@@ -12,4 +12,14 @@
 		</div>
 
 	</div>
+	<div class="row hidden" id="rango_fechas">
+		<div class="col-sm-4 col-lg-4 col-md-4">
+			<label for="">FECHA DESDE (DD-MM-AAAA)</label>
+			<input type="date" class="form-control" value="01-01-{{ Carbon\Carbon::now()->format('Y') }}" name="fecha_desde" id="fecha_desde">
+		</div>
+		<div class="col-sm-4 col-lg-4 col-md-4">
+			<label for="">FECHA HASTA (DD-MM-AAAA)</label>
+			<input type="date" class="form-control" value="01-01-{{ Carbon\Carbon::now()->format('Y') }}" name="fecha_hasta" id="fecha_hasta">
+		</div>
+	</div>
 </div>
