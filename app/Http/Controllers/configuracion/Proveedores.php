@@ -88,4 +88,20 @@ class Proveedores extends Controller
     	}
     	return redirect()->to( url('dashboard/configuracion/proveedores') );
     }
+
+    public function eliminar($req){
+    	$proveedor = Proveedor::find($req->id);
+
+    	$proveedor->edo_reg = 0;
+    	if($proveedor->save()){
+    		return response([
+    				'error' => false,
+    				'mensaje' => 'REGISTRO SUPRIMIDO SATISFACTORIAMENTE'
+    			], 200)->header('Content-Type', 'application/json');
+    	}
+    	return response([
+    			'error' => true,
+    			'mensaje' => 'ERROR AL INTENTAR SUPRIMIR EL REGISTRO'
+    		], 200)->header('Content-Type', 'application/json');
+    }
 }
