@@ -8,7 +8,7 @@ class UnidadMedida extends Model
 {
     protected $table = 'unidades_medida';
     protected $fillable = [
-    	'descripcion_unidad', 'codigo_unidad'
+    	'descripcion_unidad', 'codigo_unidad', 'edo_reg'
     ];
 
 
