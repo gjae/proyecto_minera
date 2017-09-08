@@ -17,14 +17,11 @@
 					<div class="row">
 						<br><br>
 						<div class="col-sm-12 col-md-12 col-lg-8">
-							<a  formulario="crearMaterial" class="btn btn-primary actions">
+							<a  class="btn btn-primary actions"
+								role="crear"
+								data-id=""
+							>
 								CREAR NUEVO
-							</a>
-							<a  formulario="insertarUnidadMedida" class="btn btn-success actions">
-								AGREGAR UNIDAD DE MEDIDA
-							</a>
-							<a  formulario="insertarUnidadMedida" role="controlBodega" class="btn btn-success reportes">
-								REPORTE - CONTROL DE BODEGA
 							</a>
 						</div>
 
@@ -48,10 +45,19 @@
 									<td>{{ $cargo->codigo_cargo }}</td>
 									<td>{{ $cargo->descripcion_cargo }}</td>
 									<td>
-										<a class="btn btn-primary acions"
-											role="crear"
-											data-id=""
-										>CREAR CARGO</a>
+										<a role="editar" 
+											class="btn btn-success  actions"
+											data-id="{{ $cargo->id }}"
+										>
+											EDITAR CARGO
+										</a>
+										<a role="eliminar" 
+											class="btn btn-danger  actions"
+											data-id="{{ $cargo->id }}"
+											token ="{{ csrf_token() }}"
+										>
+											ELIMINAR REGISTRO
+										</a>
 									</td>
 								</tr>
 							@endforeach
@@ -63,6 +69,35 @@
 	</div>
 </div>
 
+
+<section id="modals">
+	<!-- Large Size -->
+	<div class="modal fade" id="modal-coniguracion" tabindex="-1" role="dialog">
+	    <div class="modal-dialog modal-lg" role="document">
+	        <div class="modal-content">
+	           	<div class="modal-header">
+	                <h4 class="modal-title" id="largeModalLabel">Gestion de cargos</h4>
+	            </div>
+	            <div class="modal-body">
+	             	<form action="#" id="form-modal">
+	             		
+
+	             	</form>
+	            </div>
+	            <div class="modal-footer">
+	            	<div id="footer-datos">
+		                <button type="button" id="salvar" class="btn btn-link waves-effect">Guardar datos</button>
+		                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cerrar</button>
+	                </div>
+	                <div id="footer-reportes" class="hidden">
+		                <button type="button" id="reporte" class="btn btn-link waves-effect">Generar reporte</button>
+		                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cerrar</button>
+	                </div>
+	            </div>
+	   		</div>
+	    </div>
+	</div>
+</section>
 @endsection
 @section('jquery')
 <!-- Jquery DataTable Plugin Js -->
@@ -75,7 +110,7 @@
 <script src="{{ asset('plugins/jquery-datatable/extensions/export/vfs_fonts.js') }}"></script>
 <script src="{{ asset('plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}"></script>
 <script src="{{ asset('plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}"></script>
-<script src="{{ asset('js//configuracion/funciones.js') }}"></script>
+<script src="{{ asset('js/configuracion/funciones.js') }}"></script>
     <!-- Demo Js -->
 <script src="{{ asset('js/demo.js') }}"></script>
 <script>

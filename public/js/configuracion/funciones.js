@@ -1,1 +1,43 @@
-funciones.js
+$(document).ready(function(){
+
+	$(".actions").on('click', function(){
+		var modal = $("#modal-coniguracion")
+		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/formularios?form='+$(this).attr('role')
+		url+= '&id='+$(this).attr('data-id')
+
+		//alert($(this).attr('role'))
+		if($(this).attr('role') != 'eliminar'){
+
+			$.getJSON(url, {}, function(resp){
+				if(! resp.error){
+					modal.modal({show: true});
+					$("#form-modal").html(resp.formulario)
+				}
+			})
+		}
+		else{
+			if(confirm("¿SEGURO QUE DESEA ELIMINAR ESTE REGISTRO?")){
+				var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
+		
+				$.post(url, {'_token': $(this).attr('token'), 'id': $(this).attr('data-id')}, function(resp){
+					alert(resp.mensaje)
+					if( !resp.error)
+						location.reload()
+				})
+			}
+		}
+	})
+
+	$("#salvar").on('click', function(){
+		var datos = $("#form-modal").serialize()
+		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$("#accion").val()
+		
+		//alert(datos)
+		$.post(url, datos, function(resp){
+			alert(resp.mensaje)
+			if(! resp.error)
+				location.reload()
+		})
+	})
+
+})
