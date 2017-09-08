@@ -4,6 +4,8 @@ namespace App\Models\compras;
 
 use Illuminate\Database\Eloquent\Model;
 
+use DB;
+
 class Proveedor extends Model
 {
     protected $table = 'proveedores';
@@ -21,7 +23,13 @@ class Proveedor extends Model
     	'cedula',
     	'nro_identificacion',
     	'ciudad_id',
-    	'banco_id'
+    	'banco_id',
+        'edo_reg',
+        'codigo_proveedor',
+        'telefono_representante',
+        'email_representante',
+        'direccion',
+        'tipo_identificacion'
     ];
 
 
@@ -45,4 +53,19 @@ class Proveedor extends Model
         return $this->hasMany('App\Models\compras\Orden');
     }
 
+    public function setCodigoProveedorAttribute($old){
+        $this->attributes['codigo_proveedor'] = Proveedor::getNewCode();
+    }
+
+    public static function getNewCode(){
+        $codigo = DB::table('proveedores')->count('codigo_proveedor') + 1;
+
+        $len = (7 - strlen($codigo));
+        $completo = '';
+        for ($i=0; $i < $len; $i++) { 
+            $completo.= '0';
+        }
+
+        return $completo.$codigo;
+    }
 }

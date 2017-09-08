@@ -127,7 +127,7 @@
                     @if(Auth::user()->tipo_usuario == 'ADMIN')
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">assignment_ind</i>
+                            <i class="material-icons">settings_applications</i>
                             <span>Configuracion</span>
                         </a>
                         <ul class="ml-menu">

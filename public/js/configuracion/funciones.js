@@ -31,13 +31,17 @@ $(document).ready(function(){
 	$("#salvar").on('click', function(){
 		var datos = $("#form-modal").serialize()
 		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$("#accion").val()
-		
 		//alert(datos)
-		$.post(url, datos, function(resp){
-			alert(resp.mensaje)
-			if(! resp.error)
-				location.reload()
-		})
+		console.log(datos.indexOf('=&'))
+		if( datos.indexOf('=&') == -1 && confirm("¿SEGURO QUE DESEA GUARDAR ESTOS DATOS?")){
+			$.post(url, datos, function(resp){
+				alert(resp.mensaje)
+				if(! resp.error)
+					location.reload()
+			})
+		}
+		else if(datos.indexOf('=&') != -1)
+			alert("AUN HAY DATOS PENDIENTES POR COMPLETAR EN EL FORMULARIO")
 	})
 
 })
