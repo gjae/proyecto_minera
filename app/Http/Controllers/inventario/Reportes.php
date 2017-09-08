@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\inventario\Material as M; 
 
+use Carbon\Carbon;
 use CodeItNow\BarcodeBundle\Utils\BarcodeGenerator as BC;
 use PDF;
 class Reportes extends Controller
@@ -53,5 +54,9 @@ class Reportes extends Controller
     			'fecha_desde' => $req->fecha_desde,
     			'fecha_hasta' => $req->fecha_hasta
     		])->render();
+
+        $pdf = PDF::loadHtml($vista);
+        
+        return $pdf->stream('reporte_entre_fechas', ['attachment' => 0]);
     }
 }

@@ -34,7 +34,4 @@ class IngresoMaterial extends Model
         return $this->belongsTo('App\Models\requisicion\CentroCosto', 'centro_costo_id');
     }
 
-    public function setCreatedAtAttribute($old){
-        $this->attributes['created_at'] = Carbon::now()->format('Y-m-d 00:00:00');
-    }
 }

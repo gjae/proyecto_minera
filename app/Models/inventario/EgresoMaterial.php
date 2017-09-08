@@ -34,7 +34,4 @@ class EgresoMaterial extends Model
     	return $this->belongsTo('App\Models\personal\Persona');
     }
 
-    public function setCreatedAtAttribute($old){
-        $this->attributes['created_at'] = Carbon::now()->format('Y-m-d 00:00:00');
-    }
 }

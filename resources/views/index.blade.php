@@ -124,6 +124,41 @@
                         </ul>
                     </li>
                    @endif
+                    @if(Auth::user()->tipo_usuario == 'ADMIN')
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">assignment_ind</i>
+                            <span>Configuracion</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="{{ url('dashboard/configuracion/proveedores') }}">
+                                    Proveedores
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('dashboard/configuracion/cargos') }}">
+                                    Cargos
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('dashboard/configuracion/unidades') }}">Unidades de medida</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('dashboard/configuracion/centros') }}">Centros de costos</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('dashboard/configuracion/etapas') }}">Etapas de produccion</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('dashboard/configuracion/diciplinas') }}">Diciplinas</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('dashboard/configuracion/vehiculos') }}">Vehiculos</a>
+                            </li>
+                        </ul>
+                    </li>
+                   @endif
                     @if(Auth::user()->tipo_usuario == 'ADMIN' || Auth::user()->tipo_usuario == 'NOMINA')
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">

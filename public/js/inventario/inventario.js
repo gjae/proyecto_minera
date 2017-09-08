@@ -3,6 +3,20 @@ $(document).ready(function(){
 		var btn = $(this)
 		var url = location.href + '/formularios?formulario='+btn.attr('formulario')+'&id='+$(this).attr('data-id')
 		var modal = $("#modal-inventario")
+
+		if( $(this).attr('role') == 'reportes'){
+			if(!$("#footer-datos").hasClass('hidden')){
+				$("#footer-datos").addClass('hidden')
+				$("#footer-reportes").removeClass('hidden')
+			}
+		}
+		else{
+			if( $("#footer-datos").hasClass('hidden')){
+				
+				$("#footer-datos").removeClass('hidden')
+				$("#footer-reportes").addClass('hidden')
+			}
+		}
 		modal.modal({show: true})
 		$.get(url, {}, function(resp){
 			if( !resp.error){
@@ -52,19 +66,39 @@ $(document).ready(function(){
 		}
 
 	})
+
+	$("#reporte").on("click", function(){
+		var datos = $("#form-modal")
+		
+		var tipo = $("#tipo_reporte").val();
+		alert(tipo)
+		if(  $("#tipo_reporte").val() == 'actividad_en_fechas' ){
+			var url = location.host+'/dashboard/inventario/reportes/'+$("#tipo_reporte").val()+'?material_id='+$("#material_reporte").val()
+			url +=  '&fecha_desde='+$("#fecha_desde").val()+"&fecha_hasta="+$("#fecha_hasta").val()
+			//alert(url)			
+			window.open('http://'+url, "INVITACIONES"  ,"width=800,height=900")	
+		} 
+	})
 })
 
 function buscar_tipo(event,select){
 	//alert(select.value)
-
-	if( select.value = 'datos_generales' )
+	var side_fechas = $("#rango_fechas")
+	if( select.value == 'datos_generales' )
 	{
+		if( !side_fechas.hasClass('hidden')){
+			$("#fecha_desde").val('01-01-2017')
+			$("#fecha_hasta").val("01-01-2017");
+			side_fechas.addClass('hidden')
+		}
 		var url = location.host+'/dashboard/inventario/reportes/'+select.value+'?material_id='+$("#material_reporte").val()
 		window.open('http://'+url, "INVITACIONES"  ,"width=800,height=900")
 	}
 	else if(select.value == 'actividad_en_fechas'){
 		var side_fechas = $("#rango_fechas")
-		console.log(document.getElementById('rango_fechas'))
-		var url = location.host+'/dashboard/inventario/reportes/'+select.value+'?material_id='+$("#material_reporte").val()
+		
+		if( side_fechas.hasClass('hidden') )
+			side_fechas.removeClass('hidden')
+		
 	}
 }

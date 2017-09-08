@@ -80,8 +80,8 @@
 											</i>
 										</a>
 										
-										<a class="btn btn-warning" data-id="{{ $material->id }}" formulario="egresar_material" role="egresar" >
-											<i class="large material-icons btn-options actions"  >highlight_off</i>
+										<a class="btn btn-warning actions" data-id="{{ $material->id }}" formulario="egresar_material" role="egresar" >
+											<i class="large material-icons btn-options "  >highlight_off</i>
 										</a>
 										<a class="btn btn-primary actions" data-id="{{ $material->id }}" formulario="reportePor" role="reportes">
 											<i class="material-icons actions">local_printshop</i>
@@ -98,26 +98,32 @@
 </div>
 
 <section id="modals">
-<!-- Large Size -->
-<div class="modal fade" id="modal-inventario" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-           	<div class="modal-header">
-                <h4 class="modal-title" id="largeModalLabel">Gestion de inventario</h4>
-            </div>
-            <div class="modal-body">
-             	<form action="#" id="form-modal">
-             		
+	<!-- Large Size -->
+	<div class="modal fade" id="modal-inventario" tabindex="-1" role="dialog">
+	    <div class="modal-dialog modal-lg" role="document">
+	        <div class="modal-content">
+	           	<div class="modal-header">
+	                <h4 class="modal-title" id="largeModalLabel">Gestion de inventario</h4>
+	            </div>
+	            <div class="modal-body">
+	             	<form action="#" id="form-modal">
+	             		
 
-             	</form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="salvar" class="btn btn-link waves-effect">Guardar datos</button>
-                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cerrar</button>
-            </div>
-   		</div>
-    </div>
-</div>
+	             	</form>
+	            </div>
+	            <div class="modal-footer">
+	            	<div id="footer-datos">
+		                <button type="button" id="salvar" class="btn btn-link waves-effect">Guardar datos</button>
+		                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cerrar</button>
+	                </div>
+	                <div id="footer-reportes" class="hidden">
+		                <button type="button" id="reporte" class="btn btn-link waves-effect">Generar reporte</button>
+		                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cerrar</button>
+	                </div>
+	            </div>
+	   		</div>
+	    </div>
+	</div>
 </section>
 @endsection
 @section('jquery')
