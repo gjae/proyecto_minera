@@ -8,7 +8,7 @@ class CentroCosto extends Model
 {
     protected $table = 'centros_costos';
     protected $fillable = [
-    	'nombre_centro', 'codigo_centro'
+    	'nombre_centro', 'codigo_centro', 'edo_reg'
     ];
 
     public function requisiciones(){
