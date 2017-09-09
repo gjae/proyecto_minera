@@ -8,7 +8,7 @@ class EtapaProduccion extends Model
 {
     protected $table = 'etapas_produccion';
     protected $fillable = [
-    	'nombre_etapa', 'codigo_etapa'
+    	'nombre_etapa', 'codigo_etapa', 'edo_reg'
     ];
 
 
