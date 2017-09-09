@@ -5,6 +5,7 @@
 @section('contenedor')
 
 <input type="hidden" id="modulo" value="configuracion">
+
 <input type="hidden" id="programa" value="unidades">
 
 <div class="row clearfix">
@@ -47,7 +48,10 @@
 										{{ $unidad->created_at->format('d-m-Y') }}
 									</td>
 									<td>
-										{{ $unidad->razon_social }}
+										{{ $unidad->codigo_unidad }}
+									</td>
+									<td>
+										{{ $unidad->descripcion_unidad }}
 									</td>
 									<td>
 										<a role="editar" 
