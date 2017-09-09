@@ -58,7 +58,7 @@
 											class="btn btn-success  actions"
 											data-id="{{ $etapa->id }}"
 										>
-											EDITAR CARGO
+											EDITAR REGISTRO
 										</a>
 										<a role="eliminar" 
 											class="btn btn-danger  actions"
