@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models\transporte,
+namespace App\Models\transporte;
 
-use Illuminate\Database\Eloquent\Model,
+use Illuminate\Database\Eloquent\Model;
 
 class Transporte extends Model
 {
