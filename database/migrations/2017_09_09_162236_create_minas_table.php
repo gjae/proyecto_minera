@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTiposMaterialeTable extends Migration
+class CreateMinasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,21 @@ class CreateTiposMaterialeTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipos_material', function (Blueprint $table) {
+        Schema::create('minas', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->string('nombre_mina', 160)->default('--');
+            $table->string('codigo_mina', 7)->default('--');
 
-            $table->string('codigo_tipo', 8);
-            $table->string('descripcion_tipo', 150);
             $table->smallInteger('edo_reg')->default(1);
 
-            $table->index(['codigo_tipo']);
+            $table->index(['codigo_mina']);
         });
+        \DB::table('minas')->insert([
+                'nombre_mina' => 'DEFECTO',
+                'codigo_mina' => '000000',
+                'edo_reg' => 0
+            ]);
     }
 
     /**
@@ -32,6 +37,6 @@ class CreateTiposMaterialeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipos_material');
+        Schema::dropIfExists('minas');
     }
 }

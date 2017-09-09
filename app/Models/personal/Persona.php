@@ -47,6 +47,10 @@ class Persona extends Model
         return $this->hasMany('App\Models\inventario\EgresoMaterial');
     }
 
+    public function transporte(){
+        return $this->hasMany('App\Models\transporte\Transporte', 'persona_id');
+    }
+
     /**
      * SETTERS FUNCTIONS
      */
