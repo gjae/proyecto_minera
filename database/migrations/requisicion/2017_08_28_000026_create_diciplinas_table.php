@@ -18,6 +18,7 @@ class CreateDiciplinasTable extends Migration
             $table->timestamps();
             $table->string('nombre_diciplina');
             $table->string('codigo_diciplina', 8)->nullable();
+            $table->smallInteger('edo_reg')->default(1);
 
             $table->index(['codigo_diciplina']);
         });

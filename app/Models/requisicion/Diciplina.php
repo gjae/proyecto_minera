@@ -8,7 +8,7 @@ class Diciplina extends Model
 {
     protected $table = 'diciplinas';
     protected $fillable = [
-    	'nombre_diciplina', 'codigo_diciplina'
+    	'nombre_diciplina', 'codigo_diciplina', 'edo_reg'
     ];
 
 
