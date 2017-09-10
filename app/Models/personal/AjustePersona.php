@@ -22,4 +22,8 @@ class AjustePersona extends Model
     public function nominas(){
         return $this->hasMany('App\Models\personal\DetalleNomina');
     }
+
+    public function liquidaciones(){
+        $this->hasMany('App\Models\personal\DetalleLiquidacion', 'ajuste_persona_id');
+    }
 }

@@ -15,6 +15,15 @@ $(document).ready(function(){
 		}
 	})
 
+	$(".print").on('click', function(){
+		switch( $(this).attr('role') ){
+			case 'liquidacion' :{
+				var url = 'http://'+location.host+'/dashboard/nomina/liquidacion/imprimir?liquidacion='+$(this).attr('liquidacion')
+				window.open(url, 'RECIBO DE LIQUIDACION' ,"width=800,height=900");
+				break;
+			}
+		}
+	})
 
 	$("#salvar").on('click', function(event){
 		var url = location.href;

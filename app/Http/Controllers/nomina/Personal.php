@@ -42,6 +42,23 @@ class Personal extends Controller
 		}
 	}
 
+	public function loquidacion($req){
+		if($req->has('persona') && !empty($req->persona)){
+			$p = Persona::find($req->persona);
+			if( $p->estado_persona == 'ACTIVA' )
+			{
+				$data_vista = [
+					'persona' => $p
+				];
+				return view('modulos.nomina.liquidacion', $data_vista);
+			}
+			else{
+			   return redirect()->to( url('dashboard/nomina/personal') )->with('error', 'ESTA PERSONA NO SE ENCUENTRA ACTIVA, NO SE LE PUEDE PROCESAR LA LIQUIDACION O YA POSEE LIQUIDACION');
+			 }
+		}
+		return redirect()->to( url('dashboard/nomina/personal') );
+	}
+
 	public function guardarAjusteAPersona($req){
 		DB::beginTransaction();
 		try {

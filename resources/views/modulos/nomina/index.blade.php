@@ -10,6 +10,19 @@
 @section('contenedor')
 
 <div class="row clearfix">
+@if(Session::has('correcto'))
+<div class="col-sm-12 col-lg-12 col-md-12">
+	<div class="alert alert-success">
+		{{ Session::get('correcto') }}
+	</div>
+</div>
+@elseif(Session::has('error'))
+<div class="col-sm-12 col-lg-12 col-md-12">
+	<div class="alert alert-danger">
+		{{ Session::get('error') }}
+	</div>
+</div>
+@endif
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="card">
 			<div class="body">
@@ -44,6 +57,25 @@
 										<a class="btn btn-success actions" action="formularios" persona="{{ $persona->id }}" formulario="agregar_ajustes">
 											<strong>AGREGAR AJUSTE</strong>
 										</a>
+
+										@if( $persona->estado_persona == 'ACTIVA' )
+											<a
+												href="{{ url('dashboard/nomina/personal/loquidacion')}}?persona={{$persona->id}}"
+												data-id="{{ $persona->id }}"
+											 	class="btn btn-warning"
+												
+											 >
+												<strong>PROCESO DE RETIRO</strong>
+											 </a>
+											@else
+											<a
+												liquidacion="{{ $persona->liquidacion->id }}"
+											 	class="btn btn-danger print"
+												role="liquidacion"
+											 >
+											 		<strong>IMPRIMIR LIQUIDACION</strong>
+											 	</a>
+										 @endif
 									</td>
 								</tr>
 							@endforeach

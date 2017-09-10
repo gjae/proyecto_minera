@@ -51,6 +51,10 @@ class Persona extends Model
         return $this->hasMany('App\Models\transporte\Transporte', 'persona_id');
     }
 
+    public function liquidacion(){
+        return $this->hasOne('App\Models\personal\Liquidacion');
+    }
+
     /**
      * SETTERS FUNCTIONS
      */

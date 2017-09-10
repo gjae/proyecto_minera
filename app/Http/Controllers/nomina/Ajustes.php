@@ -57,12 +57,15 @@ class Ajustes extends Controller
 
     			if(Persona::count('id') > 0)
     			{
-	    			foreach (Persona::all() as $key => $persona) {
-	    				$ap = new AjustePersona(['persona_id' => $persona->id, 'ajuste_id' => $insert->id ]);
-	    				if(! $ap->save()){
-	    					throw new Exception("ERROR AL INTENTAR GUARDAR EL AJUSTE A LA PERSONA MODULO: nomina ARCHIVO: Ajustes.php CERCA DE LA LINEA 56", 1);
-	    				}
-	    			}
+                    if($req->ajuste_global == 'SI')
+                    {
+    	    			foreach (Persona::all() as $key => $persona) {
+    	    				$ap = new AjustePersona(['persona_id' => $persona->id, 'ajuste_id' => $insert->id ]);
+    	    				if(! $ap->save()){
+    	    					throw new Exception("ERROR AL INTENTAR GUARDAR EL AJUSTE A LA PERSONA MODULO: nomina ARCHIVO: Ajustes.php CERCA DE LA LINEA 56", 1);
+    	    				}
+    	    			}
+                    }
 
 	    			DB::commit();
 	    			return response(['error' => false, 'mensaje' => 'DATOS ALMACENADOS CORRECTAMENTE'], 200)

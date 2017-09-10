@@ -9,7 +9,7 @@ $(document).ready(function(){
 			modal.modal({show: true})
 			$("#form-modal").html(resp.formulario)
 		})
-	} ) 
+	} ) ;
 })
 
 function cargar_vehiculo(e, boton){
