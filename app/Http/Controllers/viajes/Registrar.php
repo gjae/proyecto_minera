@@ -15,6 +15,12 @@ class Registrar extends Controller
     		]);
     }
 
+    public function registro($req){
+        $r = Transporte::all();
+
+        return dd($r);
+    }
+
     public function buscar_vehiculos($req){
     	$formulario = \View::make('modulos.transporte.formularios.listado_vehiculos', [
     			'vehiculos' => Vehiculo::where('edo_reg', 1)->get(),

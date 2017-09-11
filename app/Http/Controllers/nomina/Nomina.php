@@ -79,25 +79,27 @@ class Nomina extends Controller
             $nomina = N::where('codigo_nomina', $req->codigo_nomina)->first();
             $persona = P::find($req->persona);
 
-            if( $nomina->tipo_nomina == 'Q' )
-                $total_fraccion_persona = $persona->sueldo_basico / 2;
-            else if($nomina->tipo_nomina == 'S' )
-                $total_fraccion_persona = $persona->sueldo_basico / 4;
-            else
-                $total_fraccion_persona = $persona->sueldo_basico;
+            if( count($persona->nominas->where('nomina_id', $nomina->id)) == 0 ){
+                if( $nomina->tipo_nomina == 'Q' )
+                    $total_fraccion_persona = $persona->sueldo_basico / 2;
+                else if($nomina->tipo_nomina == 'S' )
+                    $total_fraccion_persona = $persona->sueldo_basico / 4;
+                else
+                    $total_fraccion_persona = $persona->sueldo_basico;
 
 
-            $totales = U::calcular($persona, $total_fraccion_persona);
+                $totales = U::calcular($persona, $total_fraccion_persona);
 
-            return view('modulos.nomina.trabajar_nomina', [
-                    'nomina' => $nomina,
-                    'codigo_nomina' => $req->codigo_nomina,
-                    'persona' => $persona,
-                    'total_para_nomina' => $total_fraccion_persona,
-                    'totales' => $totales
-                ]);
+                return view('modulos.nomina.trabajar_nomina', [
+                        'nomina' => $nomina,
+                        'codigo_nomina' => $req->codigo_nomina,
+                        'persona' => $persona,
+                        'total_para_nomina' => $total_fraccion_persona,
+                        'totales' => $totales
+                    ]);
+            }
         }
-        return redirect()->to( url('dashboard/nomina') );  
+        return redirect()->to( url('dashboard/nomina') )->with('error', 'ESTA NOMINA YA HA SIDO TRABAJADA PARA ESTA PERSONA Y NO SE PUEDE VOLVER A TRABAJAR');  
     }
 
     public function guardarTrabajo($req){

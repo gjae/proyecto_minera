@@ -198,12 +198,9 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ url('dashboard/nomina/ajustes') }}">
-                                    Ajustes
+                                <a href="{{ url('dashboard/viajes/registrar/registro') }}">
+                                    Registro
                                 </a>
-                            </li>
-                            <li>
-                                <a href="{{ url('dashboard/nomina') }}">Nominas</a>
                             </li>
                         </ul>
                     </li>

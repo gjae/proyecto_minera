@@ -12,6 +12,22 @@
 <input type="hidden" id="modulo" value="nomina">
 <input type="hidden" id="programa" value="Nomina">
 <div class="row clearfix">
+@if(Session::has('correcto'))
+
+<div class="col sm-12 col-lg-12 col-md-12">
+	<div class="alert alert-success">
+		<strong>{{ Session::get('correcto') }}</strong>
+	</div>
+</div>
+@elseif(Session::has('error'))
+
+<div class="col sm-12 col-lg-12 col-md-12">
+	<div class="alert alert-warning">
+		<strong>{{ Session::get('error') }}</strong>
+	</div>
+</div>
+
+@endif
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="card">
 			<div class="body">
