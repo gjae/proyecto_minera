@@ -304,15 +304,11 @@
 
     <!-- Bootstrap Core Js -->
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.js') }}"></script>
-
+    <script src="{{ asset('plugins/jquery-slimscroll/jquery.slimscroll.js') }}"></script>
     <!-- Waves Effect Plugin Js -->
     <script src="{{ asset('plugins/node-waves/waves.js') }}"></script>
 
     <script src="{{ asset('plugins/morrisjs/morris.js') }}"></script>
-
-
-    <!-- Sparkline Chart Plugin Js -->
-    <script src="{{ asset('plugins/jquery-sparkline/jquery.sparkline.js') }}"></script>
 
     <!-- Custom Js -->
     <script src="{{ asset('js/admin.js') }}"></script>
