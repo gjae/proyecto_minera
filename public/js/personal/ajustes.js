@@ -16,6 +16,41 @@
 		})
 	})
 
+	$("#cerrar").on('click', function(){
+		if(confirm("¿ESTA SEGURO DE REALIZAR ESTA ACCION? UNA VEZ CERRADA NO PODRA SEGUIR TRABAJANDOLA")){
+			var url = 'http://'+location.host+'/dashboard/nomina/nomina/cerrar';
+			$(this).addClass('disabled')
+			$.post(url, {'_token': $(this).attr('token'), 'nomina': $(this).attr('nomina-id')}, function(resp){
+				
+				var alert = '';
+				if(! resp.error){
+					alert= `
+						<div class="col-sm-12 col-md-12.col-lg-12" >
+							<div class="alert alert-success">
+								<strong>${resp.mensaje}</strong>
+							</div>
+						</div>
+					`
+				}else{
+					alert= `
+						<div class="col-sm-12 col-md-12.col-lg-12" >
+							<div class="alert alert-danger">
+								<strong>${resp.mensaje}</strong>
+							</div>
+						</div>
+					`
+
+				}
+				$("#alert").show(15000, function(){
+					$(this).html(alert)
+					setTimeout(function(){
+						location.reload()
+					},1100);
+				})
+			})
+		}
+	})
+
 	$("#salvar").on('click', function(){
 		//alert("SI")
 		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$("#accion").val()

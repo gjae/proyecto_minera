@@ -20,15 +20,52 @@ class Nomina extends Controller
     public function index($req){
     	return view('modulos.nomina.nominas');
     }
+    
+    public function cerrar($req){
+
+        if( $req->method('post') )
+        {
+            $data = [
+                'error' => false,
+                'mensaje' => 'LA NOMINA HA SIDO CERRADA CORRECTAMENTE'
+            ];
+            $nomina = N::find($req->nomina);
+             if( $nomina->estado_nomina == 'ABIERTA' ){
+                return response([
+                        'error' => true,
+                        'mensaje' => 'ERROR, ESTA NOMINA YA FUE CERRADA'
+                    ], 200)->header('Content-Type', 'application/json');
+             }
+
+            $nomina->estado_nomina = 'CERRADA';
+            if($nomina->save()){
+                return response([
+                        'error' => false,
+                        'mensaje' => 'LA NOMINA HA SIDO CORRECTAMENTE CERRADA'
+                    ], 200)->header('Content-Type' ,'application/json');
+            }else{
+                return response([
+                        'error' => true,
+                        'mensaje' => 'ERROR AL INTENTAR CERRAR LA NOMINA, INTENTA MAS TARDE O CONTACTE A SU ADMINISTRADOR DE SISTEMAS'
+                    ], 200)->header('Content-Type', 'application/json');
+            }
+            return response($data, 200)->header('Content-Type', 'application/json');
+        }
+    }
 
     public function trabajar($req){
     	if( $req->has('codigo_nomina') ){
+
     		$nomina = N::where('codigo_nomina', $req->codigo_nomina)->first();
-    		return view('modulos.nomina.trabajar_nomina', [
-    				'nomina' => $nomina,
-                    'codigo_nomina' => $req->codigo_nomina,
-                    'persona' =>false
-    			]);
+    		if( $nomina->estado_nomina == 'ABIERTA' )
+            {
+                return view('modulos.nomina.trabajar_nomina', [
+        				'nomina' => $nomina,
+                        'codigo_nomina' => $req->codigo_nomina,
+                        'persona' =>false
+        			]);
+            }
+            return redirect()->to( url('dashboard/nomina') )->with('error', 'ERROR: ESTA NOMINA YA FUE CERRADA Y NO PUEDE VOLVER A SER TRABAJADA');
     	}
     	return redirect()->to( url('dashboard/nomina') );
     }

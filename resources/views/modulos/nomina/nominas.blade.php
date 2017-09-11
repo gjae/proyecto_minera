@@ -12,6 +12,8 @@
 <input type="hidden" id="modulo" value="nomina">
 <input type="hidden" id="programa" value="Nomina">
 <div class="row clearfix">
+
+<section id="alert">
 @if(Session::has('correcto'))
 
 <div class="col sm-12 col-lg-12 col-md-12">
@@ -28,6 +30,8 @@
 </div>
 
 @endif
+</section>
+
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="card">
 			<div class="body">
@@ -70,9 +74,6 @@
 										{{ number_format($nomina->total_deducciones, 2) }}
 									</td>
 									<td>
-										<a href="{{ url('dashboard/nomina/Nomina/trabajar?codigo_nomina='.$nomina->codigo_nomina) }}" class="btn btn-success">
-											Trabajar
-										</a>
 										<a class="btn btn-success reportes"
 											codigo-nomina="{{ $nomina->codigo_nomina }}"
 											 role="tipoReporte"
@@ -80,6 +81,20 @@
 											<i class="material-icons">local_printshop</i>
 											imprimir
 										</a>
+
+										@if( $nomina->estado_nomina == 'ABIERTA' )
+										<a href="{{ url('dashboard/nomina/Nomina/trabajar?codigo_nomina='.$nomina->codigo_nomina) }}" class="btn btn-success">
+											Trabajar
+										</a>
+										<a 
+											nomina-id="{{ $nomina->id }}"
+											class="btn btn-danger"
+											id="cerrar" 
+											token="{{ csrf_token() }}"
+										>
+											<strong>CERRAR</strong>
+										</a>
+										@endif
 
 									</td>
 								</tr>
