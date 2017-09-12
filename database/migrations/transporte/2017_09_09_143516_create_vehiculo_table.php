@@ -22,7 +22,7 @@ class CreateVehiculoTable extends Migration
             $table->float('capacidad_tanque')->default(0.0);
             $table->float('capacidad_carga')->default(0);
             $table->integer('cantidad_personas')->nullable();
-            $table->smaillInteger('edo_reg')->default(1);
+            $table->smallInteger('edo_reg')->default(1);
             $table->string('modelo', 193)->default('--');
             
             $table->string('marca')->nullable();
