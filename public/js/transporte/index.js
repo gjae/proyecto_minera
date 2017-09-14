@@ -5,11 +5,34 @@ $(document).ready(function(){
 		var url = 'http://'+location.host +'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()
 		url+='/'+$(this).attr('role')
 
+		if( $(this).attr('role') == 'reportes' ){
+			$("#reportes").removeClass('hidden')
+			$("#salvar").addClass('hidden')
+		}
+		else{
+			$("#reportes").addClass('hidden')
+			$("#salvar").removeClass('hidden')
+		}
+
 		$.getJSON(url, {}, function(resp){
 			modal.modal({show: true})
 			$("#form-modal").html(resp.formulario)
 		})
 	} ) ;
+
+
+	$("#reportes").on('click', function(){
+		var datos = $("#form-modal").serialize()
+		if( document.getElementById('tipo_reporte').value == '' ){
+			alert("DEBE SELECCIONAR UN TIPO DE REPORTE")
+			return false;
+		} 
+		else{
+			var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/imprimir';
+			url+= '?'+datos;
+			window.open(url, 'REPORTES DE TRANSPORTE', 'width=750,height=950');
+		}
+	})
 })
 
 function cargar_vehiculo(e, boton){
