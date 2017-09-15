@@ -8,6 +8,7 @@ $(document).ready(function(){
 		if( $(this).attr('role') == 'reportes' ){
 			$("#reportes").removeClass('hidden')
 			$("#salvar").addClass('hidden')
+			url+='?viaje_id='+$(this).attr('id-transporte')
 		}
 		else{
 			$("#reportes").addClass('hidden')

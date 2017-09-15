@@ -37,9 +37,11 @@ class Registrar extends Controller
     }
 
     public function reportes($req){
+
+        $datos[ 'id'] = ( $req->has('viaje_id') && !empty($req->viaje_id) )? $req->viaje_id : '';
         return response([
                 'error' => false,
-                'formulario' => \View::make('modulos.transporte.formularios.reportes')->render(),
+                'formulario' => \View::make('modulos.transporte.formularios.reportes', $datos)->render(),
             ], 200)->header('Content-Type',' application/json');
     }
 
@@ -83,6 +85,8 @@ class Registrar extends Controller
            $t = $t->where('created_at', '>=', Carbon::parse($req->fecha_desde)->format('Y-m-d').' 00:00:00' );
         if( !empty($req->fecha_hasta) )
            $t = $t->where('created_at', '<=', Carbon::parse($req->fecha_hasta)->format('Y-m-d').' 00:00:00' );
+       if( $req->has('viaje_id') && !empty($req->viaje_id) )
+            $t = $t->where('id', $req->viaje_id);
 
         
 

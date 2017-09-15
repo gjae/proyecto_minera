@@ -60,7 +60,7 @@
 									<td>{{ $viaje->destino }}</td>
 									<td>{{ $viaje->nro_factura }}</td>
 									<td>
-										<a class="btn btn-success acciones" role="reportes">
+										<a class="btn btn-success acciones" role="reportes" id-transporte="{{ $viaje->id }}">
 											<strong>REPORTES</strong>
 										</a>
 									</td>

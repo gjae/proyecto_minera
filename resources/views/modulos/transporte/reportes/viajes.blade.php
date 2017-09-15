@@ -30,9 +30,9 @@
 			<th>RECIBO</th>
 			<th>PLACA</th>
 			<th>PROCEDENCIA</th>
-			<th>PESO</th>
+			<th>PESO KILO</th>
 			<th>FLETE / KILO</th>
-			<th>TOTAL / PESO</th>
+			<th>TOTAL PESO KILO</th>
 			<th>PESO DE MATERIAL</th>
 			<th>PRECIO / PESO MATERIAL</th>
 			<th>TOTAL / PESO MATERIAL</th>
