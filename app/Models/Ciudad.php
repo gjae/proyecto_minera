@@ -16,4 +16,8 @@ class Ciudad extends Model
 	public function personas(){
 		return $this->hasMany('App\Models\personal\Persona');
 	}
+
+	public function distribuidores(){
+		return $this->hasMany('App\Models\Distribuidor');
+	}
 }

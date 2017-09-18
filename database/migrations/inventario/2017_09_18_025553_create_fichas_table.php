@@ -29,6 +29,9 @@ class CreateFichasTable extends Migration
             $table->date('fecha_compra')->nullable();
             $table->date('fecha_instalacion')->nullable();
             $table->date('fecha_inicio_operaciones')->nullable();
+            $table->integer('material_id')->unsigned();
+            $table->integer('fabricante_id')->unsigned();
+            $table->integer('distribuidor_id')->unsigned();
 
             $table->enum('tipo_adquisicion', [
                         'COMPRA',
@@ -114,9 +117,17 @@ class CreateFichasTable extends Migration
                     'SI',
                     'NO'
                 ])->default('SI');
-
+            $table->foreign('material_id')->references('id')
+                    ->on('materiales')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('ubicacion_id')->references('id')
                     ->on('ubicaciones')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->foreign('fabricante_id')->references('id')
+                    ->on('fabricantes')->onDelete('cascade')->onUpdate('cascade');
+
+
+            $table->foreign('distribuidor_id')->references('id')
+                    ->on('distribuidores')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

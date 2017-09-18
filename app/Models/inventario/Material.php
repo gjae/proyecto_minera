@@ -21,6 +21,10 @@ class Material extends Model
     	return $this->hasMany('App\Models\inventario\DetalleRequisicion');
     }
 
+    public function accesorios(){
+        return $this->hasMany('App\Models\inventario\Accesorio');
+    }
+
     public function unidad_medida(){
     	return $this->belongsTo('App\Models\inventario\UnidadMedida', 'unidad_medida_id');
     }

@@ -17,6 +17,7 @@ class CreateAccesoriosTable extends Migration
             $table->increments('id');
             $table->timestamps();
 
+            $table->integer('material_id')->unsigned();
             $table->string('nombre_accesorio');
             $table->enum('tipo_accesorio', [
                     'decoracion',
@@ -39,6 +40,9 @@ class CreateAccesoriosTable extends Migration
             $table->string('serie', 120)->nullable();
             $table->string('marca', 70)->nullable();
             $table->date('fecha_compra')->nullable();
+
+            $table->foreign('material_id')->references('id')
+                    ->on('materiales')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
