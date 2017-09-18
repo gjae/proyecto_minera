@@ -8,7 +8,7 @@ $(document).ready(function(){
 		if( $(this).attr('role') == 'reportes' ){
 			$("#reportes").removeClass('hidden')
 			$("#salvar").addClass('hidden')
-			url+='?viaje_id='+$(this).attr('id-transporte')
+			url+='?viaje_id='+(($(this).attr('id-transporte') == undefined)? 0 : $(this).attr('id-transporte'));
 		}
 		else{
 			$("#reportes").addClass('hidden')
@@ -33,6 +33,12 @@ $(document).ready(function(){
 			url+= '?'+datos;
 			window.open(url, 'REPORTES DE TRANSPORTE', 'width=750,height=950');
 		}
+	})
+
+	$(".factura").on('click', function(){
+		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/factura';
+		url+= '?viaje_id='+$(this).attr('id-transporte')
+		window.open(url, 'RECIBO', 'width=750,height=950');
 	})
 })
 

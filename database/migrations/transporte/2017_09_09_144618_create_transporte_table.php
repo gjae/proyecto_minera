@@ -58,10 +58,12 @@ class CreateTransporteTable extends Migration
             $table->string('ident_cliente', 33)->default('--');
             $table->string('telefono_cliente', 22)->default('--');
             $table->string('email_cliente', 23)->default('--');
+            $table->string('remision_cli', 17)->default('--');
+            $table->string('nit_cliente', 23)->default('--');
 
             $table->enum('estado_registro', ['ACTIVA', 'ANULADA', 'COMPLETADA'])->default('ACTIVA');
 
-            $table->index(['nro_factura']);
+            $table->index(['nro_factura', 'remision_cli', 'nit_cliente']);
 
             $table->foreign('persona_id')->references('id')
                     ->on('personas')->onDelete('cascade')->onUpdate('cascade');

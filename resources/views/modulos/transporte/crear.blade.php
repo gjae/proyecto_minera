@@ -163,7 +163,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-5 col-md-5 col-lg-5">
+						<div class="col-sm-3 col-md-3 col-lg-3">
 							<label for="">RAZON SOCIAL DEL CLIENTE</label>
 							<input type="text" class="form-control" maxlength="200" placeholder="RAZON SOCIAL" class="form-conrol" name="razon_social_cliente" id="razon_social_cliente">
 						</div>
@@ -171,11 +171,19 @@
 							<label for="">IDENTIFICACION DEL CLIENTE</label>
 							<input type="text" maxlength="22" minlength="7" placeholder="IDENTIFICACION DEL CLIENTE" class="form-control" name="ident_cliente" id="ident_cliente">
 						</div>
+						<div class="col-sm-3 col-md-3 col-lg-3">
+							<label for="">NRO. REMISION</label>
+							<input type="text" placeholder="NRO. DE REMISION DEL CLIENTE" maxlength="17" class="form-control" name="remision_cli" id="remision_cli">
+						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-5 col-md-5 col-lg-5">
+						<div class="col-sm-3 col-md-3 col-lg-3">
 							<label for="">TELEFONO DEL CLIENTE</label>
 							<input type="tel" required class="form-control" name="telefono_cliente" id="telefono_cliente">
+						</div>
+						<div class="col-sm-3 col-md-3 col-lg-3">
+							<label for="">NIT DEL CLIENTE</label>
+							<input type="text" placeholder="NIT DEL CLIENTE" maxlength="23" class="form-control" name="nit_cliente" id="nit_cliente">
 						</div>
 						<div class="col-sm-4 col-md-4 col-lg-4">
 							<label for="">CORREO ELECTRONICO</label>

@@ -31,10 +31,12 @@
 			<th>DESTINO</th>
 			<th>FECHA DEL VIAJE</th>
 			<th>VR TOTAL</th>
-			<th>VR A FACTURAR</th>
 		</tr>
 	</thead>
 	<tbody>
+		<?php 
+			$total =0;
+		?>
 		@foreach ($transportes as $key => $transporte)
 			<tr>
 				<td>{{ $transporte->conductor->identificacion }}</td>
@@ -43,6 +45,39 @@
 				<td>{{ $transporte->procedencia }}</td>
 				<td>{{ $transporte->destino }}</td>
 				<td>{{ $transporte->fecha_salida->format('d-m-Y') }}</td>
+				<td>{{ number_format( ( $transporte->combustible_viaje * $transporte->precio_x_lts_combustible ) , 2 )}}</td>
+
+				<?php 
+					$total += ( $transporte->combustible_viaje * $transporte->precio_x_lts_combustible );
+				?>
+				@if( !isset($transportes[$key+1]) )
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td> <strong>TOTAL A FACTURAR</strong> </td>
+						<td> {{ number_format($total, 2) }}</td>
+					</tr>
+					<?php
+						$total = 0;
+					?>
+					@elseif( ( $key > 0 ) && ( $transportes[$key+1]->conductor->identificacion != $transporte->conductor->identificacion ) )
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td> <strong>TOTAL A FACTURAR</strong> </td>
+						<td> {{ number_format($total, 2) }}</td>
+					</tr>
+					<?php
+						$total = 0;
+					?>
+
+				@endif
 			</tr>
 		@endforeach
 	</tbody>

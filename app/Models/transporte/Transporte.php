@@ -14,6 +14,8 @@ class Transporte extends Model
         * LLAVES FORANEAS
         */
         'persona_id',
+        'remision_cli',
+        'nit_cliente',
         'vehiculo_id',
         'tipo_material_id',
         'mina_id',

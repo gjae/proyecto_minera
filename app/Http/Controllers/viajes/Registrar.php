@@ -78,15 +78,35 @@ class Registrar extends Controller
     	return redirect()->to( url('dashboard') );
     }
 
+    public function factura($req){
+        if($req->has('viaje_id') && !empty($req->viaje_id)){
+
+            $t = Transporte::find($req->viaje_id);
+            $reporte = \View::make('modulos.transporte.reportes.recibo', ['transporte' => $t])
+                                ->render();
+
+            $pdf = PDF::loadHtml($reporte);
+            $pdf->setPaper('a5', 'landscape');
+            return $pdf->stream('recibo_'.$t->nro_factura, ['attachment' => 0]);
+        }
+    }
+
     public function imprimir($req){
+
         $t = new Transporte;
 
         if( !empty($req->fecha_desde) )
            $t = $t->where('created_at', '>=', Carbon::parse($req->fecha_desde)->format('Y-m-d').' 00:00:00' );
         if( !empty($req->fecha_hasta) )
            $t = $t->where('created_at', '<=', Carbon::parse($req->fecha_hasta)->format('Y-m-d').' 00:00:00' );
-       if( $req->has('viaje_id') && !empty($req->viaje_id) )
+       if( $req->has('viaje_id') && ($req->viaje_id > 0) )
             $t = $t->where('id', $req->viaje_id);
+
+        if( $req->has('identificacion') && ( !empty($req->identificacion) && is_numeric($req->identificacion) ))
+        {
+            $t = $t->join('personas', 'personas.id', 'transporte.persona_id')
+                    ->where('personas.identificacion', $req->identificacion);
+        }
 
         
 

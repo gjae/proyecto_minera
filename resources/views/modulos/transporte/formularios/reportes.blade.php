@@ -14,7 +14,7 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-9 col-md-9 col-lg-9">
-			<label for="">RANGO DE FECHAS</label>
+			<h3 class="page-header">RANGO DE FECHAS</h3>
 		</div>
 		<div class="col-sm-4 col-md-4 col-lg-4">
 			<label for="">FECHA DESDE</label>
@@ -23,6 +23,15 @@
 		<div class="col-sm-4 col-md-4 col-lg-4">
 			<label for="">FECHA HASTA</label>
 			<input type="date" name="fecha_hasta" id="fecha_hasta" class="form-control">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-9 col-md-9-col-lg-9">
+			<h3 class="page-header">FILTROS POR PERSONA</h3>
+		</div>
+		<div class="col-sm-4 col-md-4 col-lg-4">
+			<label for="">IDENTIFICAICON DEL CONDUCTOR</label>
+			<input type="text" value="--" name="identificacion" class="form-control">
 		</div>
 	</div>
 </div>

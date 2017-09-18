@@ -38,8 +38,13 @@
 				<div class="table-responsive">
 
 					
-					<button type="button red pull-right" action="formularios" role="crearNomina" class="btn btn-default waves-effect m-r-20 actions">Abrir nomina</button>	
-						
+					<div class="row">
+						<div class="col-sm-12 col-md-12 col-lg-12">
+							<a class="btn btn-success acciones" role="reportes">
+								<strong>REPORTES</strong>
+							</a>
+						</div>
+					</div>
 					<table class="table table-bordered table-striped table-hover" id="dataTables-example">
 						<thead>
 							<tr>
@@ -60,8 +65,12 @@
 									<td>{{ $viaje->destino }}</td>
 									<td>{{ $viaje->nro_factura }}</td>
 									<td>
-										<a class="btn btn-success acciones" role="reportes" id-transporte="{{ $viaje->id }}">
-											<strong>REPORTES</strong>
+										<a 
+											class="btn btn-success factura" 
+											role="reportes"
+											id-transporte="{{ $viaje->id }}"
+										>
+											<strong>RECIBO</strong>
 										</a>
 									</td>
 								</tr>

@@ -29,7 +29,7 @@
 					<table class="table table-bordered table-striped table-hover" id="dataTables-example">
 						<thead>
 							<tr>
-								<th>CODIGO DE ORDEN</th>
+								<th>CODIGO </th>
 								<th>CONSECUTIVO</th>
 								<th>TIPO</th>
 								<th>ESTADO</th>
