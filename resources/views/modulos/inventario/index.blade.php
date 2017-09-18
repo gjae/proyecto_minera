@@ -19,8 +19,8 @@
 	<strong>{{ Session::get('error') }}</strong>
 </div>
 
-@else
-<div class="alert alert success">
+@elseif( Session::has('correcto') )
+<div class="alert alert-success">
 	<strong>{{ Session::get('correcto') }}</strong>
 </div>
 

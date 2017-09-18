@@ -69,6 +69,10 @@ class Ficha extends Model
     	return $this->belongsTo('App\Models\Fabricante');
     }
 
+    public function ubicacion(){
+        return $this->belongsTo('App\Models\Ubicacion');
+    }
+
 
     public function setFechaCompraAttribute($old){
     	$this->attributes['fecha_compra'] = Carbon::parse($old)->format('Y-m-d');
@@ -80,5 +84,27 @@ class Ficha extends Model
 
     public function setFechaInicioOperacionesAttribute($old){
     	$this->attributes['fecha_inicio_operaciones'] = Carbon::parse($old)->format('Y-m-d');
+    }
+
+    public function getTipoRiesgoAttribute($value){
+        switch ($value) {
+            case 'III':
+                return 'MUY ALTO RIESGO III';
+                break;
+            
+            case 'IIB':
+                return 'ALTO RIESGO II b';
+                break;
+
+            case 'IIA':
+                return 'RIESGO MODERADO II a';
+                break;
+            case 'I':
+                return 'BAJO RIESGO I';
+                break;
+            case '-':
+                return 'NINGUNO';
+                break;
+        }
     }
 }

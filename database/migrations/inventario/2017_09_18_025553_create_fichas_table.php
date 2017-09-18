@@ -115,7 +115,19 @@ class CreateFichasTable extends Migration
             $table->float('garantia')->default(12);
 
             $table->integer('frecuencia_mantenimiento')->defalt(12);
-            $table->enum('manuales', [
+            $table->enum('manuales_componentes', [
+                    'SI',
+                    'NO'
+                ])->default('SI');
+            $table->enum('manuales_servicio', [
+                    'SI',
+                    'NO'
+                ])->default('SI');
+            $table->enum('manuales_usuario', [
+                    'SI',
+                    'NO'
+                ])->default('SI');
+            $table->enum('manuales_despiece', [
                     'SI',
                     'NO'
                 ])->default('SI');

@@ -59,4 +59,28 @@ class Reportes extends Controller
         
         return $pdf->stream('reporte_entre_fechas', ['attachment' => 0]);
     }
+
+    public function ficha($req){
+        if( $req->has('material_id') && !empty($req->material_id) ){
+            $material = M::find($req->material_id);
+
+            if($material)
+            {
+                $bc = new  BC();
+                $material = M::find($req->material_id);
+                $bc->setText($material->codigo_material);
+                $bc->setType(BC::Code128);
+                $bc->setFontSize(23);   
+                $bc->setScale(3);
+                $vista = \View::make('modulos.inventario.reportes.hoja_vida', [
+                    'material' => $material,
+                    'codigo' => $bc->generate()
+                ])->render();
+                $pdf = PDF::loadHtml($vista);
+
+                return $pdf->stream('hoja_vida_'.$material->nombre_material, ['attachment' => 0]);
+            }
+        }
+        return redirect()->to( url('dashboard/inventario/inventario') )->with('error', 'NO SE HA PODIDO ENCONTRAR EL MATERIAL SOLICITADO');
+    }
 }

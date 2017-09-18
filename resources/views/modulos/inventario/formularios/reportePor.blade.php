@@ -7,7 +7,7 @@
 				<option value="">-- SELECCIONE UNO --</option>
 				<option value="datos_generales">DATOS DEL ARTICULO</option>
 				<option value="actividad_en_fechas">ACTIVIDAD ENTRE FECHAS</option>
-
+				<option value="ficha">VER FICHA</option>
 			</select>
 		</div>
 

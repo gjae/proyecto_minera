@@ -10,4 +10,8 @@ class Ubicacion extends Model
     protected $fillable = [
     	'nombre_ubicacion', 'codigo', 'direccion_ubicacion'
     ];
+
+    public function fichas(){
+    	return $this->hasMany('App\Models\inventario\Ficha');
+    }
 }

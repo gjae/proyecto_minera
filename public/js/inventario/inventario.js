@@ -71,13 +71,11 @@ $(document).ready(function(){
 		var datos = $("#form-modal")
 		
 		var tipo = $("#tipo_reporte").val();
-		alert(tipo)
-		if(  $("#tipo_reporte").val() == 'actividad_en_fechas' ){
-			var url = location.host+'/dashboard/inventario/reportes/'+$("#tipo_reporte").val()+'?material_id='+$("#material_reporte").val()
-			url +=  '&fecha_desde='+$("#fecha_desde").val()+"&fecha_hasta="+$("#fecha_hasta").val()
+		var url = location.host+'/dashboard/inventario/reportes/'+$("#tipo_reporte").val()+'?material_id='+$("#material_reporte").val()
+		url +=  '&fecha_desde='+$("#fecha_desde").val()+"&fecha_hasta="+$("#fecha_hasta").val()
+		alert(url)
 			//alert(url)			
-			window.open('http://'+url, "INVITACIONES"  ,"width=800,height=900")	
-		} 
+		window.open('http://'+url, "INVITACIONES"  ,"width=800,height=900")	
 	})
 })
 

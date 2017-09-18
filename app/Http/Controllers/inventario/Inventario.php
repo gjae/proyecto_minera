@@ -142,4 +142,5 @@ class Inventario extends Controller
             }
         }
     }
+
 }

@@ -35,8 +35,10 @@
 		<div class="card">
 			<div class="body">
 				<div class="container">
-					<form action="#" method="post" id="ficha">
+					<form action="{{ url('dashboard/inventario/HojaVida/guardar_ficha') }}" method="post" id="ficha">
+						{{ csrf_field() }}
 						<div class="row">
+							<input type="hidden" required name="material_id" id="material_id" value="{{ $material->id }}">
 							<div class="col-sm-12 col-md-2 col-lg-2">
 								<label for="">CODIGO</label>
 								<input type="text" readonly value="{{ $material->codigo_material }}" class="form-control" name="codigo_material" id="codigo_material">
@@ -51,7 +53,7 @@
 							
 							<div class="col-sm-6 col-md-3 col-lg-3">
 								<label for="">SERVICIO</label>
-								<input type="text" maxlength="160" pattern="/[a-zA-Z0-9_]/" required class="form-control" name="servicio" id="servicio">
+								<input type="text" maxlength="160"  required class="form-control" name="servicio" id="servicio">
 							</div>
 							<div class="col-sm-6 col-lg-3 col-md-3">
 								<label for="">UBICACION</label>
@@ -126,7 +128,7 @@
 							
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<label for="">AÑO DE FABRICACION</label>
-								<input type="text" maxlength="4" minlength="4" required pattern="/\d/" class="form-control" name="anio_fabricacion" id="anio_fabricacion">
+								<input type="text" maxlength="4" minlength="4" required class="form-control" name="anio_fabricacion" id="anio_fabricacion">
 							</div>
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<label for="">VALOR</label>
@@ -134,7 +136,7 @@
 							</div>
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<label for="">GARANTIA</label>
-								<input type="number" pattern="/\d/" class="form-control" name="garantia" id="garantia">
+								<input type="number" class="form-control" name="garantia" id="garantia">
 							</div>
 
 						</div>
@@ -222,7 +224,7 @@
 						</div>
 
 						<div class="row">
-							<div class="col-sm-3 col-md-3 col-lg-3">
+							<div class="col-sm-4 col-md-4 col-lg-4">
 								<label for="">CALIFICACION BIOMEDICA</label>
 								<select name="calif_biomedica" id="calif_biomedica" class="form-control" required>
 									<option value="">-- SELECCIONE UNO --</option>
@@ -234,12 +236,124 @@
 									<option value="ANL/LABORATORIO">ANALISIS DE LABORATORIO</option>
 								</select>
 							</div>
-							<div class="col-sm-3 col-md-3 col-lg-3">
-								
-
+							<div class="col-sm-4 col-md-4 col-lg-4">
+								<label for="">TECNOLOGIA</label>	
+								<select name="tecn_predeterminada" id="tecn_predeterminada" class="form-control" required>
+									<option value="">-- SELECCIONE UNO --</option>
+									<option value="MECANICO">MECANICO</option>
+									<option value="ELECTRICO">ELECTRICIDAD</option>
+									<option value="HIDRAULICO">HEDRAULICO</option>
+									<option value="NEUMATICO">NEUMATICO</option>
+								</select>							
 							</div>
-							<div class="col-sm-3 col-md-3 col-lg-3">
+							<div class="col-sm-4 col-md-4 col-lg-4">
+								<label for="">NIVEL DE RIESGO</label>
+								<select name="tipo_riesgo" id="tipo_riesgo" class="form-control" required>
+									<option value="">-- SELECCIONE UNO --</option>
+									<option value="III">MUY ALTO III</option>
+									<option value="IIB">ALTO RIESGO IIB</option>
+									<option value="IIA">RIESGO MODERADO IIA</option>
+									<option value="I">BAJO RIESGO</option>
+									<option value="-">SIN RIESGO</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-9 col-lg-9 col-md-9">
+								<h3 class="page-header">CARACTERISTICAS TECNICAS</h3>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-2">
+								<label for="">VOLTAJE</label>
+								<input maxlength="4" type="number" class="form-control" name="voltaje" value="0" required="" id="voltaje">
+							</div>
+							<div class="col-sm-2">
+								<label for="">AMPERAJE</label>
+								<input maxlength="4" type="number" class="form-control" name="amperaje" value="0" required="" id="amperaje">
+							</div>
+							<div class="col-sm-2">
+								<label for="">POTENCIA</label>
+								<input maxlength="4" type="number" class="form-control" name="potencia" value="0" required="" id="potencia">
+							</div>
+							<div class="col-sm-2">
+								<label for="">FRECUENCIA</label>
+								<select name="frecuencia" id="frecuencia" class="form-control" required="">
+									<option value="">--SELECCIONE UNO</option>
+									<option value="ALTERNA">FRECUENCUA ALTERNA</option>
+									<option value="CONTINUA">FRECUENCIA CONTINUA</option>
+								</select>
+							</div>
+							<div class="col-sm-2">
+								<label for="">CAPACIDAD</label>
+								<input maxlength="4" type="number" class="form-control" name="capacidad" value="0" required="" id="capacidad">
 								
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-2">
+								<label for="">PRESION (PSI)</label>
+								<input maxlength="4" type="number" class="form-control" name="presion" value="0" required="" id="presion">
+							</div>
+							<div class="col-sm-2">
+								<label for="">VEL (RPM)</label>
+								<input maxlength="4" type="number" class="form-control" name="vel" value="0" required="" id="vel">
+							</div>
+							<div class="col-sm-2">
+								<label for="">TEMP (°C)</label>
+								<input maxlength="4" type="number" class="form-control" name="temperatura" value="0" required="" id="temperatura">
+							</div>
+							<div class="col-sm-2">
+								<label for="">PESO (KG)</label>
+								<input maxlength="4" type="number" class="form-control" name="peso" value="0" required="" id="peso">
+							</div>
+							<div class="col-sm-2">
+								<label for="">VIDA UTIL (MESES)</label>
+								<input maxlength="4" type="number" class="form-control" name="vida_util" value="0" required="" id="vida_util">
+							</div>
+							<div class="col-sm-2">
+								<label for="">FREC. MANTENI. (MESES)</label>
+								<input maxlength="4" type="number" class="form-control" name="frecuencia_mantenimiento" value="3" required="" id="frecuencia_mantenimiento">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-9 col-md-9 col-lg-9">
+								<h3 class="page-header">MANUALES</h3>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-4 col-md-4 col-lg-4">
+								<label for="">MANUAL DE COMPONENTES</label>
+								<select class="form-control" required name="manuales_componentes" id="manuales_componentes">
+									<option value="">-- SELECCIONE UNO --</option>
+									<option value="SI">SI</option>
+									<option value="NO">NO</option>
+								</select>
+							</div>
+							<div class="col-sm-4 col-md-4 col-lg-4">
+								<label for="">MANUALES DE USUARIO</label>
+								<select class="form-control" required name="manuales_usuario" id="manuales_usuario">
+									<option value="">-- SELECCIONE UNO --</option>
+									<option value="SI">SI</option>
+									<option value="NO">NO</option>
+								</select>
+							</div>
+							<div class="col-sm-4 col-md-4 col-lg-4">
+								<label for="">MANUALES DE DESPIECE</label>
+								<select class="form-control" required name="manuales_despiece" id="manuales_despiece">
+									<option value="">-- SELECCIONE UNO --</option>
+									<option value="SI">SI</option>
+									<option value="NO">NO</option>
+								</select>
+								
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-9 col-md-9 col-lg-9">
+								<input type="submit" class="btn btn-success" value="GUARDAR">
 							</div>
 						</div>
 					</form>
