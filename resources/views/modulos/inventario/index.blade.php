@@ -9,6 +9,26 @@
 @section('titulo', 'Modulo de persoal y nomina')
 @section('contenedor')
 
+<div class="row">
+
+<div class="col-sm-12 col-lg-12 col-md-12">
+
+@if(Session::has('error'))
+
+<div class="alert alert-danger">
+	<strong>{{ Session::get('error') }}</strong>
+</div>
+
+@else
+<div class="alert alert success">
+	<strong>{{ Session::get('correcto') }}</strong>
+</div>
+
+@endif	
+
+</div>
+
+</div>
 <div class="row clearfix">
 	<input type="hidden" id="token" value="{{ csrf_token() }}">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -86,6 +106,11 @@
 										<a class="btn btn-primary actions" data-id="{{ $material->id }}" formulario="reportePor" role="reportes">
 											<i class="material-icons actions">local_printshop</i>
 										</a>
+										@if(is_null($material->ficha))
+											<a href="{{ url('dashboard/inventario/HojaVida/crear?id='.$material->id) }}" class="btn btn-success">
+												<strong>CREAR HOJA DE VIDA</strong>
+											</a>
+										@endif
 									</td>
 								</tr>
 							@endforeach
@@ -137,7 +162,7 @@
 <script src="{{ asset('plugins/jquery-datatable/extensions/export/vfs_fonts.js') }}"></script>
 <script src="{{ asset('plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}"></script>
 <script src="{{ asset('plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}"></script>
-<script src="{{ asset('js//inventario/inventario.js') }}"></script>
+<script src="{{ asset('js/inventario/inventario.js') }}"></script>
     <!-- Demo Js -->
 <script src="{{ asset('js/demo.js') }}"></script>
 <script>

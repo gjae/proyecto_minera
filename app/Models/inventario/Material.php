@@ -52,4 +52,8 @@ class Material extends Model
     public function analisis_cotizacion(){
         return $this->hasMany('App\Models\compras\AnalisisCotizacion');
     }
+
+    public function ficha(){
+        return $this->hasOne('App\Models\inventario\Ficha');
+    }
 }

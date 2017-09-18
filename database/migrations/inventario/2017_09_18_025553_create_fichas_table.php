@@ -111,6 +111,8 @@ class CreateFichasTable extends Migration
             $table->float('temperatura')->default(0);
             $table->float('peso')->default(0);
             $table->float('vida_util')->default(12);
+            $table->float('valor')->default(0);
+            $table->float('garantia')->default(12);
 
             $table->integer('frecuencia_mantenimiento')->defalt(12);
             $table->enum('manuales', [
