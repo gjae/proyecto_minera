@@ -166,6 +166,9 @@
                                 <a href="{{ url('dashboard/configuracion/fabricantes') }}">Fabricantes</a>
                             </li>
                             <li>
+                                <a href="{{ url('dashboard/configuracion/distribuidores') }}">Distribuidores</a>
+                            </li>
+                            <li>
                                 <a href="{{ url('dashboard/configuracion/vehiculos') }}">Vehiculos</a>
                             </li>
                         </ul>

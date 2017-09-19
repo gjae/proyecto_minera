@@ -20,6 +20,8 @@ class CreateDistribuidoresTable extends Migration
             $table->string('direccion')->nullable();
             $table->string('telefono')->nullable();
             $table->integer('ciudad_id')->unsigned()->default(1);
+            $table->char('codigo_distribuidor', 4);
+            $table->smallInteger('edo_reg')->default(1);
         });
     }
 
