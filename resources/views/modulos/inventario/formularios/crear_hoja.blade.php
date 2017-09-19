@@ -103,11 +103,11 @@
 								</select>
 							</div>
 							
-							<div class="col-sm-4 col-lg-4 col-md-4">
+							<div class="col-sm-3 col-lg-3 col-md-3">
 								<label for="">REPRESENTANTE</label>
 								<input type="text" maxlength="160" class="form-control" name="representante" id="representante" value="REPRESENTANTE DE ADQUISICION">
 							</div>
-							<div class="col-sm-4 col-lg-4 col-md-4">
+							<div class="col-sm-3 col-lg-3 col-md-3">
 								<label for="">CIUDAD DEL REPRESENTANTE</label>
 								<select name="ciudad_representante" id="ciudad_representante" required class="form-control" required="">
 									<option value="">-- SELECCIONE UNO --</option>
@@ -118,9 +118,13 @@
 									@endforeach
 								</select>
 							</div>
-							<div class="col-sm-4 col-lg-4 col-md-4">
+							<div class="col-sm-3 col-lg-3 col-md-3">
 								<label for="">TELEFONO DEL REPRESENTANTE</label>
 								<input type="text" maxlength="25" class="form-control" name="telefono_representante" id="telefono_representante">
+							</div>
+							<div class="col-sm-3 col-md-3 col-lg-3">
+								<label for="">CEDULA</label>
+								<input type="text" required placeholder="CEDULA DEL REPRESENTANTE" maxlength="23" class="form-control" name="cedula_representante" id="cedula_representante">
 							</div>
 						</div>
 

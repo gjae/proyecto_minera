@@ -71,7 +71,7 @@ class Reportes extends Controller
                 $bc->setText($material->codigo_material);
                 $bc->setType(BC::Code128);
                 $bc->setFontSize(23);   
-                $bc->setScale(3);
+                $bc->setScale(2);
                 $vista = \View::make('modulos.inventario.reportes.hoja_vida', [
                     'material' => $material,
                     'codigo' => $bc->generate()

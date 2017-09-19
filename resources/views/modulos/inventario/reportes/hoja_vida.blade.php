@@ -72,13 +72,16 @@
 		</td>
 	</tr>
 </table>
-<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<table style="text-align: center;" width="100%" border="1" cellpadding="0" cellspacing="0">
 	<tr>
 		<td>
 			<strong>VIGENTE DESDE: 24-11-2017</strong>
 		</td>
 		<td>
 			<strong>VERSION: 01</strong>
+		</td>
+		<td>
+			<strong>AÑO DE FABRICACION: {{ $material->ficha->anio_fabricacion }}</strong>
 		</td>
 	</tr>
 </table>
@@ -182,26 +185,35 @@
 			<strong>{{$material->ficha->distribuidor->telefono}}</strong>
 		</td>
 	</tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0">
 	<tr>
-		<td width="17%">
+		<td width="13%">
 			<strong>REPRESENTANTE: </strong>
 		</td>
-		<td class="contenido">
+		<td width="13%" class="contenido">
 			<strong>{{ $material->ficha->representante }}</strong>
 		</td>
-		<td width="17%">
+		<td width="13%">
 			<strong>CIUDAD: </strong>
 		</td>
-		<td width="17%"  class="contenido">
+		<td width="13%"  class="contenido">
 			<strong>{{ \App\Models\Ciudad::find($material->ficha->ciudad_representante)->nombre_ciudad }}</strong>
 		</td>
-		<td width="17%" >
+		<td width="13%" >
 			<strong>TELEFONO: </strong>
 		</td>
-		<td width="17%" class="contenido">
+		<td width="13%" class="contenido">
 			<strong>{{$material->ficha->telefono_representante}}</strong>
 		</td>
+		<td width="13%">
+			<strong>CEDULA</strong>
+		</td>
+		<td width="13%" class="contenido">
+			<strong>{{ $material->ficha->cedula_representante }}</strong>
+		</td>
 	</tr>
+	
 </table>
 <table border="1" style="text-align: center;" width="100%" cellspacing="0" cellpadding="0">
 	<tr>
@@ -210,6 +222,28 @@
 		</td>
 		<td>
 			<strong>{{ $material->ficha->tipo_adquisicion }}</strong>
+		</td>
+	</tr>
+</table>
+<table border="1" style="text-align: center;" cellpadding="0" cellspacing="0" width="100%">
+	<tr>
+		<td width="5%">
+			<strong>COMPRA</strong>
+		</td>
+		<td>
+			<strong>{{ $material->ficha->fecha_compra->format('d-m-Y') }}</strong>
+		</td>
+		<td>
+			<strong>INSTALACION</strong>
+		</td>
+		<td>
+			<strong>{{ $material->ficha->fecha_instalacion->format('d-m-Y') }}</strong>
+		</td>
+		<td>
+			<strong>INICIO DE OPERACIONES</strong>
+		</td>
+		<td>
+			<strong>{{ $material->ficha->fecha_inicio_operaciones->format('d-m-Y') }}</strong>
 		</td>
 	</tr>
 </table>
@@ -340,3 +374,10 @@
 	</tbody>
 
 </table>
+<h2>MANUALES</h2>
+<strong>
+MANUAL DE USUARIO: <span>{{ $material->ficha->manuales_usuario }}</span> / <br>
+MANUAL DE COMPONENTES: <span>{{ $material->ficha->manuales_componentes }}</span> / <br>
+MANUAL DE SERVICIO: <span>{{ $material->ficha->manuales_servicio }}</span> / <br>
+MANUAL DESPECIE: <span>{{ $material->ficha->manuales_despiece }}</span>
+</strong>

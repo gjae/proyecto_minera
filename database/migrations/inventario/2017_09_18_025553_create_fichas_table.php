@@ -22,6 +22,7 @@ class CreateFichasTable extends Migration
             $table->string('marca', 40);
             $table->string('modelo', 40);
             $table->string('serie', 15);
+            $table->string('cedula_representante', 23);
             $table->string('representante', 160)->nullable();
             $table->integer('ciudad_representante')->unsigned();
             $table->string('telefono_representante', 25)->nullable();

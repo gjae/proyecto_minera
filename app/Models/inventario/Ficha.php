@@ -11,6 +11,7 @@ class Ficha extends Model
 
     protected $fillable = [
             'servicio', 
+            'cedula_representante',
             'ubicacion_id',
             'marca', 
             'modelo', 
@@ -43,7 +44,10 @@ class Ficha extends Model
             'peso',
             'vida_util',
             'frecuencia_mantenimiento',
-            'manuales', 
+            'manuales_componentes', 
+            'manuales_servicio',
+            'manuales_usuario',
+            'manuales_despiece',
             'distribuidor_id',
             'fabricante_id'
     ];
