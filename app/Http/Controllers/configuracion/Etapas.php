@@ -30,6 +30,9 @@ class Etapas extends Controller
 
     }
 
+	/**
+	* PRUEBA	
+*/
     public function guardar($req){
 
     	if( $req->method('post') ){
