@@ -82,7 +82,7 @@ class Liquidacion extends Controller
 			$liquidacion = new L($datos);
 			if( $liquidacion->save() ){
 
-				if(  $this->insertarAjustes($liquidacion, $ajustes, $p)  )
+				if(  $this->insertarAjustes($liquidacion, $ajustes, $p, $req)  )
 				{	
 					$p->estado_persona = 'INACTIVA';
 					if( $p->save() )
@@ -117,19 +117,20 @@ class Liquidacion extends Controller
     	return ceil( ( $sueldo_base  * $dias) /720 );
     }
 
-    private function insertarAjustes($liquidacion, $ajustes, $persona){
-    	$total = 0;
+    private function insertarAjustes($liquidacion, $ajustes, $persona, $req){
 
     	if( count($ajustes) > 0 )
     	{
 	    	foreach ($ajustes as $key => $ajuste) {
 	    		$total = 0;
 	    		if( $ajuste->ajuste->cantidad_ajuste > 0 ){
-	    			$total += $ajuste->ajuste->cantidad_ajuste;
+	    			$total = ($ajuste->ajuste->tipo_ajuste == 'BONO' )? $total + $ajuste->ajuste->cantidad_ajuste : $total - $ajuste->ajuste->cantidad_ajuste ;
 	    		}
 	    		else{
-	    			$total += ( ( $persona->sueldo_basico * $ajuste->ajuste->porcentaje_ajuste ) /100 );
+	    			$total = ($ajuste->ajuste->tipo_ajuste == 'BONO' ) ? $total +  ( ( $persona->sueldo_basico * $ajuste->ajuste->porcentaje_ajuste ) /100 ) : $total - ( ( $persona->sueldo_basico * $ajuste->ajuste->porcentaje_ajuste ) /100 );
 	    		}
+
+	    		$total = ( $total < 0 )? ($total * -1): $total;
 
 	    		$datos = [
 	    			'liquidacion_id' => $liquidacion->id,
@@ -152,20 +153,21 @@ class Liquidacion extends Controller
 
     	for ($i=0; $i < count($req->ajustes) ; $i++) { 
     		if( is_numeric($req->ajustes[$i]) || is_integer( $req->ajustes[$i] ) ){
-    			$ajuste = AP::where('ajuste_id', $req->ajustes[$i])
-    							->where('persona_id', $req->persona_id)->first();
+    			$ajuste = AP::where('id', $req->ajustes[$i])
+    					->where('persona_id', $req->persona_id)->first();
 
     			if($ajuste){
-    				if($ajuste->ajuste->tipo_ajuste == 'BONO'){
 
-    					if($ajuste->ajuste->cantidad_ajuste > 0){
-    						$total+= $ajuste->ajuste->cantidad_ajuste;
-    					}else{
-    						$total += ( $persona->sueldo_basico * $ajuste->ajuste->porcentaje_ajuste ) /100;
-    					}
-    					array_push($ajustes, $ajuste);
+    				if($ajuste->ajuste->cantidad_ajuste > 0){
+    					$total = ($ajuste->ajuste->tipo_ajuste == 'BONO')? $total + $ajuste->ajuste->cantidad_ajuste: $total;
 
-    				}// FIN DEL TERCER IF
+    					$total = ( $total < 0 )? ($total * -1 ): $total;
+    				}else{
+    					$total = ($ajuste->ajuste->tipo_ajuste == 'BONO')? $total + ( $persona->sueldo_basico * $ajuste->ajuste->porcentaje_ajuste ) /100 : $total ;
+
+    					$total = ( $total < 0 )? ($total * -1 ): $total;
+    				}
+    				array_push($ajustes, $ajuste);
 
     			}// FIN DEL SEGUNDO IF
 

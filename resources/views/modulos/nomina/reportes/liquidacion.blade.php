@@ -32,6 +32,15 @@
   padding-bottom: 9px;
   margin: 40px 0 20px;
 }
+table.firma{
+	border-left: 1px solid #000;
+	border-right: 1px solid #000;
+	border-bottom: 1px solid #000;
+}
+table.bajo{
+	border-left: 1px solid #000;
+	border-right: 1px solid #000;
+}
 h1 {
   margin: .67em 0;
   font-size: 2em;
@@ -111,6 +120,7 @@ h1 {
 		</td>
 	</tr>
 	@foreach($liquidacion->detalles as $key => $detalle)
+	@if ($detalle->ajuste_persona->ajuste->tipo_ajuste == 'BONO')
 		<tr>
 			<td>
 				<strong> {{ $detalle->ajuste_persona->ajuste->nombre_ajuste }} </strong>
@@ -122,6 +132,7 @@ h1 {
 				<strong>{{ number_format($detalle->total_ajuste, 2) }}</strong>
 			</td>
 		</tr>
+	@endif
 	@endforeach
 	<tr>
 		<td>
@@ -213,6 +224,96 @@ h1 {
 		</td>
 		<td width="12%" style="text-align: center;">
 			<strong>{{ number_format($liquidacion->total_liquidacion, 2) }}</strong>
+		</td>
+	</tr>
+</table>
+
+<table class="bajo" width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td>
+			DESCUENTOS
+		</td>
+		<td>
+			&nbsp;
+		</td>
+		<td>
+			&nbsp;
+		</td>
+	</tr>
+	@php
+		$total = 0;
+	@endphp
+	@foreach($liquidacion->detalles as $key => $detalle)
+	@if ($detalle->ajuste_persona->ajuste->tipo_ajuste == 'DEDUCCION')
+		<tr>
+			<td>
+				<strong> {{ $detalle->ajuste_persona->ajuste->nombre_ajuste }} </strong>
+			</td>
+			<td>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+			</td>
+			<td style="text-align: right;">
+				<strong>{{ number_format($detalle->total_ajuste, 2) }}</strong>
+			</td>
+		</tr>
+		@php
+			$total += $detalle->total_ajuste;
+		@endphp
+	@endif
+	@endforeach
+	<tr>
+		<td>
+			<strong>TOTAL A PAGAR</strong>
+		</td>
+		<td>
+			
+		</td>
+		<td style="text-align: right;">
+			<strong>
+				{{ number_format(( $liquidacion->total_liquidacion - $total), 2)	}}
+			</strong>
+		</td>
+	</tr>
+</table>
+<table class="bajo" width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td>
+			<strong>SON: {{\App\Http\Controllers\utilidades\NumerosALetras::convertir($liquidacion->total_liquidacion - $total, 'PESOS')}} M/C.</strong>
+		</td>
+		<td>
+			&nbsp;
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<br>
+			LA EMPRESA SOCIEDAD MINERA DEL NORTE LTDA., ME CANCELO OPORTUNAMENTE MIS SALARIOS CAUSADOS Y LO DECLARO A PAZ Y
+			SALVO CONMIGO POR TODOS LOS CONCEPTOS DERIVADOS DE LA RELACION DE TRABAJO QUE NOs VINCULO DURANTE EL LAPSO DE
+			TIEMPO MENCIONADO Y ACEPTO HABER RECIBIDO LA SUMA DESCRITA.
+		</td>
+		<td>
+			&nbsp;
+		</td>
+	</tr>
+</table>
+<table class="firma" cellspacing="0" border="0" width="100%" cellpadding="0">
+	
+	<tr>
+		<td style="text-align: left;" height="130px">
+			<strong>
+				_____________________________ <br>
+				<span style="font-size: 10px;">
+				{{ $liquidacion->persona->primer_nombre.' '.$liquidacion->persona->segundo_nombre.' '.$liquidacion->persona->primer_apellido.' '.$liquidacion->persona->segundo_apellido}}
+				</span>
+			</strong>
+		</td>
+		<td style="text-align: right;">
+			<strong>
+				_____________________________ <br>
+				<span style="font-size: 10px;">
+				FERNANDO BECERRA CORREDOR
+				</span>
+			</strong>
 		</td>
 	</tr>
 </table>
