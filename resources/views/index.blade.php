@@ -157,6 +157,9 @@
                                 <a href="{{ url('dashboard/configuracion/tipos') }}">Tipos de materiales</a>
                             </li>
                             <li>
+                                <a href="{{ url('dashboard/configuracion/bancos') }}">Bancos</a>
+                            </li>
+                            <li>
                                 <a href="{{ url('dashboard/configuracion/vehiculos') }}">Vehiculos</a>
                             </li>
                         </ul>
