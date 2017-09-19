@@ -59,7 +59,7 @@ class CreateOrdenesTable extends Migration
             $table->integer('proveedor_id')->unsigned();
             
 
-            $table->index(['codigo_orden']);
+            //$table->index(['codigo_orden']);
 
             $table->foreign('proveedor_id')->references('id')
                     ->on('proveedores')->onDelete('cascade')->onUpdate('cascade');

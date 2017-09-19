@@ -20,7 +20,7 @@ class CreateCargosTable extends Migration
             $table->string('descripcion_cargo', 60);
             $table->string('codigo_cargo', 7);
             $table->tinyInteger('edo_cargo')->default(1);
-            $table->index(['codigo_cargo']);
+           // $table->index(['codigo_cargo']);
         });
     }
 

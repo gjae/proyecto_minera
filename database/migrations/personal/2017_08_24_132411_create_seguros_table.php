@@ -24,7 +24,7 @@ class CreateSegurosTable extends Migration
             
             $table->tinyInteger('edo_seguro')->default(1);
 
-            $table->index(['codigo_seguro']);
+          //  $table->index(['codigo_seguro']);
         });
     }
 

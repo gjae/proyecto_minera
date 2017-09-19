@@ -26,7 +26,7 @@ class CreateVehiculoTable extends Migration
             $table->string('modelo', 193)->default('--');
             
             $table->string('marca')->nullable();
-            $table->index(['placa']);
+          //  $table->index(['placa']);
         });
     }
 

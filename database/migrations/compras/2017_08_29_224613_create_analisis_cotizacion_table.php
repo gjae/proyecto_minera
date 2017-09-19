@@ -23,7 +23,7 @@ class CreateAnalisisCotizacionTable extends Migration
             $table->integer('material_id')->unsigned();
             $table->enum('estado_analisis', ['REGISTRADO', 'ANULADO', 'APROBADO'])->default('REGISTRADO');
 
-            $table->index(['codigo']);
+           // $table->index(['codigo']);
 
             $table->foreign('proveedor_id')->references('id')
                     ->on('proveedores')->onDelete('cascade')->onUpdate('cascade');

@@ -20,7 +20,7 @@ class CreateCentroCostosTable extends Migration
             $table->string('codigo_centro', 8)->nullable();
             $table->smallInteger('edo_reg')->default(1);
 
-            $table->index(['codigo_centro']);
+          //  $table->index(['codigo_centro']);
         });
     }
 

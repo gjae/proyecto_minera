@@ -44,7 +44,7 @@ class CreateRequisicionesTable extends Migration
                     ->on('etapas_produccion')->onDelete('cascade')->onUpdate('cascade');
 
 
-            $table->index(['codigo_requisicion', 'tipo_requisicion']);
+          //  $table->index(['codigo_requisicion', 'tipo_requisicion']);
 
             $table->foreign('user_id')->references('id')
                     ->on('users')->onDelete('cascade')->onUpdate('cascade');
