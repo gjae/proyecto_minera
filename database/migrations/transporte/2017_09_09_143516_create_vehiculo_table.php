@@ -17,7 +17,7 @@ class CreateVehiculoTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('placa', 22);
-            $table->enum('tipo_vehiculo', ['CARGA', 'PARTICULAR', 'T_PERSONAL'])->default('PERSONAL');
+            $table->enum('tipo_vehiculo', ['CARGA', 'PARTICULAR', 'T_PERSONAL'])->default('T_PERSONAL');
             $table->date('fecha_adquisicion')->nullable();
             $table->float('capacidad_tanque')->default(0.0);
             $table->float('capacidad_carga')->default(0);
