@@ -19,6 +19,7 @@ class CreateUbicacionesTable extends Migration
             $table->string('nombre_ubicacion', 110);
             $table->string('direccion_ubicacion')->nullable();
             $table->char('codigo', 4)->default('0000');
+            $table->smallInteger('edo_reg')->default(1);
         });
     }
 
