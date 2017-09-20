@@ -96,11 +96,11 @@
 						</div>
 						<div class="col-sm-3 col-lg-3 col-md-3">
 							<label for="">DISTANCIA ESTIMADA (KM)</label>
-							<input type="number" class="form-control" maxlength="160" placeholder="DESTINO DEL VIAJE" style="text-align: center;" name="distancia_recorrida" id="distancia_recorrida" value="0">
+							<input type="text" class="form-control" maxlength="160" placeholder="DESTINO DEL VIAJE" style="text-align: center;" name="distancia_recorrida" id="distancia_recorrida" value="0">
 						</div>
 						<div class="col-sm-3 col-md-3 col-lg-3">
 							<label for="">COSTO / KM</label>
-							<input type="number" style="text-align: center;" placeholder="PRECIO / KM" value="0" class="form-control" name="total_km_viaje" id="total_km_viaje">
+							<input type="text" style="text-align: center;" placeholder="PRECIO / KM" value="0" class="form-control" name="total_km_viaje" id="total_km_viaje">
 						</div>
 					</div>
 
@@ -118,21 +118,21 @@
 					<div class="row">
 						<div class="col-sm-3 col-md-3 col-lg-3">
 							<label for="">VALOR DE COMBUSTIBLE</label>
-							<input type="number" placeholder="MONTO POR LTS" class="form-control" onkeyup="calcularCombustible()" required name="precio_x_lts_combustible" id="precio_x_lts_combustible">
+							<input type="text" placeholder="MONTO POR LTS" class="form-control" onkeyup="calcularCombustible()" required name="precio_x_lts_combustible" id="precio_x_lts_combustible">
 						</div>	
 						<div class="col-sm-3 col-md-3 col-lg-3">
 							<label for="">COMPUSTIBLE USADO</label>
-							<input type="number" value="0" required placeholder="LTS USADOS PARA EL VIAJE" onkeyup="calcularCombustible()" class="form-control" name="combustible_viaje" id="combustible_viaje">
+							<input type="text" value="0" required placeholder="LTS USADOS PARA EL VIAJE" onkeyup="calcularCombustible()" class="form-control" name="combustible_viaje" id="combustible_viaje">
 						</div>
 						<div class="col-sm-3 col-md-3 col-lg-3">
 							<label for="">TOTAL EN COMBUSTIBLE</label>
-							<input type="number" value="0" required readonly class="form-control" name="precio_combustible" id="precio_combustible">
+							<input type="text" value="0" required readonly class="form-control" name="precio_combustible" id="precio_combustible">
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-3 col-md-3 col-lg-3">
 							<label for="">PESO DEL VIAJE (KG)</label>
-							<input type="number" value="0" onkeyup="calcularPeso()" required class="form-control" name="kilo_viajes" id="kilo_viajes">
+							<input type="text" value="0" onkeyup="calcularPeso()" required class="form-control" name="kilo_viajes" id="kilo_viajes">
 						</div>
 						<div class="col-sm-3 col-md-3 col-lg-3">
 							<label for="">VALOR / KG</label>
@@ -140,17 +140,17 @@
 						</div>
 						<div class="col-sm-3 col-md-3 col-lg-3">
 							<label for="">TOTAL EN KG DEL VIAJE</label>
-							<input type="number" readonly value="0" required class="form-control" name="total_peso_viaje" id="total_peso_viaje">
+							<input type="text" readonly value="0" required class="form-control" name="total_peso_viaje" id="total_peso_viaje">
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-3 col-md-3 col-lg-3">
 							<label for="">TOTAL DE KILOS DE MATERIAL</label>
-							<input type="number" value="0" class="form-control" required="" name="total_kilo_material" onkeyup="calcularMaterial()" id="total_kilo_material">
+							<input type="text" value="0" class="form-control" required="" name="total_kilo_material" onkeyup="calcularMaterial()" id="total_kilo_material">
 						</div>
 						<div class="col-sm-4 col-md-4 col-lg-4">
 							<label for="">COSTO DEL FLETE / KG MATERIAL</label>
-							<input type="number" onkeyup="calcularMaterial()" required value="0" class="form-control" name="total_kilo_viaje_material" id="total_kilo_viaje_material">
+							<input type="text" onkeyup="calcularMaterial()" required value="0" class="form-control" name="total_kilo_viaje_material" id="total_kilo_viaje_material">
 						</div>
 						<div class="col-sm-3 col-md-3 col-lg-3">
 							<label for="">TOTAL FLETE / MATERIAL</label>
@@ -216,7 +216,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
            	<div class="modal-header">
-                <h4 class="modal-title" id="largeModalLabel">Gestion de personal</h4>
+                <h4 class="modal-title" id="largeModalLabel">Gestion de transporte</h4>
             </div>
             <div class="modal-body">
              	<form action="#" id="form-modal">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es-150">
 
 <head>
     <meta charset="UTF-8">
@@ -151,7 +151,7 @@
                                 <a href="{{ url('dashboard/configuracion/etapas') }}">Etapas de produccion</a>
                             </li>
                             <li>
-                                <a href="{{ url('dashboard/configuracion/diciplinas') }}">Diciplinas</a>
+                                <a href="{{ url('dashboard/configuracion/diciplinas') }}">Disciplinas</a>
                             </li>
                             <li>
                                 <a href="{{ url('dashboard/configuracion/tipos') }}">Tipos de materiales</a>
