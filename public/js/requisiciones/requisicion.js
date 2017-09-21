@@ -89,6 +89,10 @@ function guardar(event, datos){
 		alert("AUN NO SE HA CALCULADO LA REQUISICION")
 }
 
+function imprimir(event, click){
+	var url = location.host +'/dashboard/requisicion/requisicion/printRequisicion?codigo='+resp.codigo;
+}
+
 function calcular(event, button){
 
 	if( filas > 0 ){

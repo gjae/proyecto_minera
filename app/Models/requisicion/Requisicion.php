@@ -42,5 +42,7 @@ class Requisicion extends Model
     public function solicitudes_cotizaciones(){
         return $this->hasMany('App\Models\compras\SolicitudCotizacion', 'requisicion_id');
     }
-
+    public function getTipoRequisicionAttribute($old){
+        return "COMPRAS";
+    }
 }

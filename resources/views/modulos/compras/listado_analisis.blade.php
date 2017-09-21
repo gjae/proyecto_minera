@@ -10,7 +10,7 @@
 @section('contenedor')
 
 <input type="hidden" id="modulo" value="compras">
-<input type="hidden" id="programa" value="ordenes">
+<input type="hidden" id="programa" value="analisis">
 <div class="row clearfix">
 	<input type="hidden" id="token" value="{{ csrf_token() }}">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -37,21 +37,21 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach($ordenes as $orden)
+							@foreach($analisis as $orden)
 								<tr>
-									<td>{{ $orden->codigo_orden }}</td>
+									<td>{{ $orden->codigo }}</td>
 									<td>
-										{{ substr($orden->tipo_orden, 0, 2).'-'.$orden->codigo_orden }}
+										{{ substr($orden->cotizacion->solicitud->requisicion->tipo_requisicion, 0, 2).'-'.$orden->codigo }}
 									</td>
 									<td>
-										{{ $orden->tipo_orden }}
+										{{ $orden->cotizacion->solicitud->requisicion->tipo_requisicion }}
 									</td>
 									<td>
-										{{ $orden->estado_orden }}
+										{{ $orden->estado_analisis }}
 									</td>
 									<td>
 										<a
-											orden="{{ $orden->id }}"
+											orden="{{ $orden->codigo }}"
 										 	class="btn btn-success opciones"
 										 	role="imprimir"
 										 >

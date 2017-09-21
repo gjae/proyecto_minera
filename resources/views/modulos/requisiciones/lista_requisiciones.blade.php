@@ -49,7 +49,9 @@
 												<a class="btn btn-danger">
 													ANULAR
 												</a>
-												<a  class="btn btn-primary">
+												<a  class="btn btn-primary" onclick="imprimir()"
+													codigo=""
+												>
 													IMPRIMIR
 												</a>
 											</td>
