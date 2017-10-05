@@ -20,7 +20,7 @@ class CreateDiciplinasTable extends Migration
             $table->string('codigo_diciplina', 8)->nullable();
             $table->smallInteger('edo_reg')->default(1);
 
-            $table->index(['codigo_diciplina']);
+           // $table->index(['codigo_diciplina']);
         });
     }
 

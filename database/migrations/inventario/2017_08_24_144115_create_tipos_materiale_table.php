@@ -21,7 +21,7 @@ class CreateTiposMaterialeTable extends Migration
             $table->string('descripcion_tipo', 150);
             $table->smallInteger('edo_reg')->default(1);
 
-            $table->index(['codigo_tipo']);
+            //$table->index(['codigo_tipo']);
         });
     }
 

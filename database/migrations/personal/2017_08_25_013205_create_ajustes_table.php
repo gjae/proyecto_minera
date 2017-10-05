@@ -34,7 +34,7 @@ class CreateAjustesTable extends Migration
             $table->enum('aportador', ['PERSONA', 'PATRON'])
                     ->default('PERSONA');
 
-            $table->index(['codigo_ajuste', 'ajuste_permanente', 'ajuste_global', 'aportador']);
+         //   $table->index(['codigo_ajuste', 'ajuste_permanente', 'ajuste_global', 'aportador']);
         });
     }
 

@@ -63,7 +63,7 @@ class CreateTransporteTable extends Migration
 
             $table->enum('estado_registro', ['ACTIVA', 'ANULADA', 'COMPLETADA'])->default('ACTIVA');
 
-            $table->index(['nro_factura', 'remision_cli', 'nit_cliente']);
+          //  $table->index(['nro_factura', 'remision_cli', 'nit_cliente']);
 
             $table->foreign('persona_id')->references('id')
                     ->on('personas')->onDelete('cascade')->onUpdate('cascade');

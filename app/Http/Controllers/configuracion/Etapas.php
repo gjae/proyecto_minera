@@ -30,6 +30,10 @@ class Etapas extends Controller
 
     }
 
+    /**
+     * CARGANDO EL ARREGLO DE ESTE ARCHIVO
+     
+     */
     public function guardar($req){
 
     	if( $req->method('post') ){

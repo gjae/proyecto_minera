@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es-150">
 
 <head>
     <meta charset="UTF-8">
@@ -151,7 +151,7 @@
                                 <a href="{{ url('dashboard/configuracion/etapas') }}">Etapas de produccion</a>
                             </li>
                             <li>
-                                <a href="{{ url('dashboard/configuracion/diciplinas') }}">Diciplinas</a>
+                                <a href="{{ url('dashboard/configuracion/diciplinas') }}">Disciplinas</a>
                             </li>
                             <li>
                                 <a href="{{ url('dashboard/configuracion/tipos') }}">Tipos de materiales</a>
@@ -200,7 +200,7 @@
                     @if(Auth::user()->tipo_usuario == 'ADMIN' || Auth::user()->tipo_usuario == 'TRANSPORTE')
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">assignment_ind</i>
+                            <i class="material-icons">directions_car</i>
                             <span>Transporte y carga</span>
                         </a>
                         <ul class="ml-menu">

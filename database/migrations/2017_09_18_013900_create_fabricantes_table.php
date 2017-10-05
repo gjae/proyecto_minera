@@ -18,7 +18,7 @@ class CreateFabricantesTable extends Migration
             $table->timestamps();
             $table->string('nombre_fabricante');
             $table->integer('pais_id')->unsigned();
-            $table->string('telefono',22)->unsigned();
+            $table->string('telefono',22);
             $table->string('codigo_fabricante', 5)->nullable();
             $table->smallInteger('edo_reg')->default(1);
         });

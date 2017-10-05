@@ -20,7 +20,7 @@ class CreateEtapaProduccionTable extends Migration
             $table->string('codigo_etapa', 5)->nullable();
             $table->smallInteger('edo_reg')->default(1);
 
-            $table->index(['codigo_etapa']);
+          //  $table->index(['codigo_etapa']);
         });
     }
 

@@ -23,7 +23,7 @@ class CreateSolicitudCotizacionTable extends Migration
             $table->string('observacion_anulacion')->nullable();
             $table->string('codigo', 8);
 
-            $table->index(['codigo']);
+           // $table->index(['codigo']);
             $table->foreign('requisicion_id')->references('id')
                     ->on('requisiciones')->onDelete('cascade')->onUpdate('cascade');
 

@@ -39,7 +39,7 @@ class CreateProveedoresTable extends Migration
             $table->integer('banco_id')->unsigned();  
 
             $table->string('telefono_representante', 33)->nullable();
-            $table->index(['cedula', 'nro_identificacion']);
+            //$table->index(['cedula', 'nro_identificacion']);
 
             $table->string('email_representante', 33)->nullable();
 

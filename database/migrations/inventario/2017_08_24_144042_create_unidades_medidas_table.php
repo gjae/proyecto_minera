@@ -21,7 +21,7 @@ class CreateUnidadesMedidasTable extends Migration
 
             $table->smallInteger('edo_reg')->default(1);
 
-            $table->index(['codigo_unidad']);
+          //  $table->index(['codigo_unidad']);
         });
     }
 

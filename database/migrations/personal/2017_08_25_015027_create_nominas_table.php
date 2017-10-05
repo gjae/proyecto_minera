@@ -28,7 +28,7 @@ class CreateNominasTable extends Migration
 
             $table->string('nombre_nomina', 130);
 
-            $table->index(['estado_nomina']);
+          //  $table->index(['estado_nomina']);
         });
     }
 

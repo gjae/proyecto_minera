@@ -21,7 +21,7 @@ class CreateMinasTable extends Migration
 
             $table->smallInteger('edo_reg')->default(1);
 
-            $table->index(['codigo_mina']);
+            //$table->index(['codigo_mina']);
         });
         \DB::table('minas')->insert([
                 'nombre_mina' => 'DEFECTO',

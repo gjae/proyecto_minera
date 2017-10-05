@@ -32,8 +32,11 @@ $(document).ready(function(){
 
 	$(".opciones").on('click' ,function(){
 		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
-		url += '?orden='+$(this).attr('orden')
-		alert(url)
+		if( !($("#programa").val() == 'analisis') )
+			url += '?orden='+$(this).attr('orden')
+		else
+			url += '?codigo='+$(this).attr('orden')
+		//alert(url)
 		window.open(url, 'ORDEN', 'width=850,height=800');
 	})
 })

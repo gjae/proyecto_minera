@@ -19,7 +19,7 @@ class CreateServiciosTable extends Migration
             $table->string('nombre_servicio');
             $table->string('codigo_servicio', 4);
 
-            $table->index(['codigo_servicio']);
+            //$table->index(['codigo_servicio']);
         });
     }
 

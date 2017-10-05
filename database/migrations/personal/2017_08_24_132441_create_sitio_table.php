@@ -21,7 +21,7 @@ class CreateSitioTable extends Migration
             $table->string('direccion_sitio')->nullable();
             $table->integer('ciudad_id')->unsigned();
 
-            $table->index(['codigo_sitio']);
+          //  $table->index(['codigo_sitio']);
             $table->tinyInteger('edo_sitio')->default(1);
 
             $table->foreign('ciudad_id')->references('id')

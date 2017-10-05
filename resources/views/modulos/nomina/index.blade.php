@@ -80,7 +80,7 @@
 											 	class="btn btn-warning"
 												
 											 >
-												<strong>PROCESO DE RETIRO</strong>
+												<strong>LIQUIDACION</strong>
 											 </a>
 											@else
 											<a
