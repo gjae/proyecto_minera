@@ -61,4 +61,8 @@ class Orden extends Model
     	return $this->belongsTo('App\Models\compras\Proveedor');
     }
 
+    public function valuaciones(){
+        return $this->hasMany('App\Models\compras\Valuacion');
+    }
+
 }

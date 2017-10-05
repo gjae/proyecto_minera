@@ -10,7 +10,7 @@
 @section('contenedor')
 
 <input type="hidden" id="modulo" value="compras">
-<input type="hidden" id="programa" value="ordenes">
+<input type="hidden" id="programa" value="valuaciones">
 <div class="row clearfix">
 	<input type="hidden" id="token" value="{{ csrf_token() }}">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -19,7 +19,11 @@
 				<section id="botonera">
 					
 					<div class="row">
-
+						<div class="col-sm-12">
+							<a href="{{ url('dashboard/compras/Valuaciones/crear?orden='.$orden_id) }}" class="btn btn-success">
+								<strong>Crear</strong>
+							</a>
+						</div>
 					</div>
 
 				</section>
@@ -29,38 +33,21 @@
 					<table class="table table-bordered table-striped table-hover" id="dataTables-example">
 						<thead>
 							<tr>
-								<th>CODIGO DE ORDEN</th>
-								<th>CONSECUTIVO</th>
-								<th>TIPO</th>
-								<th>ESTADO</th>
-								<th>ACCIONES</th>
+								<th>Codigo</th>
+								<th>Concepto</th>
+								<th>Fecha de inicio</th>
+								<th>Fecha tope</th>
+								<th>Monto</th>
 							</tr>
 						</thead>
 						<tbody>
-							@foreach($ordenes as $orden)
+							@foreach($valuaciones as $key => $valuacion)
 								<tr>
-									<td>{{ $orden->codigo_orden }}</td>
-									<td>
-										{{ substr($orden->tipo_orden, 0, 2).'-'.$orden->codigo_orden }}
-									</td>
-									<td>
-										{{ $orden->tipo_orden }}
-									</td>
-									<td>
-										{{ $orden->estado_orden }}
-									</td>
-									<td>
-										<a
-											orden="{{ $orden->id }}"
-										 	class="btn btn-success opciones"
-										 	role="imprimir"
-										 >
-										 		<strong>IMPRIMIR</strong>
-										 </a>
-										<a href="{{ url('dashboard/compras/Valuaciones?orden='.$orden->id) }}" class="btn btn-primary">
-											<strong>REGISTRO DE VALUACION</strong>
-										</a>
-									</td>
+									<td>{{ $valuacion->codigo_valuacion }}</td>
+									<td>{{ $valuacion->concepto_valuacion }}</td>
+									<td>{{ $valuacion->fecha_inicio->format('d-m-Y') }}</td>
+									<td>{{ $valuacion->fecha_tope->format('d-m-Y') }}</td>
+									<td>{{ number_format($valuacion->monto_valuacion, 2) }}</td>
 								</tr>
 							@endforeach
 						</tbody>
@@ -77,7 +64,7 @@
 	    <div class="modal-dialog modal-lg" role="document">
 	        <div class="modal-content">
 	           	<div class="modal-header">
-	                <h4 class="modal-title" id="largeModalLabel">Gestion de ordenes de compra</h4>
+	                <h4 class="modal-title" id="largeModalLabel">Gestion de valuaciones de cotizacion</h4>
 	            </div>
 	            <div class="modal-body">
 	             	<form action="#" id="form-modal">

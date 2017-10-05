@@ -18,7 +18,7 @@ class CreateOrdenesTable extends Migration
             $table->timestamps();
             $table->enum('tipo_orden', ['COMPRA', 'SERVICIOS'])->default('COMPRA');
             $table->enum('estado_orden', ['EMITIDA', 'APROBADA', 'ANULADA', 'ELIMINADA'])->default('EMITIDA');
-            $table->string('codigo_analisis', 8);
+            $table->string('codigo_analisis', 10);
             $table->string('concepto')->nullable();
             $table->string('codigo_orden', 10);
             $table->string('proyecto', 140)->default('SOCIEDAD MINERA DEL NORTE');
@@ -48,7 +48,7 @@ class CreateOrdenesTable extends Migration
             $table->string('contte_rep_telf', 90)->nullable();
 
             $table->string('contta_nit_cc', 15);
-            $table->string('contta_dir', 15);
+            $table->string('contta_dir', 250);
             $table->string('contta_resp', 170)->nullable();
             $table->string('contta_resp_legal', 170)->nullable();
             $table->string('contta_resp_cc', 190)->nullable();

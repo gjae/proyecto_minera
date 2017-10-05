@@ -56,16 +56,19 @@ function calcularSubTotal(event, input){
 	var subtotal =document.getElementById('subtotal')
 	var anticipo = document.getElementById('monto_anticipo')
 	var retefuente = document.getElementById('retefuente')
-	subtotal.value = ( parseFloat(tot_sin_desc.value) - parseFloat(descuento.value) )
+	var total = document.getElementById('total')
 
 	if( isNaN(subtotal.value) )
 		subtotal.value = redondear(tot_sin_desc.value)
 	if( retefuente.value == '' &&  event.keyCode != 8 )
 		retefuente.value = 0
-
-	total.value = redondear( ((parseFloat(subtotal.value)+ parseFloat(iva.value)) - anticipo.value) - parseFloat(retefuente.value) )
-
+	subtotal.value = parseFloat(tot_sin_desc.value) - ( (parseFloat(tot_sin_desc.value) * parseFloat(anticipo.value) ) /100 );	
+	subtotal.value = parseFloat(subtotal.value) - parseFloat(descuento.value)
+	var tot = 0;
+	tot = redondear( ((parseFloat(subtotal.value)+ parseFloat(iva.value)) ) - parseFloat(retefuente.value) )
+	total.value = tot;
 }
+
 
 function redondear(num){
 	var original = parseFloat(num)
@@ -79,4 +82,17 @@ function redondear(num){
 	}
 
 	return result;
+}
+
+function calcular_valuacion(e, input){
+	var por_comp = document.getElementById('por_comprometer');
+	//alert( input.value )
+	if( parseFloat(por_comp.value) >= parseFloat(input.value) ){
+		por_comp.value = parseFloat(por_comp.value) - parseFloat(input.value);
+		if( isNaN(por_comp.value) || input.value == 0 ){
+			por_comp.value = document.getElementById('valor_original').value
+		}
+	}else{
+		alert("EL MONTO A COMPROMETER ES MAYOR AL MONTO POR COMPROMETER");
+	}
 }
