@@ -16,7 +16,7 @@ class CreateVariacionesTable extends Migration
         Schema::create('variaciones', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->char('consecutivo', 4)->nullable();
+            $table->string('consecutivo', 7)->default('0000000');
             $table->string('concepto', 150)->nullable();
             $table->float('monto_variacion')->default(0);
             $table->integer('cantidad_dias_variacion')->default(0);

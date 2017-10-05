@@ -16,10 +16,12 @@ class CreateValuacionesTable extends Migration
         Schema::create('valuaciones', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->char('codigo_valuacion', 4)->default('0000');
+            $table->string('codigo_valuacion', 7)->default('0000000');
             $table->string('concepto_valuacion')->nullable();
             $table->date('fecha_inicio')->nullable();
             $table->date('fecha_tope')->nullable();
+            $table->integer('orden_id')->unsigned();
+
 
             /**
              * DESCRIPCION DE LOS ESTATUS:
@@ -29,7 +31,10 @@ class CreateValuacionesTable extends Migration
              */
             $table->enum('estatus', ['PE', 'PA', 'AN'])->default('PE');
 
-            $table->float('monto_valuacion')
+            $table->float('monto_valuacion')->default(0);
+            
+            $table->foreign('orden_id')->references('id')
+                    ->on('ordenes')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
