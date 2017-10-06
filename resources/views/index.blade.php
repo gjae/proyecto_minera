@@ -119,7 +119,7 @@
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="#">Usuarios del sistema</a>
+                                <a href="{{ url('dashboard/usuarios/usuarios') }}">Usuarios del sistema</a>
                             </li>
                         </ul>
                     </li>
