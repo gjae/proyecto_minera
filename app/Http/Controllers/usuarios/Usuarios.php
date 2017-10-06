@@ -96,7 +96,7 @@ class Usuarios extends Controller
 
 
    public function eliminar($req){
-   		if(Auth::check() && Auth::user()->tipo_usuario == 'ADMINISTRADOR' ){
+   		if(Auth::check() && Auth::user()->tipo_usuario == 'ADMINc' ){
    			$user = User::find($req->id);
    			$user->edo_reg = 0;
    			if( $user->save() ){

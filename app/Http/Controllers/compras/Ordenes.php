@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\compras\AnalisisCotizacion as AC;
 use App\Models\compras\Orden;
-
+use App\Models\compras\Archivo;
+use Carbon\Carbon;
 use DB;
 use PDF;
 class Ordenes extends Controller
@@ -20,6 +21,58 @@ class Ordenes extends Controller
     public function ordenes($req){
         return view('modulos.compras.listado_ordenes', [
                 'ordenes' => Orden::all(),
+            ]);
+    }
+
+    public function adjuntar($req){
+
+        return view('modulos.compras.formularios.adjuntar_archivos',[
+                'orden' => Orden::find($req->orden_id)
+            ]);
+    }
+
+    public function guardar_archivos($req){
+        try {
+            
+            if($req->hasFile('archivos')){
+                $nombre = '';
+                foreach($req->file('archivos') as $key => $archivo)
+                {
+                    $nombre = md5(Carbon::now()->format('Y-m-d h:i:s A'));
+                    $data = [
+                        'extension' => $archivo->getClientOriginalExtension(),
+                        'nombre_original' => $archivo->getClientOriginalName(),
+                        'nombre_archivo' => $nombre,
+                        'ruta' => 'uploads/',
+                        'tamano' => $archivo->getClientSize(),
+                        'orden_id' => $req->orden_id,
+                        'tipo_archivo' => $archivo->getClientMimeType(),
+                        'comentario' =>(  is_null($req->comentarios[$key]) )? '' : $req->comentarios[$key],
+                    ];
+                    $guardar_archivo = new Archivo($data);
+
+                    if($guardar_archivo->save()){
+                        if(!( $archivo->move('uploads', $guardar_archivo->nombre_archivo.'.'.$guardar_archivo->extension) )){
+                            throw new \Exception("ERROR AL PROCESAR EL ARCHIVO", 1);
+                                        
+                        }
+                    }
+                }
+                return redirect()
+                    ->to( url('dashboard/compras/ordenes/ordenes') )
+                    ->with('correcto','LOS ARCHIVOS HAN SIDO CARGADOS CORRECTAMENTE');
+            }            
+        } catch (\Exception $e) {
+            return redirect()
+                    ->to( url('dashboard/compras/ordenes/ordenes') )
+                    ->with('error', 'ERROR AL PROCESAR UNO DE LOS ARCHIVOS: '.$e->getMessage());
+        }
+    }
+
+    public function archivos($req) {
+        $orden = Orden::find($req->orden_id);
+        return view('modulos.compras.archivos', [
+                'orden' => $orden
             ]);
     }
 
@@ -43,6 +96,43 @@ class Ordenes extends Controller
         }
     }
 
+    public function imprimir2($req){
+        if( $req->has('orden') && !empty($req->orden)){
+            $orden = Orden::find($req->orden);
+            $ac = AC::where('codigo', $orden->codigo_analisis)->first();
+
+            $requisicion = $ac->cotizacion->solicitud->requisicion;
+            set_time_limit(900);
+           
+            $vista = \View::make('modulos.compras.reportes.orden_compra2',[
+                    'orden' => $orden,
+                    'requisicion' => $requisicion,
+                    'analisis' => $ac,
+                    'solicitud' => $ac->cotizacion->solicitud
+                ])->render();
+            $pdf = PDF::loadHtml($vista);
+            $pdf->setPaper('A4', 'landscape');
+            return $pdf->stream('reporte_orden', ['attachment' => 0]);
+        }
+    }
+
+
+    public function descargar($req){
+        $post = Orden::find($req->orden);
+      //  return dd($post);
+        if($post){
+            $archivo = $post->archivos()->where('id', $req->archivo_id)->first();
+            $headers = [
+                'Content-Type' => $archivo->tipo_archivo,
+            ];
+
+            $ruta = public_path('uploads/'.$archivo->nombre_archivo.'.'.$archivo->extension);
+            return response()->download($ruta, $archivo->nombre_original, $headers);
+        }
+        return redirect()
+                ->to( url('dashboard/compras/ordenes/ordenes') )
+                ->with('error','EL ARCHIVO QUE INTENTA DESCARGAR NO EXISTE, O EL POST HA SIDO RETIRADO');
+    }
     public function buscarAnalisis($req){
     	$ac = AC::select(['codigo', 'observacion', 'proveedor_id'])
     				->distinct()->get();

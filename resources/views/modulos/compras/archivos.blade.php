@@ -6,108 +6,58 @@
 
 @endsection
 
-@section('titulo', 'Modulo de compras - listado')
+@section('titulo', 'Ultimas publicaciones hechas')
 @section('contenedor')
 
-<input type="hidden" id="modulo" value="compras">
-<input type="hidden" id="programa" value="ordenes">
-@if(Session::has('correcto'))
+<div class="row">
+
 <div class="col-sm-12 col-lg-12 col-md-12">
-	<div class="alert alert-success">
-		{{ Session::get('correcto') }}
-	</div>
+
+@if(Session::has('error'))
+
+<div class="alert alert-danger">
+	<strong>{{ Session::get('error') }}</strong>
 </div>
-@elseif(Session::has('error'))
-<div class="col-sm-12 col-lg-12 col-md-12">
-	<div class="alert alert-danger">
-		{{ Session::get('error') }}
-	</div>
+
+@elseif( Session::has('correcto') )
+<div class="alert alert-success">
+	<strong>{{ Session::get('correcto') }}</strong>
 </div>
-@endif
+
+@endif	
+
+</div>
+
+</div>
 <div class="row clearfix">
 	<input type="hidden" id="token" value="{{ csrf_token() }}">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="card">
-			<div class="container-fluid">
-				<section id="botonera">
+			<div class="body">
+				<div class="container-fluid">
 					
 					<div class="row">
-
+						<div class="col-sm-12 col-lg-9 col-md-9">
+							<h3 class="page-header">Archivos disponibles</h3>
+						</div>
 					</div>
+					<div class="row">
+						@foreach($orden->archivos as $key => $archivo)
+							<div class="col-sm-12 col-lg-5 col-md-5">
 
-				</section>
-			</div>
-			<div class="body">
-				<div class="table-responsive">				
-					<table class="table table-bordered table-striped table-hover" id="dataTables-example">
-						<thead>
-							<tr>
-								<th>CODIGO DE ORDEN</th>
-								<th>CONSECUTIVO</th>
-								<th>TIPO</th>
-								<th>ESTADO</th>
-								<th>ACCIONES</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach($ordenes as $orden)
-								<tr>
-									<td>{{ $orden->codigo_orden }}</td>
-									<td>
-										{{ substr($orden->tipo_orden, 0, 2).'-'.$orden->codigo_orden }}
-									</td>
-									<td>
-										{{ $orden->tipo_orden }}
-									</td>
-									<td>
-										{{ $orden->estado_orden }}
-									</td>
-									<td>
-										<a
-											orden="{{ $orden->id }}"
-										 	class="btn btn-success opciones"
-										 	role="imprimir"
-										 >
-										 		<strong>IMPRIMIR</strong>
-										 </a>
-
-										<a
-											orden="{{ $orden->id }}"
-										 	class="btn btn-success opciones"
-										 	role="imprimir2"
-										 >
-										 		<strong>IMPRIMIR PART. 2</strong>
-										 </a>
-										<a href="{{ url('dashboard/compras/Valuaciones?orden='.$orden->id) }}" class="btn btn-primary">
-											<strong>REGISTRO DE VALUACION</strong>
-										</a>
-										@if( $orden->tipo_orden == 'SERVICIOS' )
-										<a href="{{ url('dashboard/compras/Variaciones?orden='.$orden->id) }}" class="btn btn-warning">
-											<strong>VARIACIONES</strong>
-										</a>
-										@endif
-
-										<a
-											href="{{ url('dashboard/compras/Ordenes/adjuntar?orden_id='.$orden->id) }}"
-										 	class="btn btn-success"
-										 >
-										 		<strong>ADJUNTAR ARCHIVOS</strong>
-										 </a>
-										 @if( !empty( $orden->archivos[0] ) )
-												
-											<a
-												href="{{ url('dashboard/compras/Ordenes/archivos?orden_id='.$orden->id) }}"
-											 	class="btn btn-success"
-											 >
-											 		<strong>VER ARCHIVOS</strong>
-											 </a>
-										@endif
-									</td>
-
-								</tr>
-							@endforeach
-						</tbody>
-					</table>
+								<strong class="text-success">
+									Nombre original del archivo: {{ $archivo->nombre_original }}
+								</strong>
+								<a href="{{ url('dashboard/compras/ordenes/descargar?nombre_archivo='.$archivo->nombre_archivo.'&mime='.$archivo->tipo_archivo.'&orden='.$orden->id.'&archivo_id='.$archivo->id) }}" target="_blank" class="btn btn-success">
+									<i class="material-icons">cloud_download</i>
+								</a>
+								<p class="text-success">
+									{{ $archivo->comentario }}
+								</p>
+								{{-- <iframe src="{{ app('config')->get('app')['url'].'/uploads/'.$archivo->nombre_archivo.'.'.$archivo->extension }}" style="width:500px; height:375px;" frameborder="0"></iframe> --}}
+							</div>
+						@endforeach
+					</div>
 				</div>
 			</div>
 		</div>
@@ -120,7 +70,7 @@
 	    <div class="modal-dialog modal-lg" role="document">
 	        <div class="modal-content">
 	           	<div class="modal-header">
-	                <h4 class="modal-title" id="largeModalLabel">Gestion de ordenes de compra</h4>
+	                <h4 class="modal-title" id="largeModalLabel">Gestion de inventario</h4>
 	            </div>
 	            <div class="modal-body">
 	             	<form action="#" id="form-modal">
@@ -154,7 +104,7 @@
 <script src="{{ asset('plugins/jquery-datatable/extensions/export/vfs_fonts.js') }}"></script>
 <script src="{{ asset('plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}"></script>
 <script src="{{ asset('plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}"></script>
-<script src="{{ asset('js/compras/ordenes.js') }}"></script>
+<script src="{{ asset('js/inventario/inventario.js') }}"></script>
     <!-- Demo Js -->
 <script src="{{ asset('js/demo.js') }}"></script>
 <script>
