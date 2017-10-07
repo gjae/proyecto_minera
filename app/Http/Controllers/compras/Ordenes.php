@@ -116,6 +116,23 @@ class Ordenes extends Controller
         }
     }
 
+    public function formato_almacen($req){
+        $headers = [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ];
+
+        $ruta = public_path('uploads/FORMATO_ALMACEN.xlsx');
+        return response()->download($ruta, 'FORMATO_ALMACEN.xlsx', $headers);
+    }
+
+    public function imprimir_ley($req){
+        $vista = \View::make('modulos.compras.reportes.carta_orden', ['tipo' => $req->tipo])->render();
+        ini_set('memory_limit', '512M');
+        
+        $pdf = PDF::loadHtml($vista);
+       // $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream('reporte_orden', ['attachment' => 0]);
+    }
 
     public function descargar($req){
         $post = Orden::find($req->orden);

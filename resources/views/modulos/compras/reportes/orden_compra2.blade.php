@@ -17,7 +17,7 @@
 	td.td-title{ border-bottom: 1px solid black; }
 	td.footer-table{ border-top: 1px solid black;  }
 	td.box{ border-right: 1px solid #000; border-bottom: 1px solid #000;  }
-	.page_break { page-break-inside: avoid; }
+	.page_break { page-break-before: always; }
 
 	td.totales{  border-left: 1px solid #000; }
 </style>
@@ -159,6 +159,50 @@
 		</td>
 		<td>
 			<strong>FIN: {{ $orden->fecha_fin->format('d-m-Y') }}</strong>
+		</td>
+	</tr>
+</table>
+
+<strong>7. LUGAR DE TRABAJO</strong>
+<table border="1" width="100%" cellspacing="0" cellpadding="0">
+	<tr>
+		<td height="27px">
+			&nbsp;
+		</td>
+	</tr>
+</table>
+<strong>8. ANTICIPO</strong>
+<table border="1" width="37%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td style="text-align: center;">
+			<strong>{{ $orden->monto_anticipo }}</strong>
+		</td>
+	</tr>
+</table>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+	<tr>
+		<td width="32%">
+			<strong>9. LUGAR DE SERVICIO</strong>
+		</td>
+		<td width="68%">
+			<table border="1" width="100%" class="body" cellspacing="0" cellpadding="0">
+				<tr>
+					<td height="20px" width="20%">
+						<strong>SERVICIO: </strong>
+					</td>
+					<td width="80%">
+						&nbsp;
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>RESPONSABLE: </strong>
+					</td>
+					<td style="text-align: center;">
+						<strong>{{ $orden->contta_resp }}</strong>
+					</td>
+				</tr>
+			</table>
 		</td>
 	</tr>
 </table>

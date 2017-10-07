@@ -48,6 +48,9 @@
 							<a  formulario="insertarUnidadMedida" role="controlBodega" class="btn btn-success reportes">
 								REPORTE - CONTROL DE BODEGA
 							</a>
+							<a class="btn btn-success" onclick="formato_almacen()">
+								DESCARGAR FORMATO DE ALMACEN
+							</a>
 						</div>
 
 					</div>
@@ -169,5 +172,10 @@
 $('#dataTables-example').DataTable({
     responsive: true
 });
+
+function formato_almacen(){
+	var url = location.protocol+'//'+location.host+'/dashboard/compras/ordenes/formato_almacen';
+	window.open(url, 'formato', 'width=800,height=900')
+}
 </script>
 @endsection

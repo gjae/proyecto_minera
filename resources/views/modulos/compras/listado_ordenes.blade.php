@@ -32,7 +32,12 @@
 				<section id="botonera">
 					
 					<div class="row">
-
+						<br>
+						<div class="col-sm-12 col-md-5 col-lg-5">
+							<button class="btn btn-success" onclick="imprimir_ley()">
+								IMPRIMIR CARTA DE LEY
+							</button>
+						</div>
 					</div>
 
 				</section>
@@ -101,6 +106,9 @@
 											 >
 											 		<strong>VER ARCHIVOS</strong>
 											 </a>
+											<button tipo="{{ $orden->tipo_orden }}" class="btn btn-success" onclick="imprimir_ley(event, this)">
+												IMPRIMIR CARTA DE LEY
+											</button>
 										@endif
 									</td>
 
@@ -161,5 +169,11 @@
 $('#dataTables-example').DataTable({
     responsive: true
 });
+
+function imprimir_ley(e, boton){
+	var url = location.protocol+'//'+location.host+'/dashboard/compras/ordenes/imprimir_ley?tipo='+boton.getAttribute('tipo')
+
+	window.open(url, 'CARTA DE LEY', 'width=800,height=900')
+}
 </script>
 @endsection
