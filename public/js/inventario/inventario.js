@@ -1,4 +1,29 @@
 $(document).ready(function(){
+	$(".actions").on('click', function(){
+			var btn = $(this)
+			var url = location.href + '/formularios?formulario='+btn.attr('formulario')+'&id='+$(this).attr('data-id')
+			var modal = $("#modal-inventario")
+
+			if( $(this).attr('role') == 'reportes'){
+				if(!$("#footer-datos").hasClass('hidden')){
+					$("#footer-datos").addClass('hidden')
+					$("#footer-reportes").removeClass('hidden')
+				}
+			}
+			else{
+				if( $("#footer-datos").hasClass('hidden')){
+					
+					$("#footer-datos").removeClass('hidden')
+					$("#footer-reportes").addClass('hidden')
+				}
+			}
+			modal.modal({show: true})
+			$.get(url, {}, function(resp){
+				if( !resp.error){
+					$("#form-modal").html(resp.formulario)
+				}
+			})
+		});
 	$(".formularios").on('click', function(){
 		var url = location.protocol+'//'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/formulario?form='+$(this).attr('formulario')
 		
