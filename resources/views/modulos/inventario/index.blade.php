@@ -177,5 +177,6 @@ function formato_almacen(){
 	var url = location.protocol+'//'+location.host+'/dashboard/compras/ordenes/formato_almacen';
 	window.open(url, 'formato', 'width=800,height=900')
 }
+
 </script>
 @endsection

@@ -132,6 +132,17 @@ class CreateFichasTable extends Migration
                     'SI',
                     'NO'
                 ])->default('SI');
+
+            $table->enum('tipo_depreciacion', [
+                    'A',
+                    'M',
+                    'S',
+                    'D'
+                ])->default('M');
+
+            $table->float('tiempo_depreciacion')->default(0);
+            $table->float('monto_depreciacion')->default(0);
+            $table->float('total_depreciacion')->default(0);
             $table->foreign('material_id')->references('id')
                     ->on('materiales')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('ubicacion_id')->references('id')

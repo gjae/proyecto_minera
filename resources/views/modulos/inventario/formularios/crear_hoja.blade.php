@@ -136,7 +136,7 @@
 							</div>
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<label for="">VALOR</label>
-								<input type="number" class="form-control" name="valor" id="valor">
+								<input type="text" onclick="calcularDepreciacion(event, this)" value="0" class="form-control" name="valor" id="valor">
 							</div>
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<label for="">GARANTIA</label>
@@ -314,10 +314,6 @@
 								<input maxlength="4" type="number" class="form-control" name="peso" value="0" required="" id="peso">
 							</div>
 							<div class="col-sm-2">
-								<label for="">VIDA UTIL (MESES)</label>
-								<input maxlength="4" type="number" class="form-control" name="vida_util" value="0" required="" id="vida_util">
-							</div>
-							<div class="col-sm-2">
 								<label for="">FREC. MANTENI. (MESES)</label>
 								<input maxlength="4" type="number" class="form-control" name="frecuencia_mantenimiento" value="3" required="" id="frecuencia_mantenimiento">
 							</div>
@@ -354,6 +350,32 @@
 								</select>
 								
 							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12 col-md-9 col-lg-9">
+								<h3 class="page-header">Depreciacion</h3>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12 col-lg-3 col-md-3">
+								<label for="">Tipo de depreciacion</label>
+								<select onchange="calcularDepreciacion(event, this)" name="tipo_drepreciacion" id="tipo_depreciacion" class="form-control" required>
+									<option value="">-- SELECCIONE UNO--</option>
+									<option value="A">Anual</option>
+									<option value="M">Mensual</option>
+									<option value="S">Semanal</option>
+									<option value="D">Diaria</option>
+								</select>
+							</div>
+							<div class="col-sm-12 col-lg-3 col-md-3">
+								<label for="">Vida util</label>
+								<input onkeyup="calcularDepreciacion(event,this)" type="text" required placeholder="Cantidad de tiempo [en Dias, Meses o Semanas]" class="form-control" name="vida_util" id="tiempo_depreciacion" value="0">
+							</div>
+							<div class="col-sm-12 col-lg-2 col-md-2">
+								<label for="">Monto depreciacion</label>
+								<input onkeyup="calcularDepreciacion(event,this)" type="text" class="form-control" readonly name="monto_depreciacion" value="0" required id="monto_depreciacion">
+							</div>
+								<input type="hidden" class="form-control" name="total_depreciacion" readonly="" value="0" id="total_depreciacion">
 						</div>
 						<div class="row">
 							<div class="col-sm-9 col-md-9 col-lg-9">
@@ -414,5 +436,75 @@
 $('#dataTables-example').DataTable({
     responsive: true
 });
+
+function calcularDepreciacion(e, field){
+	//alert("entra")
+	var tipo = document.getElementById('tipo_depreciacion')
+	var tiempo = document.getElementById('tiempo_depreciacion')
+	var monto = document.getElementById('monto_depreciacion');
+	var total = document.getElementById('total_depreciacion')
+	var valor = document.getElementById('valor');
+
+	var total = 0.0;
+	switch(tipo.value){
+		case 'A':{
+			//alert("a")
+			if( parseFloat(valor.value) <= 0 ){
+				alert("DEBE INGRESAR UN VALOR AL BIEN")
+				valor.focus();
+				return false;
+			}
+			if( parseFloat(tiempo.value) > 0){
+				//alert(parseFloat(valor.value)/parseFloat(tiempo.value)<)
+				monto.value = (parseFloat(valor.value)/parseFloat(tiempo.value)).toFixed(2)
+			}
+
+			break;
+		}
+		case 'M':{
+			if( parseFloat(valor.value) <= 0 ){
+				alert("DEBE INGRESAR UN VALOR AL BIEN")
+				valor.focus();
+				return false;
+			}
+			if( parseFloat(tiempo.value) > 0){
+				var meses = ( 12 * parseFloat(tiempo.value) )
+				monto.value = (parseFloat(valor.value)/meses).toFixed(2)
+			}
+
+			break;
+		}
+
+		case 'S':{
+			if( parseFloat(valor.value) <= 0 ){
+				alert("DEBE INGRESAR UN VALOR AL BIEN")
+				valor.focus();
+				return false;
+			}
+			if( parseFloat(tiempo.value) > 0){
+				var semanas = ( 4 * 12 ) / parseFloat(tiempo.value);
+				var meses = ( 12 * semanas )
+				monto.value = (parseFloat(valor.value)/meses).toFixed(2)
+			}
+
+			break;
+		}
+		case 'D':{
+			if( parseFloat(valor.value) <= 0 ){
+				alert("DEBE INGRESAR UN VALOR AL BIEN")
+				valor.focus();
+				return false;
+			}
+			if( parseFloat(tiempo.value) > 0){
+				var dias = (30 * 12)/parseFloat(tiempo.value)
+				var meses = ( 12 * dias)
+				monto.value = (parseFloat(valor.value)/meses).toFixed(2)
+			}
+
+			break;
+		}
+
+	}
+}
 </script>
 @endsection
