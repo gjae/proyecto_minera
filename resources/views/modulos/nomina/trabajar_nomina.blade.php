@@ -88,6 +88,10 @@
 									<option {{ ($ajuste->ajuste->ajuste_permanente == 'SI')? 'SELECTED' : '' }} value="{{ $ajuste->id }}">AGREGAR</option>
 								</select>
 							</div>
+							<div class="col-sm-12 col-md-3 col-lg-3">
+								<label for="">MONTO DEL AJUSTE</label>
+								<input type="text" required class="form-control" name="costos[]">
+							</div>
 
 						@endforeach
 		

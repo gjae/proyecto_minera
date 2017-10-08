@@ -374,6 +374,36 @@
 	</tbody>
 
 </table>
+<table border="1" style="text-align: center;" width="100%" cellspacing="0" cellpadding="0">
+	<tr>
+		<td>
+			<strong>MODO DE DEPRECIACION</strong>
+		</td>
+		<td>
+			<strong>TIEMPO DE DEP.</strong>
+		</td>
+		<td>
+			<strong>VALOR INICIAL</strong>
+		</td>
+		<td>
+			<strong>DEPRECIACION</strong>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<strong>{{ $material->ficha->tipo_depreciacion }}</strong>
+		</td>
+		<td>
+			<strong>{{ $material->ficha->vida_util }}</strong>
+		</td>
+		<td>
+			<strong>{{ number_format($material->ficha->valor, 2) }}</strong>
+		</td>
+		<td>
+			<strong>{{ number_format($material->ficha->monto_depreciacion, 2) }}</strong>
+		</td>
+	</tr>
+</table>
 <h2>MANUALES</h2>
 <strong>
 MANUAL DE USUARIO: <span>{{ $material->ficha->manuales_usuario }}</span> / <br>

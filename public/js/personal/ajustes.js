@@ -3,6 +3,11 @@
 	$(".actions").on('click', function(){
 		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
 		var modal = $("#modal-personal")
+		var nomina = $(this).attr('nomina')
+
+		if( typeof(nomina) != undefined ){
+			url += '?nomina='+nomina+'&ref=nomina_index'
+		}
 
 		$.getJSON(url, {}, function(resp){
 			if(resp.error){
@@ -10,6 +15,13 @@
 			}
 			else
 			{
+				if( resp.reporte ){
+					$("#reportes").removeClass('hidden')
+					$("#salvar").addClass('hidden')
+				}else{
+					$("#reportes").addClass('hidden')
+					$("#salvar").removeClass('hidden')
+				}
 				$("#form-modal").html(resp.formulario)
 				modal.modal({show: true})
 			}
@@ -100,6 +112,12 @@
 		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
 		window.open(url+'?codigo_nomina='+$(this).attr('codigo-nomina'), "REPORTE DE NOMINA HASTA ESTE MOMENTO"  ,"width=800,height=900")
 	});
+
+	$("#reportes").on('click', function(){
+		var datos = $("#form-modal").serialize();
+		var url = location.protocol+'//'+location.host+'/dashboard/nomina/Nomina/reportes?'+datos
+		window.open(url, 'RECIBOS DE NOMINA', 'width=800,height=900')
+	})
 })
 
 function cargarPersona(event, boton){

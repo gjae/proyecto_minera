@@ -120,9 +120,18 @@
 			<label for="">Fecha de ingreso (AAAA-MM-DD / DD-MM-AAAA)</label>
 			<input type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso">		
 		</div>
-		<div class="col-sm-5">
+		<div class="col-sm-5 col-md-3 col-lg-3">
 			<label for="">Sueldo base</label>
-			<input type="number" class="form-control" id="sueldo_basico" name="sueldo_basico" placeholder="Sueldo basico de la persona">
+			<input type="text" class="form-control" id="sueldo_basico" name="sueldo_basico" placeholder="Sueldo basico de la persona">
+		</div>
+		<div class="col-sm-5 col-md-3 col-lg-3">
+			<label for="">Mina</label>
+			<select name="mina_id" id="mina_id" class="form-control">
+				<option value="1">Empleado administrativo</option>
+				@foreach(App\Models\Mina::where('edo_reg', 1)->get() as $mina )
+					<option value="{{ $mina->id }}">{{ $mina->nombre_mina }}</option>
+				@endforeach
+			</select>
 		</div>
 	</div>
 

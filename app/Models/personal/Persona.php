@@ -11,7 +11,7 @@ class Persona extends Model
         'primer_nombre', 'segundo_nombre', 'primer_apellido', 'segundo_apellido',
         'identificacion', 'fecha_ingreso', 'telefono', 'direccion_persona', 'sueldo_basico',
         'sitio_trabajo_id', 'tipo_sangre_id', 'cargo_id', 'ciudad_id', 'estado_persona', 'sexo',
-        'fecha_nacimiento',
+        'fecha_nacimiento', 'mina_id',
     ];
 
     protected $casts = [
@@ -21,6 +21,10 @@ class Persona extends Model
 
     public function ajustes(){
         return $this->hasMany('App\Models\personal\AjustePersona');
+    }
+
+    public function mina(){
+        return $this->belongsTo('App\Models\Mina');
     }
 
     public function ciudad(){

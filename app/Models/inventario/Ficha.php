@@ -116,4 +116,24 @@ class Ficha extends Model
                 break;
         }
     }
+
+    public function getTipoDepreciacionAttribute($valor){
+        switch ($valor) {
+            case 'M':
+               return 'MENSUAL';
+                break;
+            
+            case 'A':
+                return 'ANUAL';
+                break;
+
+            case 'S':
+                return 'SEMANAL';
+                break;
+
+            case 'D':
+                return 'DIARIA';
+                break;
+        }
+    }
 }
