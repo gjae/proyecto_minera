@@ -19,4 +19,8 @@ class Mina extends Model
     public function personas(){
     	return $this->hasMany('App\Models\personal\Persona');
     }
+
+    public function movimientos(){
+        return $this->hasMany('App\Models\MovimientosMinas');
+    }
 }

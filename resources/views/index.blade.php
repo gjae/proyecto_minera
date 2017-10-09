@@ -249,6 +249,11 @@
                                     Ver inventario
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ url('dashboard/inventario/minas') }}">
+                                    Inventario de minas
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     @endif

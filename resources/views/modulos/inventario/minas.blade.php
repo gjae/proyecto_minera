@@ -1,4 +1,4 @@
-<@extends('index')
+@extends('index')
 
 @section('css')
  <!-- JQuery DataTable Css -->
@@ -6,7 +6,7 @@
 
 @endsection
 
-@section('titulo', 'Modulo de inventario y minas')
+@section('titulo', 'Modulo de inventario y minas - Inventario de minas')
 @section('contenedor')
 
 <div class="row">
@@ -29,6 +29,7 @@
 </div>
 
 </div>
+<input type="hidden" id="ref" value="minas">
 <div class="row clearfix">
 	<input type="hidden" id="token" value="{{ csrf_token() }}">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -39,13 +40,13 @@
 					<div class="row">
 						<br><br>
 						<div class="col-sm-12 col-md-12 col-lg-8">
-							<a  formulario="crearMaterial" class="btn btn-primary actions">
+							<a  formulario="crear_material_mina" class="btn btn-primary actions">
 								CREAR NUEVO
 							</a>
 							<a  formulario="insertarUnidadMedida" class="btn btn-success actions">
 								AGREGAR UNIDAD DE MEDIDA
 							</a>
-							<a  formulario="insertarUnidadMedida" role="controlBodega" class="btn btn-success reportes">
+							<a  formulario="crear_material_mina" role="controlBodega" class="btn btn-success reportes">
 								REPORTE - CONTROL DE BODEGA
 							</a>
 							<a class="btn btn-success" onclick="formato_almacen()">
@@ -62,22 +63,18 @@
 					<table class="table table-bordered table-striped table-hover" id="dataTables-example">
 						<thead>
 							<tr>
-								<th width="12%">Codigo</th>
-								<th width="22%">Nombre</th>
-								<th width="12%">U. medida</th>
-								<th width="20%">Tipo de material</th>
+								<th width="12%">Nombre</th>
+								<th width="22%">Unidad de medida</th>
+								<th width="12%">Tipo de material</th>
 								<th width="20%">Cantidad disponible</th>
 								<th width="20%">Opciones</th>
 							</tr>
 						</thead>
 						<tbody>
-							@foreach(App\Models\inventario\Material::where('estado_material', 'ACTIVO')->get() as $key => $material)
+							@foreach(App\Models\minas\MaterialMina::all() as $key => $material)
 								<tr>
 									<td>
-										{{ $material->codigo_material }}
-									</td>
-									<td>
-										{{ $material->nombre_material }}
+										{{ $material->descripcion }}
 									</td>
 									<td>
 										{{ $material->unidad_medida->codigo_unidad }}
@@ -86,7 +83,7 @@
 										{{ $material->tipo->descripcion_tipo }}
 									</td>
 									<td>
-										{{ $material->ingresos->sum('cantidad') - $material->egresos->sum('cantidad_salida') }}
+										{{ $material->movimientos->sum('cantidad_ingreso') - $material->movimientos->sum('cantidad_salida') }}
 									</td>
 									<td>
 										<a class="btn btn-danger btn-options" role="delete" data-id="{{ $material->id }}">
@@ -94,7 +91,7 @@
 										</a>
 
 										<a class="btn btn-success actions"
-											formulario="ingreso_material"  
+											formulario="ingreso_material_mina"  
 											data-id="{{ $material->id }}" role="ingresar"
 										>
 											<i class="large material-icons btn-options " 
@@ -103,17 +100,9 @@
 											</i>
 										</a>
 										
-										<a class="btn btn-warning actions" data-id="{{ $material->id }}" formulario="egresar_material" role="egresar" >
-											<i class="large material-icons btn-options "  >highlight_off</i>
-										</a>
 										<a class="btn btn-primary actions" data-id="{{ $material->id }}" formulario="reportePor" role="reportes">
 											<i class="material-icons actions">local_printshop</i>
 										</a>
-										@if(is_null($material->ficha))
-											<a href="{{ url('dashboard/inventario/HojaVida/crear?id='.$material->id) }}" class="btn btn-success">
-												<strong>CREAR HOJA DE VIDA</strong>
-											</a>
-										@endif
 									</td>
 								</tr>
 							@endforeach

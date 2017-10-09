@@ -1,8 +1,12 @@
 $(document).ready(function(){
 	$(".actions").on('click', function(){
 		var btn = $(this)
-		var url = location.href + '/formularios?formulario='+btn.attr('formulario')+'&id='+$(this).attr('data-id')
+		var url = location.href + '/formularios?formulario='+btn.attr('formulario');
 		var modal = $("#modal-inventario")
+		var id = $(this).attr('data-id');
+
+		if( ( typeof(id) != undefined ) )
+			url+='&id='+id
 
 		if( $(this).attr('role') == 'reportes'){
 			if(!$("#footer-datos").hasClass('hidden')){
@@ -61,7 +65,14 @@ $(document).ready(function(){
 
 	$(".reportes").on('click', function(){
 		if( $(this).attr('role') =='controlBodega' ){
+
+			var ref = $("#ref")
 			var url = location.href+'/'+$(this).attr('role');
+			if( typeof(ref) != undefined )
+			{
+				var url = location.protocol+'//'+location.host+'/dashboard/inventario/reportes/datos_generales?ref='+ref.val()
+			}
+
 			window.open(url, "FORMATO DE CONTROL DE BODEGA"  ,"width=800,height=900")
 		}
 
@@ -73,8 +84,10 @@ $(document).ready(function(){
 		var tipo = $("#tipo_reporte").val();
 		var url = location.host+'/dashboard/inventario/reportes/'+$("#tipo_reporte").val()+'?material_id='+$("#material_reporte").val()
 		url +=  '&fecha_desde='+$("#fecha_desde").val()+"&fecha_hasta="+$("#fecha_hasta").val()
-		//alert(url)
-			//alert(url)			
+		var ref = $("#ref")
+
+		if( typeof(ref) != undefined )	
+			url+='&ref='+ref.val()	
 		window.open('http://'+url, "INVITACIONES"  ,"width=800,height=900")	
 	})
 	$(".formularios").on('click', function(){
@@ -138,6 +151,10 @@ function buscar_tipo(event,select){
 			side_fechas.addClass('hidden')
 		}
 		var url = location.host+'/dashboard/inventario/reportes/'+select.value+'?material_id='+$("#material_reporte").val()
+		var ref = $("#ref")
+		if( typeof(ref) != undefined )	
+			url+='&ref='+ref.val()	
+
 		window.open('http://'+url, "INVITACIONES"  ,"width=800,height=900")
 	}
 	else if(select.value == 'actividad_en_fechas'){
@@ -170,4 +187,29 @@ function actualizar(event, formulario){
 	}
 
 	formulario.submit();
+}
+
+function calcularTotal(ev, field){
+	var peso_en = document.getElementById('peso_en');
+	var cantidad = document.getElementById('cantidad');
+	var valor = document.getElementById('monto_tonelada')
+	var total_movimiento = document.getElementById('total_movimiento');
+
+	switch(peso_en.value){
+		case 'TON':{
+			total_movimiento.value = (parseFloat(cantidad.value) * parseFloat(valor.value)).toFixed(2)
+			break;
+		}
+
+		case 'KG':{
+			total_movimiento.value =( (parseFloat(cantidad.value)/1000) * parseFloat(valor.value) ).toFixed(2)
+			break;
+		}
+
+		case 'GR': {
+			var kg = ( parseFloat(cantidad.value) * 1 ) / 1000;
+			total_movimiento.value =( (parseFloat(kg)/1000) * parseFloat(valor.value) ).toFixed(2)
+			break;
+		}
+	}
 }

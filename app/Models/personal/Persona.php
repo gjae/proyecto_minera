@@ -23,6 +23,10 @@ class Persona extends Model
         return $this->hasMany('App\Models\personal\AjustePersona');
     }
 
+    public function mis_movimientos_minas(){
+        return $this->hasMany('App\Models\minas\MovimientosMinas');
+    }
+
     public function mina(){
         return $this->belongsTo('App\Models\Mina');
     }
