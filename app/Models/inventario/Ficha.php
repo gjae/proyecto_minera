@@ -12,6 +12,7 @@ class Ficha extends Model
     protected $fillable = [
             'servicio', 
             'cedula_representante',
+            'valor',
             'ubicacion_id',
             'marca', 
             'modelo', 
@@ -49,7 +50,11 @@ class Ficha extends Model
             'manuales_usuario',
             'manuales_despiece',
             'distribuidor_id',
-            'fabricante_id'
+            'fabricante_id',
+            'tipo_depreciacion',
+            'tiempo_depreciacion',
+            'monto_depreciacion',
+            'total_depreciacion'
     ];
 
     protected $casts = [
@@ -108,6 +113,26 @@ class Ficha extends Model
                 break;
             case '-':
                 return 'NINGUNO';
+                break;
+        }
+    }
+
+    public function getTipoDepreciacionAttribute($valor){
+        switch ($valor) {
+            case 'M':
+               return 'MENSUAL';
+                break;
+            
+            case 'A':
+                return 'ANUAL';
+                break;
+
+            case 'S':
+                return 'SEMANAL';
+                break;
+
+            case 'D':
+                return 'DIARIA';
                 break;
         }
     }

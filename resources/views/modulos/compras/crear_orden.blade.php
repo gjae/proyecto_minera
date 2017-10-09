@@ -72,11 +72,11 @@
                                         <input type="number" name="tiempo_pago" class="form-control" id="tiempo_pago">
                                     </div>
                                     <div class="col-sm-12 col-md-4 col-lg-4">
-                                        <label for="">FECHA DE INICIO DEL TRABAJO (AAAA-MM--DD)</label>
+                                        <label for="">FECHA INICIO  (AAAA-MM--DD)</label>
                                         <input type="date" name="fecha_inicio" class="form-control" id="date">
                                     </div>
                                     <div class="col-sm-12 col-md-4 col-lg-4">
-                                        <label for="">FECHA DE FIN DEL TRABAJO (AAAA-MM--DD)</label>
+                                        <label for="">FECHA FIN (AAAA-MM--DD)</label>
                                         <input type="date" name="fecha_fin" class="form-control" id="date">
                                     </div>
                                 </div>
@@ -253,7 +253,7 @@
 
                                 <div class="row">
                                     <div class="col-sm-9 col-md-4 col-lg-4">
-                                        <label for="">MONTO DE ANTICIPO</label>
+                                        <label for="">% DE ANTICIPO</label>
                                         <input type="text" onkeyup="calcularSubTotal(event, this)" class="form-control" value="0" name="monto_anticipo" id="monto_anticipo">
                                     </div>
                                 </div>

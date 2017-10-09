@@ -23,4 +23,8 @@ class EtapaProduccion extends Model
     public function ingresos_materiales(){
     	return $this->hasMany('App\Models\inventario\IngresoMaterial', 'etapa_produccion_id', 'id');
     }
+
+    public function items(){
+        return $this->hasMany('App\Models\requisicion\DetalleRequisicion', 'etapa_produccion_id');
+    }
 }

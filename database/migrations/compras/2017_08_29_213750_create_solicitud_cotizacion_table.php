@@ -22,6 +22,7 @@ class CreateSolicitudCotizacionTable extends Migration
             $table->enum('estado_registro', ['ACTIVA', 'ANULADA', 'PROCESADA'])->default('ACTIVA');
             $table->string('observacion_anulacion')->nullable();
             $table->string('codigo', 8);
+            $table->integer('ciudad_id')->unsigned();
 
            // $table->index(['codigo']);
             $table->foreign('requisicion_id')->references('id')
@@ -29,6 +30,9 @@ class CreateSolicitudCotizacionTable extends Migration
 
             $table->foreign('proveedor_id')->references('id')
                     ->on('proveedores')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->foreign('ciudad_id')->references('id')
+                    ->on('ciudades')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

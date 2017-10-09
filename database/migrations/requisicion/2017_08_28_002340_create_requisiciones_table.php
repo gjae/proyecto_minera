@@ -19,6 +19,7 @@ class CreateRequisicionesTable extends Migration
             $table->string('codigo_requisicion', 12);
             $table->string('concepto_requisicion')->nullable();
 
+            $table->integer('ciudad_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->enum('tipo_requisicion', ['BIENES', 'SERVICIOS'])->default('BIENES');
 
@@ -48,6 +49,9 @@ class CreateRequisicionesTable extends Migration
 
             $table->foreign('user_id')->references('id')
                     ->on('users')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->foreign('ciudad_id')->references('id')
+                ->on('ciudades')->onDelete('cascade')->onUpdate('cascade');
         });
 
     }

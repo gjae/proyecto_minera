@@ -47,7 +47,9 @@
 			<td>
 				<br>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<strong>DUITAMA</strong>
+				<strong>
+					{{ $requisiciones->ciudad->nombre_ciudad }}
+				</strong>
 				
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
@@ -137,9 +139,9 @@
 				<td>{{ $detalle->material->unidad_medida->codigo_unidad }}</td>
 				<td>{{ $detalle->cantidad_pedida }}</td>
 				<td>{{ $detalle->cantidad_aprobada }}</td>
-				<td>{{ $requisiciones->centro_costo->nombre_centro }}</td>
-				<td>{{ $requisiciones->etapa_produccion->nombre_etapa }}</td>
-				<td>{{ $requisiciones->diciplina->nombre_diciplina }}</td>
+				<td>{{ $detalle->centro_costos->nombre_centro }}</td>
+				<td>{{ $detalle->etapa_produccion->nombre_etapa }}</td>
+				<td>{{ $detalle->disciplina->nombre_diciplina }}</td>
 				<td>&nbsp;</td>
 			</tr>
 		@endforeach

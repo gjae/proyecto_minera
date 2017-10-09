@@ -19,6 +19,7 @@ class CreateAnticiposTable extends Migration
             $table->string('concepto_anticipo', 150)->nullable();
             $table->char('consecutivo', 4)->nullable();
             $table->float('porcentaje')->default(0);
+            $table->float('total_orden')->default(0);
             $table->float('total_anticipo')->default(0);
             $table->integer('orden_id')->unsigned();
 
