@@ -23,7 +23,7 @@
 				@endforeach
 			</select>
 		</div>
-		<div class="col-sm-9 col-md-4 col-lg-4">
+		<div class="col-sm-9 col-md-3 col-lg-3">
 			<label for="">Tipo de material</label>
 			<select name="tipo_material_id" id="tipo_material_id" class="form-control">
 				<option value="">Seleccione una opcion</option>

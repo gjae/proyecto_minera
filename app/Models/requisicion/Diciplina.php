@@ -27,4 +27,8 @@ class Diciplina extends Model
     public function items(){
         return $this->hasMany('App\Models\requisicion\DetalleRequisicion');
     }
+    
+    public function movimientos_minas(){
+        return $this->hasMny('App\Models\minas\MovimientosMinas', 'diciplina_id');
+    }
 }

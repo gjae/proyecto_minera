@@ -5,9 +5,16 @@
 			<label for="">TIPO DE REPORTE</label>
 			<select name="tipo" onchange="buscar_tipo(event, this)" id="tipo_reporte" class="form-control">
 				<option value="">-- SELECCIONE UNO --</option>
-				<option value="datos_generales">DATOS DEL ARTICULO</option>
-				<option value="actividad_en_fechas">ACTIVIDAD ENTRE FECHAS</option>
-				<option value="ficha">VER FICHA</option>
+				@if(isset($ref))
+					<option value="datos_generales">MOVIMIENTOS DEL MATERIAL</option>
+					<option value="actividad_en_fechas">ACTIVIDAD ENTRE FECHAS</option>
+				@else
+					<option value="datos_generales">DATOS DEL ARTICULO</option>
+					<option value="actividad_en_fechas">ACTIVIDAD ENTRE FECHAS</option>
+					@if( App\Models\inventario\Material::find($id)->ficha != null)
+						<option value="ficha">VER FICHA</option>
+					@endif
+				@endif
 			</select>
 		</div>
 
