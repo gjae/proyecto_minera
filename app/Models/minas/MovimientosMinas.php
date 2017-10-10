@@ -24,7 +24,9 @@ class MovimientosMinas extends Model
         'persona_id',
 
         'material_mina_id',
-
+        'etapa_produccion_id',
+        'centro_costo_id',
+        'diciplina_id',
         'mina_id',
     ];
 
@@ -44,5 +46,17 @@ class MovimientosMinas extends Model
 
     public function mina(){
     	return $this->belongsTo('App\Models\Mina');
+    }
+
+    public function etapa_producion(){
+        return $this->belongsTo('App\Models\requisicion\EtapaProduccion', 'etapa_produccion_id');
+    }
+
+    public function centro_costos(){
+        return $this->belongsTo('App\Models\requisicion\CentroCosto', 'centro_costo_id');
+    }
+
+    public function disciplina(){
+        return $this->belongsTo('App\Models\requisicion\Diciplina', 'diciplina_id');
     }
 }

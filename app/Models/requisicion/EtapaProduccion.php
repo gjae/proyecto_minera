@@ -27,4 +27,8 @@ class EtapaProduccion extends Model
     public function items(){
         return $this->hasMany('App\Models\requisicion\DetalleRequisicion', 'etapa_produccion_id');
     }
+
+    public function movimientos_minas(){
+        return $this->hasMny('App\Models\minas\MovimientosMinas', 'etapa_produccion_id');
+    }
 }

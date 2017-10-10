@@ -26,4 +26,8 @@ class CentroCosto extends Model
     public function items(){
         return $this->hasMany('App\Models\requisicion\DetalleRequisicion');
     }
+
+     public function movimientos_minas(){
+        return $this->hasMny('App\Models\minas\MovimientosMinas', 'centro_costo_id');
+    }
 }
