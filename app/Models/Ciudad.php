@@ -20,4 +20,12 @@ class Ciudad extends Model
 	public function distribuidores(){
 		return $this->hasMany('App\Models\Distribuidor');
 	}
+
+	public function requisiciones(){
+		return $this->hasMany('App\Models\requisicion\Requisicion');
+	}
+
+	public function invitaciones(){
+		return $this->hasMany('App\Models\compras\SolicitudCotizacion');
+	}	
 }

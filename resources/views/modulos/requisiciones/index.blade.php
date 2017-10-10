@@ -39,6 +39,19 @@
 					</div>
 				</div>
 				<div class="row">
+					<div class="col-sm-12 col-lg-3 col-md-5">
+						<label for="">CIUDAD</label>
+						<select name="ciudad_id" id="ciudad_id" class="form-control" required>
+							<option value="">-- SELECCIONE UNO --</option>
+							@foreach(App\Models\Ciudad::all() as $ciudad)
+								<option value="{{ $ciudad->id }}">
+									{{ $ciudad->nombre_ciudad }}
+								</option>
+							@endforeach
+						</select>
+					</div>
+				</div>
+				<div class="row">
 					<div class="col-sm-12 col-md-3 col-lg-3">
 						<label for="">Centro de costos</label>
 						<select name="centro_costo_id" id="centro_consto_id" class="form-control">
@@ -94,23 +107,26 @@
 				</div>
 				<div class="row">
 					
-					<div class="col-sm-3 col-md-5 col-lg-3">
-						
-						<table class="table-responsive table-bordered table-striped table-hover">
+					<div class="col-sm-12 col-md-11 col-lg-11">
+						<div class="table-responsive">
+						<table class="table-bordered table-striped table-hover">
 							<thead>
 								<tr>
 									<th>CODIGO</th>
 									<th>DESCRIPCION</th>
-									<th>U. MEDIDA</th>
+									<th>MEDIDA</th>
 									<th>CANTIDAD</th>
 									<th>COSTO ESTIMADO</th>
 									<th>% IMPUESTOS</th>
 									<th>TOTAL</th>
+									<th>CENTRO DE COSTOS</th>
+									<th>E. PRODUC</th>
+									<th>C. COSTS</th>
 								</tr>
 							</thead>
 							<tbody id="filas_detalles"></tbody>
 						</table>
-
+						</div>
 					</div>
 
 				</div>

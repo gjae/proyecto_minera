@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\requisicion;
 
 use Illuminate\Http\Request;
@@ -37,12 +36,19 @@ class Requisicion extends Controller
 
     public function consultarMaterial($req){
     	$material = Material::where('codigo_material', $req->codigo)->first();
+
+        $centros = \View::make('modulos.requisiciones.selects.centros_costos')->render();
+        $etapas = \View::make('modulos.requisiciones.selects.etapas')->render();
+        $disciplinas = \View::make('modulos.requisiciones.selects.disciplinas')->render();
     	$respuesta = [];
     	if($material){
     		$respuesta = [
     			'error' => false,
     			'material' => $material,
-    			'unidad_medida' => $material->unidad_medida
+    			'unidad_medida' => $material->unidad_medida,
+                'centros' => $centros,
+                'etapas' => $etapas,
+                'disciplinas' => $disciplinas
     		];
     	}
     	else
@@ -96,7 +102,10 @@ class Requisicion extends Controller
     				'porcentaje_impuesto' => $request->porcentaje_impuesto[$i],
     				'cantidad_pedida' => $request->cantidades[$i],
     				'cantidad_aprobada' => 0,
-    				'total_material' =>($request->costo_estimado[$i] * $request->cantidades[$i]) + ( ( ( $request->costo_estimado[$i] * $request->cantidades[$i] ) ) * $request->porcentaje_impuesto[$i] ) / 100
+    				'total_material' =>($request->costo_estimado[$i] * $request->cantidades[$i]) + ( ( ( $request->costo_estimado[$i] * $request->cantidades[$i] ) ) * $request->porcentaje_impuesto[$i] ) / 100,
+                    'diciplina_id' => $request->disciplinas_id[$i],
+                    'etapa_produccion_id' => $request->etapas_id[$i],
+                    'centro_costo_id' => $request->centros_id[$i]
     			])
     		);
     	}

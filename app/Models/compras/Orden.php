@@ -48,7 +48,10 @@ class Orden extends Model
         'contta_rep_telf', 
     ];
     
-
+    protected $casts = [
+        'fecha_inicio' => 'date',
+        'fecha_fin' => 'date'
+    ];
     public function setFechaInicioAttribute($old){
     	$this->attributes['fecha_inicio'] = Carbon::parse($old)->format('Y-m-d');
     }
@@ -59,6 +62,18 @@ class Orden extends Model
 
     public function proveedor(){
     	return $this->belongsTo('App\Models\compras\Proveedor');
+    }
+
+    public function valuaciones(){
+        return $this->hasMany('App\Models\compras\Valuacion');
+    }
+
+    public function variaciones(){
+        return $this->hasMany('App\Models\compras\Variacion');
+    }
+
+    public function archivos(){
+        return $this->hasMany('App\Models\compras\Archivo');
     }
 
 }

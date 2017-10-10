@@ -18,4 +18,8 @@ class TipoMaterial extends Model
     public function transportes(){
     	return $this->hasMany('App\Models\transporte\Transporte', 'tipo_material_id');
     }
+
+    public function materiales_minas(){
+        return $this->hasMany('App\Models\minas\MaterialMina', 'tipo_material_id');
+    }
 }

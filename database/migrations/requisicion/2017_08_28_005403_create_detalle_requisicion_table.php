@@ -17,6 +17,11 @@ class CreateDetalleRequisicionTable extends Migration
             $table->increments('id');
             $table->timestamps();
 
+            $table->integer('centro_costo_id')->unsigned();
+            $table->integer('diciplina_id')->unsigned();
+            $table->integer('etapa_produccion_id')->unsigned();
+
+
             $table->integer('material_id');
             $table->integer('requisicion_id')->unsigned();
             $table->integer('servicio_id');
@@ -28,6 +33,15 @@ class CreateDetalleRequisicionTable extends Migration
 
             $table->foreign('requisicion_id')->references('id')
                 ->on('requisiciones')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->foreign('centro_costo_id')->references('id')
+                    ->on('centros_costos')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->foreign('diciplina_id')->references('id')
+                    ->on('diciplinas')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->foreign('etapa_produccion_id')->references('id')
+                    ->on('etapas_produccion')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

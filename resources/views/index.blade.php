@@ -119,7 +119,7 @@
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="#">Usuarios del sistema</a>
+                                <a href="{{ url('dashboard/usuarios/usuarios') }}">Usuarios del sistema</a>
                             </li>
                         </ul>
                     </li>
@@ -247,6 +247,11 @@
                             <li>
                                 <a href="{{ url('dashboard/inventario/inventario') }}">
                                     Ver inventario
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('dashboard/inventario/minas') }}">
+                                    Inventario de minas
                                 </a>
                             </li>
                         </ul>

@@ -37,8 +37,11 @@
 			<div class="body">
 				<div class="table-responsive">
 
-					
-					<button type="button red pull-right" action="formularios" role="crearNomina" class="btn btn-default waves-effect m-r-20 actions">Abrir nomina</button>	
+					<div class="row">
+						<div class="col-sm-12 col-md-9 col-lg-9">
+							<button type="button red pull-right" action="formularios" role="crearNomina" class="btn btn-default waves-effect m-r-20 actions">Abrir nomina</button>	
+						</div>
+					</div>
 						
 					<table class="table table-bordered table-striped table-hover" id="dataTables-example">
 						<thead>
@@ -96,6 +99,8 @@
 										</a>
 										@endif
 
+
+										<button type="button red pull-right" action="formularios"  action="formularios" role="reportes_nomina" nomina="{{ $nomina->codigo_nomina }}" class="btn btn-warning waves-effect m-r-20 actions">Reportes</button>
 									</td>
 								</tr>
 							@endforeach
@@ -122,7 +127,9 @@
              	</form>
             </div>
             <div class="modal-footer">
+
                 <button type="button" id="salvar" class="btn btn-link waves-effect">Guardar datos</button>
+				<button type="button" id="reportes" class="btn btn-link waves-effect hidden">Generar reporte</button>
                 <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cerrar</button>
             </div>
    		</div>

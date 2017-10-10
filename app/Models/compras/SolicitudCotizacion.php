@@ -13,7 +13,8 @@ class SolicitudCotizacion extends Model
     	'concepto_solicitud',
     	'estado_registro',
     	'observacion_anulacion',
-        'codigo'
+        'codigo',
+        'ciudad_id'
     ];
 
     public function requisicion(){
@@ -26,5 +27,9 @@ class SolicitudCotizacion extends Model
 
     public function registros_cotizacion(){
         return $this->hasMany('App\Models\compras\RegistroCotizacion', 'solicitud_cotizacion_id');
+    }
+
+    public function ciudad(){
+        return $this->belongsTo('App\Models\Ciudad');
     }
 }

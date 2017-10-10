@@ -15,4 +15,8 @@ class UnidadMedida extends Model
     public function materiales(){
     	return $this->hasMany('App\Models\inventario\Material', 'unidad_medida_id');
     }
+
+    public function materiales_de_minas(){
+    	return $this->hasMany('App\Models\minas\MaterialMina', 'unidad_medida_id');
+    }
 }

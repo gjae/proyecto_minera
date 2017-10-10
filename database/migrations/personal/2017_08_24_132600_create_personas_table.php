@@ -20,9 +20,9 @@ class CreatePersonasTable extends Migration
             $table->string('identificacion', 89);
             $table->date('fecha_ingreso');
 
-            $table->string('primer_nombre', 22);
+            $table->string('primer_nombre', 22)->nullable();
             $table->string('segundo_nombre', 22)->nullable();
-            $table->string('primer_apellido', 22);
+            $table->string('primer_apellido', 22)->nullable();
 
             $table->date('fecha_nacimiento')->nullable();
             $table->smallInteger('estatus_persona')->default('1');
@@ -35,7 +35,8 @@ class CreatePersonasTable extends Migration
             $table->integer('tipo_sangre_id')->unsigned();
             $table->integer('cargo_id')->unsigned();
             $table->integer('ciudad_id')->unsigned();
-            
+            $table->integer('mina_id')->unsigned()->default(1);
+
             $table->enum('estado_persona', ['ACTIVA', 'INACTIVA', 'DESPEDIDA', 'JUBILADA', 'DISCAPACITADA'])->default('ACTIVA');
             
             $table->enum('sexo', ['HOMBRE', 'MUJER'])->nullable();
@@ -54,6 +55,8 @@ class CreatePersonasTable extends Migration
             $table->foreign('ciudad_id')->references('id')
                     ->on('ciudades')->onDelete('cascade')->onUpdate('cascade');
 
+            $table->foreign('mina_id')->references('id')
+                    ->on('minas')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

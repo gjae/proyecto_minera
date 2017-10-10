@@ -209,7 +209,7 @@ HASTA {{ Carbon\Carbon::parse($fecha_hasta)->format('d-m-Y') }}
 				&nbsp;
 			</td>
 			<td class="footer-table">
-				<strong>TOTAL DE EGRESOS</strong>
+				<strong>TOTAL DE INGRESOS</strong>
 			</td >
 			<td class="footer-table">
 				{{ 

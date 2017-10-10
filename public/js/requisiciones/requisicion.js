@@ -19,13 +19,26 @@ function agregarFila(event, inputs){
 				</div>
 			</td>
 			<td>
-				<input type="number" value="0" onkeypress="calcularTotal(event, this)" name="costo_estimado[]" id="costo_estimado${filas}" data-fila="${filas}" />
+				<input type="text" value="0" onkeypress="calcularTotal(event, this)" name="costo_estimado[]" id="costo_estimado${filas}" data-fila="${filas}" />
 			</td>
 			<td>
-				<input type="number" value="0" onkeypress="calcularTotal(event, this)" name="porcentaje_impuesto[]" id="porcentaje_impuesto${filas}" data-fila="${filas}" />
+				<input type="text" value="0" onkeypress="calcularTotal(event, this)" name="porcentaje_impuesto[]" id="porcentaje_impuesto${filas}" data-fila="${filas}" />
 			</td>
 			<td>
-				<input type="number" value="0" readonly name="totales[]" id="totales${filas}" data-fila="${filas}" />
+				<input type="text" value="0" readonly name="totales[]" id="totales${filas}" data-fila="${filas}" />
+			</td>
+			<td>
+				<div id="centros${filas}">
+				</div>
+			</td>
+
+			<td>
+				<div id="etapas${filas}">
+				</div>
+			</td>
+			<td>
+				<div id="disciplinas${filas}">
+				</div>
 			</td>
 		</tr>
 	`
@@ -46,6 +59,9 @@ function agregarDetalle(event, codigo){
 				var ids = "#descipcion"+codigo.getAttribute('data-fila')
 				$(ids).html("<strong>"+resp.material.nombre_material+"</strong>")
 				$("#unidades"+codigo.getAttribute('data-fila')).html("<strong>"+resp.unidad_medida.codigo_unidad+"</strong>")
+				$("#centros"+codigo.getAttribute('data-fila')).html(resp.centros)
+				$("#etapas"+codigo.getAttribute('data-fila')).html(resp.etapas)
+				$("#disciplinas"+codigo.getAttribute('data-fila')).html(resp.disciplinas)
 			}
 		})	
 	}

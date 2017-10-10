@@ -9,6 +9,7 @@ use App\Models\personal\Persona as P;
 use App\Models\personal\DetalleNomina as DN;
 use App\Http\Controllers\utilidades\Utilidades as U;
 use App\Models\personal\Ajuste as A;
+use App\Models\personal\AjustePersona as AP;
 
 use CodeItNow\BarcodeBundle\Utils\BarcodeGenerator as BC;
 use DB;
@@ -85,12 +86,42 @@ class Nomina extends Controller
         return response(['error' => false, 'formulario' => $vista], 200)->header('Content-Type', 'application/json');
     }
 
+    public function reportes_nomina($req){
+        $vista = \View::make('modulos.nomina.formularios.reportes_nomina', [
+                'nomina' => $req->nomina,
+            ])->render();
+
+        return response(['error' => false, 'formulario' => $vista, 'reporte' => true], 200)->header('Content-Type', 'application/json');   
+    }
+
+    public function reportes($req){
+        $persona = new P;
+
+        if($req->has('identificacion') && $req->identificacion != '')
+            $persona = $persona->where('identificacion', $req->identificacion);
+
+        if($req->has('mina_id') && $req->mina_id!='' ){
+            $persona = $persona->where('mina_id', $req->mina_id);
+        }
+
+        $nomina = N::where('codigo_nomina', $req->nomina)->first();
+
+        $vistaPdf = \View::make('modulos.nomina.reportes.recibo_persona',[
+            'personas' => $persona->get(),
+            'periodo' => $this->getPeriodoNomina($nomina),
+        ])->render();
+
+        $pdf = PDF::loadHtml($vistaPdf);
+
+        return $pdf->stream('reporte_nomina_.pdf', ['attachment' => 0]);
+    }
+
     public function buscarPersonas($req){
         $view = \View::make('modulos.nomina.formularios.personas', [
                 'personas' => P::all()
             ])->render();
 
-       return response(['error' => false, 'formulario' => $view])->header('Content-Type', 'application/json');
+       return response(['error' => false, 'formulario' => $view,])->header('Content-Type', 'application/json');
     }
 
     public function abrirNomina($req){
@@ -139,6 +170,22 @@ class Nomina extends Controller
         return redirect()->to( url('dashboard/nomina') )->with('error', 'ESTA NOMINA YA HA SIDO TRABAJADA PARA ESTA PERSONA Y NO SE PUEDE VOLVER A TRABAJAR');  
     }
 
+    private function calcularValor($req, $key){
+    
+        $aj = AP::find($req->ajustes[$key]);
+        if($aj->ajuste->cantidad_ajuste > 0){
+
+            if( $req->costos[$key] == 0 )
+                return [$aj->ajuste->cantidad_ajuste , $aj->ajuste->tipo_ajuste ];
+        }else{
+            if( $req->costos[$key] == 0 )
+                return [($aj->persona->sueldo_basico * $aj->ajuste->porcentaje_ajuste) / 100, $aj->ajuste->tipo_ajuste ];
+               
+        }
+        
+        return [$req->costos[$key] , $aj->ajuste->tipo_ajuste ];
+    }
+
     public function guardarTrabajo($req){
 
         $resp = [
@@ -149,20 +196,23 @@ class Nomina extends Controller
         DB::beginTransaction();
         try {
             
-            foreach ($req->ajustes as $key => $ajuste) {
-                if($ajuste > 0){
-                    $insert =  [
-                        'persona_id' => $req->persona_id,
-                        'nomina_id' => $req->nomina_id,
-                        'ajuste_persona_id' => $ajuste,
-                        'total_bonos' => $req->total_bonos,
-                        'total_deducciones' => $req->total_deducciones,
-                        'total_pagar' => $req->total_pagar
-                    ];
-                    $dn = new DN($insert);
-                    if(! $dn->save()){
-                        throw new \Exception("ERROR AL INTENTAR GUARDAR EL DETALLE DE LA NOMINA, MODULO: nomin ARCHIVO: Nomina.php CERCA DE LA LINEA 117", 1);
-                        
+            if( !empty($req->ajustes) )
+            {
+                foreach ($req->ajustes as $key => $ajuste) {
+                    if($ajuste > 0){
+                        list($monto, $tipo) = $this->calcularValor($req, $key);
+                        $insert =  [
+                            'persona_id' => $req->persona_id,
+                            'nomina_id' => $req->nomina_id,
+                            'ajuste_persona_id' => $ajuste,
+                            ($tipo == 'BONO') ? 'total_bonos' : 'total_deducciones' => $monto,
+                            'total_pagar' => $req->total_pagar
+                        ];
+                        $dn = new DN($insert);
+                        if(! $dn->save()){
+                            throw new \Exception("ERROR AL INTENTAR GUARDAR EL DETALLE DE LA NOMINA, MODULO: nomin ARCHIVO: Nomina.php CERCA DE LA LINEA 117", 1);
+                            
+                        }
                     }
                 }
             }
@@ -195,6 +245,7 @@ class Nomina extends Controller
                     'periodo' => $this->getPeriodoNomina(N::where('codigo_nomina', $req->codigo_nomina)->first()),
                     'ajustes' => A::all(),
                     'totales' => $this->totalPorAjuste(N::where('codigo_nomina', $req->codigo_nomina)->first()),
+                    'persona' => null
 
                 ])->render();
             $pdf = PDF::loadHtml($vistaPdf);
@@ -213,17 +264,12 @@ class Nomina extends Controller
            
         foreach ($nomina->detalles as $key => $detalle) {
 
-            if($detalle->ajuste->ajuste->cantidad_ajuste > 0) {
-                $totalAjustes[$detalle->ajuste->ajuste->tipo_ajuste][$detalle->ajuste->ajuste->nombre_ajuste] += $detalle->ajuste->ajuste->cantidad_ajuste;
-                $totalAjustes['TOTAL_'.$detalle->ajuste->ajuste->tipo_ajuste] += $detalle->ajuste->ajuste->cantidad_ajuste;
-            }
-            else{
-                $totalAjustes[$detalle->ajuste->ajuste->tipo_ajuste][$detalle->ajuste->ajuste->nombre_ajuste] += ($this->getSueldoPersona($nomina, $detalle->persona) * $detalle->ajuste->ajuste->porcentaje_ajuste) / 100;
+            $totalAjustes[$detalle->ajuste->ajuste->tipo_ajuste][$detalle->ajuste->ajuste->nombre_ajuste] += ($detalle->total_bonos > 0)? $detalle->total_bonos : $detalle->total_deducciones;
 
-                $totalAjustes['TOTAL_'.$detalle->ajuste->ajuste->tipo_ajuste] += ($this->getSueldoPersona($nomina, $detalle->persona) * $detalle->ajuste->ajuste->porcentaje_ajuste) / 100;
-            }
+            $totalAjustes['TOTAL_'.$detalle->ajuste->ajuste->tipo_ajuste] += ($detalle->ajuste->ajuste->tipo_ajuste == 'BONO') ? $detalle->total_bonos: $detalle->total_deducciones;
                 
         }
+        
        return $totalAjustes;
     }
 
@@ -249,7 +295,7 @@ class Nomina extends Controller
             }
 
             case 'M':{
-                $periodo['hasta'] = $nomina->periodo_nomina->endOfMotnh();
+                $periodo['hasta'] = $nomina->periodo_nomina->endOfMonth();
                 break;
             }
         }
