@@ -48,7 +48,7 @@ class MovimientosMinas extends Model
     	return $this->belongsTo('App\Models\Mina');
     }
 
-    public function etapa_producion(){
+    public function etapa_produccion(){
         return $this->belongsTo('App\Models\requisicion\EtapaProduccion', 'etapa_produccion_id');
     }
 

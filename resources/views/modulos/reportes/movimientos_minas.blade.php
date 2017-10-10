@@ -79,12 +79,13 @@ h1 {
 	<thead>
 		<tr>
 			<th>Material</th>
-			<th>UMD</th>
-			<th>Mina</th>
+			<th>UND</th>
+			<th>C. Costos</th>
+			<th>Proceso</th>
+			<th>Frente</th>
 			<th>Fecha movimiento</th>
 			<th>Concepto</th>
-			<th>Ingreso</th>
-			<th>Egreso</th>
+			<th>Ton / trabajada</th>
 			<th>Responsable</th>
 			<th>Peso en</th>
 			<th>Precio / TON</th>
@@ -100,14 +101,17 @@ h1 {
 		$ingreso = 0;
 	@endphp
 	@foreach($material->movimientos as $key => $movimiento )
+		@if($movimiento->cantidad_ingreso > 0)
 		<tr>
 			<td>{{ $material->descripcion }}</td>
 			<td>{{ $material->unidad_medida->codigo_unidad }}</td>
-			<td>{{ $movimiento->mina->nombre_mina }}</td>
+			<td>{{ $movimiento->centro_costos->nombre_centro }}</td>
+			<td> {{ $movimiento->etapa_produccion->nombre_etapa }} </td>
+			<td>{{ $movimiento->disciplina->nombre_diciplina }}</td>
 			<td>{{ ( is_null($movimiento->fecha_ingreso) )? $movimiento->fecha_salida->format('d-m-Y') : $movimiento->fecha_ingreso->format('d-m-Y') }}</td>
+			
 			<td>{{ $movimiento->observacion }}</td>
 			<td>{{ number_format($movimiento->cantidad_ingreso, 2)  }}</td>
-			<td>{{ number_format($movimiento->cantidad_salida , 2) }}</td>
 			<td>{{ $movimiento->persona->primer_nombre.' '.$movimiento->persona->primer_apellido }}</td>
 			<td>{{ $movimiento->peso_en }}</td>
 			<td>{{ number_format($movimiento->monto_tonelada, 2) }}</td>
@@ -119,6 +123,7 @@ h1 {
 					$ingreso += $movimiento->total_movimiento;
 			@endphp
 		</tr>
+		@endif
 
 		@if( $key > 0 && isset($material->movimientos[$key+1]) && $material->movimientos[$key]->created_at->format('d-m-Y') != $material->movimientos[$key+1]->created_at->format('d-m-Y') )
 			<tr>
@@ -140,8 +145,10 @@ h1 {
 				<td class="td-totales">&nbsp;</td>
 				<td class="td-totales">&nbsp;</td>
 				<td class="td-totales">&nbsp;</td>
+				<td class="td-totales">&nbsp;</td>
+				<td class="td-totales">&nbsp;</td>
 				<td class="td-totales">
-					<strong>{{ number_format($ingreso - $egreso , 2) }}</strong>
+					<strong>{{ number_format($ingreso , 2) }}</strong>
 				</td>
 			</tr>
 		@endif
@@ -157,8 +164,9 @@ h1 {
 			<td class="td-totales">&nbsp;</td>
 			<td class="td-totales">&nbsp;</td>
 			<td class="td-totales">&nbsp;</td>
+			<td class="td-totales">&nbsp;</td>
 			<td class="td-totales">
-				<strong>{{ number_format($ingreso - $egreso, 2) }}</strong>
+				<strong>{{ number_format($ingreso, 2) }}</strong>
 			</td>
 		</tr>
 	</tbody>

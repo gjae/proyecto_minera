@@ -96,7 +96,7 @@ class Minas extends Controller
                 ])->render();
 
         $pdf = PDF::loadHtml($vista);
-        $pdf->setPaper('a4', 'landscape');
+        $pdf->setPaper('B5', 'landscape');
         return $pdf->stream('movimientos_'.Carbon::now()->format('d_m_Y'), ['attachment' => 0]);
      }
 

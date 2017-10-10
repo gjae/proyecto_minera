@@ -89,7 +89,15 @@
 					</select>
 				</div>
 				<div class="col-sm-12 col-lg-3 col-md-3">
-					
+					<label for="">Disciplina</label>
+					<select name="diciplina_id" id="diciplina_id" class="form-control" required="Usted debe seleccionar un item de la lista">
+						<option value="">-- SELECCIONE UNO --</option>
+						@foreach (App\Models\requisicion\Diciplina::where('edo_reg', 1)->get() as $disciplina)
+							<option value="{{ $disciplina->id }}">
+								{{ $disciplina->nombre_diciplina }}
+							</option>
+						@endforeach
+					</select>
 				</div>
 			</div>
 			<div class="row clearfix">
