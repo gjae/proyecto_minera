@@ -84,10 +84,10 @@ class Personal extends Controller
 				return view('modulos.nomina.liquidacion', $data_vista);
 			}
 			else{
-			   return redirect()->to( url('dashboard/nomina/personal') )->with('error', 'ESTA PERSONA NO SE ENCUENTRA ACTIVA, NO SE LE PUEDE PROCESAR LA LIQUIDACION O YA POSEE LIQUIDACION');
+			   return redirect()->to( url('index.php/dashboard/nomina/personal') )->with('error', 'ESTA PERSONA NO SE ENCUENTRA ACTIVA, NO SE LE PUEDE PROCESAR LA LIQUIDACION O YA POSEE LIQUIDACION');
 			 }
 		}
-		return redirect()->to( url('dashboard/nomina/personal') );
+		return redirect()->to( url('index.php/dashboard/nomina/personal') );
 	}
 
 	public function guardarAjusteAPersona($req){

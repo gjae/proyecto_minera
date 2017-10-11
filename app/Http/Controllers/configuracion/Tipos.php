@@ -46,7 +46,7 @@ class Tipos extends Controller
     			] ,200)->header('Content-Type', 'application/json');
     	}
 
-    	return redirect()->to(  url('dashboard/configuracion/etapas'));
+    	return redirect()->to(  url('index.php/dashboard/configuracion/etapas'));
     }
 
     public function editar($req){
@@ -66,7 +66,7 @@ class Tipos extends Controller
 
     	}
 
-    	return redirect()->to( url('dashboard/configuracion/etapas') );
+    	return redirect()->to( url('index.php/dashboard/configuracion/etapas') );
 
     }
 
@@ -87,6 +87,6 @@ class Tipos extends Controller
     			], 200)->header('Content-Type', 'application/json');
     	}
 
-    	return redirect()->to( url('dashboard/configuracion/etapas') );
+    	return redirect()->to( url('index.php/dashboard/configuracion/etapas') );
     }
 }

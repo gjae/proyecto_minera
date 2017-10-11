@@ -44,7 +44,7 @@ class Unidades extends Controller
     			], 200)->header('Content-Type','application/json');
     	}
 
-    	return redirect()->to( url('dashboard/configuracion/unidades') );
+    	return redirect()->to( url('index.php/dashboard/configuracion/unidades') );
 
     }
 
@@ -64,7 +64,7 @@ class Unidades extends Controller
 	    		],200)->header('Content-Type', 'application/json');
 	    }
 
-	    return redirect()->to( url('dashboard/coniguracion/unidades') );
+	    return redirect()->to( url('index.php/dashboard/coniguracion/unidades') );
     }
 
     public function eliminar($req){
@@ -84,6 +84,6 @@ class Unidades extends Controller
     			], 200)->header('Content-Type', 'application/json');
 
     	}
-    	return redirect()->to( url('dashboard/configuracion/unidades') );
+    	return redirect()->to( url('index.php/dashboard/configuracion/unidades') );
     }
 }

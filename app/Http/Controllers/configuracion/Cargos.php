@@ -33,7 +33,7 @@ class Cargos extends Controller
     public function guardar($req){
 
     	if(!$req->method('post') ){
-    		return redirect()->to( url('dashboard/configuracion/cargos') );
+    		return redirect()->to( url('index.php/dashboard/configuracion/cargos') );
     	}
     	DB::beginTransaction();
     	try {
@@ -91,7 +91,7 @@ class Cargos extends Controller
     				] ,200)->header('Content-Type', 'application/json');
     		}
     	}else{
-    		return redirect()->to( url('dashboard/configuracion/cargos') );
+    		return redirect()->to( url('index.php/dashboard/configuracion/cargos') );
     	}
     }
 
@@ -106,7 +106,7 @@ class Cargos extends Controller
     		}
 
     	}else{
-    		return redirect()->to( url('dashboard/configuracion/cargos') );
+    		return redirect()->to( url('index.php/dashboard/configuracion/cargos') );
     	}
     }
 }

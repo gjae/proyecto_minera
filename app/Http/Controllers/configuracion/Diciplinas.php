@@ -48,7 +48,7 @@ class Diciplinas extends Controller
     			] ,200)->header('Content-Type', 'application/json');
     	}
 
-    	return redirect()->to(  url('dashboard/configuracion/etapas'));
+    	return redirect()->to(  url('index.php/dashboard/configuracion/etapas'));
     }
 
     public function editar($req){
@@ -68,7 +68,7 @@ class Diciplinas extends Controller
 
     	}
 
-    	return redirect()->to( url('dashboard/configuracion/etapas') );
+    	return redirect()->to( url('index.php/dashboard/configuracion/etapas') );
 
     }
 
@@ -89,6 +89,6 @@ class Diciplinas extends Controller
     			], 200)->header('Content-Type', 'application/json');
     	}
 
-    	return redirect()->to( url('dashboard/configuracion/etapas') );
+    	return redirect()->to( url('index.php/dashboard/configuracion/etapas') );
     }
 }
