@@ -17,7 +17,7 @@ class CreateCiudadesTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('nombre_ciudad', 150);
-            $table->string('codigo_ciudad');
+            $table->string('codigo_ciudad')->nullable();
 
             $table->tinyInteger('edo_ciudad')->default(1);
            $table->index('codigo_ciudad', 'in_coc');
