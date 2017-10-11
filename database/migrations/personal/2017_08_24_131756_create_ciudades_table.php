@@ -20,7 +20,7 @@ class CreateCiudadesTable extends Migration
             $table->string('codigo_ciudad');
 
             $table->tinyInteger('edo_ciudad')->default(1);
-           // $table->index(['codigo_ciudad']);
+           $table->index('codigo_ciudad', 'in_coc');
         });
     }
 

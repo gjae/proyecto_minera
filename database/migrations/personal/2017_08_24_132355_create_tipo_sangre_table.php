@@ -20,7 +20,7 @@ class CreateTipoSangreTable extends Migration
             $table->string('abreviatura_tipo', 10);
 
             $table->tinyInteger('edo_tipo');
-           // $table->index(['abreviatura_tipo']);
+           $table->index('abreviatura_tipo', 'abrti');
         });
     }
 

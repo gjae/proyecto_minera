@@ -37,6 +37,7 @@ class CreatePersonasTable extends Migration
             $table->integer('ciudad_id')->unsigned();
             $table->integer('mina_id')->unsigned()->default(1);
 
+            $table->index('identificacion', 'idnt');
             $table->enum('estado_persona', ['ACTIVA', 'INACTIVA', 'DESPEDIDA', 'JUBILADA', 'DISCAPACITADA'])->default('ACTIVA');
             
             $table->enum('sexo', ['HOMBRE', 'MUJER'])->nullable();
