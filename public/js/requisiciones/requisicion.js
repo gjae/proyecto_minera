@@ -47,7 +47,7 @@ function agregarFila(event, inputs){
 }
 function agregarDetalle(event, codigo){
 	if( event.keyCode == 13){
-		var url = location.host+'/dashboard/requisicion/requisicion/consultarMaterial?codigo='+codigo.value
+		var url = location.host+'/index.php/dashboard/requisicion/requisicion/consultarMaterial?codigo='+codigo.value
 		if( codigo.value == "" ){
 			alert("NO SE HA INGRESADO UN CODIGO VALIDO")
 			return false;
@@ -89,12 +89,12 @@ function guardar(event, datos){
 			alert("El formulario aun tiene datos que no han sido completados");
 			return false;
 		}
-		var url = location.host +'/dashboard/requisicion/requisicion/guardar';
+		var url = location.host +'/index.php/dashboard/requisicion/requisicion/guardar';
 		$.post('http://'+url, datos, function(resp){
 			alert(resp.mensaje)
 			if(!resp.error)
 			{
-				var url = location.host +'/dashboard/requisicion/requisicion/printRequisicion?codigo='+resp.codigo;
+				var url = location.host +'/index.php/dashboard/requisicion/requisicion/printRequisicion?codigo='+resp.codigo;
 				window.open('http://'+url, "INVITACIONES"  ,"width=800,height=900")
 				filas = 0
 				location.reload()
@@ -106,7 +106,7 @@ function guardar(event, datos){
 }
 
 function imprimir(event, click){
-	var url = location.host +'/dashboard/requisicion/requisicion/printRequisicion?codigo='+resp.codigo;
+	var url = location.host +'/index.php/dashboard/requisicion/requisicion/printRequisicion?codigo='+resp.codigo;
 }
 
 function calcular(event, button){

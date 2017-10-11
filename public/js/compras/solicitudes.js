@@ -3,7 +3,7 @@ $(document).ready(function(){
 
 	$(".actions").on('click', function(){
 		var modal = $("#modal-compras")
-		var url = location.host + '/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role');
+		var url = location.host + '/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role');
 		$.getJSON('http://'+url, {}, function(resp){
 			if( !resp.error){
 				$("#form-modal").html(resp.formulario);
@@ -15,7 +15,7 @@ $(document).ready(function(){
 
 	$("#guardar").on('click', function(){
 		var datos = $("#"+$(this).attr('form-id')).serialize();
-		var url = location.host + '/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role');
+		var url = location.host + '/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role');
 		if( $(".requisiciones").val() == undefined || $(".proveedores").val() == undefined  ){
 			alert("ASEGURESE DE HABER AGREGADO ALGUN PROVEEDOR Y ALGUNA REQUISICION")
 			return false;
@@ -29,7 +29,7 @@ $(document).ready(function(){
 			alert(resp.mensaje)
 			if(! resp.error)
 			{
-				var url = location.host + '/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/printInvitacion?codigo='+resp.codigo
+				var url = location.host + '/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/printInvitacion?codigo='+resp.codigo
 				window.open('http://'+url, "INVITACIONES"  ,"width=800,height=900")
 				//location.reload();
 			}

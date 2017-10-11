@@ -27,7 +27,7 @@ $(document).ready(function(){
 	$(".print").on('click', function(){
 		switch( $(this).attr('role') ){
 			case 'liquidacion' :{
-				var url = 'http://'+location.host+'/dashboard/nomina/liquidacion/imprimir?liquidacion='+$(this).attr('liquidacion')
+				var url = 'http://'+location.host+'/index.php/dashboard/nomina/liquidacion/imprimir?liquidacion='+$(this).attr('liquidacion')
 				window.open(url, 'RECIBO DE LIQUIDACION' ,"width=800,height=900");
 				break;
 			}
@@ -53,7 +53,7 @@ $(document).ready(function(){
 
 	$("#generar").on('click', function(){
 		var filtros = $("#form-modal").serialize();
-		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/reportes'
+		var url = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/reportes'
 		url+='?'+filtros
 		//alert(url)
 		window.open(url, 'REPORTE DE PERSONAL', 'width=950,height=850');

@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 	$(".actions").on('click', function(){
 		var modal = $("#modal-coniguracion")
-		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/formularios?form='+$(this).attr('role')
+		var url = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/formularios?form='+$(this).attr('role')
 		url+= '&id='+$(this).attr('data-id')
 
 		//alert($(this).attr('role'))
@@ -17,7 +17,7 @@ $(document).ready(function(){
 		}
 		else{
 			if(confirm("¿SEGURO QUE DESEA ELIMINAR ESTE REGISTRO?")){
-				var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
+				var url = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
 		
 				$.post(url, {'_token': $(this).attr('token'), 'id': $(this).attr('data-id')}, function(resp){
 					alert(resp.mensaje)
@@ -30,7 +30,7 @@ $(document).ready(function(){
 
 	$("#salvar").on('click', function(){
 		var datos = $("#form-modal").serialize()
-		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$("#accion").val()
+		var url = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$("#accion").val()
 		//alert(datos)
 		console.log(datos.indexOf('=&'))
 		if( datos.indexOf('=&') == -1 && confirm("¿SEGURO QUE DESEA GUARDAR ESTOS DATOS?")){
