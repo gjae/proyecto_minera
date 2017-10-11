@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 	$(".actions").on('click', function(){
-		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
+		var url = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
 		var modal = $("#modal-compras");
 		$.getJSON(url, {}, function(resp){
 			if(! resp.error){
@@ -16,7 +16,7 @@ $(document).ready(function(){
 			alert("NO SE HA AGREGADO UN PROVEEDOR")
 			return false;
 		}
-		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
+		var url = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
 		url+='?proveedor_id='+$("#proveedor_id").val()
 		var modal = $("#modal-compras");
 		$.getJSON(url, {}, function(resp){
@@ -28,7 +28,7 @@ $(document).ready(function(){
 	})
 
 	$("#guardar").on('click', function(){
-		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/guardarRegistro';
+		var url = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/guardarRegistro';
 		//alert(url)
 
 		if($("#registro").serialize().indexOf('=&') != -1){
@@ -38,12 +38,12 @@ $(document).ready(function(){
 		$.post(url, $("#registro").serialize(), function(resp){
 			alert(resp.mensaje)
 			if(! resp.error)
-				location.href = 'http://'+location.host+'/dashboard/compras/Cotizaciones/registrar';
+				location.href = 'http://'+location.host+'/index.php/dashboard/compras/Cotizaciones/registrar';
 		})
 	})
 
 	$("#agregarRequisicion").on('click', function(){
-		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
+		var url = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
 		url+='?invitacion='+$("#solicitud").val()
 		alert(url)
 		return false;
@@ -76,7 +76,7 @@ function agregarInvitacion(event, boton){
 		$("#solicitud").val(boton.getAttribute('data-id'))
 		boton.classList.add('disabled');
 	}
-	var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/detalles'
+	var url = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/detalles'
 	url += '?proveedor_id='+$("#proveedor_id").val()+'&solicitud='+boton.getAttribute('codigo')
 	location.href = url;
 }

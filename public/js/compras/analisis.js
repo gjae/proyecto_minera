@@ -3,7 +3,7 @@ $(document).ready(function(){
 	$(".acciones").on('click', function(){
 
 		var modal = $("#modal-compras");
-		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()
+		var url = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()
 		url+='/'+$(this).attr('role')
 		url+='?codigo='+$(this).attr('codigo')
 		//alert(url)
@@ -22,7 +22,7 @@ $(document).ready(function(){
 			alert("AUN LE FALTAN DATOS DEL FORMULARIO POR COMPLETAR");
 			return false;
 		}
-		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()
+		var url = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()
 		url += '/'+$(this).attr('role')
 		
 		//alert(datos)
@@ -36,12 +36,12 @@ $(document).ready(function(){
 })
 
 function cargarRegistro(evento, boton){
-	var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/cargarRegistro?codigo='+boton.getAttribute('codigo')
+	var url = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/cargarRegistro?codigo='+boton.getAttribute('codigo')
 	location.href = url;
 }
 
 function imprimir(event, boton){
-	var url = 'http://'+location.host+'/dashboard/compras/analisis/imprimir?codigo='+boton.getAttribute('codigo')
+	var url = 'http://'+location.host+'/index.php/dashboard/compras/analisis/imprimir?codigo='+boton.getAttribute('codigo')
 	window.open(url, 'MEJOR OFERTA', 'width=800,height=490');
 
 }

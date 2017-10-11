@@ -37,7 +37,7 @@ $(document).ready(function(){
 			return false;
 		}
 		else{
-			var url = 'http://'+location.host+'/dashboard/inventario/'+$("#_archivo").val()+'/'+$("#accion").val()
+			var url = 'http://'+location.host+'/index.php/dashboard/inventario/'+$("#_archivo").val()+'/'+$("#accion").val()
 			//alert(url)
 
 			if(confirm("¿Seguro de guardar estos datos?")){
@@ -70,7 +70,7 @@ $(document).ready(function(){
 			var url = location.href+'/'+$(this).attr('role');
 			if( typeof(ref) != undefined )
 			{
-				var url = location.protocol+'//'+location.host+'/dashboard/inventario/reportes/datos_generales?ref='+ref.val()
+				var url = location.protocol+'//'+location.host+'/index.php/dashboard/inventario/reportes/datos_generales?ref='+ref.val()
 			}
 
 			window.open(url, "FORMATO DE CONTROL DE BODEGA"  ,"width=800,height=900")
@@ -82,12 +82,12 @@ $(document).ready(function(){
 		var datos = $("#form-modal")
 		
 		var tipo = $("#tipo_reporte").val();
-		var url = location.host+'/dashboard/inventario/reportes/'+$("#tipo_reporte").val()+'?material_id='+$("#material_reporte").val()
+		var url = location.host+'/index.php/dashboard/inventario/reportes/'+$("#tipo_reporte").val()+'?material_id='+$("#material_reporte").val()
 		url +=  '&fecha_desde='+$("#fecha_desde").val()+"&fecha_hasta="+$("#fecha_hasta").val()
 		var ref = $("#ref")
 
 		if( ref.val() != undefined ){
-			var url = location.host+'/dashboard/inventario/'+ref.val()+'/'+$("#tipo_reporte").val()+'?material_id='+$("#material_reporte").val()
+			var url = location.host+'/index.php/dashboard/inventario/'+ref.val()+'/'+$("#tipo_reporte").val()+'?material_id='+$("#material_reporte").val()
 			url +=  '&fecha_desde='+$("#fecha_desde").val()+"&fecha_hasta="+$("#fecha_hasta").val()
 			url+='&ref='+ref.val()	
 		}
@@ -95,7 +95,7 @@ $(document).ready(function(){
 		window.open('http://'+url, "INVITACIONES"  ,"width=800,height=900")	
 	})
 	$(".formularios").on('click', function(){
-		var url = location.protocol+'//'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/formulario?form='+$(this).attr('formulario')
+		var url = location.protocol+'//'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/formulario?form='+$(this).attr('formulario')
 		
 		var id = 0;
 		if( $(this).attr('formulario') == 'editar_usuario'   ||  
@@ -133,7 +133,7 @@ $(document).ready(function(){
 	$(".eliminar").on('click', function(){
 		if(confirm('¿SEGURO QUE DESEA REALIZAR ESTA ACCION?, UNA VEZ ACEPTADA NO PODRA REVERTIRSE'))
 		{
-			var url = location.protocol+'//'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/eliminar';
+			var url = location.protocol+'//'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/eliminar';
 			$.post(url, {id: $(this).attr('data-id'), '_token': $("#token").val() }, function(resp){
 				alert(resp.mensaje);
 				if(! resp.error)
@@ -154,7 +154,7 @@ function buscar_tipo(event,select){
 			$("#fecha_hasta").val("01-01-2017");
 			side_fechas.addClass('hidden')
 		}
-		var url = location.host+'/dashboard/inventario/reportes/'+select.value+'?material_id='+$("#material_reporte").val()
+		var url = location.host+'/index.php/dashboard/inventario/reportes/'+select.value+'?material_id='+$("#material_reporte").val()
 		var ref = $("#ref")
 		if( ref.val() != undefined )	
 			url+='&ref='+ref.val()	

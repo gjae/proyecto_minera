@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 	$(".acciones").on('click', function(){
 
-		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()
+		var url = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()
 		url += '/'+$(this).attr('role')
 		var modal = $("#modal-compras");
 		$.getJSON(url, {}, function(resp){
@@ -20,7 +20,7 @@ $(document).ready(function(){
 		if( datos.indexOf('=&') == -1){
 			if(confirm('¿SEGURO QUE DESEA GUARDAR ESTOS DATOS?')){
 
-				var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val();
+				var url = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val();
 				
 				$.post(url+'/guardar', datos , function(resp){
 					alert(resp.mensaje);
@@ -31,7 +31,7 @@ $(document).ready(function(){
 	})
 
 	$(".opciones").on('click' ,function(){
-		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
+		var url = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
 		if( !($("#programa").val() == 'analisis') )
 			url += '?orden='+$(this).attr('orden')
 		else
@@ -41,7 +41,7 @@ $(document).ready(function(){
 	})
 
 	$(".eliminar_valuacion").on('click', function(){
-		var url = location.protocol+'//'+location.host+'/dashboard/compras/Valuaciones/eliminar';
+		var url = location.protocol+'//'+location.host+'/index.php/dashboard/compras/Valuaciones/eliminar';
 
 		if( confirm('¿Seguro que desea realizar esta accion?') ){
 			$.post(url, {'_token': $("#token").val(), 'id': $(this).attr('data-id') }, function(res){
@@ -54,7 +54,7 @@ $(document).ready(function(){
 	})
 
 		$(".eliminar_variacion").on('click', function(){
-		var url = location.protocol+'//'+location.host+'/dashboard/compras/Variaciones/eliminar';
+		var url = location.protocol+'//'+location.host+'/index.php/dashboard/compras/Variaciones/eliminar';
 
 		if( confirm('¿Seguro que desea realizar esta accion?') ){
 			$.post(url, {'_token': $("#token").val(), 'id': $(this).attr('data-id') }, function(res){
@@ -68,7 +68,7 @@ $(document).ready(function(){
 })
 
 function cargarAnalisis(event, boton){
-	var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()
+	var url = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()
 	url += '/'+boton.getAttribute('role')+'?codigo='+boton.getAttribute('codigo')
 	location.href = url
 }

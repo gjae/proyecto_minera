@@ -1,7 +1,7 @@
  $(document).ready(function(){
 
 	$(".actions").on('click', function(){
-		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
+		var url = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
 		var modal = $("#modal-personal")
 		var nomina = $(this).attr('nomina')
 
@@ -30,7 +30,7 @@
 
 	$("#cerrar").on('click', function(){
 		if(confirm("¿ESTA SEGURO DE REALIZAR ESTA ACCION? UNA VEZ CERRADA NO PODRA SEGUIR TRABAJANDOLA")){
-			var url = 'http://'+location.host+'/dashboard/nomina/nomina/cerrar';
+			var url = 'http://'+location.host+'/index.php/dashboard/nomina/nomina/cerrar';
 			$(this).addClass('disabled')
 			$.post(url, {'_token': $(this).attr('token'), 'nomina': $(this).attr('nomina-id')}, function(resp){
 				
@@ -65,7 +65,7 @@
 
 	$("#salvar").on('click', function(){
 		//alert("SI")
-		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$("#accion").val()
+		var url = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$("#accion").val()
 		var datos = $("#form-modal").serialize();
 
 		if( datos.indexOf('=&') == -1 ){
@@ -81,7 +81,7 @@
 	})
 
 	$("#agregar_persona").on('click', function(){
-		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
+		var url = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
 		var modal = $("#modal-personal")
 
 		$.getJSON(url, {}, function(resp){
@@ -97,31 +97,31 @@
 	})
 
 	$("#guardarTrabajo").on('click', function(){
-		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
+		var url = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
 		var datos = $("#"+$(this).attr('formulario')).serialize()
 		if( confirm('¿SEGURO DE GUARDAR ESTOS DATOS?') ){
 			$.post(url, datos, function(resp){
 				alert(resp.mensaje)
 				if(! resp.error)
-					location.href = 'http://'+location.host+'/dashboard/nomina/Nomina/trabajar';
+					location.href = 'http://'+location.host+'/index.php/dashboard/nomina/Nomina/trabajar';
 			})
 		}
 	})
 
 	$(".reportes").on('click', function(){
-		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
+		var url = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/'+$(this).attr('role')
 		window.open(url+'?codigo_nomina='+$(this).attr('codigo-nomina'), "REPORTE DE NOMINA HASTA ESTE MOMENTO"  ,"width=800,height=900")
 	});
 
 	$("#reportes").on('click', function(){
 		var datos = $("#form-modal").serialize();
-		var url = location.protocol+'//'+location.host+'/dashboard/nomina/Nomina/reportes?'+datos
+		var url = location.protocol+'//'+location.host+'/index.php/dashboard/nomina/Nomina/reportes?'+datos
 		window.open(url, 'RECIBOS DE NOMINA', 'width=800,height=900')
 	})
 })
 
 function cargarPersona(event, boton){
-	var url = 'http://'+location.host+'/dashboard/nomina/Nomina/trabajarPersona?codigo_nomina='+$("#codigo_nomina").val()
+	var url = 'http://'+location.host+'/index.php/dashboard/nomina/Nomina/trabajarPersona?codigo_nomina='+$("#codigo_nomina").val()
 	url += '&persona='+boton.getAttribute('persona-id');
 	location.href = url
 }
