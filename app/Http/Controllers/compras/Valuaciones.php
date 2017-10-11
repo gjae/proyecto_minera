@@ -33,12 +33,12 @@ class Valuaciones extends Controller
 		//return dd($req->all());
 		if($valuacion->save()){
 			return redirect()
-					->to( url('dashboard/compras/Valuaciones?orden='.$req->orden_id) )
+					->to( url('index.php/dashboard/compras/Valuaciones?orden='.$req->orden_id) )
 					->with('correcto',  'EL REGISTRO HA SIDO INCLUIDO CORRECTAMENTE');
 		}
 		else{
 			return redirect()
-					->to( url('dashboard/compras/Valuaciones?orden='.$req->orden_id) )
+					->to( url('index.php/dashboard/compras/Valuaciones?orden='.$req->orden_id) )
 					->with('error', 'EL REGISTRO NO PUDO SER GUARDADO EN LA BASE DE DATOS , INTENTELO MAS TARDE!');
 		}
 	}

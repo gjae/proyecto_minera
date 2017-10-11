@@ -60,7 +60,7 @@ class Proveedores extends Controller
 
 	    	return response($data, 200)->header('Content-Type',' application/json');
 	    }
-	    return redirect()->to( url('dashboard/configuracion/proveedores') );
+	    return redirect()->to( url('index.php/dashboard/configuracion/proveedores') );
     }
 
     public function editar($req){
@@ -86,7 +86,7 @@ class Proveedores extends Controller
     				], 200)->header('Content-Type', 'application/json');
     		}
     	}
-    	return redirect()->to( url('dashboard/configuracion/proveedores') );
+    	return redirect()->to( url('index.php/dashboard/configuracion/proveedores') );
     }
 
     public function eliminar($req){

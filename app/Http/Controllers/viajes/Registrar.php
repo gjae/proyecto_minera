@@ -52,7 +52,7 @@ class Registrar extends Controller
     				'vehiculo' => Vehiculo::find($req->id)
     			]);
     	}
-    	return redirect()->to( url('dashboard/viajes/registrar') );
+    	return redirect()->to( url('index.php/dashboard/viajes/registrar') );
     }
 
     public function buscar_personas($req){
@@ -69,10 +69,10 @@ class Registrar extends Controller
     	if( $req->method('post') ){
     		$t = new Transporte($req->all());
     		if($t->save()){
-    			return redirect()->to( url('dashboard/viajes/registrar') )->with('correcto', 'LOS DATOS HAN SIDO ALMACENADOS DE MANERA CORRECTA');
+    			return redirect()->to( url('index.php/dashboard/viajes/registrar') )->with('correcto', 'LOS DATOS HAN SIDO ALMACENADOS DE MANERA CORRECTA');
     		}
     		else{
-    			return redirect()->to( url('dashboard/viajes/registrar') )->with('error', 'HA OCURRIDO UN ERROR INESPERADO AL INTENTAR ALMACENAR LOS DATOS');
+    			return redirect()->to( url('index.php/dashboard/viajes/registrar') )->with('error', 'HA OCURRIDO UN ERROR INESPERADO AL INTENTAR ALMACENAR LOS DATOS');
     		}
     	}
     	return redirect()->to( url('dashboard') );

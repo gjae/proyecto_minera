@@ -50,7 +50,7 @@ class Centros extends Controller
 	    			'mensaje' => 'HA OCURRIDO UN ERROR AL INTENTAR INSERTAR EL REGISTRO , INTENTE LUEGO'
 	    		],200)->header('Content-Type', 'application/json');
 	    }
-	    return redirect()->to( url('dashboard/configuracion/centros') );
+	    return redirect()->to( url('index.php/dashboard/configuracion/centros') );
 
 
     }
@@ -74,7 +74,7 @@ class Centros extends Controller
 	    			'mensaje' => 'ERROR AL INTENTAR EDITAR LOS DATOS DEL CENTRO'
 	    		], 200)->header('Content-Type', 'application/json');
 	    }
-	    return redirect()->to( url('dashboard/configuracion/centros') );
+	    return redirect()->to( url('index.php/dashboard/configuracion/centros') );
     }
 
     public function eliminar($req){
@@ -94,6 +94,6 @@ class Centros extends Controller
     				'mensaje' =>' ERROR AL INTENTAR SUPRINIR EL REGISTRO'
     			], 200)->header('Content-Type', 'application/json');
     	}
-    	return redirect()->to( url('dashboard/configuraciones/centros') );
+    	return redirect()->to( url('index.php/dashboard/configuraciones/centros') );
     }
 }	

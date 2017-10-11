@@ -44,7 +44,7 @@ class Vehiculos extends Controller
     			], 200)->header('Content-Type', 'application/json');
     	}
 
-    	return redirect()->to( url('dashboard/configuracion/vehiculos') );
+    	return redirect()->to( url('index.php/dashboard/configuracion/vehiculos') );
     }
 
     public function eliminar($req){
@@ -56,7 +56,7 @@ class Vehiculos extends Controller
     				] , 200)->header('Content-Type', 'application/json');
     		}
     	}
-    	return redirect()->to( url('dashboard/configuracion/vehiculos') );
+    	return redirect()->to( url('index.php/dashboard/configuracion/vehiculos') );
     }
 
     public function guardar($req){
@@ -79,7 +79,7 @@ class Vehiculos extends Controller
     			], 200)->header('Content-Type', 'application/json');
     	}
 
-    	return redirect()->to( url('dashboard/configuracion/vehiculos') ); 
+    	return redirect()->to( url('index.php/dashboard/configuracion/vehiculos') ); 
     }
 
 }

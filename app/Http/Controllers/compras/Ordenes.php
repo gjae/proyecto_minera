@@ -59,12 +59,12 @@ class Ordenes extends Controller
                     }
                 }
                 return redirect()
-                    ->to( url('dashboard/compras/ordenes/ordenes') )
+                    ->to( url('index.php/dashboard/compras/ordenes/ordenes') )
                     ->with('correcto','LOS ARCHIVOS HAN SIDO CARGADOS CORRECTAMENTE');
             }            
         } catch (\Exception $e) {
             return redirect()
-                    ->to( url('dashboard/compras/ordenes/ordenes') )
+                    ->to( url('index.php/dashboard/compras/ordenes/ordenes') )
                     ->with('error', 'ERROR AL PROCESAR UNO DE LOS ARCHIVOS: '.$e->getMessage());
         }
     }
@@ -147,7 +147,7 @@ class Ordenes extends Controller
             return response()->download($ruta, $archivo->nombre_original, $headers);
         }
         return redirect()
-                ->to( url('dashboard/compras/ordenes/ordenes') )
+                ->to( url('index.php/dashboard/compras/ordenes/ordenes') )
                 ->with('error','EL ARCHIVO QUE INTENTA DESCARGAR NO EXISTE, O EL POST HA SIDO RETIRADO');
     }
     public function buscarAnalisis($req){

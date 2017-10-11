@@ -49,7 +49,7 @@ class Liquidacion extends Controller
     	$p = Persona::find($req->persona_id);
 
     	if( $p->estado_persona == 'INACTIVA' ){
-    		return redirect()->to( url('dashboard/nomina/personal') )->with('error', 'ESTA PERSONA NO SE ENCUENTRA ACTIVA, NO SE LE PUEDE PROCESAR LA LIQUIDACION O YA POSEE LIQUIDACION');
+    		return redirect()->to( url('index.php/dashboard/nomina/personal') )->with('error', 'ESTA PERSONA NO SE ENCUENTRA ACTIVA, NO SE LE PUEDE PROCESAR LA LIQUIDACION O YA POSEE LIQUIDACION');
     	}
 
     	$dias_trabajados = $fecha_retiro->diffInDays($p->fecha_ingreso);
@@ -88,7 +88,7 @@ class Liquidacion extends Controller
 					if( $p->save() )
 					{
 						DB::commit();
-						return redirect()->to( url('dashboard/nomina/personal?persona='.$req->persona_id) )->with('correcto', 'LA LIQUIDACION HA SIDO PROCESADA CORRECTAMENTE');
+						return redirect()->to( url('index.php/dashboard/nomina/personal?persona='.$req->persona_id) )->with('correcto', 'LA LIQUIDACION HA SIDO PROCESADA CORRECTAMENTE');
 					}
 				}
 			}
@@ -97,7 +97,7 @@ class Liquidacion extends Controller
 		}catch(\Exception $e){
 			DB::rollback();
 			return dd($e->getMessage());
-			return redirect()->to( url('dashboard/nomina/personal/liquidacion?persola='.$req->persona_id) )->with('error', 'ERROR AL INTENTAR PROCESAR LA LIQUIDACION , INTENTE LUEGO ');
+			return redirect()->to( url('index.php/dashboard/nomina/personal/liquidacion?persola='.$req->persona_id) )->with('error', 'ERROR AL INTENTAR PROCESAR LA LIQUIDACION , INTENTE LUEGO ');
 		} 	
     }
 

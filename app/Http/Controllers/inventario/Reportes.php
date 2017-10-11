@@ -103,6 +103,6 @@ class Reportes extends Controller
                 return $pdf->stream('hoja_vida_'.$material->nombre_material, ['attachment' => 0]);
             }
         }
-        return redirect()->to( url('dashboard/inventario/inventario') )->with('error', 'NO SE HA PODIDO ENCONTRAR EL MATERIAL SOLICITADO');
+        return redirect()->to( url('index.php/dashboard/inventario/inventario') )->with('error', 'NO SE HA PODIDO ENCONTRAR EL MATERIAL SOLICITADO');
     }
 }

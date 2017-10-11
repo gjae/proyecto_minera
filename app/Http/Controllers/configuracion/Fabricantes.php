@@ -58,7 +58,7 @@ class Fabricantes extends Controller
     				] ,200)->header('Content-Type', 'application/json');
     		}
     	}else{
-    		return redirect()->to( url('dashboard/configuracion/cargos') );
+    		return redirect()->to( url('index.php/dashboard/configuracion/cargos') );
     	}
     }
 
@@ -73,14 +73,14 @@ class Fabricantes extends Controller
     		}
 
     	}else{
-    		return redirect()->to( url('dashboard/configuracion/cargos') );
+    		return redirect()->to( url('index.php/dashboard/configuracion/cargos') );
     	}
     }
 
     public function guardar($req){
 
     	if(!$req->method('post') ){
-    		return redirect()->to( url('dashboard/configuracion/bancos') );
+    		return redirect()->to( url('index.php/dashboard/configuracion/bancos') );
     	}
     	DB::beginTransaction();
     	try {

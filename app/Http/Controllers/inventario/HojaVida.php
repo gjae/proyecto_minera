@@ -19,7 +19,7 @@ class HojaVida extends Controller
 	    				'material' => $material
 	    			]);
 	    	}
-	    	return redirect()->to( url('dashboard/inventario/inventario') )->with('error', 'ERROR: EL ARTICULO QUE INTENTA BUSCAR NO EXISTE, INTENTE MAS TARDE');
+	    	return redirect()->to( url('index.php/dashboard/inventario/inventario') )->with('error', 'ERROR: EL ARTICULO QUE INTENTA BUSCAR NO EXISTE, INTENTE MAS TARDE');
     	}
     }
 
@@ -29,14 +29,14 @@ class HojaVida extends Controller
         try {
             if( $ficha->save() ){
                 \DB::commit();
-                return redirect()->to( url('dashboard/inventario/inventario') )->with('correcto', 'LOS DATOS HAN SIDO ALMACENADOS DE MANERA CORRECTA');
+                return redirect()->to( url('index.php/dashboard/inventario/inventario') )->with('correcto', 'LOS DATOS HAN SIDO ALMACENADOS DE MANERA CORRECTA');
             }
             else
                 throw new \Exception("LOS DATOS NO HAN PODIDO INSERTAR LOS DATOS DE MANERA CORRECTA, VERIFIQUE Y VUELVA A INTENTAR", 1);
                 
         } catch (\Exception $e) {
             \DB::rollback();
-            return redirect()->to( url('dashboard/inventario/inventario') )->with('error', $e->getMessage());
+            return redirect()->to( url('index.php/dashboard/inventario/inventario') )->with('error', $e->getMessage());
         }
     }
 }

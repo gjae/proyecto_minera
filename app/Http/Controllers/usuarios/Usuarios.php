@@ -28,7 +28,7 @@ class Usuarios extends Controller
    			return response([
    					'error' => false,
    					'formulario' => $vista,
-   					'action' => url('dashboard/usuarios/usuarios/crud'),
+   					'action' => url('index.php/dashboard/usuarios/usuarios/crud'),
    				], 200)->header('Content-Type', 'application/json');
 
    		} catch (\Exception $e) {
@@ -47,14 +47,14 @@ class Usuarios extends Controller
 
    		if( $usuario ){
    			return redirect()
-   					->to( url('dashboard/usuarios') )
+   					->to( url('index.php/dashboard/usuarios') )
    					->with('error', 'EL NOMBRE DE USUARIO QUE INTENTA INGRESAR YA EXISTE!');
    		}
 
    		$usuario = new User($req->all());
    		if( $usuario->save() ){
    			return redirect()
-   					->to( url('dashboard/usuarios') )
+   					->to( url('index.php/dashboard/usuarios') )
    					->with('correcto', 'USUARIO CREADO EXITOSAMENTE');
    		}
    		else{
@@ -82,15 +82,15 @@ class Usuarios extends Controller
 	   		if( $user->save()){
               
 	   			return redirect()
-   					->to( url('dashboard/usuarios'.$complemento) )
+   					->to( url('index.php/dashboard/usuarios'.$complemento) )
    					->with('correcto', 'LOS DATOS DEL REGISTRO HAN SIDO ACTUALIZADOS CORRECTAMENTE');
 	   		}
 	   		return redirect()
-   					->to( url('dashboard/usuarios'.$complemento) )
+   					->to( url('index.php/dashboard/usuarios'.$complemento) )
    					->with('error', 'ERROR AL INTENTAR ACTUALIZAR LOS DATOS DEL USUARIO');
 	   	}
 	   	return redirect()
-   				->to( url('dashboard/usuarios'.$complemento) )
+   				->to( url('index.php/dashboard/usuarios'.$complemento) )
    				->with('error', 'ERROR: VERIFIQUE QUE POSEE UNA SESSION ABIERTA Y QUE TENGA EL PERMISO CORRECTO PARA ESTA ACCION');
    }
 

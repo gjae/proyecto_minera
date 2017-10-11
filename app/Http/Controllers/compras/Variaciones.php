@@ -32,12 +32,12 @@ class Variaciones extends Controller
 		$var = new Variacion($req->all());
 		if($var->save()){
 			return redirect()
-					->to( url('dashboard/compras/variaciones?orden='.$req->orden_id) )
+					->to( url('index.php/dashboard/compras/variaciones?orden='.$req->orden_id) )
 					->with('correcto','LA VARIACION HA SIDO CREADA EXITOSAMENTE');
 		}
 		else{
 			return redirect()
-					->to( url('dashboard/compras/variaciones?orden='.$req->orden_id) )
+					->to( url('index.php/dashboard/compras/variaciones?orden='.$req->orden_id) )
 					->with('error','ERROR AL INTENTAR GUARDAR LA VARIACION');
 		}
 	}
