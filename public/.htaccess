@@ -12,6 +12,8 @@
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_URI} !/js/(.*)
+#	RewriteRule (.*) public/$1 [R=301,L]
     RewriteRule ^ index.php [L]
 
     # Handle Authorization Header
