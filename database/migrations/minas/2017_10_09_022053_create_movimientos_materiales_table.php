@@ -48,6 +48,10 @@ class CreateMovimientosMaterialesTable extends Migration
             $table->integer('diciplina_id')->unsigned();
             $table->integer('centro_costo_id')->unsigned();
 
+            $table->integer('centro_costo_id')->unsigned();
+            $table->integer('diciplina_id')->unsigned();
+            $table->integer('etapa_produccion_id')->unsigned();
+
             $table->foreign('persona_id')->references('id')
                     ->on('personas')->onDelete('cascade');
 

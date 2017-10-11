@@ -86,8 +86,12 @@ $(document).ready(function(){
 		url +=  '&fecha_desde='+$("#fecha_desde").val()+"&fecha_hasta="+$("#fecha_hasta").val()
 		var ref = $("#ref")
 
-		if( typeof(ref) != undefined )	
+		if( ref.val() != undefined ){
+			var url = location.host+'/dashboard/inventario/'+ref.val()+'/'+$("#tipo_reporte").val()+'?material_id='+$("#material_reporte").val()
+			url +=  '&fecha_desde='+$("#fecha_desde").val()+"&fecha_hasta="+$("#fecha_hasta").val()
 			url+='&ref='+ref.val()	
+		}
+
 		window.open('http://'+url, "INVITACIONES"  ,"width=800,height=900")	
 	})
 	$(".formularios").on('click', function(){
@@ -152,7 +156,7 @@ function buscar_tipo(event,select){
 		}
 		var url = location.host+'/dashboard/inventario/reportes/'+select.value+'?material_id='+$("#material_reporte").val()
 		var ref = $("#ref")
-		if( typeof(ref) != undefined )	
+		if( ref.val() != undefined )	
 			url+='&ref='+ref.val()	
 
 		window.open('http://'+url, "INVITACIONES"  ,"width=800,height=900")

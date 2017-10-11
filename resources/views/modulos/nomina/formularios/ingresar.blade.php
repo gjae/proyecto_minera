@@ -124,7 +124,7 @@
 			<label for="">Sueldo base</label>
 			<input type="text" class="form-control" id="sueldo_basico" name="sueldo_basico" placeholder="Sueldo basico de la persona">
 		</div>
-		<div class="col-sm-5 col-md-3 col-lg-3">
+		<div class="col-sm-5 col-md-2 col-lg-2">
 			<label for="">Mina</label>
 			<select name="mina_id" id="mina_id" class="form-control">
 				<option value="1">Empleado administrativo</option>

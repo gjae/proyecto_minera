@@ -72,7 +72,7 @@ class Reportes extends Controller
     public function actividad_en_fechas($req){
     	$material = M::find($req->material_id);
     	$vista = \View::make('modulos.reportes.actividad_material_en_fechas', [
-    			'materiales' => $material,
+    			'material' => $material,
     			'fecha_desde' => $req->fecha_desde,
     			'fecha_hasta' => $req->fecha_hasta
     		])->render();

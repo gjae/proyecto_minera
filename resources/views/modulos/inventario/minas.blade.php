@@ -49,9 +49,6 @@
 							<a  formulario="crear_material_mina" role="controlBodega" class="btn btn-success reportes">
 								REPORTE - CONTROL DE BODEGA
 							</a>
-							<a class="btn btn-success" onclick="formato_almacen()">
-								DESCARGAR FORMATO DE ALMACEN
-							</a>
 						</div>
 
 					</div>
@@ -102,6 +99,9 @@
 										
 										<a class="btn btn-primary actions" data-id="{{ $material->id }}" formulario="reportePor" role="reportes">
 											<i class="material-icons actions">local_printshop</i>
+										</a>
+										<a class="btn btn-primary actions" data-id="{{ $material->id }}" formulario="reportePor" role="reportes">
+											Historial de movimientos
 										</a>
 									</td>
 								</tr>

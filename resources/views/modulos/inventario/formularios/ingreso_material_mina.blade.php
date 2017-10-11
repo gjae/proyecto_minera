@@ -38,7 +38,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-12 col-md-3 col-lg-3">
+				<div class="col-sm-12 col-md-4 col-lg-4">
 					<label for="">Tipo de movimiento</label>
 					<select name="tipo_movimiento" id="" class="form-control">
 						<option value="">-- SELECCIONE UNO --</option>
@@ -46,7 +46,7 @@
 						<option value="ingreso">Ingreso</option>
 					</select>
 				</div>
-				<div class="col-sm-12 col-md-3 col-lg-3">
+				<div class="col-sm-12 col-md-5 col-lg-5">
 					<label for="">Unidad de peso</label>
 					<select name="peso_en" onchange="calcularTotal(event, this)" id="peso_en" class="form-control">
 						<option value="">-- SELECCIONE UNO --</option>
@@ -55,13 +55,49 @@
 						<option value="GR">Gramos</option>
 					</select>
 				</div>
-				<div class="col-sm-12 col-md-2 col-lg-2">
+				<div class="col-sm-12 col-md-4 col-lg-4">
 					<label for="">Valor / tonelada</label>
 					<input type="text" name="monto_tonelada" onkeyup="calcularTotal(event, this)" class="form-control" id="monto_tonelada" >
 				</div>
-				<div class="col-sm-12 col-md-2 col-lg-2">
+				<div class="col-sm-12 col-md-4 col-lg-4">
 					<label for="">Cantidad / movimiento</label>
 					<input type="text" name="cantidad"  onkeyup="calcularTotal(event, this)" class="form-control" id="cantidad" value="0">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12 col-lg-3 col-md-3">
+					<label for="">Centro de costos</label>
+					<select name="centro_costo_id" id="centro_costo_id" class="form-control" required>
+						<option value="">-- SELECCIONE UNO --</option>
+						@foreach( App\Models\requisicion\CentroCosto::where('edo_reg', 1)->get() as $centro)
+							<option value="{{$centro->id}}">
+								{{ $centro->nombre_centro }}
+							</option>
+						@endforeach
+					</select>
+				</div>
+				<div class="col-sm-12 col-lg-3 col-md-3">
+					<label for="">Epata de produccion</label>
+					<select name="etapa_produccion_id" id="etapa_produccion_id" class="form-control">
+						<option value="">-- SELECCIONE UNO --</option>
+
+						@foreach( App\Models\requisicion\EtapaProduccion::where('edo_reg', 1)->get() as $etapa)
+							<option value="{{$etapa->id}}">
+								{{ $etapa->nombre_etapa }}
+							</option>
+						@endforeach
+					</select>
+				</div>
+				<div class="col-sm-12 col-lg-3 col-md-3">
+					<label for="">Disciplina</label>
+					<select name="diciplina_id" id="diciplina_id" class="form-control" required="Usted debe seleccionar un item de la lista">
+						<option value="">-- SELECCIONE UNO --</option>
+						@foreach (App\Models\requisicion\Diciplina::where('edo_reg', 1)->get() as $disciplina)
+							<option value="{{ $disciplina->id }}">
+								{{ $disciplina->nombre_diciplina }}
+							</option>
+						@endforeach
+					</select>
 				</div>
 			</div>
 			<div class="row clearfix">
