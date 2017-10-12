@@ -10,7 +10,7 @@ class Material extends Model
     protected $table = 'materiales';
     protected $fillable = [
     	'codigo_material', 'existencia_minima', 'unidad_medida_id',
-    	'tipo_material_id', 'fecha_ingreso_material', 'nombre_material'
+    	'tipo_material_id', 'fecha_ingreso_material', 'nombre_material', 'monto_estimado'
     ];
 
     protected $casts = [
