@@ -8,7 +8,7 @@ class Dashboard extends Controller
 {
 	public function index(Request $req, $modulo = null, $programa = null,$accion = null){
 		$instance = '';
-		if(Auth::user()->edo_reg == 1){
+		if(Auth::user()->edo_reg == 0){
 			Auth::logout();
 			return redirect()
 					->to( url('login') )
