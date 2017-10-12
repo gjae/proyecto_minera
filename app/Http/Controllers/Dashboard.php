@@ -29,7 +29,7 @@ class Dashboard extends Controller
 				]);
 			}
 			else{
-				return redirect()->to( url('index.php/dashboard') );
+				return redirect()->to( url('dashboard') );
 			}
 
 		}
