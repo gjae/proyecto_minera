@@ -33,6 +33,8 @@ class Reportes extends Controller
 
     public function datos_generales($req){
 
+        if(!$req->has('ref') && $req->ref != 'undefined')
+        {
         	$bc = new  BC();
         	$material = M::find($req->material_id);
         	$bc->setText($material->codigo_material);
@@ -48,7 +50,23 @@ class Reportes extends Controller
     		$pdf = PDF::loadHtml($vista);
 
     		return $pdf->stream('datos_item', ['attachment' => 0]);
-        
+        }
+
+        $material = new MM;
+
+        if($req->has('material_id'))
+            $material = $material->where('id', $req->material_id);
+
+        $mina = new Mina();
+
+        $vista = \View::make('modulos.reportes.movimientos_minas', [
+                    'materiales' =>  $material->orderBy('id')->get(),
+                    'minas' => $mina->get(),
+                ])->render();
+
+        $pdf = PDF::loadHtml($vista);
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream('movimientos_'.Carbon::now()->format('d_m_Y'), ['attachment' => 0]);
     }
 
     public function actividad_en_fechas($req){
