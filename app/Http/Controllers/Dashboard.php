@@ -8,11 +8,17 @@ class Dashboard extends Controller
 {
 	public function index(Request $req, $modulo = null, $programa = null,$accion = null){
 		$instance = '';
+		if(Auth::user()->edo_reg == 1){
+			Auth::logout();
+			return redirect()
+					->to( url('login') )
+					->with('error', 'Usuario inactivo');
+		}
 		if( $modulo == null ){
 			return view('index');
 		}else{
 
-			if( Auth::user()->tipo_usuario == 'ADMIN' || Auth::user()->tipo_usuario == strtoupper($modulo) ){
+			if( Auth::user()->tipo_usuario == 'ADMIN' || Auth::user()->tipo_usuario == strtoupper($modulo) || ($programa == 'usuarios' && $accion == 'logout') ){
 				$instance = 'App\\Http\\Controllers\\'.$modulo.'\\';
 				$programa = ($programa == null) ? ucfirst($modulo) : ucfirst($programa);
 				$instance .= $programa;
