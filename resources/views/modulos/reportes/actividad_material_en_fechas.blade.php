@@ -35,51 +35,45 @@ h1 {
 }
 </style>
 <div class="header">
-<table border="1" cellpadding="0" cellspacing="0">
+<table border="1" width="100%" cellpadding="0" cellspacing="0">
 	<tr>
-		<td>
+		<td width="20%">
 			<img src="{{ public_path().'/images/logo.png' }}" alt="" style="max-width: 150px; max-height: 210px;">
 		</td>
-		<td >
-			<table border="0" cellpadding="0" cellspacing="0">
+		<td width="65%">
+			<table border="0" width="100%" style="text-align: center;" cellpadding="0" cellspacing="0">
 				<tr>
 					<td class="td-title">
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						
 						<strong style="font-size: 12pt; font-family: Helvetica;">SOCIEDAD MINERA DEL NORTE LTDA.</strong>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						
 						<br>
 
 					</td>
 				</tr>
 				<tr>
 					<td>
-						&nbsp;&nbsp;&nbsp;&nbsp;
-						<strong style="font-size: 12pt; font-family: Helvetica;">REPORTE DE DATOS DE ANAQUEL POR ITEM</strong>
-						&nbsp;&nbsp;&nbsp;&nbsp;
+						
+						<strong style="font-size: 12pt; font-family: Helvetica;">REPORTE DE DATOS DE ANAQUEL POR ITEM<</strong>
+						
 					</td>
 				</tr>
 			</table>
 		</td>
-		<td>
-			<table border="0" cellspacing="0" cellpadding="0">
+		<td width="15%">
+			<table border="0" width="100%" cellspacing="0" cellpadding="0">
 
-				<tr>
-					<td class="td-title">
-						&nbsp;
-						<strong style="font-size: 10pt; font-family: Helvetica;"> </strong>
-					&nbsp;
-					</td>
-				</tr>
-				<tr style="outline: thin solid;">
+				<tr >
 					<td>
-					&nbsp;
-						<strong style="font-size: 10pt; font-family: Helvetica;">{{ Carbon\Carbon::now()->format('d-m-Y') }}</strong>
-						&nbsp;
+					
+						<strong style="font-size: 10pt; font-family: Helvetica;">{{ Carbon\Carbon::now()->format('d-M-Y') }}</strong>
+						
 					</td>
 				</tr>
 			</table>
 		</td>
 	</tr>
+
 </table>
 
 <br>
@@ -88,14 +82,14 @@ h1 {
 <br>
 
 <strong style="margin-left: 125px;">
-DESDE {{ Carbon\Carbon::parse($fecha_desde)->format('d-m-Y') }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+DESDE {{ Carbon\Carbon::parse($fecha_desde)->format('d-m-Y') }}  
 HASTA {{ Carbon\Carbon::parse($fecha_hasta)->format('d-m-Y') }}
 </strong>
 
 <br>
-<strong style="margin-left: 125px;">CODIGO &nbsp;&nbsp;&nbsp;&nbsp; {{ $material->codigo_material }}</strong>
+<strong style="margin-left: 125px;">CODIGO  {{ $material->codigo_material }}</strong>
 <br>
-<strong style="margin-left: 125px;">DESCRIPCION &nbsp;&nbsp;&nbsp;&nbsp;{{ $material->nombre_material }}</strong>
+<strong style="margin-left: 125px;">DESCRIPCION {{ $material->nombre_material }}</strong>
 <br>
 <br>
 
@@ -103,22 +97,22 @@ HASTA {{ Carbon\Carbon::parse($fecha_hasta)->format('d-m-Y') }}
 	<thead>
 		<tr>
 			<th>
-			&nbsp;&nbsp;
+			
 			Fecha de creacion
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			
 			</th>
 			<th>
-				&nbsp;&nbsp;
+				
 				Unidad de medida
-				&nbsp;&nbsp;
+				
 			</th>
 			<th>
-			&nbsp;&nbsp;
+			
 			Cantidad disponible
-			&nbsp;&nbsp;
+			
 			</th>
 			<th>
-			&nbsp;
+			
 			Cantidad minima
 			</th>
 		</tr>
@@ -157,33 +151,33 @@ HASTA {{ Carbon\Carbon::parse($fecha_hasta)->format('d-m-Y') }}
 <br>
 <strong style="margin-left: 240px; ">RELACION DE INGRESOS</strong>
 <br>
-<table border="0" cellspacing="0" cellpadding="0" class="body">
+<table border="0" width="100%" cellspacing="0" cellpadding="0" class="body">
 	<thead>
-		<tr>
+		<tr style="text-align: center;">
 			<th>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			
 			Fecha de ingreso
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			
 			</th>
 			<th>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
 				Cantidad
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
 			</th>
 			<th>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			Diciplina
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			
+			Disciplina
+			
 			</th>
 			<th>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			
 			Centro de costos
 			</th>
 		</tr>
 	</thead>
 	<tbody style="text-align: center;">
 	 	@foreach($material->ingresos()->where('created_at', '>=', Carbon\Carbon::parse($fecha_desde)->format('Y-m-d') )->where('created_at', '<=', Carbon\Carbon::parse($fecha_hasta)->format('Y-m-d') )->get()  as $key => $ingreso)
-		<tr>
+		<tr style="text-align: center;">
 			<td>
 				{{ $ingreso->created_at->format('d-m-Y h:i A') }}
 			</td>
@@ -227,38 +221,38 @@ HASTA {{ Carbon\Carbon::parse($fecha_hasta)->format('d-m-Y') }}
 <br>
 <strong style="margin-left: 240px; ">RELACION DE EGRESOS</strong>
 <br>
-<table border="0" cellspacing="0" cellpadding="0" class="body">
+<table border="0" width="100%" cellspacing="0" cellpadding="0" class="body">
 	<thead>
-		<tr>
+		<tr style="text-align: center;">
 			<th>
-			&nbsp;&nbsp;&nbsp;
+			
 			Fecha de ingreso
-			&nbsp;&nbsp;&nbsp;
+			
 			</th>
 			<th>
-				&nbsp;&nbsp;
+				
 				Cantidad
-				&nbsp;&nbsp;
+				
 			</th>
 			<th>
-			&nbsp;&nbsp;
-			Diciplina
-			&nbsp;&nbsp;
+			
+			Disciplina
+			
 			</th>
 			<th>
-			&nbsp;&nbsp;&nbsp;
+			
 			Centro de costos
-			&nbsp;&nbsp;&nbsp;
+			
 			</th>
 			<th>
-				&nbsp;
+				
 				Entregado A 
 			</th>
 		</tr>
 	</thead>
 	<tbody style="text-align: center;">
 	 	@foreach($material->egresos()->where('created_at', '>=', Carbon\Carbon::parse($fecha_desde)->format('Y-m-d') )->where('created_at', '<=', Carbon\Carbon::parse($fecha_hasta)->format('Y-m-d') )->get()  as $key => $egreso)
-		<tr>
+		<tr style="text-align: center;">
 			<td>
 				{{ $egreso->created_at->format('d-m-Y h:i A') }}
 			</td>
