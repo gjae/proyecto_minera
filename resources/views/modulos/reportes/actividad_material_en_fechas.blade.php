@@ -93,7 +93,7 @@ HASTA {{ Carbon\Carbon::parse($fecha_hasta)->format('d-m-Y') }}
 <br>
 <br>
 
-<table border="0" cellspacing="0" cellpadding="0" class="body">
+<table border="0" width="100%" style="text-align: center;" cellspacing="0" cellpadding="0" class="body">
 	<thead>
 		<tr>
 			<th>
