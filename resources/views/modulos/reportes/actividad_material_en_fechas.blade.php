@@ -274,7 +274,11 @@ HASTA {{ Carbon\Carbon::parse($fecha_hasta)->format('d-m-Y') }}
 
 			</td>
 			<td>
+				@if($egreso->persona_id == 0)
 				{{ $egreso->persona->primer_nombre.' '.$egreso->persona->primer_apellido }}
+				@else
+				<strong>NO APLICA</strong>
+				@endif
 			</td>
 			
 		</tr>
