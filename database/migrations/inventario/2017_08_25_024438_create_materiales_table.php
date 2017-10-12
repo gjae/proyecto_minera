@@ -23,6 +23,7 @@ class CreateMaterialesTable extends Migration
             $table->integer('tipo_material_id')->unsigned();
             $table->date('fecha_ingreso_material');
             $table->string('nombre_material', 150);
+            $table->float('monto_estimado')->default(0);
             $table->enum('estado_material' , ['ACTIVO', 'ELIMINADO'])->default('ACTIVO');
 
             //$table->index(['codigo_material', 'estado_material']);
