@@ -28,7 +28,7 @@ class Usuarios extends Controller
    			return response([
    					'error' => false,
    					'formulario' => $vista,
-   					'action' => url('index.php/dashboard/usuarios/usuarios/crud'),
+   					'action' => url('dashboard/usuarios/usuarios/crud'),
    				], 200)->header('Content-Type', 'application/json');
 
    		} catch (\Exception $e) {
