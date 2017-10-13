@@ -211,9 +211,6 @@ HASTA {{ Carbon\Carbon::parse($fecha_hasta)->format('d-m-Y') }}
 			<td>
 				&nbsp;
 			</td>
-			<td>
-				&nbsp;
-			</td>
 			<td class="footer-table">
 				<strong>PROMEDIO </strong>
 			</td>
