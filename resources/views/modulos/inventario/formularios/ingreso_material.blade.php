@@ -45,11 +45,15 @@
 				</div>
 			</div>
 			<div class="row clearfix">
-				<div class="col-sm-9 col-md-9 col-lg-9">
+				<div class="col-sm-12 col-md-4 col-lg-4">
 					
 					<label for="">Cantidad ingresada</label>
 					<input type="number" style="text-align: center;" class="form-control" name="cantidad" placeholder="Ingrese el número de ingresos" id="cantidad">
 
+				</div>
+				<div class="col-sm-12 col-md-3 col-lg-3">
+					<label for="">Valor</label>
+					<input type="text" value="0" placeholder="Monto por unidad" class="form-control" name="monto" id="monto">
 				</div>
 
 			</div>
