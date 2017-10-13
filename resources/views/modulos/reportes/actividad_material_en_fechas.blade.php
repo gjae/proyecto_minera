@@ -211,6 +211,9 @@ HASTA {{ Carbon\Carbon::parse($fecha_hasta)->format('d-m-Y') }}
 			<td class="footer-table">
 				<strong>VALOR PROMEDIO DE INGRESO </strong>
 			</td >
+			<td>
+				&nbsp;
+			</td>
 			<td class="footer-table">
 				<strong>{{ 
 					$material->ingresos()
@@ -226,6 +229,9 @@ HASTA {{ Carbon\Carbon::parse($fecha_hasta)->format('d-m-Y') }}
 				&nbsp;
 			</td>
 			<td class="footer-table">
+				&nbsp;
+			</td>
+			<td>
 				&nbsp;
 			</td>
 			<td class="footer-table">
