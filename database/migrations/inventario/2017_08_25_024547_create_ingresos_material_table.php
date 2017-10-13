@@ -20,6 +20,7 @@ class CreateIngresosMaterialTable extends Migration
             $table->date('fecha_ingreso');
             $table->integer('material_id')->unsigned();
             $table->float('cantidad')->default(0.00);
+            $table->float('monto')->default(0.00);
 
             $table->integer('diciplina_id')->unsigned();
             $table->integer('centro_costo_id')->unsigned();

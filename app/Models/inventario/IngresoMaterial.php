@@ -11,7 +11,7 @@ class IngresoMaterial extends Model
     protected $fillable = [
     	'fecha_ingreso', 'material_id', 'cantidad',
         'etapa_produccion_id', 'diciplina_id', 
-        'centro_costo_id'
+        'centro_costo_id', 'monto'
     ];
 
     protected $casts = [
