@@ -195,7 +195,6 @@ HASTA {{ Carbon\Carbon::parse($fecha_hasta)->format('d-m-Y') }}
 			
 		</tr>
 		@endforeach
-		@endforeach
 		<tr>
 			<td class="footer-table">
 				&nbsp;
