@@ -19,7 +19,7 @@
 		</div>
 		<div class="col-sm-9 col-md-2 col-lg-2">
 			<label for="">Fecha de ingreso</label>
-			<input type="text" value="{{ Carbon\Carbon::now()->format('d-m-Y') }}" name="fecha_ingreso_material" readonly class="form-control" id="fecha_ingreso_material">
+			<input type="text" value="{{ Carbon\Carbon::now()->format('d-m-Y') }}" name="fecha_ingreso_material" required class="form-control" id="fecha_ingreso_material">
 		</div>
 	</div>
 
