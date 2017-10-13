@@ -47,10 +47,7 @@
 				@endforeach
 			</select>
 		</div>
-		<div class="col-sm-9 col-md-3 col-lg-3">
-			<label for="">Valor estimado</label>
-			<input type="text" required value="0" name="monto_estimado" class="form-control" id="monto_estimado">
-		</div>
+		<input type="hidden"  value="0" name="monto_estimado" class="form-control" id="monto_estimado">
 
 	</div>
 
