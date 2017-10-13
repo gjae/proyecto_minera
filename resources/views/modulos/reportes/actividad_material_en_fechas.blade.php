@@ -195,6 +195,27 @@ HASTA {{ Carbon\Carbon::parse($fecha_hasta)->format('d-m-Y') }}
 			
 		</tr>
 		@endforeach
+		@endforeach
+		<tr>
+			<td class="footer-table">
+				&nbsp;
+			</td>
+			<td class="footer-table">
+				&nbsp;
+			</td>
+			<td class="footer-table">
+				<strong>VALOR PROMEDIO DE INGRESO </strong>
+			</td >
+			<td class="footer-table">
+				{{ 
+					$material->ingresos()
+								->where('created_at','>=', Carbon\Carbon::parse($fecha_desde)->format('Y-m-d') )
+								->where('created_at','<=', Carbon\Carbon::parse($fecha_hasta)->format('Y-m-d') )
+								->avg('monto') 
+				}}
+			</td>
+			
+		</tr>
 		<tr>
 			<td class="footer-table">
 				&nbsp;
