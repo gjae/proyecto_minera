@@ -165,6 +165,9 @@ HASTA {{ Carbon\Carbon::parse($fecha_hasta)->format('d-m-Y') }}
 				
 			</th>
 			<th>
+				Monto
+			</th>
+			<th>
 			
 			Disciplina
 			
@@ -183,6 +186,9 @@ HASTA {{ Carbon\Carbon::parse($fecha_hasta)->format('d-m-Y') }}
 			</td>
 			<td>
 				{{ $ingreso->cantidad }}
+			</td>
+			<td>
+				<strong>{{ number_format($ingreso->monto, 2) }}</strong>
 			</td>
 			<td>
 				{{ $ingreso->diciplina->nombre_diciplina }}
@@ -206,12 +212,12 @@ HASTA {{ Carbon\Carbon::parse($fecha_hasta)->format('d-m-Y') }}
 				<strong>VALOR PROMEDIO DE INGRESO </strong>
 			</td >
 			<td class="footer-table">
-				{{ 
+				<strong>{{ 
 					$material->ingresos()
 								->where('created_at','>=', Carbon\Carbon::parse($fecha_desde)->format('Y-m-d') )
 								->where('created_at','<=', Carbon\Carbon::parse($fecha_hasta)->format('Y-m-d') )
 								->avg('monto') 
-				}}
+				}}</strong>
 			</td>
 			
 		</tr>
@@ -226,12 +232,12 @@ HASTA {{ Carbon\Carbon::parse($fecha_hasta)->format('d-m-Y') }}
 				<strong>TOTAL DE INGRESOS</strong>
 			</td >
 			<td class="footer-table">
-				{{ 
+				<strong>{{ 
 					$material->ingresos()
 								->where('created_at','>=', Carbon\Carbon::parse($fecha_desde)->format('Y-m-d') )
 								->where('created_at','<=', Carbon\Carbon::parse($fecha_hasta)->format('Y-m-d') )
 								->sum('cantidad') 
-				}}
+				}}</strong>
 			</td>
 			
 		</tr>
