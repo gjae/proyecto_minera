@@ -47,6 +47,7 @@ class Personal extends Controller
 		if(Auth::check() && Auth::user()->tipo_usuario == 'ADMIN'){
 			$datos = $req->except(['_token', 'accion', 'persona_id']);
 			$persona = Persona::where('id', $req->persona_id);
+			$persona['fecha_nacimiento'] = Carbon::parse($persona['fecha_nacimiento'])->format('Y-m-d');
 			if( $persona->update($datos) ){
 				return response([
 						'error' => false,
