@@ -40,7 +40,7 @@
 				<h4>TELEFONO</h4>
 			</th>
 			<th>
-				<h4>DIRECCION</h4>
+				<h4>PENSION</h4>
 			</th>
 			<th>
 				<h4>RH</h4>
@@ -64,9 +64,9 @@
 				<td><strong>{{ $persona->cargo->descripcion_cargo }}</strong></td>
 				<td><strong>{{ $persona->ciudad->nombre_ciudad }}</strong></td>
 				<td><strong>{{ $persona->telefono }}</strong></td>
-				<td><strong>{{ $persona->direccion_persona }}</strong></td>
+				<td><strong>{{ $persona->pension }}</strong></td>
 				<td><strong>{{ $persona->tipo_sangre->abreviatura_tipo }}</strong></td>
-				<td><strong>--</strong></td>
+				<td><strong>{{ $persona->eps }}</strong></td>
 				<td><strong>{{ $persona->fecha_ingreso->format('d-m-Y') }}</strong></td>
 				<td><strong>{{ $persona->sitio_trabajo->nombre_sitio }}</strong></td>
 		</tr>

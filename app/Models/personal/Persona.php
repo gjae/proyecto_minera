@@ -11,7 +11,7 @@ class Persona extends Model
         'primer_nombre', 'segundo_nombre', 'primer_apellido', 'segundo_apellido',
         'identificacion', 'fecha_ingreso', 'telefono', 'direccion_persona', 'sueldo_basico',
         'sitio_trabajo_id', 'tipo_sangre_id', 'cargo_id', 'ciudad_id', 'estado_persona', 'sexo',
-        'fecha_nacimiento', 'mina_id',
+        'fecha_nacimiento', 'mina_id','eps','pension',
     ];
 
     protected $casts = [
