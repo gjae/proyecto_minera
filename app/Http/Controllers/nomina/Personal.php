@@ -43,6 +43,23 @@ class Personal extends Controller
 		}
 	}
 
+	public function editarPersona($req){
+		if(Auth::check() && Auth::user()->tipo_usuario == 'ADMIN'){
+			$datos = $req->except(['_token', 'accion', 'persona_id']);
+			$persona = Persona::where($req->persona_id);
+			if( $persona->update($datos) ){
+				return response([
+						'error' => false,
+						'mensaje' => 'LOS DATOS DE LA PERSONA HAN SIDO MODIFICADOS CORRECTAMENTE'
+					], 200)->header('Content-Type', 'application/json');
+			}
+		}
+		return response([
+				'error' => true,
+				'mensaje' =>'ERROR AL INTENTAR MODIFICAR LOS DATOS DE LA PERSONA'
+			], 200)->header('Content-Type', 'application/json');
+	}
+
 	public function reportes($req){
 		return call_user_func_array([$this, $req->tipo_formato], [$req]);
 	}

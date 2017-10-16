@@ -73,6 +73,10 @@
 											<strong>AGREGAR AJUSTE</strong>
 										</a>
 
+										<a class="btn btn-success actions" action="formularios" persona="{{ $persona->id }}" formulario="editar_persona">
+											<strong>EDITAR</strong>
+										</a>
+
 										@if( $persona->estado_persona == 'ACTIVA' )
 											<a
 												href="{{ url('dashboard/nomina/personal/loquidacion')}}?persona={{$persona->id}}"
