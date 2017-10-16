@@ -30,7 +30,7 @@
 	<div class="row">
 		<div class="col-sm-5 col-md-4 col-lg-4">
 			<label for="">Identificacion</label>
-			<input type="text" placeholder="Identificacion de la persona" id="identificacion" class="form-control" name="identificacion">
+			<input type="text" placeholder="Identificacion de la persona" id="identificacion" value="{{ $persona->identificacion }}" class="form-control" name="identificacion">
 		</div>
 		<div class="col-sm-5 col-md-5 col-lg-5">
 			<label for="">Fecha de nacimiento (AAAA-MM-DD / DD-MM-AAAA)</label>
@@ -73,7 +73,7 @@
 	<div class="row">
 		<div class="col-sm-10 col-md-9 col-lg-9">
 			<label for="">Direccion</label>
-			<textarea name="direccion" id="direccion" cols="30" rows="10" class="form-control">{{$persona->direccion}}</textarea>
+			<textarea name="direccion_persona" id="direccion" cols="30" rows="10" class="form-control">{{$persona->direccion_persona}}</textarea>
 		</div>
 	</div>
 
