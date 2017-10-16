@@ -46,8 +46,8 @@
 		<div class="col-sm-2 col-md-2 col-lg-2">
 			<label for="">Sexo</label>
 			<select name="sexo" id="sexo" class="form-control">
-				<option {{ $persona->sexo == 'HOMBRE'? 'selected' ; '' }} value="HOMBRE">Hombre</option>
-				<option {{ $persona->sexo == 'MUJER'? 'selected' ; '' }} value="MUJER">Mujer</option>
+				<option {{ $persona->sexo == 'HOMBRE'? 'selected' : '' }} value="HOMBRE">Hombre</option>
+				<option {{ $persona->sexo == 'MUJER'? 'selected' : '' }} value="MUJER">Mujer</option>
 			</select>
 		</div>
 		<div class="col-sm-2">
