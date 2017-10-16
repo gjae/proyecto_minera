@@ -114,6 +114,16 @@
 			</select>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-4 col-lg-4">
+			<label for="">EPS</label>
+			<input type="text" name="eps" class="form-control" placeholder="Ingrese el EPS de la persona" required="Complete este campo">
+		</div>
+		<div class="col-sm-12 col-lg-4 col-md-4">
+			<label for="">Pension</label>
+			<input type="text" name="pension" class="form-control" required="Complete este campo">
+		</div>
+	</div>
 
 	<div class="row">
 		<div class="col-sm-5 col-md-4 col-lg-4">
