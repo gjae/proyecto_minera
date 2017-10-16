@@ -19,7 +19,7 @@
 
 </style>
 <img src="{{ public_path().'/images/logo.png' }}" alt="" style="max-width: 310px; max-height: 210px;">
-<table border="0" cellpadding="0" cellspacing="0" class="body" style="text-align: center;">
+<table border="0" width="100%" cellpadding="0" cellspacing="0" class="body" style="text-align: center;">
 
 <thead >
 	<tr bgcolor="#92D050">
