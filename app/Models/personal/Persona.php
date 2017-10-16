@@ -3,7 +3,7 @@ namespace App\Models\personal;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
-
+use Auth;
 class Persona extends Model 
 {
     protected $table = 'personas';

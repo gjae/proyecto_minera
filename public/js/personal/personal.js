@@ -38,16 +38,19 @@ $(document).ready(function(){
 		var url = location.href;
 		var datos = $("#form-modal").serialize();
 		//alert(datos)
-		if( datos.indexOf('=&') != -1 ){
-			alert("AUN HAY CAMPOS POR COMPLETAR")
-			return false;
-		}
-		else{
-			$.post(url+'/'+$("#accion").val(), datos, function(resp){
-				alert(resp.mensaje)
-				if(! resp.error)
-					location.reload()
-			})
+		if(confirm('¿Seguro de que desea guardar estos datos?'))
+		{
+			if( datos.indexOf('=&') != -1 ){
+				alert("AUN HAY CAMPOS POR COMPLETAR")
+				return false;
+			}
+			else{
+				$.post(url+'/'+$("#accion").val(), datos, function(resp){
+					alert(resp.mensaje)
+					if(! resp.error)
+						location.reload()
+				})
+			}
 		}
 	})
 
