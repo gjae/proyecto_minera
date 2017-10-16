@@ -59,7 +59,6 @@ class Reportes extends Controller
 
         $vista = \View::make('modulos.inventario.reportes.formato_bodega', [
                     'materiales' =>  $material->orderBy('id')->get(),
-                    'minas' => $mina->get(),
                 ])->render();
 
         $pdf = PDF::loadHtml($vista);
