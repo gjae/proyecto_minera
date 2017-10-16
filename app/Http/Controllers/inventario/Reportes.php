@@ -57,16 +57,14 @@ class Reportes extends Controller
         if($req->has('material_id'))
             $material = $material->where('id', $req->material_id);
 
-        $mina = new Mina();
-
-        $vista = \View::make('modulos.reportes.movimientos_minas', [
+        $vista = \View::make('modulos.inventario.reportes.formato_bodega', [
                     'materiales' =>  $material->orderBy('id')->get(),
                     'minas' => $mina->get(),
                 ])->render();
 
         $pdf = PDF::loadHtml($vista);
         $pdf->setPaper('a4', 'landscape');
-        return $pdf->stream('movimientos_'.Carbon::now()->format('d_m_Y'), ['attachment' => 0]);
+        return $pdf->stream('formato_bodega_'.Carbon::now()->format('d_m_Y'), ['attachment' => 0]);
     }
 
     public function actividad_en_fechas($req){
