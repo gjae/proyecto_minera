@@ -46,7 +46,7 @@ class Personal extends Controller
 	public function editarPersona($req){
 		if(Auth::check() && Auth::user()->tipo_usuario == 'ADMIN'){
 			$datos = $req->except(['_token', 'accion', 'persona_id']);
-			$persona = Persona::where($req->persona_id);
+			$persona = Persona::where('id', $req->persona_id);
 			if( $persona->update($datos) ){
 				return response([
 						'error' => false,
