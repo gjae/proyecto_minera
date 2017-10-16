@@ -107,7 +107,7 @@ h1 {
 	<tbody>
 		<tr>
 			<td>
-				{{ $material->created_at->format('d / m / Y') }}
+				{{ $material->fecha_ingreso_material->format('d / m / Y') }}
 			</td>
 			<td>
 				{{ $material->unidad_medida->codigo_unidad }}
