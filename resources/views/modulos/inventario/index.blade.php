@@ -174,7 +174,7 @@ $('#dataTables-example').DataTable({
 });
 
 function formato_almacen(){
-	var url = location.protocol+'//'+location.host+'/dashboard/compras/ordenes/formato_almacen';
+	var url = location.protocol+'//'+location.host+'/index.php/dashboard/compras/ordenes/formato_almacen';
 	window.open(url, 'formato', 'width=800,height=900')
 }
 
