@@ -8,7 +8,7 @@ use App\Models\personal\Persona;
 use App\Models\personal\Ajuste as A;
 use App\Models\personal\AjustePersona as AP;
 
-
+use Auth;
 use DB;
 use Carbon\Carbon;
 use PDF;
