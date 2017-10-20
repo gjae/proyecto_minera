@@ -2,7 +2,7 @@ $(document).ready(function(){
 	$(".acciones").on('click', function(){
 
 		var modal = $("#modal");
-		var url = 'http://'+location.host +'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()
+		var url = 'http://'+location.host +'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()
 		url+='/'+$(this).attr('role')
 
 		if( $(this).attr('role') == 'reportes' ){
@@ -29,14 +29,14 @@ $(document).ready(function(){
 			return false;
 		} 
 		else{
-			var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/imprimir';
+			var url = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/imprimir';
 			url+= '?'+datos;
 			window.open(url, 'REPORTES DE TRANSPORTE', 'width=750,height=950');
 		}
 	})
 
 	$(".factura").on('click', function(){
-		var url = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/factura';
+		var url = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/factura';
 		url+= '?viaje_id='+$(this).attr('id-transporte')
 		window.open(url, 'RECIBO', 'width=750,height=950');
 	})
@@ -44,7 +44,7 @@ $(document).ready(function(){
 
 function cargar_vehiculo(e, boton){
 
-	location.href = 'http://'+location.host+'/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/cargar_vehiculo?id='+boton.getAttribute('data-id')
+	location.href = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/cargar_vehiculo?id='+boton.getAttribute('data-id')
 
 }
 
