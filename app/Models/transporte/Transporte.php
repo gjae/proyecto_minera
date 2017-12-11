@@ -50,6 +50,7 @@ class Transporte extends Model
 		'estado_registro',
         'total_km_viaje',
         'distancia_recorrida',
+		'ciudad_id',
     ];
     protected $casts = [
     	'fecha_llegada' => 'date',
@@ -86,4 +87,8 @@ class Transporte extends Model
 
         return $nuevo.$codigo;
     }
+
+	public function ciudad(){
+		return $this->belongsTo('App\Models\Ciudad');
+	}
 }

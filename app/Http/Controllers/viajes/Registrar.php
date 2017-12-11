@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\transporte\Vehiculo;
 use App\Models\transporte\Transporte;
 
+use App\Models\Recibo;
 use Carbon\Carbon;
 use PDF;
 
@@ -25,6 +26,59 @@ class Registrar extends Controller
                 'viajes' => $r
             ]);
     }
+
+	public function recibo($req){
+		//return dd($req);
+		return view('modulos.transporte.formularios.recibo', [
+    			'vehiculo' => false
+    		]);		
+	}
+	
+	public function recibos($req){
+		return view('modulos.transporte.recibos');
+	}	
+
+	public function imprimir_recibo($req){
+		$t = Recibo::find($req->id);
+        $reporte = \View::make('modulos.transporte.reportes.recibo_vehiculo', ['transporte' => $t])
+                                ->render();
+
+       $pdf = PDF::loadHtml($reporte);
+       $pdf->setPaper('a5', 'landscape');
+      return $pdf->stream('recibo_'.$t->nro_factura, ['attachment' => 0]);
+	}
+
+	public function guardar_recibo($req){
+		//return dd($req->all());
+		$recibo = new Recibo($req->all());
+		if($recibo->save()){
+			return redirect()->to( url('dashboard/viajes/registrar') )
+					->with('correcto', 'EL RECIBO HA SIDO GUARDADO EXITOSAMENTE');	
+		}
+		else{
+			return redirect()->to( url('dashboard/viajes/registrar') )
+					->with('error', 'HA OCURRIDO UN ERROR AL INTENTAR GUARDAR EL RECIBO, INTENTE LUEGO');
+		}
+	}
+	
+	public function crear_recibo($req){
+    	if($req->has('id') && !empty($req->id)){
+    		return view('modulos.transporte.formularios.recibo', [
+    				'vehiculo' => Vehiculo::find($req->id)
+    			]);
+    	}
+    	return redirect()->to( url('dashboard/viajes/registrar') );	
+	}
+
+	public function buscar_vehiculos_recibo($req){
+    	$formulario = \View::make('modulos.transporte.formularios.listado_vehiculos_recibo', [
+    			'vehiculos' => Vehiculo::where('edo_reg', 1)->get(),
+    		])->render();
+    	return response([
+    			'error' => false,
+    			'formulario' => $formulario
+    		],200)->header('Content-Type', 'application/json');
+	}
 
     public function buscar_vehiculos($req){
     	$formulario = \View::make('modulos.transporte.formularios.listado_vehiculos', [
@@ -52,7 +106,7 @@ class Registrar extends Controller
     				'vehiculo' => Vehiculo::find($req->id)
     			]);
     	}
-    	return redirect()->to( url('index.php/dashboard/viajes/registrar') );
+    	return redirect()->to( url('dashboard/viajes/registrar') );
     }
 
     public function buscar_personas($req){
@@ -69,10 +123,10 @@ class Registrar extends Controller
     	if( $req->method('post') ){
     		$t = new Transporte($req->all());
     		if($t->save()){
-    			return redirect()->to( url('index.php/dashboard/viajes/registrar') )->with('correcto', 'LOS DATOS HAN SIDO ALMACENADOS DE MANERA CORRECTA');
+    			return redirect()->to( url('dashboard/viajes/registrar') )->with('correcto', 'LOS DATOS HAN SIDO ALMACENADOS DE MANERA CORRECTA');
     		}
     		else{
-    			return redirect()->to( url('index.php/dashboard/viajes/registrar') )->with('error', 'HA OCURRIDO UN ERROR INESPERADO AL INTENTAR ALMACENAR LOS DATOS');
+    			return redirect()->to( url('dashboard/viajes/registrar') )->with('error', 'HA OCURRIDO UN ERROR INESPERADO AL INTENTAR ALMACENAR LOS DATOS');
     		}
     	}
     	return redirect()->to( url('dashboard') );

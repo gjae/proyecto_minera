@@ -19,7 +19,8 @@
 		<form action="#" method="post" id="form-requisicion">
 			{{ csrf_field() }}
 			<input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-			<div class="container">
+			<input type="hidden" name="centro_costo_id" value="10">	
+		<div class="container">
 				
 				<div class="row">
 					<div class="col-sm-12 col-md-3 col-lg-3">
@@ -52,7 +53,6 @@
 					</div>
 				</div>
 				<div class="row">
-				<input type="hidden" name="centro_costo_id">
 				<input type="hidden" value="1" name="etapa_produccion_id">
 				<input type="hidden" value="1" name="diciplina_id">
 				</div>

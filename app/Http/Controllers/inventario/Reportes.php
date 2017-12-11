@@ -33,7 +33,7 @@ class Reportes extends Controller
 
     public function datos_generales($req){
 
-        if(!$req->has('ref') && $req->ref != 'undefined')
+        if(!$req->has('ref') && $req->ref != 'undefined' && false)
         {
         	$bc = new  BC();
         	$material = M::find($req->material_id);
@@ -51,19 +51,20 @@ class Reportes extends Controller
 
     		return $pdf->stream('datos_item', ['attachment' => 0]);
         }
-
-        $material = new MM;
+	
+	#return dd("hola");
+        $material = new M;
 
         if($req->has('material_id'))
             $material = $material->where('id', $req->material_id);
+	#return dd($material->get());
 
-        $vista = \View::make('modulos.inventario.reportes.formato_bodega', [
-                    'materiales' =>  $material->orderBy('id')->get(),
-                ])->render();
-
-        $pdf = PDF::loadHtml($vista);
-        $pdf->setPaper('a4', 'landscape');
-        return $pdf->stream('formato_bodega_'.Carbon::now()->format('d_m_Y'), ['attachment' => 0]);
+        $pdf = PDF::loadView('modulos.inventario.reportes.formato_bodega', [
+                    'materiales' =>  $material->get(),
+                ]);
+		
+	$pdf->setPaper('a2', 'landscape');
+       return $pdf->stream('reporte_entre_fechas', ['attachment' => 0]);
     }
 
     public function actividad_en_fechas($req){

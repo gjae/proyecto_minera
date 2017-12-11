@@ -1,4 +1,4 @@
-<@extends('index')
+@extends('index')
 
 @section('css')
  <!-- JQuery DataTable Css -->
@@ -89,11 +89,11 @@
 										{{ $material->ingresos->sum('cantidad') - $material->egresos->sum('cantidad_salida') }}
 									</td>
 									<td>
-										<a class="btn btn-danger btn-options" role="delete" data-id="{{ $material->id }}">
+										<a class="btn btn-danger" onclick="click_option(event, this)" role="delete" data-id="{{ $material->id }}">
 											<i class="large material-icons btn-options"  >delete</i>
 										</a>
 
-										<a class="btn btn-success actions"
+										<a class="btn btn-success" onclick="click_action(event, this)"
 											formulario="ingreso_material"  
 											data-id="{{ $material->id }}" role="ingresar"
 										>
@@ -103,10 +103,10 @@
 											</i>
 										</a>
 										
-										<a class="btn btn-warning actions" data-id="{{ $material->id }}" formulario="egresar_material" role="egresar" >
+										<a class="btn btn-warning" onclick="click_action(event, this)" data-id="{{ $material->id }}" formulario="egresar_material" role="egresar" >
 											<i class="large material-icons btn-options "  >highlight_off</i>
 										</a>
-										<a class="btn btn-primary actions" data-id="{{ $material->id }}" formulario="reportePor" role="reportes">
+										<a class="btn btn-primary" onclick="click_action(event, this)" data-id="{{ $material->id }}" formulario="reportePor" role="reportes">
 											<i class="material-icons actions">local_printshop</i>
 										</a>
 										@if(is_null($material->ficha))

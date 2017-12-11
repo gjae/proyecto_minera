@@ -42,9 +42,14 @@ $(document).ready(function(){
 	})
 })
 
-function cargar_vehiculo(e, boton){
+function cargar_vehiculo(e, boton, recibo = false){
 
-	location.href = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/cargar_vehiculo?id='+boton.getAttribute('data-id')
+	if(!recibo){
+		location.href = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/cargar_vehiculo?id='+boton.getAttribute('data-id')
+	}
+	else{
+		location.href = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/crear_recibo?id='+boton.getAttribute('data-id')
+	}
 
 }
 

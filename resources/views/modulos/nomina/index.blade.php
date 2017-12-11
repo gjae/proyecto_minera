@@ -69,11 +69,11 @@
 										{{ $persona->fecha_ingreso }}
 									</td>
 									<td>
-										<a class="btn btn-success actions" action="formularios" persona="{{ $persona->id }}" formulario="agregar_ajustes">
+										<a class="btn btn-success" onClick="actions(event, this)" action="formularios" persona="{{ $persona->id }}" formulario="agregar_ajustes">
 											<strong>AGREGAR AJUSTE</strong>
 										</a>
 
-										<a class="btn btn-success actions" action="formularios" persona="{{ $persona->id }}" formulario="editar_persona">
+										<a class="btn btn-success" onClick="actions(event, this)" action="formularios" persona="{{ $persona->id }}" formulario="editar_persona">
 											<strong>EDITAR</strong>
 										</a>
 

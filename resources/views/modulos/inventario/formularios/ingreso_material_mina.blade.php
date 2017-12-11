@@ -3,12 +3,16 @@
 	<input type="hidden" name="accion" id="accion" value="ingresarMaterial">
 	<input type="hidden" name="_archivo" id="_archivo" value="minas">
 	<input type="hidden" name="material_mina_id" value="{{ $id }}">
-	<input type="hidden" name="fecha" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
 
 	<div class="row clearfix">
 		
 		<div class="container">
-			
+			<div class="row">
+				<div class="col-sm-12 col-md-4 col-lg-4">
+					<label>Fecha (Formato: AAAA-MM-DD) </label>
+					<input type="date" class="form-control" name="fecha" value="{{Carbon\Carbon::now()->format('Y-m-d')}}">
+				</div>
+			</div>
 			<div class="row clearfix">
 				<div class="col-sm-10 col-md-3 col-lg-3">
 					<label for="">Concepto</label>

@@ -66,9 +66,9 @@ class Nomina extends Controller
                         'persona' =>false
         			]);
             }
-            return redirect()->to( url('index.php/dashboard/nomina') )->with('error', 'ERROR: ESTA NOMINA YA FUE CERRADA Y NO PUEDE VOLVER A SER TRABAJADA');
+            return redirect()->to( url('dashboard/nomina') )->with('error', 'ERROR: ESTA NOMINA YA FUE CERRADA Y NO PUEDE VOLVER A SER TRABAJADA');
     	}
-    	return redirect()->to( url('index.php/dashboard/nomina') );
+    	return redirect()->to( url('dashboard/nomina') );
     }
 
     public function crearNomina($req){
@@ -167,7 +167,7 @@ class Nomina extends Controller
                     ]);
             }
         }
-        return redirect()->to( url('index.php/dashboard/nomina') )->with('error', 'ESTA NOMINA YA HA SIDO TRABAJADA PARA ESTA PERSONA Y NO SE PUEDE VOLVER A TRABAJAR');  
+        return redirect()->to( url('dashboard/nomina') )->with('error', 'ESTA NOMINA YA HA SIDO TRABAJADA PARA ESTA PERSONA Y NO SE PUEDE VOLVER A TRABAJAR');  
     }
 
     private function calcularValor($req, $key){
