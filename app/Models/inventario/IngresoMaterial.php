@@ -47,5 +47,4 @@ class IngresoMaterial extends Model
 		$this->attributes['created_at'] = Carbon::parse($old)->format('Y-m-d H:i:s');
 	}
 
-
 }
