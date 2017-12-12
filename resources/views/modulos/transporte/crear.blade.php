@@ -31,7 +31,7 @@
 <div class="card">
 	
 	<div class="body">
-		<form action="{{ url('index.php/dashboard/viajes/registrar/guardar') }}" method="post" id="form">
+		<form action="{{ url('dashboard/viajes/registrar/guardar') }}" method="post" id="form">
 			{{ csrf_field() }}
 			<input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 			<div class="container">
