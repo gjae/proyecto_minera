@@ -92,7 +92,7 @@ class Proveedores extends Controller
     public function eliminar($req){
     	$proveedor = Proveedor::find($req->id);
 
-    	$proveedor->edo_reg = 0;
+    	$proveedor->delete();
     	if($proveedor->save()){
     		return response([
     				'error' => false,

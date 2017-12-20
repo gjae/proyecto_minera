@@ -78,7 +78,7 @@ $(document).ready(function(){
 
 	})
 
-	$("#reporte").on("click", function(){
+	$(".reporte").on("click", function(){
 		var datos = $("#form-modal")
 		
 		var tipo = $("#tipo_reporte").val();

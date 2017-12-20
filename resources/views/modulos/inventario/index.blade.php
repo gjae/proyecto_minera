@@ -48,6 +48,9 @@
 							<a  formulario="insertarUnidadMedida" role="controlBodega" class="btn btn-success reportes">
 								REPORTE - CONTROL DE BODEGA
 							</a>
+							<a  formulario="reportePorProveedor" role="controlBodega" class="btn btn-success actions">
+								REPORTE - POR PROVEEDOR
+							</a>
 							<a class="btn btn-success" onclick="formato_almacen()">
 								DESCARGAR FORMATO DE ALMACEN
 							</a>
@@ -145,7 +148,7 @@
 		                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cerrar</button>
 	                </div>
 	                <div id="footer-reportes" class="hidden">
-		                <button type="button" id="reporte" class="btn btn-link waves-effect">Generar reporte</button>
+		                <button type="button" class="reporte btn btn-link waves-effect">Generar reporte</button>
 		                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cerrar</button>
 	                </div>
 	            </div>
