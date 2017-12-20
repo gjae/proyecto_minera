@@ -59,6 +59,10 @@ class Proveedor extends Model
         $this->attributes['codigo_proveedor'] = Proveedor::getNewCode();
     }
 
+    public function ingresoMaterial(){
+        return $this->hasMany('App\Models\inventario\IngresoMaterial');
+    }
+
     public static function getNewCode(){
         $codigo = DB::table('proveedores')->count('codigo_proveedor') + 1;
 

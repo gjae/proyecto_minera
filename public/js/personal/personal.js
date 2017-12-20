@@ -62,3 +62,27 @@ $(document).ready(function(){
 		window.open(url, 'REPORTE DE PERSONAL', 'width=950,height=850');
 	})
 })
+
+function actions(event, boton){
+
+		if(boton.getAttribute('action') == 'formularios'){
+			var modal = $("#modal-personal")
+			var url = location.href +'/formulario?form='+boton.getAttribute('formulario')+'&persona='+(boton.getAttribute('persona') || 0)
+			//alert(url)
+			//
+			if( boton.getAttribute('role') == 'reportes' ){
+				$("#salvar").addClass('hidden')
+				$("#generar").removeClass('hidden')
+			}
+			else{
+				$("#salvar").removeClass('hidden')
+				$("#generar").addClass('hidden')
+			}
+			$.get(url, '', function(resp){
+				if(! resp.error){
+					modal.modal({show : true})
+					$("#form-modal").html(resp.formulario)
+				}
+			})
+		}
+}

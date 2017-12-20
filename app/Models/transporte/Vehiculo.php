@@ -26,6 +26,10 @@ class Vehiculo extends Model
     protected $casts = [
         'fecha_adquisicion' => 'date'
     ];  
+	
+	public function recibos(){
+		return $this->hasMany('App\Models\Recibo');
+	}		
 
     public function transportes(){
     	return $this->hasMany('App\Models\transporte\Transporte', 'vehiculo_id');

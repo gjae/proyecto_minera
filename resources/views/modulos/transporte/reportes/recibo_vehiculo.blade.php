@@ -9,7 +9,7 @@
 <table border="1" style="text-align: center;" cellspacing="0" width="100%" cellpadding="0">
 	<tr >
 		<td height="34px">
-			<strong>FECHA</strong>
+			<strong>FECHA DE EMISION</strong>
 		</td>
 		<td>
 			<strong>NUMERO REMISION CLIENTE</strong>
@@ -20,7 +20,7 @@
 	</tr>
 	<tr >
 		<td>
-			<strong>{{ $transporte->fecha_salida->format('d/m/Y') }}</strong>
+			<strong>{{ $transporte->created_at->format('d/m/Y') }}</strong>
 		</td>
 		<td>
 			<strong>{{ $transporte->remision_cli }}</strong>
@@ -32,13 +32,13 @@
 </table>
 <table border="1" width="100%" style="text-align: center;" cellpadding="0" cellspacing="0">
 	<tr>
-		<td width="13%" height="34px">
+		<td  width="13%" height="34px">
 			<strong>PROVEEDOR: </strong>
 		</td>
 		<td width="48%">
 			<strong> SOCIEDAD MIERA DEL NORTE LTDA. </strong>
 		</td>
-		<td width="15%" ">
+		<td width="15%" >
 			<strong>NIT:</strong>
 		</td>
 		<td width="30%" > 
@@ -55,7 +55,7 @@
 		<td width="28%">
 			<strong> {{ $transporte->ciudad->nombre_ciudad }} </strong>
 		</td>
-		<td width="30%">
+		<td width="30%" >
 			<strong>TIPO DE MATERIAL:</strong>
 		</td>
 		<td width="25%"> 
@@ -65,13 +65,13 @@
 </table>
 <table border="1" width="100%" style="text-align: center;" cellpadding="0" cellspacing="0">
 	<tr>
-		<td width="15%" height="34px">
+		<td  width="15%" height="34px">
 			<strong>DESTINO: </strong>
 		</td>
 		<td width="29%">
 			<strong>{{ $transporte->destino }}</strong>
 		</td>
-		<td width="18%" >
+		<td width="18%">
 			<strong>PROCEDENCIA:</strong>
 		</td>
 		<td width="38%"> 
@@ -91,17 +91,17 @@
 			<strong>CONDUCTOR:</strong>
 		</td>
 		<td width="18%"> 
-			<strong>{{ $transporte->conductor->primer_nombre.' '.$transporte->conductor->primer_apellido }}</strong>
+			<strong>{{ $transporte->persona->primer_nombre.' '.$transporte->persona->primer_apellido }}</strong>
 		</td>
 		<td width="15%">
 			<strong>IDENTIFICACION:</strong>
 		</td>
 		<td>
-			<strong>{{ $transporte->conductor->identificacion }}</strong>
+			<strong>{{ $transporte->persona->identificacion }}</strong>
 		</td>
 	</tr>
 </table>
-<table width="100%" border="0" class="firma" cellspacing="0" cellpadding="0">
+<table width="100%" border="0" class="firma" cellspacing="0" cellpadding="0" style="background-image: ">
 	<tr>
 		<td height="190px" style="text-align: center;">
 			<strong>_______________________________</strong> <br>
@@ -110,6 +110,7 @@
 		<td height="190px" style="text-align: center;" style="z-index: 1;">
 			<img src="{{ public_path().'/images/logo.png' }}" alt="" style="max-width: 310px; max-height: 210px; opacity: 0.2; max-width: 100px;">
 		</td>
+
 		<td style="text-align: center;">
 			<strong>_______________________________</strong><br>
 			<strong>FIRMA DESPACHADOR</strong>

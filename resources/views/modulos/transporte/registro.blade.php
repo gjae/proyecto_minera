@@ -39,9 +39,14 @@
 
 					
 					<div class="row">
-						<div class="col-sm-12 col-md-12 col-lg-12">
+						<div class="col-sm-12 col-md-3 col-lg-3">
 							<a class="btn btn-success acciones" role="reportes">
 								<strong>REPORTES</strong>
+							</a>
+						</div>
+						<div class="col-sm-12 col-md-3 col-lg-3">
+							<a class="btn btn-success acciones" role="reportes" href="{{ url('dashboard/viajes/registrar/recibo') }}">
+								<strong>CREAR RECIBO</strong>
 							</a>
 						</div>
 					</div>

@@ -1,4 +1,5 @@
 <style>
+	*{ margin: 0; padding: 0;}
 	body{
 		font-family: Helvetica;
 	}
@@ -136,13 +137,12 @@ h1 {
 				<td class="td-totales">
 					<strong>FECHA: </strong>
 				</td>
+				<td class="td-totales"></td>
+				<td class="td-totales"></td>
 				<td class="td-totales">
 					<strong>{{ $movimiento->created_at->format('d-m-Y') }}</strong>
 				</td>
-				<td class="td-totales">&nbsp;</td>
-				<td class="td-totales">&nbsp;</td>
-				<td class="td-totales">&nbsp;</td>
-				<td class="td-totales">&nbsp;</td>
+				<td class="td-totales"></td>
 				<td class="td-totales">&nbsp;</td>
 				<td class="td-totales">&nbsp;</td>
 				<td class="td-totales">&nbsp;</td>

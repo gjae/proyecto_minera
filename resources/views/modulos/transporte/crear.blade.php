@@ -31,7 +31,7 @@
 <div class="card">
 	
 	<div class="body">
-		<form action="{{ url('index.php/dashboard/viajes/registrar/guardar') }}" method="post" id="form">
+		<form action="{{ url('dashboard/viajes/registrar/guardar') }}" method="post" id="form">
 			{{ csrf_field() }}
 			<input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 			<div class="container">
@@ -58,8 +58,8 @@
 				@if( !is_bool($vehiculo))
 					<div class="row">
 						<div class="col-sm-2 col-md-2 col-lg-2 offset-md-4 offset-lg-4 offset-sm-4">
-							<label for="">CODIGO / FACTURA</label>
-							<input type="text"  style="text-align: center;" value="{{ \App\Models\transporte\Transporte::getNewCode() }}" class="form-control" name="nro_factura" id="nro_factura">
+							<label for="">CODIGO / REMESA</label>
+							<input type="text"  style="text-align: center;" required class="form-control" name="nro_factura" id="nro_factura">
 						</div>
 						<div class="col-sm-3 col-md-3 col-lg-3">
 							<label for="">TIPO DE MATERIAL</label>
@@ -95,12 +95,12 @@
 							<input type="text" class="form-control" maxlength="160" placeholder="DESTINO DEL VIAJE" style="text-align: center;" name="destino" id="destino">
 						</div>
 						<div class="col-sm-3 col-lg-3 col-md-3">
-							<label for="">DISTANCIA ESTIMADA (KM)</label>
-							<input type="text" class="form-control" maxlength="160" placeholder="DESTINO DEL VIAJE" style="text-align: center;" name="distancia_recorrida" id="distancia_recorrida" value="0">
+							<!--<label for="">DISTANCIA ESTIMADA (KM)</label>-->
+							<input type="hidden" class="form-control" maxlength="160" placeholder="DESTINO DEL VIAJE" style="text-align: center;" name="distancia_recorrida" id="distancia_recorrida" value="0">
 						</div>
 						<div class="col-sm-3 col-md-3 col-lg-3">
-							<label for="">COSTO / KM</label>
-							<input type="text" style="text-align: center;" placeholder="PRECIO / KM" value="0" class="form-control" name="total_km_viaje" id="total_km_viaje">
+							<!--<label for="">COSTO / KM</label>-->
+							<input type="hidden" style="text-align: center;" placeholder="PRECIO / KM" value="0" class="form-control" name="total_km_viaje" id="total_km_viaje">
 						</div>
 					</div>
 
@@ -114,80 +114,88 @@
 							<input type="date" placeholder="FECHA DE LLEGADA AL DESTINO FORMATO DD-MM-AAAA" class="form-control" name="fecha_llegada" id="fecha_llegada">
 						</div>
 					</div>
+						<div class="col-sm-3 col-md-3 col-lg-3">
+							<label for="">CIUDAD</label>
+							<select name='ciudad_id' class="form-control">
+								@foreach(App\Models\Ciudad::where('edo_ciudad', 1)->get() as $ciudad)
+									<option value="{{ $ciudad->id}}">{{ $ciudad->nombre_ciudad }} </option>
+								@endforeach
+							</select>
+						</div>
 
 					<div class="row">
 						<div class="col-sm-3 col-md-3 col-lg-3">
-							<label for="">VALOR DE COMBUSTIBLE</label>
-							<input type="text" placeholder="MONTO POR LTS" class="form-control" onkeyup="calcularCombustible()" required name="precio_x_lts_combustible" id="precio_x_lts_combustible">
+							<!--<label for="">VALOR DE COMBUSTIBLE</label> -->
+							<input type="hidden" placeholder="MONTO POR LTS" class="form-control" onkeyup="calcularCombustible()" required name="precio_x_lts_combustible" id="precio_x_lts_combustible" value="0">
 						</div>	
 						<div class="col-sm-3 col-md-3 col-lg-3">
-							<label for="">COMPUSTIBLE USADO</label>
-							<input type="text" value="0" required placeholder="LTS USADOS PARA EL VIAJE" onkeyup="calcularCombustible()" class="form-control" name="combustible_viaje" id="combustible_viaje">
+							<!--<label for="">COMPUSTIBLE USADO</label>-->
+							<input type="hidden" value="0" required placeholder="LTS USADOS PARA EL VIAJE" onkeyup="calcularCombustible()" class="form-control" name="combustible_viaje" id="combustible_viaje">
 						</div>
 						<div class="col-sm-3 col-md-3 col-lg-3">
-							<label for="">TOTAL EN COMBUSTIBLE</label>
-							<input type="text" value="0" required readonly class="form-control" name="precio_combustible" id="precio_combustible">
+							<!--<label for="">TOTAL EN COMBUSTIBLE</label> -->
+							<input type="hidden" value="0" required readonly class="form-control" name="precio_combustible" id="precio_combustible">
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-3 col-md-3 col-lg-3">
-							<label for="">PESO DEL VIAJE (KG)</label>
+							<label for="">PESO DEL VIAJE (TON)</label>
 							<input type="text" value="0" onkeyup="calcularPeso()" required class="form-control" name="kilo_viajes" id="kilo_viajes">
 						</div>
 						<div class="col-sm-3 col-md-3 col-lg-3">
-							<label for="">VALOR / KG</label>
-							<input type="text" value="0" onkeyup="calcularPeso()" required class="form-control" name="precio_kilo" id="precio_kilo">
+							<!--<label for="">VALOR / KG</label>-->
+							<input type="hidden" value="0" onkeyup="calcularPeso()" required class="form-control" name="precio_kilo" id="precio_kilo">
 						</div>
 						<div class="col-sm-3 col-md-3 col-lg-3">
-							<label for="">TOTAL EN KG DEL VIAJE</label>
-							<input type="text" readonly value="0" required class="form-control" name="total_peso_viaje" id="total_peso_viaje">
+							<!--<label for="">TOTAL EN KG DEL VIAJE</label>-->
+							<input type="hidden" readonly value="0" required class="form-control" name="total_peso_viaje" id="total_peso_viaje">
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-3 col-md-3 col-lg-3">
-							<label for="">TOTAL DE KILOS DE MATERIAL</label>
-							<input type="text" value="0" class="form-control" required="" name="total_kilo_material" onkeyup="calcularMaterial()" id="total_kilo_material">
+						<!--	<label for="">TOTAL DE KILOS DE MATERIAL</label>-->
+							<input type="hidden" value="0" class="form-control" required="" name="total_kilo_material" onkeyup="calcularMaterial()" id="total_kilo_material">
 						</div>
 						<div class="col-sm-4 col-md-4 col-lg-4">
-							<label for="">COSTO DEL FLETE / KG MATERIAL</label>
-							<input type="text" onkeyup="calcularMaterial()" required value="0" class="form-control" name="total_kilo_viaje_material" id="total_kilo_viaje_material">
+							<!--<label for="">COSTO DEL FLETE / KG MATERIAL</label>-->
+							<input type="hidden" onkeyup="calcularMaterial()" required value="0" class="form-control" name="total_kilo_viaje_material" id="total_kilo_viaje_material">
 						</div>
 						<div class="col-sm-3 col-md-3 col-lg-3">
-							<label for="">TOTAL FLETE / MATERIAL</label>
-							<input type="text" readonly value="0" class="form-control" name="total_viaje_kilos" id="total_viaje_kilos">
+							<!--<label for="">TOTAL FLETE / MATERIAL</label>-->
+							<input type="hidden" readonly value="0" class="form-control" name="total_viaje_kilos" id="total_viaje_kilos">
 						</div>
 					</div>
-					<div class="row">
+					<!--<div class="row">
 						<div class="col-sm-9 col-md-9 col-lg-9">
 							<h3 class="page-header">DATOS DEL CLIENTE</h3>
 						</div>
+					</div>-->
+					<div class="row">
+						<div class="col-sm-3 col-md-3 col-lg-3">
+							<!--<label for="">RAZON SOCIAL DEL CLIENTE</label> -->
+							<input type="hidden" class="form-control" maxlength="200" placeholder="RAZON SOCIAL" class="form-conrol" name="razon_social_cliente" id="razon_social_cliente" value="no aplica">
+						</div>
+						<div class="col-sm-4 col-md-4 col-lg-4">
+							<!--<label for="">IDENTIFICACION DEL CLIENTE</label> -->
+							<input type="hidden" maxlength="22" minlength="7" placeholder="IDENTIFICACION DEL CLIENTE" class="form-control" name="ident_cliente" id="ident_cliente" value="NO APLICA">
+						</div>
+						<div class="col-sm-3 col-md-3 col-lg-3">
+							<!--<label for="">NRO. REMISION</label> -->
+							<input type="hidden" value="NO APLICA" placeholder="NRO. DE REMISION DEL CLIENTE" maxlength="17" class="form-control" name="remision_cli" id="remision_cli">
+						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-3 col-md-3 col-lg-3">
-							<label for="">RAZON SOCIAL DEL CLIENTE</label>
-							<input type="text" class="form-control" maxlength="200" placeholder="RAZON SOCIAL" class="form-conrol" name="razon_social_cliente" id="razon_social_cliente">
+							<!--<label for="">TELEFONO DEL CLIENTE</label> -->
+							<input type="hidden" value="NO APLICA" required class="form-control" name="telefono_cliente" id="telefono_cliente">
+						</div>
+						<div class="col-sm-3 col-md-3 col-lg-3">
+							<!--<label for="">NIT DEL CLIENTE</label>-->
+							<input type="hidden" value="NO APLICA" placeholder="NIT DEL CLIENTE" maxlength="23" class="form-control" name="nit_cliente" id="nit_cliente">
 						</div>
 						<div class="col-sm-4 col-md-4 col-lg-4">
-							<label for="">IDENTIFICACION DEL CLIENTE</label>
-							<input type="text" maxlength="22" minlength="7" placeholder="IDENTIFICACION DEL CLIENTE" class="form-control" name="ident_cliente" id="ident_cliente">
-						</div>
-						<div class="col-sm-3 col-md-3 col-lg-3">
-							<label for="">NRO. REMISION</label>
-							<input type="text" placeholder="NRO. DE REMISION DEL CLIENTE" maxlength="17" class="form-control" name="remision_cli" id="remision_cli">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-3 col-md-3 col-lg-3">
-							<label for="">TELEFONO DEL CLIENTE</label>
-							<input type="tel" required class="form-control" name="telefono_cliente" id="telefono_cliente">
-						</div>
-						<div class="col-sm-3 col-md-3 col-lg-3">
-							<label for="">NIT DEL CLIENTE</label>
-							<input type="text" placeholder="NIT DEL CLIENTE" maxlength="23" class="form-control" name="nit_cliente" id="nit_cliente">
-						</div>
-						<div class="col-sm-4 col-md-4 col-lg-4">
-							<label for="">CORREO ELECTRONICO</label>
-							<input required type="email" class="form-control" name="email_cliente" placeholder="DIRECCION EMAIL DEL CLIENTE">
+							<!--<label for="">CORREO ELECTRONICO</label> -->
+							<input required type="hidden" value="NO APLICA" class="form-control" name="email_cliente" placeholder="DIRECCION EMAIL DEL CLIENTE">
 						</div>
 					</div>
 					<br>

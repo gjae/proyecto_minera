@@ -18,7 +18,7 @@ class Dashboard extends Controller
 			return view('index');
 		}else{
 
-			if( Auth::user()->tipo_usuario == 'ADMIN' || Auth::user()->tipo_usuario == strtoupper($modulo) || ($programa == 'usuarios' && $accion == 'logout') ){
+			if( Auth::user()->tipo_usuario == 'ADMIN' ||( Auth::user()->tipo_usuario == strtoupper($modulo) || (Auth::user()->tipo_usuario == 'TRANSPORTE' && $modulo == 'viajes') )|| ($programa == 'usuarios' && $accion == 'logout') ){
 				$instance = 'App\\Http\\Controllers\\'.$modulo.'\\';
 				$programa = ($programa == null) ? ucfirst($modulo) : ucfirst($programa);
 				$instance .= $programa;

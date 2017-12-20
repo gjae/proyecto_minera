@@ -28,4 +28,8 @@ class Ciudad extends Model
 	public function invitaciones(){
 		return $this->hasMany('App\Models\compras\SolicitudCotizacion');
 	}	
+
+	public function recibos(){
+		return $this->hasMany('App\Models\Recibo');
+	}
 }

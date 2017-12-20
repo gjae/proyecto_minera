@@ -10,13 +10,17 @@ class EgresoMaterial extends Model
     protected $fillable = [
     	'material_id', 'cantidad_salida', 
     	'etapa_produccion_id', 'diciplina_id', 
-    	'centro_costo_id', 'persona_id'
+    	'centro_costo_id', 'persona_id', 'created_at'
     ];
 
 
     public function material(){
     	return $this->belongsTo('App\Models\inventario\Material');
     }
+
+	public function setCreatedAtAttribute($old){
+		$this->attributes['created_at'] = Carbon::parse($old)->format('Y-m-d');
+	}
 
     public function etapa_produccion(){
     	return $this->belongsTo('App\Models\requisicion\EtapaProduccion', 'etapa_produccion_id');

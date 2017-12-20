@@ -1,6 +1,8 @@
 <style>
 	body{
 		font-family: Helvetica;
+		padding: 0;
+		margin: 0;
 	}
 	thead{
 		border: 1px solid black;
@@ -160,29 +162,58 @@ HASTA {{ Carbon\Carbon::parse($fecha_hasta)->format('d-m-Y') }}
 			
 			</th>
 			<th>
-				
-				Cantidad
-				
-			</th>
-			<th>
-				Monto
-			</th>
-			<th>
-			
-			Disciplina
-			
-			</th>
-			<th>
 			
 			Centro de costos
 			</th>
+			<th>
+			
+			Proveedor
+			
+			</th>
+			<th>
+			
+			Factura
+			
+			</th>
+			<th>
+				CANT
+			</th>
+			<th>
+				Valor Unitario
+			</th>
+			<th>
+				V / IVA
+			</th>
+			<th>
+				Valor Total
+			</th>
 		</tr>
 	</thead>
+
+@php
+$gasto = 0;
+$ingresos = 0;
+
+@endphp
 	<tbody style="text-align: center;">
 	 	@foreach($material->ingresos()->where('created_at', '>=', Carbon\Carbon::parse($fecha_desde)->format('Y-m-d') )->where('created_at', '<=', Carbon\Carbon::parse($fecha_hasta)->format('Y-m-d') )->get()  as $key => $ingreso)
+ @php
+$ingresos ++;
+@endphp
 		<tr style="text-align: center;">
 			<td>
-				{{ $ingreso->created_at->format('d-m-Y h:i A') }}
+				{{ $ingreso->created_at->format('d-m-Y') }}
+			</td>
+			<td>
+				
+				{{ $ingreso->centro_costo->nombre_centro }}
+
+			</td>
+			<td>
+				{{ $ingreso->proveedor->razon_social }}
+			</td>
+			<td>
+				{{ ( is_null($ingreso->factura) || empty($ingreso->factura)  ) ? '--' : $ingreso->factura }}
 			</td>
 			<td>
 				{{ $ingreso->cantidad }}
@@ -191,12 +222,11 @@ HASTA {{ Carbon\Carbon::parse($fecha_hasta)->format('d-m-Y') }}
 				<strong>{{ number_format($ingreso->monto, 2) }}</strong>
 			</td>
 			<td>
-				{{ $ingreso->diciplina->nombre_diciplina }}
+				<strong>{{number_format($ingreso->precio, 2) }}</strong>
 			</td>
-			<td>
-				
-				{{ $ingreso->centro_costo->nombre_centro }}
 
+			<td>
+				<strong> {{ number_format( $ingreso->total_iva , 2) }}</strong>
 			</td>
 			
 		</tr>
@@ -212,14 +242,23 @@ HASTA {{ Carbon\Carbon::parse($fecha_hasta)->format('d-m-Y') }}
 				&nbsp;
 			</td>
 			<td class="footer-table">
-				<strong>PROMEDIO </strong>
+				&nbsp;
+			</td>
+			<td class="footer-table">
+				&nbsp;
+			</td>
+			<td class="footer-table">
+				&nbsp;
+			</td>
+			<td class="footer-table">
+				<strong>TOTALES GASTOS</strong>
 			</td>
 			<td class="footer-table">
 				<strong>{{ 
-					$material->ingresos()
+					number_format($material->ingresos()
 								->where('created_at','>=', Carbon\Carbon::parse($fecha_desde)->format('Y-m-d') )
 								->where('created_at','<=', Carbon\Carbon::parse($fecha_hasta)->format('Y-m-d') )
-								->avg('monto') 
+								->sum('total_iva') , 2)
 				}}</strong>
 			</td>
 			
@@ -235,7 +274,56 @@ HASTA {{ Carbon\Carbon::parse($fecha_hasta)->format('d-m-Y') }}
 				&nbsp;
 			</td>
 			<td class="footer-table">
-				<strong>TOTAL DE INGRESOS</strong>
+				&nbsp;
+			</td>
+			<td class="footer-table">
+				&nbsp;
+			</td>
+			<td class="footer-table">
+				&nbsp;
+			</td>
+			<td class="footer-table">
+				<strong>PROMEDIO</strong>
+			</td>
+			<td class="footer-table">
+@php
+$ingresos = $material->ingresos()
+								->where('created_at','>=', Carbon\Carbon::parse($fecha_desde)->format('Y-m-d') )
+								->where('created_at','<=', Carbon\Carbon::parse($fecha_hasta)->format('Y-m-d') )
+								->sum('cantidad') ;
+
+$ingresos = ($ingresos > 0) ? $ingresos : 1;
+@endphp
+				<strong>{{ 
+					number_format($material->ingresos()
+								->where('created_at','>=', Carbon\Carbon::parse($fecha_desde)->format('Y-m-d') )
+								->where('created_at','<=', Carbon\Carbon::parse($fecha_hasta)->format('Y-m-d') )
+								->sum('total_iva') / $ingresos , 2)
+				}}</strong>
+			</td>
+			
+		</tr>
+		<tr>
+			<td class="footer-table">
+				&nbsp;
+			</td>
+			<td class="footer-table">
+				&nbsp;
+			</td>
+			<td class="footer-table">
+				&nbsp;
+			</td>
+			<td class="footer-table">
+				&nbsp;
+			</td>
+			<td class="footer-table">
+				&nbsp;
+			</td>
+			<td class="footer-table">
+				&nbsp;
+			</td>
+			<td class="footer-table">
+				<strong>INGRESOS</strong>
 			</td >
 			<td class="footer-table">
 				<strong>{{ 
@@ -258,7 +346,7 @@ HASTA {{ Carbon\Carbon::parse($fecha_hasta)->format('d-m-Y') }}
 		<tr style="text-align: center;">
 			<th>
 			
-			Fecha de ingreso
+			Fecha de egreso
 			
 			</th>
 			<th>

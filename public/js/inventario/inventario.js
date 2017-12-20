@@ -217,3 +217,46 @@ function calcularTotal(ev, field){
 		}
 	}
 }
+
+function click_option(event, boton){
+		if( boton.getAttribute('role') == 'delete' ){
+			if(confirm("¿Seguro que desea eliminar este item?")){
+				var url = location.href+'/eliminarMaterial';
+				$.post(url, {id: boton.getAttribute('data-id'), '_token': $("#token").val() }, function(resp){
+					alert(resp.mensaje)
+					if(! resp.error)
+						location.reload()
+				})
+			}
+		}
+}
+
+function click_action(event, boton){
+		var btn = boton
+		var url = location.href + '/formularios?formulario='+btn.getAttribute('formulario');
+		var modal = $("#modal-inventario")
+		var id = boton.getAttribute('data-id');
+
+		if( ( typeof(id) != undefined ) )
+			url+='&id='+id
+
+		if( boton.getAttribute('role') == 'reportes'){
+			if(!$("#footer-datos").hasClass('hidden')){
+				$("#footer-datos").addClass('hidden')
+				$("#footer-reportes").removeClass('hidden')
+			}
+		}
+		else{
+			if( $("#footer-datos").hasClass('hidden')){
+				
+				$("#footer-datos").removeClass('hidden')
+				$("#footer-reportes").addClass('hidden')
+			}
+		}
+		modal.modal({show: true})
+		$.get(url, {}, function(resp){
+			if( !resp.error){
+				$("#form-modal").html(resp.formulario)
+			}
+		})
+}

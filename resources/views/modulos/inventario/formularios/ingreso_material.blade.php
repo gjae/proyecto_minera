@@ -8,7 +8,12 @@
 	<div class="row clearfix">
 		
 		<div class="container">
-			
+			<div class="row clearfix">
+				<div class="col-sm-10 col-md-3 col-lg-3">
+					<label> FECHA DEL INGRESO </label>
+					<input type="date" name="created_at" value="{{ Carbon\Carbon::now()->format('Y-m-d  H:i:s') }}" class="form-control" placeholder="FECHA DEL INGRESO">				
+				</div>
+			</div>
 			<div class="row clearfix">
 				<div class="col-sm-10 col-md-3 col-lg-3">
 					<label for="">Centro de costos</label>
@@ -52,10 +57,35 @@
 
 				</div>
 				<div class="col-sm-12 col-md-3 col-lg-3">
-					<label for="">Valor</label>
+					<label for="">Valor unitario</label>
 					<input type="text" value="0" placeholder="Monto por unidad" class="form-control" name="monto" id="monto">
 				</div>
 
+			</div>
+			<div class="row clearfix">
+				<div class="col-sm-4 col-md-4 col-lg-4">
+					<label>Proveedor</label>
+					<select name="proveedor_id" class="form-control" required>
+						<option value="2">NINGUNO</option>
+						@foreach(App\Models\compras\Proveedor::where('edo_reg', 1)->get() as $proveedor)
+							<option value="{{$proveedor->id}}">{{$proveedor->razon_social}}</option>
+						@endforeach
+					</select>
+				</div>
+				<div class="col-sm-4 col-md-4 col-lg-4">
+					<label>Factura</label>
+					<input name="factura" class="form-control" maxlength="33" placeholder="INGRESE EL NUMERO DE FACTURA" required />
+				</div>
+			</div>
+			<div class="row clearfix">
+				<div class="col-sm-3 col-md-3 col-lg-3">
+					<label>Valor más IVA</label>
+					<input type="text" name="precio" class="form-control" required placeholder="PRECIO UNITARIO" >
+				</div>
+				<div class="col-sm-3 col-md-3 col-lg-3">
+					<label>Valor total</label>
+					<input type="text" name="total_iva" class="form-control" required placeholder="MONTO TOTAL DE IVA" >
+				</div>
 			</div>
 
 		</div>

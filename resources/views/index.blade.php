@@ -187,6 +187,11 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ url('dashboard/nomina/minas') }}">
+                                    Inventario de minas
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ url('dashboard/nomina/ajustes') }}">
                                     Ajustes
                                 </a>
@@ -212,6 +217,11 @@
                             <li>
                                 <a href="{{ url('dashboard/viajes/registrar/registro') }}">
                                     Registro
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('dashboard/viajes/registrar/recibos') }}">
+                                    Recibos
                                 </a>
                             </li>
                         </ul>
@@ -247,11 +257,6 @@
                             <li>
                                 <a href="{{ url('dashboard/inventario/inventario') }}">
                                     Ver inventario
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ url('dashboard/inventario/minas') }}">
-                                    Inventario de minas
                                 </a>
                             </li>
                         </ul>

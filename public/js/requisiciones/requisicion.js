@@ -87,6 +87,7 @@ function guardar(event, datos){
 		var datos = $("#form-requisicion").serialize();
 		if(datos.indexOf("=&") != -1){
 			alert("El formulario aun tiene datos que no han sido completados");
+			alert(datos)
 			return false;
 		}
 		var url = location.host +'/index.php/dashboard/requisicion/requisicion/guardar';

@@ -1,4 +1,8 @@
 <style>
+	*{
+		padding: 0;
+		margin: 0;
+	}
 	body{
 		font-family: Helvetica;
 	}
@@ -41,6 +45,7 @@
 
 @foreach($materiales as $material)
 
+@if(!is_null($material->egresos) || true)
 @foreach($material->egresos as $egreso)
 
 <tr>
@@ -51,7 +56,7 @@
 	<td>&nbsp;</td>
 	<td> {{ $egreso->cantidad_salida }} </td>
 	<td> 
-		{{ $egreso->persona->primer_nombre }}
+		{{ ( is_null($egreso->persona) ) ? '--' : $egreso->persona->primer_nombre  }}
 	</td>
 	<td>
 		{{ $egreso->centro_costo->nombre_centro }}
@@ -65,7 +70,9 @@
 </tr>
 
 @endforeach
+@endif
 
+@if($material->ingresos)
 @foreach($material->ingresos as $ingreso)
 
 <tr>
@@ -91,7 +98,7 @@
 	<td>a</td>
 </tr>
 @endforeach
-
+@endif
 
 @endforeach
 </body>
