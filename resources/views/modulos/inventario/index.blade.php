@@ -48,8 +48,8 @@
 							<a  formulario="insertarUnidadMedida" role="controlBodega" class="btn btn-success reportes">
 								REPORTE - CONTROL DE BODEGA
 							</a>
-							<a  formulario="reportePorProveedor" role="controlBodega" class="btn btn-success actions">
-								REPORTE - POR PROVEEDOR
+							<a  formulario="reportePorProveedor" role="reportes" class="btn btn-success" onclick="click_action(event, this)">
+								REPORTE - POR PROVEEDO
 							</a>
 							<a class="btn btn-success" onclick="formato_almacen()">
 								DESCARGAR FORMATO DE ALMACEN
