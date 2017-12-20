@@ -63,6 +63,13 @@ class Proveedor extends Model
         return $this->hasMany('App\Models\inventario\IngresoMaterial');
     }
 
+    public function getTipoIdentificacionAttribute($old){
+        if($old == 'CÉDULA_DE_CIUDADANÍ'){
+            return "CEDULA DE CIUDADANIA";
+        }
+        return $old;
+    }
+
     public static function getNewCode(){
         $codigo = DB::table('proveedores')->count('codigo_proveedor') + 1;
 
