@@ -1,5 +1,5 @@
 <div class="container">
-	<input type="text" id="tipo_reporte" value="por_proveedor">
+	<input type="hidden" id="tipo_reporte" value="por_proveedor">
 	<div class="row">
 		<div class="col-sm-8 col-md-8 col-lg-8">
 			<label for="">Seleccione proveedor</label>
