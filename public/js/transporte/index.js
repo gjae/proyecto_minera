@@ -42,6 +42,14 @@ $(document).ready(function(){
 	})
 })
 
+
+function factura(e, boton){
+	alert("Clicked")
+	var url = 'http://'+location.host+'/index.php/dashboard/'+$("#modulo").val()+'/'+$("#programa").val()+'/factura';
+	url+= '?viaje_id='+boton.getAttribute('id-transporte')
+	window.open(url, 'RECIBO', 'width=750,height=950');
+}
+
 function cargar_vehiculo(e, boton, recibo = false){
 
 	if(!recibo){

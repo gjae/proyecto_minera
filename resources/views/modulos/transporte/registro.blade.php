@@ -71,9 +71,10 @@
 									<td>{{ $viaje->nro_factura }}</td>
 									<td>
 										<a 
-											class="btn btn-success factura" 
+											class="btn btn-success" 
 											role="reportes"
 											id-transporte="{{ $viaje->id }}"
+											onclick="factura(event, this)"
 										>
 											<strong>RECIBO</strong>
 										</a>
