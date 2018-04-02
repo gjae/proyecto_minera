@@ -18,11 +18,7 @@ class MovimientosMinas extends Model
         'fecha_salida',
         'observacion',
         'peso_en',
-        /**
-         * PERSONA (MINERO) RESPONSABLE
-         */
         'persona_id',
-
         'material_mina_id',
         'etapa_produccion_id',
         'centro_costo_id',

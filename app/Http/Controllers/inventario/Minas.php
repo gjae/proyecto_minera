@@ -145,6 +145,7 @@ class Minas extends Controller
 
    public function ingresarMaterial($req){
 
+      
    		try {
    			$datos = [
    				'material_mina_id' => $req->material_mina_id,
@@ -155,11 +156,18 @@ class Minas extends Controller
    				'peso_en' => $req->peso_en,
    				'monto_tonelada' => $req->monto_tonelada,
    				'cantidad_'.$req->tipo_movimiento => $req->cantidad,
-   				'total_movimiento' => $req->total_movimiento
+   				'total_movimiento' => $req->total_movimiento,
+          'centro_costo_id' => $req->centro_costo_id,
+          'diciplina_id' => $req->diciplina_id,
+          'etapa_produccion_id' => $req->etapa_produccion_id,
 
    			];
+        return json_encode($datos);
 
-   			if(MOVM::create($datos)){
+   			if($mov->save()){
+          $mov = MOVM::find($mov->id);
+          $mov->centro_costo_id = $req->centro_costo_id;
+          $mov->save();
    				return response([
    						'error' => false,
    						'mensaje' => 'EL MOVIMIENTO HA SIDO INGRESADO EXITOSAMENTE'

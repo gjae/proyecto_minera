@@ -24,6 +24,7 @@ class Dashboard extends Controller
 				$instance .= $programa;
 				$instance = new $instance;
 				$accion = ($accion == null )? 'index' : $accion; 
+
 				return call_user_func_array([$instance, $accion], [
 					'req' => $req
 				]);

@@ -1,4 +1,7 @@
 <div class="container">
+	@if (isset($desde_form))
+		<input type="hidden" id="desde_form" name="desde_form" value="{{$desde_form}}">
+	@endif
 	<div class="row">
 		<input type="hidden" name="material_id" id="material_reporte" value="{{ $id }}">
 		<div class="col-sm-9 col-lg-8 col-md-8">

@@ -72,7 +72,7 @@ class Reportes extends Controller
 
         if($req->has('material_id'))
             $material = $material->where('id', $req->material_id);
-	#return dd($material->get());
+	//return dd($material->get());
 
         $pdf = PDF::loadView('modulos.inventario.reportes.formato_bodega', [
                     'materiales' =>  $material->get(),

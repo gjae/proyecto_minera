@@ -159,6 +159,8 @@ function buscar_tipo(event,select){
 			side_fechas.addClass('hidden')
 		}
 		var url = location.host+'/index.php/dashboard/inventario/reportes/'+select.value+'?material_id='+$("#material_reporte").val()
+		if( $("#desde_form").val() !== undefined )
+			url = location.host+'/index.php/dashboard/nomina/minas/'+select.value+'?material_id='+$("#material_reporte").val()
 		var ref = $("#ref")
 		if( ref.val() != undefined )	
 			url+='&ref='+ref.val()	

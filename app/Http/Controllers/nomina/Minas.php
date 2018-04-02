@@ -19,7 +19,8 @@ class Minas extends Controller
     	if( $req->has('formulario') ){
     		$vista = \View::make('modulos.inventario.formularios.'.$req->formulario, [
               'id'=> $req->id,
-              'ref' => 'minas'
+              'ref' => 'minas',
+              'desde_form' => 'nomina'
             ])->render();
     		$data = [
     			'error' => false,
@@ -30,7 +31,6 @@ class Minas extends Controller
     }
 
     public function guardarMaterial($req){
-
      		$mm = new MM($req->all());
      		try {
      			if($mm->save()){
@@ -109,7 +109,7 @@ class Minas extends Controller
 
         $mina = new Mina();
 
-        $vista = \View::make('modulos.reportes.movimientos_minas', [
+        $vista = \View::make('modulos.nomina.reportes.movimientos_minas', [
                     'materiales' =>  $material->orderBy('id')->get(),
                     'minas' => $mina->get(),
                 ])->render();
@@ -144,7 +144,6 @@ class Minas extends Controller
 
 
    public function ingresarMaterial($req){
-
    		try {
    			$datos = [
    				'material_mina_id' => $req->material_mina_id,
@@ -155,10 +154,15 @@ class Minas extends Controller
    				'peso_en' => $req->peso_en,
    				'monto_tonelada' => $req->monto_tonelada,
    				'cantidad_'.$req->tipo_movimiento => $req->cantidad,
-   				'total_movimiento' => $req->total_movimiento
+   				'total_movimiento' => $req->total_movimiento,
+          'centro_costo_id' => $req->centro_costo_id,
+          'diciplina_id' => $req->diciplina_id,
+          'etapa_produccion_id' => $req->etapa_produccion_id,
+
 
    			];
 
+       // return dd($datos);
    			if(MOVM::create($datos)){
    				return response([
    						'error' => false,
