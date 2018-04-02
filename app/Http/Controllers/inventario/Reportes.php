@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\inventario\Material as M; 
 use App\Models\minas\MaterialMina as MM;
 use App\Models\Mina;
+use App\Models\compras\Proveedor;
 
 use Carbon\Carbon;
 use CodeItNow\BarcodeBundle\Utils\BarcodeGenerator as BC;
@@ -29,6 +30,20 @@ class Reportes extends Controller
     	$pdf = PDF::loadHtml($vista);
 
     	return $pdf->stream('reporte_inventario', ['attachment' => 0]);
+    }
+    public function por_proveedor($req){
+        $proveedor = Proveedor::find($req->proveedor_id);
+        $ingresos = $proveedor
+                    ->ingresoMaterial
+                    ->where('fecha_ingreso', '>=', Carbon::parse($req->fecha_desde)->format('Y-m-d'))
+                    ->where('fecha_ingreso', '<=', Carbon::parse($req->fecha_hasta)->format('Y-m-d'));
+
+        $vista = \View::make('modulos.inventario.reportes.por_proveedor',[
+            'ingresos' => $ingresos,
+            'proveedor' => $proveedor,
+        ])->render();
+        $pdf = PDF::loadHtml($vista);
+        return $pdf->stream('reporte_por_proveedor');
     }
 
     public function datos_generales($req){

@@ -134,7 +134,7 @@
 		                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cerrar</button>
 	                </div>
 	                <div id="footer-reportes" class="hidden">
-		                <button type="button" id="reporte" class="btn btn-link waves-effect">Generar reporte</button>
+		                <button type="button" class="reporte btn btn-link waves-effect">Generar reporte</button>
 		                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Cerrar</button>
 	                </div>
 	            </div>

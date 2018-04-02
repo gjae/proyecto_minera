@@ -82,12 +82,13 @@ $(document).ready(function(){
 		var datos = $("#form-modal")
 		
 		var tipo = $("#tipo_reporte").val();
-		var url = location.href+'/'+$("#tipo_reporte").val()+'?material_id='+$("#material_reporte").val()
+		var url = 'http://'+location.host+'/index.php/dashboard/inventario/Reportes/'+$("#tipo_reporte").val()+'?material_id='+$("#material_reporte").val()
 		url +=  '&fecha_desde='+$("#fecha_desde").val()+"&fecha_hasta="+$("#fecha_hasta").val()
 		var ref = $("#ref")
-
+		//alert(url)
+		
 		if( ref.val() != undefined ){
-			var url = location.href+'/'+ref.val()+'/'+$("#tipo_reporte").val()+'?material_id='+$("#material_reporte").val()
+			var url = location.href+'/'+$("#tipo_reporte").val()+'?material_id='+$("#material_reporte").val()
 			url +=  '&fecha_desde='+$("#fecha_desde").val()+"&fecha_hasta="+$("#fecha_hasta").val()
 			url+='&ref='+ref.val()	
 		}
