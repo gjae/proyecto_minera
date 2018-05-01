@@ -9,11 +9,38 @@ use App\Models\minas\MovimientosMinas as MOVM;
 use App\Models\Mina;
 use PDF;
 use Carbon\Carbon;
+use DB;
+use App\Models\inventario\UnidadMedida;
+
 class Minas extends Controller
 {
     public function index($req){
     	return view('modulos.inventario.minas');
     }
+
+    public function guardarUnidadMedida($req){
+        $resp = [];
+        DB::beginTransaction();
+        try {
+                if(UnidadMedida::create($req->all())){
+                        $resp = [
+                                'error' => false,
+                                'mensaje' => 'SE HA GUARDADO CORRECTAMENTE LA UNIDAD DE MEDIDA'
+                        ];
+                        DB::commit();
+                }
+        } catch (\Exception $e) {
+                DB::rollback();
+                $resp = [
+                        'error' => true,
+                        'mensaje' => 'HA OCURRIDO UN ERROR INESPERADO: '.$e->getMessage().' MODULO DE INVENTARIO ARCHIVO Medidas.php FUNCION guardar'
+                ];
+        }finally{
+                return response($resp, 200)->header('Content-Type', 'application/json');
+
+        }
+    }
+
 
     public function formularios($req){
     	if( $req->has('formulario') ){
