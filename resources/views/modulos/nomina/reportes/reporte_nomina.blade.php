@@ -302,7 +302,7 @@
 		<tr>
 			<td>
 				
-				 <strong>REPORTE DE NOMINA POR PERSONA - {{ $detalle->persona->primer_nombre }}</strong>
+				 <strong>REPORTE DE NOMINA POR PERSONA - {{ $detalle->persona->primer_nombre.' '.$detalle->persona->primer_apellido .'( '.$detalle->persona->identificacion.' )'}}</strong>
 			</td>
 		</tr>
 	</table>

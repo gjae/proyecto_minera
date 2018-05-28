@@ -326,7 +326,7 @@
 				$total_deducciones = 0;
 			@endphp
 			@foreach($persona->nominas as $key_2 => $detalle_person)
-				@if( $detalle_person->persona->identificacion == $persona->identificacion  )
+				@if( $detalle_person->persona->identificacion == $persona->identificacion && $detalle_person->nomina_id == $nomina->id )
 				<tr style="text-align: center;">
 					<td>
 						{{ $detalle_person->ajuste->ajuste->codigo_ajuste }}
