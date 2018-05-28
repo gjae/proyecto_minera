@@ -70,7 +70,7 @@
 		</td>
 		<td>
 			
-			<strong>{{ $personas[0]->nominas[0]->nomina->codigo_nomina }}</strong>
+			<strong>{{ $nomina->codigo_nomina }}</strong>
 		</td>
 	</tr>
 	<tr>
@@ -79,7 +79,7 @@
 		</td>
 		<td >
 			
-			<strong>{{ $personas[0]->nominas[0]->nomina->nombre_nomina }}</strong>
+			<strong>{{ $nomina->nombre_nomina }}</strong>
 			
 		</td>
 	</tr>
@@ -261,7 +261,7 @@
 		</td>
 		<td>
 			
-			<strong>{{ $persona->nominas[0]->nomina->codigo_nomina }}</strong>
+			<strong>{{ $nomina->codigo_nomina }}</strong>
 		</td>
 	</tr>
 	<tr>
@@ -270,7 +270,7 @@
 		</td>
 		<td >
 			
-			<strong>{{ $persona->nominas[0]->nomina->nombre_nomina }}</strong>
+			<strong>{{ $nomina->nombre_nomina }}</strong>
 			
 		</td>
 	</tr>
@@ -299,7 +299,7 @@
 		<tr style="text-align: center;">
 			<td>
 				
-				 <strong>REPORTE DE NOMINA POR PERSONA - {{ $persona->primer_nombre }}</strong>
+				 <strong>REPORTE DE NOMINA POR PERSONA - {{ $persona->primer_nombre.' '.$persona->primer_apellido.' ( '.$persona->identificacion.' )' }}</strong>
 			</td>
 		</tr>
 	</table>
