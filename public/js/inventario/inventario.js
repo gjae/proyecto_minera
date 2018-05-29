@@ -79,6 +79,7 @@ $(document).ready(function(){
 	})
 
 	$(".reporte").on("click", function(){
+
 		var datos = $("#form-modal")
 		
 		var tipo = $("#tipo_reporte").val();
@@ -96,6 +97,9 @@ $(document).ready(function(){
 			url+='&proveedor_id='+$("#proveedor_id").val()
 		}
 
+		if( $("#tipo_reporte").val()  == 'formatoNomina'){
+			url+='&cedula='+$("#identificacion").val();
+		}
 		window.open(url, "INVITACIONES"  ,"width=800,height=900")	
 	})
 	$(".formularios").on('click', function(){
@@ -149,7 +153,7 @@ $(document).ready(function(){
 })
 
 function buscar_tipo(event,select){
-	//alert(select.value)
+	// alert(select.value)
 	var side_fechas = $("#rango_fechas")
 	if( select.value == 'datos_generales' )
 	{
@@ -172,7 +176,20 @@ function buscar_tipo(event,select){
 		
 		if( side_fechas.hasClass('hidden') )
 			side_fechas.removeClass('hidden')
+		if( !$("#filtro_persona").hasClass('hiddden') )
+			$("#filtro_persona").addClass('hidden')
 		
+	}
+
+	if( select.value == 'formatoNomina' ){
+		var filtro = $("#filtro_persona")
+		
+		if( filtro.hasClass('hidden') )
+			filtro.removeClass('hidden')
+
+		if( $("#rango_fechas").hasClass('hidden') )
+			$("#rango_fechas").removeClass('hidden');
+
 	}
 }
 
