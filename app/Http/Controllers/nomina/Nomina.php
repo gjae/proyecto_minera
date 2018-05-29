@@ -97,18 +97,19 @@ class Nomina extends Controller
     public function reportes($req){
         $persona = new P;
 
-        if($req->has('identificacion') && $req->identificacion != '')
+        $nomina = N::where('codigo_nomina', $req->nomina)->first();
+        if($req->has('identificacion') && $req->identificacion != '') {
             $persona = $persona->where('identificacion', $req->identificacion);
-
-        if($req->has('mina_id') && $req->mina_id!='' ){
-            $persona = $persona->where('mina_id', $req->mina_id);
         }
 
-        $nomina = N::where('codigo_nomina', $req->nomina)->first();
+        if($req->has('mina_id') && ($req->mina_id!='' && $req->mina_id != '-') ){
+            $persona = $persona->where('mina_id', $req->mina_id);
+        }
 
         $vistaPdf = \View::make('modulos.nomina.reportes.recibo_persona',[
             'personas' => $persona->get(),
             'periodo' => $this->getPeriodoNomina($nomina),
+            'nomina' => $nomina
         ])->render();
 
         $pdf = PDF::loadHtml($vistaPdf);

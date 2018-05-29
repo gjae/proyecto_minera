@@ -11,11 +11,38 @@ use PDF;
 use Carbon\Carbon;
 use DB;
 use App\Models\inventario\UnidadMedida;
+use App\Models\personal\Persona;
 
 class Minas extends Controller
 {
     public function index($req){
     	return view('modulos.inventario.minas');
+    }
+
+    public function formatoNomina($req){
+      $personas = new Persona;
+      $personas2 = null;
+      $movimientos = null;
+      if( $req->has('cedula') && !empty( $req->cedula )  ){
+        $personas = $personas->where('identificacion', '=', $req->cedula)->first();
+      }
+      $personas2 = clone $personas;
+
+      $movimientos = $personas2->mis_movimientos_minas();
+      if( $req->has('fecha_desde') && !empty($req->fecha_desde) ){
+        $movimientos = $movimientos->where('fecha_ingreso', '>=', $req->fecha_desde);
+       // return $movimientos->toSql();
+      }
+      if( $req->has('fecha_hasta') && !empty($req->fecha_hasta) ){
+        $movimientos = $movimientos->where('fecha_ingreso', '<=', $req->fecha_hasta);
+      }
+
+      $movimientos = is_null( $movimientos ) ? $movimientos->get() : $movimientos->orderBy('fecha_ingreso', 'ASC')->get();
+
+      return view('modulos.nomina.reportes.reporte_mina_persona', [
+
+      ]);
+
     }
 
     public function guardarUnidadMedida($req){

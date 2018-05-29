@@ -11,6 +11,7 @@
 				@if(isset($ref))
 					<option value="datos_generales">MOVIMIENTOS DEL MATERIAL</option>
 					<option value="actividad_en_fechas">ACTIVIDAD ENTRE FECHAS</option>
+					<option value="formatoNomina">FORMATO DE NOMINA</option>
 				@else
 					<option value="datos_generales">DATOS DEL ARTICULO</option>
 					<option value="actividad_en_fechas">ACTIVIDAD ENTRE FECHAS</option>
@@ -30,6 +31,12 @@
 		<div class="col-sm-4 col-lg-4 col-md-4">
 			<label for="">FECHA HASTA (DD-MM-AAAA)</label>
 			<input type="date" class="form-control" value="01-01-{{ Carbon\Carbon::now()->format('Y') }}" name="fecha_hasta" id="fecha_hasta">
+		</div>
+	</div>
+	<div class="row hidden" id="filtro_persona">
+		<div class="col-sm-12 col-lg-8 col-md-8">
+			<label for="">Filtrar por identificacion</label>
+			<input type="text" name="cedula" id="identificacion" class="form-control">
 		</div>
 	</div>
 </div>
