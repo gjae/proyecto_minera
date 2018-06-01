@@ -37,7 +37,24 @@ class Minas extends Controller
         $movimientos = $movimientos->where('fecha_ingreso', '<=', $req->fecha_hasta);
       }
 
-      $movimientos = is_null( $movimientos ) ? $movimientos->where('material_mina_id','=', $req->material_id)->get() : $movimientos->where('material_mina_id','=', $req->material_id)->orderBy('fecha_ingreso', 'ASC')->get();
+      if( empty($req->cedula) ){
+        $personas = $personas->where('estado_persona', '=', 'ACTIVA')->get();
+
+        $html = view('modulos.nomina.reportes.reporte_mina_general', [
+          'personas' => $personas,
+          'fecha_desde' => ( empty($req->fecha_desde) ? null : $req->fecha_desde ),
+          'fecha_hasta' => ( empty($req->fecha_hasta) ? null : $req->fecha_hasta )
+        ])->render();
+
+        $pdf = PDF::loadHtml($html);
+
+        $pdfName = md5( Carbon::now()->format('YYYY-mm-dd H:m:s') );
+
+        return $pdf->stream($pdfName, ['stream' => 0]);
+        return $html;
+      }
+
+      $movimientos = is_null( $movimientos ) ? $movimientos->where('material_mina_id','=', $req->material_id)->orderBy('fecha_ingreso', 'ASC')->get() : $movimientos->where('material_mina_id','=', $req->material_id)->orderBy('fecha_ingreso', 'ASC')->get();
 
       //return dd($movimientos);
       $html = view('modulos.nomina.reportes.reporte_mina_persona', [
