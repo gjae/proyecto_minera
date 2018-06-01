@@ -108,6 +108,9 @@
 				
 			</th>
 			<th>
+				FECHA
+			</th>
+			<th>
 				
 				CANT. INGRESADA
 				
@@ -129,11 +132,12 @@
 			@foreach( $movimientos as $movimiento )
 				<tr align="center">
 					<td>
-						{{ $movimiento->peso_en }}
+						{{ $movimiento->material->unidad_medida->descripcion_unidad }}
 					</td>
 					<td>
 						{{ $movimiento->observacion }}
 					</td>
+					<td> {{ $movimiento->fecha_ingreso->format('d/m/Y') }} </td>
 					<td>
 						{{ $movimiento->cantidad_ingreso.' '.$movimiento->peso_en }}
 					</td>
