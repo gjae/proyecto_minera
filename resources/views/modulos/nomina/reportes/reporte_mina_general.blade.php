@@ -137,7 +137,9 @@
 					@foreach( $movimientos as $movimiento )
 						<tr align="center">
 							<td>
-								{{ $movimiento->material->unidad_medida->descripcion_unidad }}
+								@if( $movimiento->material )
+									{{ $movimiento->material->unidad_medida->descripcion_unidad }}
+								@endif
 							</td>
 							<td>
 								{{ $movimiento->observacion }}
