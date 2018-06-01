@@ -29,6 +29,7 @@
 			$movimientos = $persona
 				->mis_movimientos_minas()
 				->where('fecha_ingreso', '>=', \Carbon\Carbon::parse($fecha_desde)->format('Y-m-d'))
+				->where('material_mina_id','=', $material)
 				->where('fecha_ingreso', '<=', \Carbon\Carbon::parse($fecha_hasta)->format('Y-m-d') )
 				->orderBy('fecha_ingreso', 'ASC')->get();
 			if( $movimientos->isEmpty() ) continue;

@@ -68,7 +68,6 @@
 			<strong>NOMINA</strong>
 		</td>
 		<td align="right">
-			<strong>  {{ $movimientos[0]->material->descripcion }}</strong>
 		</td>
 	<tr>
 		<td align="left">

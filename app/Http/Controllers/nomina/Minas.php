@@ -43,7 +43,8 @@ class Minas extends Controller
         $html = view('modulos.nomina.reportes.reporte_mina_general', [
           'personas' => $personas,
           'fecha_desde' => ( empty($req->fecha_desde) ? null : $req->fecha_desde ),
-          'fecha_hasta' => ( empty($req->fecha_hasta) ? null : $req->fecha_hasta )
+          'fecha_hasta' => ( empty($req->fecha_hasta) ? null : $req->fecha_hasta ),
+          'material' => $req->material_id
         ])->render();
 
         $pdf = PDF::loadHtml($html);
@@ -56,7 +57,7 @@ class Minas extends Controller
 
       $movimientos = is_null( $movimientos ) ? $movimientos->where('material_mina_id','=', $req->material_id)->orderBy('fecha_ingreso', 'ASC')->get() : $movimientos->where('material_mina_id','=', $req->material_id)->orderBy('fecha_ingreso', 'ASC')->get();
 
-      //return dd($movimientos);
+      return dd($movimientos);
       $html = view('modulos.nomina.reportes.reporte_mina_persona', [
         'persona' => $personas,
         'movimientos' => $movimientos,
