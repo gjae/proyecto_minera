@@ -106,6 +106,9 @@
 			
 			<thead style="text-align: center;">
 				<tr class="borderOK" >
+					<th>
+						FECHA
+					</th>
 					<th >
 						
 						U. MEDIDA
@@ -115,9 +118,6 @@
 						
 						DESCRIPCION
 						
-					</th>
-					<th>
-						FECHA
 					</th>
 					<th>
 						
@@ -137,17 +137,15 @@
 				<tbody>
 					@foreach( $movimientos as $movimiento )
 						<tr align="center">
+							<td> {{ $movimiento->fecha_ingreso->format('d/m/Y') }} </td>
 							<td>
-								@if( $movimiento->material )
-									{{ $movimiento->material->unidad_medida->descripcion_unidad }}
-								@endif
+								{{ App\Models\inventario\UnidadMedida::where('codigo_unidad', '=', $movimiento->peso_en)->first()->descripcion_unidad  }}
 							</td>
 							<td>
 								{{ $movimiento->observacion }}
 							</td>
-							<td> {{ $movimiento->fecha_ingreso->format('d/m/Y') }} </td>
 							<td>
-								{{ $movimiento->cantidad_ingreso.' '.$movimiento->peso_en }}
+								{{ $movimiento->cantidad_ingreso }}
 							</td>
 							<td align="right">
 								{{ number_format($movimiento->monto_tonelada, 2, '.', ',') }}

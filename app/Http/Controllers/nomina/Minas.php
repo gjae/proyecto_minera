@@ -52,12 +52,12 @@ class Minas extends Controller
         $pdfName = md5( Carbon::now()->format('YYYY-mm-dd H:m:s') );
 
         return $pdf->stream($pdfName, ['stream' => 0]);
-        return $html;
+        //return $html;
       }
 
       $movimientos = is_null( $movimientos ) ? $movimientos->where('material_mina_id','=', $req->material_id)->orderBy('fecha_ingreso', 'ASC')->get() : $movimientos->where('material_mina_id','=', $req->material_id)->orderBy('fecha_ingreso', 'ASC')->get();
 
-      return dd($movimientos);
+      //return dd($movimientos);
       $html = view('modulos.nomina.reportes.reporte_mina_persona', [
         'persona' => $personas,
         'movimientos' => $movimientos,

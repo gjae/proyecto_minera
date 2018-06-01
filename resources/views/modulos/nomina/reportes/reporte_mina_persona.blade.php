@@ -95,59 +95,59 @@
 <table border="0" width="100%" cellpadding="0" cellspacing="0" class="body">
 	
 	<thead style="text-align: center;">
-		<tr class="borderOK" >
-			<th >
-				
-				U. MEDIDA
-				
-			</th>
-			<th>
-				
-				DESCRIPCION
-				
-			</th>
-			<th>
-				FECHA
-			</th>
-			<th>
-				
-				CANT. INGRESADA
-				
-			</th>
-			<th>
-				VALORACION COP$
-			</th>
-			<th>
-				
-				TOTAL COP$ 
-				
-			</th>
-		</tr>
+				<tr class="borderOK" >
+					<th>
+						FECHA
+					</th>
+					<th >
+						
+						U. MEDIDA
+						
+					</th>
+					<th>
+						
+						DESCRIPCION
+						
+					</th>
+					<th>
+						
+						CANT. INGRESADA
+						
+					</th>
+					<th>
+						VALORACION COP$
+					</th>
+					<th>
+						
+						TOTAL COP$ 
+						
+					</th>
+				</tr>
 	</thead>
 		@php
 			$total=0;
 		@endphp
 		<tbody>
 			@foreach( $movimientos as $movimiento )
-				<tr align="center">
-					<td>
-						{{ $movimiento->material->unidad_medida->descripcion_unidad }}
-					</td>
-					<td>
-						{{ $movimiento->observacion }}
-					</td>
-					<td> {{ $movimiento->fecha_ingreso->format('d/m/Y') }} </td>
-					<td>
-						{{ $movimiento->cantidad_ingreso.' '.$movimiento->peso_en }}
-					</td>
-					<td align="right">
-						{{ number_format($movimiento->monto_tonelada, 2, '.', ',') }}
-					</td>
-					<td align="right">
-						@php $total += $movimiento->total_movimiento ; @endphp
-						{{ number_format( $movimiento->total_movimiento, 2, '.', ',' ) }}
-					</td>
-				</tr>
+						<tr align="center">
+							<td> {{ $movimiento->fecha_ingreso->format('d/m/Y') }} </td>
+							<td>
+								{{ App\Models\inventario\UnidadMedida::where('codigo_unidad', '=', $movimiento->peso_en)->first()->descripcion_unidad  }}
+							</td>
+							<td>
+								{{ $movimiento->observacion }}
+							</td>
+							<td>
+								{{ $movimiento->cantidad_ingreso }}
+							</td>
+							<td align="right">
+								{{ number_format($movimiento->monto_tonelada, 2, '.', ',') }}
+							</td>
+							<td align="right">
+								@php $total += $movimiento->total_movimiento ; @endphp
+								{{ number_format( $movimiento->total_movimiento, 2, '.', ',' ) }}
+							</td>
+						</tr>
 			@endforeach
 			<tr>
 				<td></td>
@@ -156,6 +156,9 @@
 				<td></td>
 			</tr>
 			<tr >
+				<td class="footer-table">
+					
+				</td>
 				<td class="footer-table">
 					
 				</td>
