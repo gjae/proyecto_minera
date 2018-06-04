@@ -26,11 +26,19 @@
 
 		@php
 			$total=0;
+			$descuento = 0;
+			$ingreso = 0;
 			$movimientos = $persona
 				->mis_movimientos_minas()
-				->where('fecha_ingreso', '>=', \Carbon\Carbon::parse($fecha_desde)->format('Y-m-d'))
+				->where(function($query) use($fecha_desde){
+					$query->where('fecha_ingreso', '>=', \Carbon\Carbon::parse($fecha_desde)->format('Y-m-d'))
+						->orWhere('fecha_salida', '>=', \Carbon\Carbon::parse($fecha_desde)->format('Y-m-d'));
+				})
 				->where('material_mina_id','=', $material)
-				->where('fecha_ingreso', '<=', \Carbon\Carbon::parse($fecha_hasta)->format('Y-m-d') )
+				->where(function($query) use($fecha_hasta){
+					$query->where('fecha_ingreso', '<=', \Carbon\Carbon::parse($fecha_hasta)->format('Y-m-d') )
+						->orWhere('fecha_salida', '<=', \Carbon\Carbon::parse($fecha_hasta)->format('Y-m-d') );
+				})
 				->orderBy('fecha_ingreso', 'ASC')->get();
 			if( $movimientos->isEmpty() ) continue;
 		@endphp
@@ -109,6 +117,9 @@
 					<th>
 						FECHA
 					</th>
+					<th>
+						TIPO
+					</th>
 					<th >
 						
 						U. MEDIDA
@@ -121,7 +132,7 @@
 					</th>
 					<th>
 						
-						CANT. INGRESADA
+						CANT.
 						
 					</th>
 					<th>
@@ -137,7 +148,20 @@
 				<tbody>
 					@foreach( $movimientos as $movimiento )
 						<tr align="center">
-							<td> {{ $movimiento->fecha_ingreso->format('d/m/Y') }} </td>
+							<td> 
+								@if( is_null( $movimiento->fecha_salida ) )
+								{{ $movimiento->fecha_ingreso->format('d/m/Y') }} 
+								@else
+								{{ $movimiento->fecha_salida->format('d/m/Y') }} 
+								@endif
+							</td>
+							<td>
+								@if( is_null($movimiento->fecha_salida) )
+									<strong>I</strong>
+									@else
+									<strong>D</strong>
+								@endif
+							</td>
 							<td>
 								{{ App\Models\inventario\UnidadMedida::where('codigo_unidad', '=', $movimiento->peso_en)->first()->descripcion_unidad  }}
 							</td>
@@ -145,13 +169,24 @@
 								{{ $movimiento->observacion }}
 							</td>
 							<td>
-								{{ $movimiento->cantidad_ingreso }}
+								@if( is_null($movimiento->fecha_salida) )
+									{{ $movimiento->cantidad_ingreso }}
+									@else
+									{{ $movimiento->cantidad_salida }}
+								@endif
 							</td>
 							<td align="right">
 								{{ number_format($movimiento->monto_tonelada, 2, '.', ',') }}
 							</td>
 							<td align="right">
-								@php $total += $movimiento->total_movimiento ; @endphp
+								@php 
+									if( is_null( $movimiento->fecha_salida ) ){
+										$ingreso += $movimiento->total_movimiento ; 
+									}
+									else{
+										$descuento += $movimiento->total_movimiento ; 
+									}
+								@endphp
 								{{ number_format( $movimiento->total_movimiento, 2, '.', ',' ) }}
 							</td>
 						</tr>
@@ -175,11 +210,60 @@
 						<td class="footer-table">
 							
 						</td>
-						<td class="footer-table" style="text-align: right;">
-							<strong>TOTAL</strong>
+						<td class="footer-table">
+							
 						</td>
 						<td class="footer-table" style="text-align: right;">
-							<strong>{{ number_format($total, 2) }}</strong>
+							<strong>INGRESO</strong>
+						</td>
+						<td class="footer-table" style="text-align: right;">
+							<strong>{{ number_format($ingreso, 2) }}</strong>
+						</td>
+					</tr>
+					<tr >
+						<td class="footer-table">
+							
+						</td>
+						<td class="footer-table">
+							
+						</td>
+						<td class="footer-table">
+							
+						</td>
+						<td class="footer-table">
+							
+						</td>
+						<td class="footer-table">
+							
+						</td>
+						<td class="footer-table" style="text-align: right;">
+							<strong>DESCUENTO</strong>
+						</td>
+						<td class="footer-table" style="text-align: right;">
+							<strong>{{ number_format($descuento, 2) }}</strong>
+						</td>
+					</tr>
+					<tr >
+						<td class="footer-table">
+							
+						</td>
+						<td class="footer-table">
+							
+						</td>
+						<td class="footer-table">
+							
+						</td>
+						<td class="footer-table">
+							
+						</td>
+						<td class="footer-table">
+							
+						</td>
+						<td class="footer-table" style="text-align: right;">
+							<strong>TOTAL NETO</strong>
+						</td>
+						<td class="footer-table" style="text-align: right;">
+							<strong>{{ number_format($ingreso - $descuento, 2) }}</strong>
 						</td>
 					</tr>
 				</tbody>
