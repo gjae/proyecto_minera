@@ -100,6 +100,8 @@ $(document).ready(function(){
 		if( $("#tipo_reporte").val()  == 'formatoNomina'){
 			url+='&cedula='+$("#identificacion").val();
 		}
+
+		url+='&generar='+$("#tipo_reporte_generar").val();
 		window.open(url, "INVITACIONES"  ,"width=800,height=900")	
 	})
 	$(".formularios").on('click', function(){

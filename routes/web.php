@@ -12,6 +12,7 @@
 */
 
 
+
 Auth::routes();
 
 Route::get('/', function(){
@@ -20,6 +21,18 @@ Route::get('/', function(){
 	}
 	return redirect()->to( url('login') );
 });
+
+Route::get('excel', function(){
+
+
+	$spreadsheet = new PhpOffice\PhpSpreadsheet\Spreadsheet();
+	$sheet = $spreadsheet->getActiveSheet();
+	$sheet->setCellValue('A1', 'Hello World !');
+
+	$writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+	return $writer->save('hello world.xlsx');
+});
+
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function(){
 
 	Route::match(['get', 'post'],'/{modulo?}/{programa?}/{accion?}', 'Dashboard@index');

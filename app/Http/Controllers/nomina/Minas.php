@@ -12,6 +12,8 @@ use Carbon\Carbon;
 use DB;
 use App\Models\inventario\UnidadMedida;
 use App\Models\personal\Persona;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Minas extends Controller
 {
@@ -44,6 +46,9 @@ class Minas extends Controller
       if( empty($req->cedula) ){
         $personas = $personas->where('estado_persona', '=', 'ACTIVA')->get();
 
+        if( $req->generar == 'EXCEL' )
+          return $this->toExcel($personas, $req->fecha_desde, $req->fecha_hasta, $req->material_id);
+
         $html = view('modulos.nomina.reportes.reporte_mina_general', [
           'personas' => $personas,
           'fecha_desde' => ( empty($req->fecha_desde) ? null : $req->fecha_desde ),
@@ -58,8 +63,6 @@ class Minas extends Controller
         return $pdf->stream($pdfName, ['stream' => 0]);
         //return $html;
       }
-
-
       $movimientos = is_null( $movimientos ) ? $movimientos->where('material_mina_id','=', $req->material_id)->orderBy('fecha_ingreso', 'ASC')->get() : $movimientos->where('material_mina_id','=', $req->material_id)->orderBy('fecha_ingreso', 'ASC')->get();
 
       //return dd($movimientos);
@@ -76,6 +79,125 @@ class Minas extends Controller
 
       return $pdf->stream($pdfName, ['stream' => 0]);
     }
+
+    /**
+     * FUNCION PARA RENDERIZAR EL ARCHIVO EXCEL
+     */
+
+    public function toExcel($personas, $fecha_desde, $fecha_hasta, $material){
+      $spreadsheet = new Spreadsheet();
+      $sheet = $spreadsheet->getActiveSheet();
+      $posicion = 1;
+
+      foreach ($personas as $key => $persona) {
+        $sheet->setCellValue(
+            'D'.$posicion, 
+            $persona->primer_nombre.' '.$persona->segundo_nombre.' '.$persona->primer_apellido.' '.$persona->segundo_apellido.' '.$persona->identificacion
+        );
+
+        $movimientos = $persona
+          ->mis_movimientos_minas()
+          ->where(function($query) use($fecha_desde){
+            $query->where('fecha_ingreso', '>=', \Carbon\Carbon::parse($fecha_desde)->format('Y-m-d'))
+              ->orWhere('fecha_salida', '>=', \Carbon\Carbon::parse($fecha_desde)->format('Y-m-d'));
+          })
+          ->where('material_mina_id','=', $material)
+          ->where(function($query) use($fecha_hasta){
+            $query->where('fecha_ingreso', '<=', \Carbon\Carbon::parse($fecha_hasta)->format('Y-m-d') )
+              ->orWhere('fecha_salida', '<=', \Carbon\Carbon::parse($fecha_hasta)->format('Y-m-d') );
+          })
+          ->orderBy('fecha_ingreso', 'ASC')->get();
+        if( $movimientos->isEmpty() ) continue;
+
+        /**
+         * POSICIONAMIENTO DE LAS CABEZERAS DE LAS FILAS
+         */
+          $posicion++;
+          $sheet->setCellValue('A'.$posicion, 'FECHA');
+          $sheet->setCellValue('B'.$posicion, 'TIPO');
+          $sheet->setCellValue('C'.$posicion, 'U. MEDIDA');
+          $sheet->setCellValue('D'.$posicion, 'DESCRIPCION');
+          $sheet->setCellValue('E'.$posicion, 'CANTIDAD');
+          $sheet->setCellValue('F'.$posicion, 'VALOR');
+          $sheet->setCellValue('G'.$posicion, 'TOTAL');
+
+          $total = 0;
+          $ingresos = 0;
+          $descuentos = 0;
+
+        foreach ($movimientos as $key => $movimiento) {
+          $posicion++;
+          $sheet->setCellValue(
+            'A'.$posicion, 
+            ( is_null($movimiento->fecha_salida) ? $movimiento->fecha_ingreso->format('d / m / Y') : $movimiento->fecha_salida->format('d / m / Y') ) 
+          );
+          $sheet->setCellValue(
+            'B'.$posicion, 
+             ( is_null($movimiento->fecha_salida) ? 'INGRESO' : 'DESCUENTO' ) 
+          );
+          $sheet->setCellValue(
+            'C'.$posicion,
+            UnidadMedida::where('codigo_unidad', '=', $movimiento->peso_en)->first()->descripcion_unidad 
+          );
+          $sheet->setCellValue(
+            'D'.$posicion,
+            $movimiento->observacion
+          );
+          $sheet->setCellValue(
+            'E'.$posicion,
+            ( is_null($movimiento->fecha_salida) ? $movimiento->cantidad_ingreso : $movimiento->cantidad_salida )
+          );
+          $sheet->setCellValue(
+            'F'.$posicion,
+            ( is_null($movimiento->fecha_salida) ? $movimiento->monto_tonelada : '-'.$movimiento->monto_tonelada )
+          );
+          $sheet->setCellValue(
+            'G'.$posicion, 
+            $movimiento->total_movimiento
+          );
+
+          if( is_null( $movimiento->fecha_salida ) ) $ingresos+= $movimiento->total_movimiento;
+          else $descuentos += $movimiento->total_movimiento;
+        }
+        $posicion++;
+        $sheet->setCellValue(
+          'F'.$posicion,
+          'TOTAL INGRESO'
+        );
+        $sheet->setCellValue(
+          'G'.$posicion,
+          $ingresos
+        );
+        $posicion++;
+        $sheet->setCellValue(
+          'F'.$posicion,
+          'TOTAL DESCUENTO'
+        );
+        $sheet->setCellValue(
+          'G'.$posicion,
+          $descuentos
+        );
+        $posicion++;
+        $sheet->setCellValue(
+          'F'.$posicion,
+          'TOTAL NETO'
+        );
+        $sheet->setCellValue(
+          'G'.$posicion,
+          $ingresos - $descuentos
+        );
+
+
+        $posicion += 3;
+      }
+
+      $writer = new Xlsx($spreadsheet);
+      $ruta = 'excel_reportes/'.md5(Carbon::now()->format('Y-m-d H:m:s'));
+      $writer->save($ruta.'.xlsx');
+
+      return response()->download( public_path( $ruta.'.xlsx' ) )->deleteFileAfterSend(true);
+    }
+
 
     public function guardarUnidadMedida($req){
         $resp = [];

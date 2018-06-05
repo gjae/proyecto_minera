@@ -24,13 +24,20 @@
 
 	</div>
 	<div class="row hidden" id="rango_fechas">
-		<div class="col-sm-4 col-lg-4 col-md-4">
+		<div class="col-sm-4 col-lg-3 col-md-3">
 			<label for="">FECHA DESDE (DD-MM-AAAA)</label>
 			<input type="date" class="form-control" value="01-01-{{ Carbon\Carbon::now()->format('Y') }}" name="fecha_desde" id="fecha_desde">
 		</div>
-		<div class="col-sm-4 col-lg-4 col-md-4">
+		<div class="col-sm-4 col-lg-3 col-md-3">
 			<label for="">FECHA HASTA (DD-MM-AAAA)</label>
 			<input type="date" class="form-control" value="01-01-{{ Carbon\Carbon::now()->format('Y') }}" name="fecha_hasta" id="fecha_hasta">
+		</div>
+		<div class="col-sm-4 col-lg-2 col-md-2">
+			<label for="">Tipo</label>
+			<select name="tipo_reporte_generar" id="tipo_reporte_generar" class="form-control">
+				<option value="PDF">PDF</option>
+				<option value="EXCEL">EXCEL</option>
+			</select>
 		</div>
 	</div>
 	<div class="row hidden" id="filtro_persona">
