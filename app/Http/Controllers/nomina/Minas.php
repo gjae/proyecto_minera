@@ -30,11 +30,15 @@ class Minas extends Controller
 
       $movimientos = $personas2->mis_movimientos_minas();
       if( $req->has('fecha_desde') && !empty($req->fecha_desde) ){
-        $movimientos = $movimientos->where('fecha_ingreso', '>=', $req->fecha_desde);
+        $movimientos = $movimientos->where(function($query) use($req){
+          $query->where('fecha_ingreso', '>=', $req->fecha_desde)->orWhere('fecha_salida', '>=', $req->fecha_desde);
+        });
        // return $movimientos->toSql();
       }
       if( $req->has('fecha_hasta') && !empty($req->fecha_hasta) ){
-        $movimientos = $movimientos->where('fecha_ingreso', '<=', $req->fecha_hasta);
+        $movimientos = $movimientos->where( function($query) use ($req){
+          $query->where('fecha_ingreso', '<=', $req->fecha_hasta)->orWhere('fecha_salida', '<=', $req->fecha_hasta);
+        } );
       }
 
       if( empty($req->cedula) ){
@@ -54,6 +58,7 @@ class Minas extends Controller
         return $pdf->stream($pdfName, ['stream' => 0]);
         //return $html;
       }
+
 
       $movimientos = is_null( $movimientos ) ? $movimientos->where('material_mina_id','=', $req->material_id)->orderBy('fecha_ingreso', 'ASC')->get() : $movimientos->where('material_mina_id','=', $req->material_id)->orderBy('fecha_ingreso', 'ASC')->get();
 
