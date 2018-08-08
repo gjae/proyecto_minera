@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$(".actions").on('click', function(){
+/*	$(".actions").on('click', function(){
 		var btn = $(this)
 		var url = location.href + '/formularios?formulario='+btn.attr('formulario');
 		var modal = $("#modal-inventario")
@@ -28,7 +28,7 @@ $(document).ready(function(){
 			}
 		})
 	});
-
+*/
 	$("#salvar").on('click', function(resp){
 		var datos = $("#form-modal").serialize()
 		//alert(datos)
@@ -218,11 +218,46 @@ function actualizar(event, formulario){
 	formulario.submit();
 }
 
+
+        $(".actions").on('click', function(){
+		//alert("gasdasd");  
+              var btn = $(this)
+                var url = location.href + '/formularios?formulario='+btn.attr('formulario');
+                var modal = $("#modal-inventario")
+                var id = $(this).attr('data-id');
+
+                if( ( typeof(id) != undefined ) )
+                        url+='&id='+id
+
+                if( $(this).attr('role') == 'reportes'){
+                        if(!$("#footer-datos").hasClass('hidden')){
+                                $("#footer-datos").addClass('hidden')
+                                $("#footer-reportes").removeClass('hidden')
+                        }
+                }
+                else{
+                        if( $("#footer-datos").hasClass('hidden')){
+
+                                $("#footer-datos").removeClass('hidden')
+                                $("#footer-reportes").addClass('hidden')
+                        }
+                }
+                modal.modal({show: true})
+                $.get(url, {}, function(resp){
+                        if( !resp.error){
+                                $("#form-modal").html(resp.formulario)
+                        }
+                })
+        });
+
+
 function calcularTotal(ev, field){
 	var peso_en = document.getElementById('peso_en');
 	var cantidad = document.getElementById('cantidad');
 	var valor = document.getElementById('monto_tonelada')
 	var total_movimiento = document.getElementById('total_movimiento');
+	
+//	alert('PESO EN '+peso_en.value+' CANTIDAD EN: '+cantidad.value+' VALOR: '+valor.value+' total: '+total_movimiento.value);
 
 	switch(peso_en.value){
 		case 'TON':{
@@ -230,7 +265,7 @@ function calcularTotal(ev, field){
 			break;
 		}
 
-		case 'KG':{
+		case 'K':{
 			total_movimiento.value =( (parseFloat(cantidad.value)/1000) * parseFloat(valor.value) ).toFixed(2)
 			break;
 		}
@@ -239,6 +274,10 @@ function calcularTotal(ev, field){
 			var kg = ( parseFloat(cantidad.value) * 1 ) / 1000;
 			total_movimiento.value =( (parseFloat(kg)/1000) * parseFloat(valor.value) ).toFixed(2)
 			break;
+		}
+		default: {
+			var total = ( parseFloat(cantidad.value) * parseFloat(valor.value));
+			total_movimiento.value = total;
 		}
 	}
 }

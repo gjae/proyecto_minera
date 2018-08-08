@@ -24,7 +24,7 @@
 						<option value="">Seleccione uno</option>
 						@foreach(App\Models\personal\Persona::where('estado_persona', 'ACTIVA')->get() as $persona)
 							<option value="{{ $persona->id }}">
-								{{ $persona->primer_nombre.' '.$persona->primer_apellido }}
+								{{ $persona->identificacion }}
 							</option>
 						@endforeach
 					</select>
@@ -52,11 +52,12 @@
 				</div>
 				<div class="col-sm-12 col-md-5 col-lg-5">
 					<label for="">Unidad de peso</label>
+
 					<select name="peso_en" onchange="calcularTotal(event, this)" id="peso_en" class="form-control">
 						<option value="">-- SELECCIONE UNO --</option>
-						<option value="TON">Tonelada</option>
-						<option value="KG">Kilogramos</option>
-						<option value="GR">Gramos</option>
+						@foreach(App\Models\inventario\UnidadMedida::where('edo_reg', '=', 1)->get() as $unidad)
+							<option value="{{ $unidad->codigo_unidad }}">{{ $unidad->descripcion_unidad }}</option>
+						@endforeach
 					</select>
 				</div>
 				<div class="col-sm-12 col-md-4 col-lg-4">
