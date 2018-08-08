@@ -298,11 +298,13 @@ class Minas extends Controller
 
         $mina = new Mina();
 	#return dd($material->select('materiales_minas.*')->toSql());
+
         $vista = \View::make('modulos.reportes.movimientos_minas', [
                     'materiales' =>  $material->select('materiales_minas.*')->distinct()->orderBy('materiales_minas.id')->get(),
                     'minas' => $mina->get(),
                 ])->render();
 
+        return $vista;
         $pdf = PDF::loadHtml($vista);
         $pdf->setPaper('B5', 'landscape');
         return $pdf->stream('movimientos_'.Carbon::now()->format('d_m_Y'), ['attachment' => 0]);
@@ -322,6 +324,8 @@ class Minas extends Controller
                     'minas' => $mina->get(),
                 ])->render();
 
+
+        return dd($material->orderBy('id')->get());
         $pdf = PDF::loadHtml($vista);
         $pdf->setPaper('a4', 'landscape');
         return $pdf->stream('movimientos_'.Carbon::now()->format('d_m_Y'), ['attachment' => 0]);
