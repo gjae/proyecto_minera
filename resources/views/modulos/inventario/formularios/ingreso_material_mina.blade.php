@@ -24,7 +24,7 @@
 						<option value="">Seleccione uno</option>
 						@foreach(App\Models\personal\Persona::where('estado_persona', 'ACTIVA')->get() as $persona)
 							<option value="{{ $persona->id }}">
-								{{ $persona->primer_nombre.' '.$persona->primer_apellido }}
+								{{ $persona->identificacion }}
 							</option>
 						@endforeach
 					</select>
