@@ -24,6 +24,9 @@ class MovimientosMinas extends Model
         'centro_costo_id',
         'diciplina_id',
         'mina_id',
+        'proceso_id',
+        'frente_id',
+        'nivel_id'
     ];
 
     protected $dates = ['deleted_at', 'fecha_salida', 'fecha_ingreso'];

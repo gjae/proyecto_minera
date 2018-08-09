@@ -10,7 +10,8 @@ class EgresoMaterial extends Model
     protected $fillable = [
     	'material_id', 'cantidad_salida', 
     	'etapa_produccion_id', 'diciplina_id', 
-    	'centro_costo_id', 'persona_id', 'created_at'
+    	'centro_costo_id', 'persona_id', 'created_at',
+        'proceso_id', 'frente_id', 'nivel_id'
     ];
 
 

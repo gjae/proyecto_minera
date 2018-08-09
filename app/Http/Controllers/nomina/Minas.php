@@ -370,7 +370,9 @@ class Minas extends Controller
           'centro_costo_id' => $req->centro_costo_id,
           'diciplina_id' => $req->diciplina_id,
           'etapa_produccion_id' => $req->etapa_produccion_id,
-
+          'proceso_id' => $req->proceso_id,
+          'frente_id' => $req->frente_id,
+          'nivel_id' => $req->nivel_id
 
    			];
 

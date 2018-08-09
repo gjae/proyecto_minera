@@ -12,7 +12,8 @@ class IngresoMaterial extends Model
     	'fecha_ingreso', 'material_id', 'cantidad',
         'etapa_produccion_id', 'diciplina_id', 
         'centro_costo_id', 'monto', 'proveedor_id', 'factura', 'precio',
-		'total', 'total_iva', 'created_at'
+		'total', 'total_iva', 'created_at',
+        'proceso_id', 'frente_id', 'nivel_id'
     ];
 
     protected $casts = [
