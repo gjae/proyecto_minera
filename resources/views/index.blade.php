@@ -202,6 +202,34 @@
                         </ul>
                     </li>
                    @endif
+                    @if(Auth::user()->tipo_usuario == 'ADMIN' || Auth::user()->tipo_usuario == 'SUPERVISOR_NOM')
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">assignment_ind</i>
+                            <span>Supervisor de nomina</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="{{ url('dashboard/nomina/personal') }}">
+                                    Personal
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('dashboard/nomina/minas') }}">
+                                    Inventario de minas
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('dashboard/nomina/ajustes') }}">
+                                    Ajustes
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('dashboard/nomina') }}">Nominas</a>
+                            </li>
+                        </ul>
+                    </li>
+                   @endif
                     @if(Auth::user()->tipo_usuario == 'ADMIN' || Auth::user()->tipo_usuario == 'TRANSPORTE')
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">

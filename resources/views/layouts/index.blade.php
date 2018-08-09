@@ -137,6 +137,22 @@
                         </ul>
                     </li>
                    @endif
+                    @if(Auth::user()->tipo_usuario == 'ADMIN' || Auth::user()->tipo_usuario == 'SUPERVISOR_NOM')
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">assignment_ind</i>
+                            <span>Supervisores de nomina</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="#">Ingresar / egresar persona</a>
+                            </li>
+                            <li>
+                                <a href="#">Crear concepto de nomina</a>
+                            </li>
+                        </ul>
+                    </li>
+                   @endif
                 </ul>
             </div>
             <!-- #Menu -->
